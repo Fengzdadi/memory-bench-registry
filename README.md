@@ -7,6 +7,7 @@
 - 字段与可复现等级定义：[docs/fields.md](docs/fields.md)
 - 现有汇总列表的覆盖缺口核对：[docs/coverage-gaps.md](docs/coverage-gaps.md)
 - 现有汇总列表及其核实状态：[docs/related-lists.md](docs/related-lists.md)
+- 评估过但未收录的候选及理由：[docs/excluded.md](docs/excluded.md)
 
 当前共 **207** 条。可复现等级分布：`unverified` 0 · `paper_only` 37 · `data_public` 31 · `official_script` 139 · `smoke_tested` 0 · `full_run` 0
 

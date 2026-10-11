@@ -67,3 +67,7 @@
 
 后三个类型是阶段 1 核对后加入的，依据见 [coverage-gaps.md](coverage-gaps.md)。
 只考察单次长输入的长上下文测试（如 RULER、NIAH、LongBench）不算记忆 benchmark，不为它们设类型，也不收录。
+经过复核但决定不收录的候选及理由见 [excluded.md](excluded.md)。
+
+`parametric` 的收录范围：只收明确把自己定位为评测“记忆”的知识编辑 / 遗忘 benchmark，
+不追求覆盖整个知识编辑领域（阶段 1 找到 132 个相关 benchmark，按此标准收录 17 个；2026-10-11 由仓库所有者确认）。
