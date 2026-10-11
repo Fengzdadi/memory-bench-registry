@@ -1,0 +1,45 @@
+name: Video2Skill
+slug: video2skill
+release_date: 2026-09
+venue: arXiv preprint
+memory_types:
+- multimodal
+links:
+  paper: https://arxiv.org/abs/2609.36691
+  code: null
+  data: https://huggingface.co/datasets/Sterzhang/video2skill-bench
+scale:
+  conversations: 172
+  questions: 1671
+  avg_context_length: null
+  notes: Reference segments are event-level scoring units. The library persists across videos, but skill labels are not executed
+    on held-out downstream tasks.
+metrics:
+- Event coverage
+- Pairwise skill-grouping precision
+- Pairwise skill-grouping recall
+- Adjusted Rand Index
+- Create recall
+- Reuse recall
+- Decision accuracy
+judge_model: null
+repro_level: data_public
+repro_checked_at: '2026-10-11'
+run_records: []
+notes: Procedural_workflow is omitted because the test scores skill discovery and reuse decisions, not task performance after
+  applying a learned procedure.
+sources:
+  name: arXiv abstract/title https://arxiv.org/abs/2609.36691; paper https://arxiv.org/html/2609.36691
+  release_date: 'arXiv submission history https://arxiv.org/abs/2609.36691: v1 submitted 2026-09-29'
+  venue: 'arXiv abstract page https://arxiv.org/abs/2609.36691: no verified journal reference or conference publication'
+  memory_types: 'arXiv HTML §2.1–2.3: a persistent library stores visually inferred physical transformations across video
+    boundaries; no downstream task execution is scored'
+  links.paper: arXiv abstract page https://arxiv.org/abs/2609.36691
+  repro_level: official project page links public HF dataset with test labels/videos; no official evaluation script link on
+    project page, checked 2026-10-11
+  links.data: official project page links HF release; HF API lists test JSONL and video files, checked 2026-10-11
+  scale.conversations: 'arXiv HTML §2.2: 40 HD-EPIC test clips and 132 RoboInter test videos'
+  scale.questions: 'arXiv HTML §2.2: 1,137 + 534 verified test reference segments'
+  scale.notes: arXiv HTML §2.1–2.3
+  metrics: arXiv HTML §2.3
+  notes: arXiv HTML §2.3; docs/fields.md procedural_workflow definition

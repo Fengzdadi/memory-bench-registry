@@ -1,0 +1,39 @@
+name: Knowing the Store
+slug: knowing-the-store
+release_date: 2026-10
+venue: arXiv preprint
+memory_types:
+- semantic_knowledge_update
+links:
+  paper: https://arxiv.org/abs/2610.04794
+  code: https://github.com/ansh348/knowing-the-store
+  data: https://github.com/ansh348/knowing-the-store/tree/main/artifact/supplementary/data
+scale:
+  conversations: null
+  questions: 444
+  avg_context_length: null
+  notes: 'The counterfactual set has 148 store triples: 88 supersession, 30 retraction and 30 expiry obligations.'
+metrics:
+- Obligation AUROC
+- Matched within-triple score
+- Accuracy
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-11'
+run_records: []
+notes: Readers see value-free store summaries, not full record contents. Synthetic stores vary lifecycle metadata to test
+  metamemory monitoring.
+sources:
+  name: arXiv abstract/title https://arxiv.org/abs/2610.04794; paper https://arxiv.org/html/2610.04794
+  release_date: 'arXiv submission history https://arxiv.org/abs/2610.04794: v1 submitted 2026-10-03'
+  venue: 'arXiv abstract page https://arxiv.org/abs/2610.04794: no verified journal reference or conference publication'
+  memory_types: 'arXiv HTML §3–5: store lifecycle states (superseded, retracted, expired) determine whether a non-active record
+    should be used'
+  links.paper: arXiv abstract page https://arxiv.org/abs/2610.04794
+  repro_level: official GitHub tree contains artifact/supplementary/data probe sets and scoring code; checked 2026-10-11
+  links.code: arXiv HTML Code and Data Availability names official repository
+  links.data: official GitHub tree includes counterfactual probe sets, store summaries and scoring artifacts, checked 2026-10-11
+  scale.questions: 'arXiv HTML §4: 148 questions each asked against three store versions (444 scored items)'
+  scale.notes: arXiv HTML §4 and Appendix data statistics
+  metrics: arXiv HTML §4 Table 1 and §5
+  notes: arXiv HTML abstract and §4

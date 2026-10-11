@@ -1,0 +1,45 @@
+name: DyadMem
+slug: dyadmem
+release_date: 2026-10
+venue: arXiv preprint
+memory_types:
+- conversational_longterm
+- personalization
+- episodic
+- semantic_knowledge_update
+links:
+  paper: https://arxiv.org/abs/2610.03020
+  code: null
+  data: null
+scale:
+  conversations: 3065
+  questions: 61210
+  avg_context_length: null
+  notes: The episodes comprise 50,961 sessions, with gold Capture, Update and Recall supervision plus two QA settings.
+metrics:
+- Capture F1
+- Update operation F1
+- Recall@n
+- Gold-Memory QA accuracy
+- Full-Pipeline QA accuracy
+- Gold-to-Pipeline gap
+judge_model: GPT-5-mini
+repro_level: paper_only
+repro_checked_at: '2026-10-11'
+run_records: []
+notes: The paper links a dataset page, but its file listing currently contains no released episodes or QA records.
+sources:
+  name: arXiv abstract/title https://arxiv.org/abs/2610.03020; paper https://arxiv.org/html/2610.03020
+  release_date: 'arXiv submission history https://arxiv.org/abs/2610.03020: v1 submitted 2026-10-02'
+  venue: 'arXiv abstract page https://arxiv.org/abs/2610.03020: no verified journal reference or conference publication'
+  memory_types: 'arXiv HTML §3: multi-session user and agent memories, chronological updates, episodic support and personalized
+    QA'
+  links.paper: arXiv abstract page https://arxiv.org/abs/2610.03020
+  repro_level: official HF page contains only a README and linked GitHub repository contains a website draft, with no benchmark
+    data or evaluator files; checked 2026-10-11
+  scale.conversations: 'arXiv HTML abstract and §3: 3,065 episodes'
+  scale.questions: 'arXiv HTML abstract and §3: 61,210 QA instances'
+  scale.notes: arXiv HTML abstract and §3
+  metrics: arXiv HTML §3.3
+  judge_model: 'arXiv HTML §3.3 and §4.1: default QA judge GPT-5-mini'
+  notes: official HF API sibling listing and GitHub tree, checked 2026-10-11

@@ -1,0 +1,38 @@
+name: CMSC-E
+slug: cmsc-e
+release_date: 2026-10
+venue: arXiv preprint
+memory_types:
+- personalization
+links:
+  paper: https://arxiv.org/abs/2610.05124
+  code: https://github.com/aishwaryalonarkar/cross-model-memory-canonicalization
+  data: https://github.com/aishwaryalonarkar/cross-model-memory-canonicalization/tree/main/data
+scale:
+  conversations: null
+  questions: null
+  avg_context_length: null
+  notes: Each object has three rendering arms and two downstream prompts. Of 176, 172 received complete CMSD scores and 86
+    emotional objects received ECS.
+metrics:
+- Cross-Model Semantic Drift (CMSD)
+- Emotional Consistency Score (ECS)
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-11'
+run_records: []
+notes: A pilot comparison of raw, disambiguated and canonicalized memory objects across three model families. The paper labels
+  statistical findings exploratory.
+sources:
+  name: arXiv abstract/title https://arxiv.org/abs/2610.05124; paper https://arxiv.org/html/2610.05124
+  release_date: 'arXiv submission history https://arxiv.org/abs/2610.05124: v1 submitted 2026-10-04'
+  venue: 'arXiv abstract page https://arxiv.org/abs/2610.05124: no verified journal reference or conference publication'
+  memory_types: 'arXiv HTML §V–VI: user-related persistent memory objects are interpreted by different models; semantic and
+    emotional consistency are scored'
+  links.paper: arXiv abstract page https://arxiv.org/abs/2610.05124
+  repro_level: official GitHub tree includes data/dataset.json and pipeline/run_phase2_scoring.py, checked 2026-10-11
+  links.code: arXiv HTML Code Availability names the official implementation
+  links.data: official GitHub tree includes data/dataset.json and data/dataset_supplementary.json, checked 2026-10-11
+  scale.notes: arXiv HTML §VI-A
+  metrics: arXiv HTML §V and §VI
+  notes: arXiv HTML abstract and §VI

@@ -1,0 +1,42 @@
+name: TWIST
+slug: twist
+release_date: 2026-09
+venue: arXiv preprint
+memory_types:
+- conversational_longterm
+- memory_security
+links:
+  paper: https://arxiv.org/abs/2609.28575
+  code: https://github.com/subratpanda/twist-benchmark
+  data: https://github.com/subratpanda/twist-benchmark/tree/main/data
+scale:
+  conversations: null
+  questions: 161
+  avg_context_length: null
+  notes: Only draft-alignment Track B has an instantiated scored set; Tracks A, C and D remain protocol specifications.
+metrics:
+- Contradiction recall
+- Grounded contradiction recall
+- Aligned specificity
+- Hard-negative specificity
+- Attribution accuracy
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-11'
+run_records: []
+notes: The current entry represents the scored Track B release. Other tracks are proposed and should not be treated as released
+  datasets.
+sources:
+  name: arXiv abstract/title https://arxiv.org/abs/2609.28575; paper https://arxiv.org/html/2609.28575
+  release_date: 'arXiv submission history https://arxiv.org/abs/2609.28575: v1 submitted 2026-09-23'
+  venue: 'arXiv abstract page https://arxiv.org/abs/2609.28575: no verified journal reference or conference publication'
+  memory_types: 'arXiv HTML §3.3: Track B tests whether a memory system flags and grounds contradictions while avoiding false
+    interventions in conversational memory'
+  links.paper: arXiv abstract page https://arxiv.org/abs/2609.28575
+  repro_level: official GitHub tree contains Track B v1.0 JSONL and reference/score_track_b.py, checked 2026-10-11
+  links.code: arXiv HTML official release link; GitHub README identifies TWIST Track B
+  links.data: official GitHub tree has data/track_b_items_v1.0.jsonl, checked 2026-10-11
+  scale.questions: 'arXiv HTML abstract and §3.3: 161 human-validated Track B v1.0 items'
+  scale.notes: arXiv HTML §1 and §3
+  metrics: arXiv HTML §3.3
+  notes: arXiv HTML §1 chronology and §3.3

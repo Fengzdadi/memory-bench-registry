@@ -25,6 +25,10 @@
 
 - `flagged/impact-is-not-invalidation.yaml`：输入是仓库断言与提交差异，判断断言是否失效；论文没有让编码 agent 在独立会话或任务间保留信息，不符合 `coding_cross_session` 的收录标准。
 - `flagged/lsrep.yaml`：论文明确把 LSREP 定义为评测协议；实例化所用的四段私人对话及 219 个 probe 未公开，不构成可单独登记的公开 benchmark 数据集。
+- `flagged/capmem.yaml`：每题只从一段预生成的长视频字幕作答，属于 `docs/fields.md` 排除的单次长输入测试。
+- `flagged/simlife-bp.yaml`：已报告的任务把一整段超长模拟生活 episode 作为输入做离线规则问答，没有跨独立交互保存记忆。
+- `flagged/what-should-an-agent-remember.yaml`：每个 episode 只有 10 条 slot-value 陈述和两次查询，主要检验保留/选择规则；不符合现有任一记忆类型的具体判定标准。
+- `flagged/ember-bench.yaml`：模型从单段预录家庭任务视频做离线多选问答，没有环境中的动作评测，也没有跨独立交互的记忆保留。
 
 ## 下一步
 

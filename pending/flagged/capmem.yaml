@@ -22,8 +22,7 @@ judge_model: null
 repro_level: paper_only
 repro_checked_at: '2026-10-11'
 run_records: []
-notes: The model is evaluated on generated timestamped captions; source videos come from multiple public egocentric datasets.
-  The paper describes non-commercial annotation release without an address.
+notes: 'Flagged: each question is answered from captions generated for one video, a single-input long-context test under docs/fields.md. Source videos come from multiple public egocentric datasets; the paper describes non-commercial annotation release without an address.'
 sources:
   name: arXiv abstract/title https://arxiv.org/abs/2609.17688; paper https://arxiv.org/html/2609.17688
   release_date: 'arXiv submission history https://arxiv.org/abs/2609.17688: v1 submitted 2026-09-15'
@@ -36,4 +35,4 @@ sources:
   scale.questions: 'arXiv HTML §3.2 Table 1/2: 1,000 multiple-choice QA pairs'
   scale.notes: arXiv HTML §3.2 Table 2 and Limitations
   metrics: arXiv HTML §3.2 Evaluation Metrics
-  notes: arXiv HTML §3 and release statement
+  notes: arXiv HTML §3 task input and release statement; docs/fields.md exclusion of single-input long-context tests

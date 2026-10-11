@@ -1,0 +1,37 @@
+name: PairPref
+slug: pairpref
+release_date: 2026-09
+venue: arXiv preprint
+memory_types:
+- personalization
+links:
+  paper: https://arxiv.org/abs/2609.34526
+  code: null
+  data: null
+scale:
+  conversations: null
+  questions: 1227
+  avg_context_length: null
+  notes: Each pair holds one preference and request fixed across two situations. The prompt supplies a 16-memory pool; 45
+    preferences cover eight situation categories.
+metrics:
+- Selection pair success
+- Free-generation pair success
+- Preference-use selectivity
+judge_model: DeepSeek V4 Flash
+repro_level: paper_only
+repro_checked_at: '2026-10-11'
+run_records: []
+notes: The benchmark tests applicability of a still-valid preference. It does not require reconstructing a multi-session history.
+sources:
+  name: arXiv abstract/title https://arxiv.org/abs/2609.34526; paper https://arxiv.org/html/2609.34526
+  release_date: 'arXiv submission history https://arxiv.org/abs/2609.34526: v1 submitted 2026-09-28'
+  venue: 'arXiv abstract page https://arxiv.org/abs/2609.34526: no verified journal reference or conference publication'
+  memory_types: 'arXiv HTML §3: whether a retrieved user preference should guide a response depends on task circumstances'
+  links.paper: arXiv abstract page https://arxiv.org/abs/2609.34526
+  repro_level: arXiv paper read 2026-10-11; no official code or benchmark data address identified
+  scale.questions: 'arXiv HTML §3.4: 1,227 matched situation pairs'
+  scale.notes: arXiv HTML §3.3–3.4
+  metrics: arXiv HTML §4.1 Metrics
+  judge_model: 'arXiv HTML §4.1: free-generation answers judged by DeepSeek V4 Flash'
+  notes: arXiv HTML §3–4

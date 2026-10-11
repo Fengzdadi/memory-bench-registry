@@ -1,0 +1,45 @@
+name: PRAGMA
+slug: pragma
+release_date: 2026-09
+venue: arXiv preprint
+memory_types:
+- conversational_longterm
+- personalization
+- semantic_knowledge_update
+links:
+  paper: https://arxiv.org/abs/2609.09664
+  code: https://github.com/yuhyojeong/PRAGMA
+  data: https://huggingface.co/datasets/stellahj/PRAGMA
+scale:
+  conversations: 100
+  questions: 400
+  avg_context_length: approximately 160K conversational tokens per user
+  notes: User histories include evidence and filler sessions; each query has annotated evidence-session indices.
+metrics:
+- Session-level Recall
+- Exact Recall
+- Alignment score
+- Grounding score
+judge_model: gpt-5
+repro_level: data_public
+repro_checked_at: '2026-10-11'
+run_records: []
+notes: The public repo primarily contains a construction pipeline; response rubrics are in the HF data release.
+sources:
+  name: arXiv abstract/title https://arxiv.org/abs/2609.09664; paper https://arxiv.org/html/2609.09664
+  release_date: 'arXiv submission history https://arxiv.org/abs/2609.09664: v1 submitted 2026-09-09'
+  venue: 'arXiv abstract page https://arxiv.org/abs/2609.09664: no verified journal reference or conference publication'
+  memory_types: 'arXiv HTML §3: long user histories support personalized guidance, evolving preferences and corrective queries'
+  links.paper: arXiv abstract page https://arxiv.org/abs/2609.09664
+  repro_level: HF API confirms public conversations, queries and rubrics; official GitHub pipeline/run_pipeline.py reconstructs
+    data but README provides no direct benchmark evaluation runner, checked 2026-10-11
+  links.code: arXiv HTML title footnote links author GitHub; README describes construction pipeline
+  links.data: official GitHub README links HF release; HF API lists full_sessions.json, metadata.json and response_metrics.json,
+    checked 2026-10-11
+  scale.conversations: 'arXiv HTML §3.2: 100 users/histories'
+  scale.questions: 'arXiv HTML §3.2: 400 queries, four per user'
+  scale.avg_context_length: arXiv HTML §3.2
+  scale.notes: arXiv HTML §3.2–3.3
+  metrics: arXiv HTML §3.3 and §4.2
+  judge_model: 'arXiv HTML §3.3 and §4.2: default response judge gpt-5; repo README specifies gpt-5-2025-08-07'
+  notes: official GitHub README Using the Released Benchmark, checked 2026-10-11

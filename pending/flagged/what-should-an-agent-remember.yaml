@@ -1,0 +1,40 @@
+name: What Should an Agent Remember?
+slug: what-should-an-agent-remember
+release_date: 2026-09
+venue: arXiv preprint
+memory_types:
+- semantic_knowledge_update
+links:
+  paper: https://arxiv.org/abs/2610.00366
+  code: https://github.com/TheClassicTechno/MemoryLLMAgentProject
+  data: null
+scale:
+  conversations: 300
+  questions: 600
+  avg_context_length: null
+  notes: Each episode streams 10 single-sentence slot-value facts before its two queries; five memory slots and three exposed
+    items are the default setting.
+metrics:
+- Required-fact recall
+- Retention rate
+- Answer correctness
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-11'
+run_records: []
+notes: 'Flagged: each case tests retention and retrieval from ten short slot-value statements in one episode. It has no dialogue
+  history, specific event, fact update, or cross-task skill reuse under the repository taxonomy.'
+sources:
+  name: arXiv abstract/title https://arxiv.org/abs/2610.00366; paper https://arxiv.org/html/2610.00366
+  release_date: 'arXiv submission history https://arxiv.org/abs/2610.00366: v1 submitted 2026-09-30'
+  venue: 'arXiv abstract page https://arxiv.org/abs/2610.00366: no verified journal reference or conference publication'
+  memory_types: 'arXiv HTML §3: slot-value facts in an online bounded-memory stream; candidate tag only, since no fact changes
+    are tested'
+  links.paper: arXiv abstract page https://arxiv.org/abs/2610.00366
+  repro_level: official GitHub tree contains env/streaming_qa_env.py, eval/metrics.py and main.py, checked 2026-10-11
+  links.code: arXiv HTML repository link; GitHub tree contains environment and evaluation modules
+  scale.conversations: 'arXiv HTML §3: 300 seeded episodes'
+  scale.questions: 'arXiv HTML §3: two queries per episode'
+  scale.notes: arXiv HTML §3
+  metrics: arXiv HTML §3–4
+  notes: arXiv HTML §3 environment and metrics; docs/fields.md memory_types and single-input boundary
