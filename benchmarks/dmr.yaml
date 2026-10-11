@@ -18,11 +18,11 @@ metrics:
 - ROUGE-L recall
 - ROUGE-L F1 (v1 only)
 - ROUGE-L precision (v1 only)
-judge_model: GPT-4
+judge_model: null
 repro_level: data_public
 repro_checked_at: '2026-10-10'
 run_records: []
-notes: DMR is a task inside the MemGPT systems paper, not a standalone benchmark paper. It builds on MSC validation dialogues (Xu et al., 2021). An LLM wrote one question per dialogue whose answer appears only in earlier sessions. The paper never states the question count; the HF release has 500 items. v1 and v2 report different baselines and metrics. The judge is implied to be GPT-4 but is not named outright. The official repo has no DMR eval script. The HF data is licensed Apache-2.0.
+notes: DMR is a task inside the MemGPT systems paper, not a standalone benchmark paper. It builds on MSC validation dialogues (Xu et al., 2021). An LLM wrote one question per dialogue whose answer appears only in earlier sessions. The paper never states the question count; the HF release has 500 items. v1 and v2 report different baselines and metrics. The paper does not name the judge model; it only cites GPT-4's agreement with human raters as justification for using an LLM judge. The official repo has no DMR eval script. The HF data is licensed Apache-2.0.
 sources:
   name: arXiv 2310.08560 v2 §3.1.1 'Deep memory retrieval (DMR) task'; v1 §3.1.2
   release_date: 'arXiv API: 2310.08560v1 published 2023-10-12 (v2 2024-02-12)'
@@ -36,6 +36,6 @@ sources:
   scale.avg_context_length: 'paper §3.1 Dataset: ''Each multi-session chat in MSC has five total sessions, and each session consists of a roughly a dozen messages''; released data averages 62.8 turns and 1,307 words (counted)'
   scale.notes: own count over the HF jsonl fields metadata, previous_dialogs and dialog
   metrics: 'v2 Table 2: Accuracy and ROUGE-L (R); v1 Table 2: Accuracy and ROUGE-L F1/P/R'
-  judge_model: paper §3.1.1 justifies the 'LLM judge' with '(GPT-4 has been shown to have high agreement with human evaluators (Zheng et al., 2023))'; appendix §6.1.2 gives the judge prompt but no model version. The model is implied, not named outright. The repo's doc-QA judge script (different task) uses gpt-4-0613
+  judge_model: paper §3.1.1 justifies the 'LLM judge' with '(GPT-4 has been shown to have high agreement with human evaluators (Zheng et al., 2023))'; appendix §6.1.2 gives the judge prompt but no model version. The model is implied, not named outright. The repo's doc-QA judge script (different task) uses gpt-4-0613. Not named for DMR, so null (independent review 2026-10-11)
   repro_level: 'HF dataset is public and ungated, and the 500-row jsonl downloaded. Repo letta-ai/letta has no DMR/MSC eval script: paper_experiments/ (commit 5511a08017, removed from main in the Sept 2025 cleanup) contains only doc_qa_task/ and nested_kv_task/. Checked 2026-10-10'
   notes: arXiv v1 and v2 PDFs, HF dataset card, letta-ai/letta repo history
