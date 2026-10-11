@@ -1,0 +1,28 @@
+{
+ "name": "Impact Is Not Invalidation (claim-invalidation benchmark)",
+ "slug": "impact-is-not-invalidation",
+ "leads": {
+  "registry_key": "arxiv:2609.25130",
+  "tier": "P2",
+  "arxiv": "2609.25130 (arXiv API: v1 2026-09-20; title: Impact Is Not Invalidation: Ask About the Claim, Not the Diff)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "Impact Is Not Invalidation: Ask About the Claim, Not the Diff",
+    "paper_url": "https://arxiv.org/pdf/2609.25130",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "semantic_knowledge_update"
+   ],
+   "extra_tags": [
+    "coding_memory_invalidation"
+   ],
+   "kind_reason": "Contributes 'An execution-grounded benchmark for claim invalidation' for coding-agent memory: 10,369 claims (test functions) with 184 execution-verified flips from 23 Python libraries. It tests whether a stored claim stays true after a commit diff; the paper never mentions sessions or cross-session "
+  }
+ }
+}

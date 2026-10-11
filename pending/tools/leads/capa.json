@@ -1,0 +1,13 @@
+{
+ "name": "CAPA",
+ "slug": "capa",
+ "leads": {
+  "registry_key": "arxiv:2607.26611",
+  "tier": "P0",
+  "arxiv": "2607.26611 (arXiv API: v1 ?; title: None)",
+  "phase1_verified_types": {
+   "coding_cross_session": "Benchmark Task section: 'CAPA evaluates whether a coding assistant can use a recurring user's prior multi-turn coding sessions'. Main Results: same-user history improves ES for 11 of 12 models."
+  },
+  "paper_hint": "https://arxiv.org/abs/2607.26611"
+ }
+}

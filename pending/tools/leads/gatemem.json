@@ -1,0 +1,32 @@
+{
+ "name": "GateMem",
+ "slug": "gatemem",
+ "leads": {
+  "registry_key": "arxiv:2606.18829",
+  "tier": "P2",
+  "arxiv": "2606.18829 (arXiv API: v1 2026-06-17; title: GateMem: Benchmarking Memory Governance in Multi-Principal Shared-Memory Agents)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "GateMem: Benchmarking Memory Governance in Multi-Principal Shared-Memory Agents",
+    "paper_url": "https://arxiv.org/pdf/2606.18829",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "multi_agent_group",
+    "semantic_knowledge_update",
+    "conversational_longterm"
+   ],
+   "extra_tags": [
+    "memory_security",
+    "access_control",
+    "active_forgetting"
+   ],
+   "kind_reason": "A benchmark for multi-principal shared-memory agents with 91 multi-party episodes (~223 turns each) and 2,218 hidden checkpoints. It scores utility under state updates, access control, and active forgetting after deletion requests."
+  }
+ }
+}

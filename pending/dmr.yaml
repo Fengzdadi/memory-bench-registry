@@ -1,0 +1,41 @@
+name: DMR (Deep Memory Retrieval)
+slug: dmr
+release_date: 2023-10
+venue: arXiv preprint
+memory_types:
+- conversational_longterm
+links:
+  paper: https://arxiv.org/abs/2310.08560
+  code: https://github.com/letta-ai/letta
+  data: https://huggingface.co/datasets/MemGPT/MSC-Self-Instruct
+scale:
+  conversations: 500
+  questions: 500
+  avg_context_length: 5 sessions of roughly a dozen messages each
+  notes: '500 = rows in msc_self_instruct.jsonl, one DMR Q/A pair per row in the self_instruct field (counted 2026-10-10). All rows come from the MSC ''valid'' split: 4 previous sessions plus session 5. Mean of about 63 turns and 1.3K words per item (counted). The same file also serves the conversation-opener task. The paper itself gives no count.'
+metrics:
+- LLM-judge accuracy (CORRECT/WRONG)
+- ROUGE-L recall
+- ROUGE-L F1 (v1 only)
+- ROUGE-L precision (v1 only)
+judge_model: GPT-4
+repro_level: data_public
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: DMR is a task inside the MemGPT systems paper, not a standalone benchmark paper. It builds on MSC validation dialogues (Xu et al., 2021). An LLM wrote one question per dialogue whose answer appears only in earlier sessions. The paper never states the question count; the HF release has 500 items. v1 and v2 report different baselines and metrics. The judge is implied to be GPT-4 but is not named outright. The official repo has no DMR eval script. The HF data is licensed Apache-2.0.
+sources:
+  name: arXiv 2310.08560 v2 §3.1.1 'Deep memory retrieval (DMR) task'; v1 §3.1.2
+  release_date: 'arXiv API: 2310.08560v1 published 2023-10-12 (v2 2024-02-12)'
+  venue: arXiv API has no journal_ref; comment reads 'Code and data available at https://research.memgpt.ai'; the v1 PDF header says 'Preprint'; the NSF PAR record 10524107 lists only arXiv; no OpenReview or proceedings entry found
+  memory_types: 'paper §3.1.1: the agent answers questions that ''explicitly refer back to a prior conversation'' (MSC sessions 1-5); the appendix §6.1.3 generation prompt forbids questions answerable from persona info'
+  links.paper: arXiv abs page 2310.08560
+  links.code: research.memgpt.ai (the project page the paper links) links github.com/cpacker/MemGPT; gh api shows it now resolves to letta-ai/letta
+  links.data: 'research.memgpt.ai ''Dataset'' links huggingface.co/MemGPT; HF API: MemGPT/MSC-Self-Instruct, tagged arxiv:2310.08560, not gated, apache-2.0, file msc_self_instruct.jsonl'
+  scale.conversations: 'downloaded msc_self_instruct.jsonl from the HF dataset: 500 rows with 500 unique MSC initial_data_ids (counted 2026-10-10); the paper reports no count'
+  scale.questions: 'same file: all 500 rows have exactly one self_instruct {B: question, A: answer} pair (counted 2026-10-10)'
+  scale.avg_context_length: 'paper §3.1 Dataset: ''Each multi-session chat in MSC has five total sessions, and each session consists of a roughly a dozen messages''; released data averages 62.8 turns and 1,307 words (counted)'
+  scale.notes: own count over the HF jsonl fields metadata, previous_dialogs and dialog
+  metrics: 'v2 Table 2: Accuracy and ROUGE-L (R); v1 Table 2: Accuracy and ROUGE-L F1/P/R'
+  judge_model: paper §3.1.1 justifies the 'LLM judge' with '(GPT-4 has been shown to have high agreement with human evaluators (Zheng et al., 2023))'; appendix §6.1.2 gives the judge prompt but no model version. The model is implied, not named outright. The repo's doc-QA judge script (different task) uses gpt-4-0613
+  repro_level: 'HF dataset is public and ungated, and the 500-row jsonl downloaded. Repo letta-ai/letta has no DMR/MSC eval script: paper_experiments/ (commit 5511a08017, removed from main in the Sept 2025 cleanup) contains only doc_qa_task/ and nested_kv_task/. Checked 2026-10-10'
+  notes: arXiv v1 and v2 PDFs, HF dataset card, letta-ai/letta repo history

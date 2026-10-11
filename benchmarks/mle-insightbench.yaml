@@ -1,0 +1,44 @@
+name: MLE-InsightBench
+slug: mle-insightbench
+release_date: 2026-10
+venue: arXiv preprint
+memory_types:
+- procedural_workflow
+links:
+  paper: https://arxiv.org/abs/2610.04927
+  code: null
+  data: null
+scale:
+  conversations: null
+  questions: 12
+  avg_context_length: null
+  notes: questions = the 12 held-out target tasks (one Kaggle competition per domain) used for evaluation. The benchmark has 160 competitions in 12 domains; the other 148 are source competitions used only to assemble insights. Each condition gets 6 runs per task (72 runs), a 12-hour budget and at most 250 agent steps. There are no conversations, and context length does not apply.
+metrics:
+- Normalized private-test score (per-task min-max normalized, % change from no-insight baseline)
+- Task-specific private-test scores via MLE-bench-compatible graders (R2, Fmax, mAA, AUC, SNR, Sharpe, GLL, Brier, MAE, MCC)
+- Normalized validation score over development time
+- Token consumption (input/reasoning/output)
+- Monetary cost
+- Wall-clock time
+- Number of significant tasks (two-sided Mann-Whitney U, alpha=0.05, Holm-Bonferroni)
+judge_model: null
+repro_level: paper_only
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: Agents are evaluated on 12 held-out Kaggle targets. Insights (12 domain, 148 competition and 16 improvement insights) are assembled offline from the gold-medal solutions and writeups of source competitions, then injected as skills or a playbook. The agent does not accumulate them from its own runs. The paper says the workflow and insights are open-sourced, but arXiv v1 gives no link, and no official repo or dataset was found on GitHub or Hugging Face (checked 2026-10-10). Target tasks need Kaggle competition data.
+sources:
+  name: 'arXiv 2610.04927v1 abstract and §3 title ''MLE-InsightBench: A Controlled-Environment Benchmark'''
+  release_date: 'arXiv API: 2610.04927v1 published 2026-10-04T04:10:28Z'
+  venue: arXiv API entry has no journal_ref or comments; the v1 HTML header reads 'arXiv:2610.04927v1 [cs.SE] 04 Oct 2026' with copyright '© none'; no venue is stated anywhere in the paper
+  memory_types: '§3 Held-out split: insights come from source competitions that are causal non-descendants of each target, reflecting that ''an agentic MLE system facing a new task can draw on prior experience''; §4.2.2 injects insights (domain, competition and improvement strategies) as on-demand skills or a playbook; §5 scores task performance on held-out targets with and without these insights'
+  links.paper: arXiv abs page 2610.04927
+  links.code: 'null: the paper (§6) says ''we open-source our workflow and insights'' but neither the HTML nor the PDF hyperlinks give a repo URL. GitHub repo and code searches for MLE-InsightBench and MLE-InsightForge, the first author''s repos (Bihui-Jin) and the uw-swag org found no official repo (checked 2026-10-10)'
+  links.data: 'null: no dataset link in the paper; Hugging Face searches (author BihuiJ, ''InsightBench'', ''InsightForge'') found no MLE-InsightBench dataset (checked 2026-10-10)'
+  scale.questions: '§3 and Table 1: 12 target tasks, one per domain; §5.1 ''We evaluate on the 12 held-out target tasks'' (T=12, K=6, 72 runs per condition)'
+  scale.conversations: 'null: not a conversational benchmark; the units are Kaggle competitions'
+  scale.avg_context_length: 'null: the paper reports no context length; tasks are agentic MLE runs (12h budget, at most 250 steps)'
+  scale.notes: 'Abstract and §3: 160 competitions, 12 domains, 148 source competitions; §5.1: run budget and 6 runs per task'
+  metrics: §5.1 Metrics paragraph, Eq. (1), Table 3 (normalized private-test and validation scores, tokens, time, cost), Table 1 (task metrics), Table 4 (per-task change, significance)
+  judge_model: 'null: §5.1 says the private-test score is ''computed by the task''s MLE-bench-compatible grader''. An LLM filters writeups only during insight assembly (§4.1.2), and it is not an evaluation judge'
+  repro_level: 'paper_only: paper checked; no official code repo or public dataset release found on GitHub or Hugging Face, and no link in arXiv v1 HTML/PDF (checked 2026-10-10)'
+  notes: §4.1.2 insight counts and sources; §6 open-source statement; §3 Kaggle data and the Jane Street dataset no longer being accessible

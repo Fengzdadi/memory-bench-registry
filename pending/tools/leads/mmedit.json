@@ -1,0 +1,14 @@
+{
+ "name": "MMEdit",
+ "slug": "mmedit",
+ "leads": {
+  "registry_key": "arxiv:2310.08475",
+  "tier": "P0",
+  "arxiv": "2310.08475 (arXiv API: v1 ?; title: None)",
+  "phase1_verified_types": {
+   "parametric": "Sec 3.1: \"Assuming we have a multimodal LLM f parameterized by θ ... what we need is an updated θ_e with f(i_e, x_e; θ_e) = y_e.\" Table 1 lists E-VQA and E-IC splits."
+  },
+  "paper_hint": "https://arxiv.org/abs/2310.08475",
+  "code_hint": "https://github.com/zjunlp/EasyEdit"
+ }
+}

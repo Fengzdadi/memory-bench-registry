@@ -1,0 +1,33 @@
+{
+ "name": "SLVMBench",
+ "slug": "slvmbench",
+ "leads": {
+  "registry_key": "arxiv:2607.11312",
+  "tier": "P0",
+  "arxiv": "2607.11312 (arXiv API: v1 2026-07-13; title: SLVMBench: Skill Learning from Video Memory)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "SLVMBench: Skill Learning from Video Memory",
+    "paper_url": "https://arxiv.org/pdf/2607.11312",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "procedural_workflow"
+   ],
+   "extra_tags": [
+    "multimodal",
+    "long_context_single_input"
+   ],
+   "kind_reason": "A benchmark for video-LLMs: learn a skill from a tutorial embedded in a 2-3 hour distractor video stream, then apply it to questions about a later target video. It has 2,261 QA pairs from 1,220 videos, with question types such as next step, step ordering, tool configuration and mistake detection. Th"
+  },
+  "phase1_verified_types": {
+   "procedural_workflow": "Sec 3.4: \"SLVMBench evaluates true knowledge transfer instead of simple visual pattern matching\"; Sec 4.1: \"apply learned procedural knowledge\"; Table 2 Procedural Mastery: Next Step Prediction, Step Ordering, Tool Configuration"
+  },
+  "paper_hint": "https://arxiv.org/abs/2607.11312"
+ }
+}

@@ -1,0 +1,35 @@
+{
+ "name": "MemOps",
+ "slug": "memops",
+ "leads": {
+  "registry_key": "arxiv:2607.12893",
+  "tier": "P0",
+  "arxiv": "2607.12893 (arXiv API: v1 2026-07-14; title: MemOps: Benchmarking Lifecycle Memory Operations in Long-Horizon Conversations)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "MemOps: Benchmarking Lifecycle Memory Operations in Long-Horizon Conversations",
+    "paper_url": "https://arxiv.org/pdf/2607.12893",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "conversational_longterm",
+    "semantic_knowledge_update",
+    "parametric"
+   ],
+   "extra_tags": [
+    "memory_operation_tracing"
+   ],
+   "kind_reason": "A benchmark of lifecycle memory operations (remember, forget, update, reflect) in long task-oriented multi-session conversations. It uses gold operation traces and six probe types and has 2,006 QA pairs, with ~61K tokens in the long-context setting. It evaluates long-context, retrieval, managed-memo"
+  },
+  "phase1_verified_types": {
+   "parametric": "Sec. 4.1: 'we test the parameter-update baseline Temp-LoRA'. Sec. 1: 'Parametric memory, which folds interaction history directly into model parameters' is 'markedly unreliable'. Tables 3-5 score Temp-LoRA beside RAG, MemOS, Mem0 and long-context models."
+  },
+  "paper_hint": "https://arxiv.org/abs/2607.12893",
+  "code_hint": "https://github.com/MemTensor/MemOps"
+ }
+}

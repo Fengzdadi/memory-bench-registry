@@ -1,0 +1,44 @@
+name: CloneMem
+slug: clonemem
+release_date: 2026-01
+venue: ACL 2026
+memory_types:
+- personalization
+- episodic
+- semantic_knowledge_update
+links:
+  paper: https://arxiv.org/abs/2601.07023
+  code: https://github.com/AvatarMemory/CloneMemBench
+  data: https://huggingface.co/datasets/ZhiyuZhangA/CloneMem
+scale:
+  conversations: 10
+  questions: 1183
+  avg_context_length: ~100k tokens (3 short personas); >500k tokens (7 long personas)
+  notes: 'conversations = 10 personas, each a 1-3-year history of non-conversational digital traces (diaries, private/group chats, memos, emails, etc.), not dialogues. questions = 1,183 (Table 2), bilingual EN/ZH, free-text + multiple-choice. Splits: releases/100k (3 personas), releases/500k (7; some up to 1M tokens). Release holds 8,489 traces and 1,187 questions per language (counted 2026-10-10).'
+metrics:
+- Recall@k over media IDs (recall_flat, recall_all_any, recall_any_any; k=10/20)
+- Memory Recall (LLM-judged, 0-1)
+- Memory Helpfulness Score (LLM-judged, normalized 0-1)
+- QA Consistency (LLM-judged, normalized 0-1)
+- Choice Accuracy (multiple-choice, %)
+judge_model: GPT-4o
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'Published at ACL 2026 main (Anthology 2026.acl-long.1549). The paper conflicts with itself on size: Table 2 gives 1,183 questions, while §4.1 says ~5,000 QA pairs. The GitHub and HF release (Apache-2.0, ungated) has 1,187 questions per language, counted 2026-10-10, and contains no single_point_factual items. §5 names GPT-4o as judge, while Appendix A.5 says GPT-4o-mini is "also used for evaluation". Photos and voice notes appear only as text descriptions. run_eval.sh points to paths (data/new_data/..., clonemem_adaptation/) that are absent from the repo.'
+sources:
+  name: 'arXiv title ''CloneMem: Benchmarking Long-Term Memory for AI Clones''; repo docs/README.md'
+  release_date: 'arXiv API: 2601.07023v1 published 2026-01-11T18:33:12Z'
+  venue: 'ACL Anthology 2026.acl-long.1549: Proceedings of the 64th Annual Meeting of the ACL (Volume 1: Long Papers), July 2026, pp. 33571-33602; repo docs/README.md news 2026.04.06 ''accepted by ACL 2026 Main Conference'''
+  memory_types: 'Paper abstract and §4.2 / Appendix B: QA over 1-3 years of non-conversational life traces (diaries, chats, emails), with no user-agent dialogue -> episodic. Tasks track evolving personal states (experience/emotion/opinion) through comparative, trajectory, pattern, causal and counterfactual questions -> semantic_knowledge_update (state tracking). The model answers as the person''s AI clone, and QA Consistency penalizes generic, non-personal answers -> personalization. Not multimodal: the Limitations section says photos and voice notes are represented as text descriptions.'
+  links.paper: arXiv abs page 2601.07023
+  links.code: 'arXiv abstract: ''Code and dataset are available at https://github.com/AvatarMemory/CloneMemBench'' (gh api: Apache-2.0, created 2026-01-10)'
+  links.data: 'Repo docs/README.md HuggingFace badge -> huggingface.co/datasets/ZhiyuZhangA/CloneMem. HF API (2026-10-10): public, gated=false, apache-2.0, 20 JSON files (100k/ and 500k/, en+zh) plus dataloader.py'
+  scale.conversations: Paper Table 2 '# Personas 10' (arXiv HTML and ACL PDF); repo has 10 persona files per language
+  scale.questions: 'Paper Table 2 ''# Questions 1,183'' (arXiv v1 HTML and ACL Anthology PDF). Released en/zh files counted on 2026-10-10 via qa_items: 32+76+78+180+142+167+114+110+181+107 = 1,187 per language'
+  scale.avg_context_length: 'Paper Table 2 ''Context Length: 3 short (~100k tokens), 7 long (>500k tokens)''; §4.1 ''some reaching up to 1M''. The paper reports no average.'
+  scale.notes: Paper Table 2 and §4.1; repo data/releases/README.md; per-file counts streamed from GitHub raw on 2026-10-10
+  metrics: 'Paper §5.2 and results tables, re-checked 2026-10-10: the retrieval table (arXiv v1 Table 3; ACL PDF Table 4) reports recall_all_any, recall_any_any and recall_flat only at k=10 and k=20. k=5 appears only in the LLM-judged QA/memory-utility table (arXiv Table 4: QA consistency, choice accuracy, memory helpful score, memory recall at k=5/10/20). No retrieval Recall@5 is reported, although Appendix D.1.1 says ''k in {5,10}''. Appendix D.1 also defines Recall-All-All, Recall-Any-All, QA Hallucination Rate and QA Perfect Rate.'
+  judge_model: Paper §5 'we assess free-text responses using GPT-4o as an LLM-based judge'; the Limitations section also names GPT-4o. Repo eval/compute_llm_metrics_for_clonemem.py --model_name default 'gpt-4o'. Appendix A.5 says GPT-4o-mini is 'also used for evaluation'.
+  repro_level: 'Repo tree (checked 2026-10-10): src/clonemem-eval/eval_flat.py, eval_amem.py, eval_mem0.py, eval_oracle.py, eval/run_generation.py, eval/compute_auto_metrics_for_clonemem.py, eval/compute_llm_metrics_for_clonemem.py, eval/run_eval.sh. Data is in data/releases/{100k,500k}/ and on HF.'
+  notes: ACL Anthology page; paper Table 2 vs §4.1 and Appendix A.5; released files counted 2026-10-10; repo src/clonemem-eval/eval/run_eval.sh

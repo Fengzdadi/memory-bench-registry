@@ -1,0 +1,14 @@
+{
+ "name": "EvoMemBench",
+ "slug": "evomembench",
+ "leads": {
+  "registry_key": "arxiv:2605.18421",
+  "tier": "P0",
+  "arxiv": "2605.18421 (arXiv API: v1 ?; title: None)",
+  "phase1_verified_types": {
+   "procedural_workflow": "Sec 4.4: \"Cross-episode execution evolution evaluates whether an agent can learn reusable execution experience from previous episodes and apply it to future tasks.\" Sec 5.1: memory updated after each episode and reused."
+  },
+  "paper_hint": "https://arxiv.org/abs/2605.18421",
+  "code_hint": "https://github.com/DSAIL-Memory/EvoMemBench"
+ }
+}

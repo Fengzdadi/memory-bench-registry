@@ -1,0 +1,46 @@
+name: AhaBench
+slug: ahabench
+release_date: 2026-06
+venue: arXiv preprint
+memory_types:
+- procedural_workflow
+links:
+  paper: https://arxiv.org/abs/2609.05435
+  code: https://github.com/Marco-Cheng/AhaBench
+  data: null
+scale:
+  conversations: null
+  questions: null
+  avg_context_length: null
+  notes: 'No single item count is reported. Aha-Puzzle: 7 puzzle identities x 4 languages x 3 repeats, giving 84 cold/endpoint pairs and 588 curriculum episodes per model. Aha-Euler: 50 single-step + 90 graph-composition tasks (140 in benchmark_manifest.json); the main teaching contrast uses 50 single-step requests per condition. Aha-Vending: 5 incident-setting seeds of up to 365 simulated days per model.'
+metrics:
+- Aha-Puzzle rubric score (correctness /70 + efficiency /30)
+- Endpoint gain (trace-free score minus cold score on same targets)
+- Support-withdrawal profile and withdrawal gap
+- Aha-Euler held-out exact-match accuracy (cold / full teaching / answer-only teaching)
+- Procedure gap (full minus partial accuracy)
+- End-to-end completion accuracy
+- Aha-Vending terminal profit, completion, survival days, termination mode
+- Time-averaged profit, maximum drawdown, early/late 90-day earning rates
+- 'v1 scorecard: Initial Score, Post-Experience Score, Learning Lift'
+judge_model: GPT-5.4
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'The title and framing changed between arXiv v1 (2026-06-30), which leads with an Initial/Post-Experience/Learning Lift scorecard, and v2 (2026-09-21), which uses each component''s own metrics; the README keeps the old scorecard as a legacy view. The three components are Aha-Puzzle, Aha-Euler and Aha-Vending (a simulator inspired by Vending-Bench). Experience reaches the fixed-weight agents in context. The repo has no root licence: Puzzle is Apache-2.0, Euler and Vending are MIT. Runs need OpenAI-compatible endpoints, and Puzzle also needs a host/judge LLM. No model outputs are packaged.'
+sources:
+  name: 'arXiv API title (v2) and repo README heading: ''AhaBench'''
+  release_date: 'arXiv API: 2609.05435 <published>2026-06-30T04:04:01Z (v1); v2 updated 2026-09-21'
+  venue: arXiv API entry has no journal_ref or comment; repo README citation lists 'arXiv preprint'; no venue found
+  memory_types: 'arXiv v2 HTML §3.1: the learning opportunity is the questioning strategy from solved episodes, tested on a new target puzzle. §3.2: computation taught on one input, tested on a held-out input. §4: endpoint gain and procedure gap. §2: the update rule may revise context, memory or reusable skills. Procedural experience is reused on later, different tasks.'
+  links.paper: arXiv API id 2609.05435
+  links.code: paper HTML 'Github Repository' link (v1 and v2) points to https://github.com/Marco-Cheng/AhaBench; repo README links back to arXiv 2609.05435
+  links.data: 'null: no separate dataset page. Data ships in the repo (benchmarks/puzzle/data, benchmarks/dag_euler/tasks, benchmarks/openvending/open_vending_bench/data). Hugging Face search for ''ahabench'' returns only unrelated AHa-Bench datasets.'
+  scale.conversations: 'null: the benchmark is built from interactive episodes, tasks and simulator seeds, not conversations'
+  scale.questions: 'null: no single item count. Per-component counts are in arXiv v2 §3.1 (84 pairs / 588 episodes), §3.2 (50 + 90 tasks) and §3.3 (5 incident seeds), plus Table 10 (50 requests per condition). The repo benchmark_manifest.json has 50 single_stage + 90 dag tasks.'
+  scale.avg_context_length: 'null: the paper reports no average context length (only up to 20 questions per Puzzle episode and at most 8 recent transitions per Vending request)'
+  scale.notes: arXiv v2 §3.1-3.3, Table 10; repo benchmarks/dag_euler/benchmark_manifest.json and evaluation/README.md (counted 2026-10-10)
+  metrics: arXiv v2 §4 (Eqs. 1-3, sustained operational outcomes), Tables 1-5 and 10; arXiv v1 §5 Table 3 (Initial / Post-Experience / Lift scorecard)
+  judge_model: 'arXiv v2 §3.1: host is GPT-5.4 Pro and rubric executor (judge) is GPT-5.4, both at temperature 0. v1 §3 says GPT-5.4 executes the rubric. The judge is used for Aha-Puzzle only; Euler uses exact match and Vending uses simulator profit.'
+  repro_level: repo tree (checked 2026-10-10) has scripts/run_ahabench.py (run/doctor/score), benchmarks/puzzle/scripts/run_benchmark.py, benchmarks/dag_euler/evaluation/run_parallel_adaptive_dag_nodes.py and benchmarks/openvending/open_vending_bench/cli.py, plus in-repo data files
+  notes: arXiv v1 vs v2 HTML titles and abstracts; repo README (legacy scorecard); component LICENSE files (Apache-2.0 for Puzzle, MIT for dag_euler and openvending); README 'Model Interface' section

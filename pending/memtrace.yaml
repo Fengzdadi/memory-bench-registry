@@ -1,0 +1,48 @@
+name: MemTrace
+slug: memtrace
+release_date: 2026-06
+venue: arXiv preprint
+memory_types:
+- conversational_longterm
+- semantic_knowledge_update
+links:
+  paper: https://arxiv.org/abs/2606.17328
+  code: https://github.com/ivyllll/MemTraceBench
+  data: null
+scale:
+  conversations: 20
+  questions: 15422
+  avg_context_length: null
+  notes: '20 = users (multi-session histories from HaluMem-Medium); 15,422 = question rows from 835 knowledge points and 5,677 base probes, scored at 8 windows per user. Repo index (counted 2026-10-10): 58-82 sessions per user, about 160K tokens per full history on average; per-user probe lists sum to 5,674.'
+metrics:
+- Gist accuracy (binary, LLM-judged)
+- Verbatim completeness (0-1)
+- Response type (correct/partial/abstention/hallucination)
+- Fresh accuracy (W1-W2)
+- Saturated accuracy (W7-W8)
+- Delta-Forget (Fresh minus Saturated)
+- Abstention rate
+- Hallucination rate
+- Reach-vs-use failure attribution (retriever reach, oracle Gist)
+- Cohen's kappa (judge agreement)
+judge_model: GPT-4o
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: Built by transforming HaluMem-Medium histories and memory points into per-fact probes, so it is not an independent corpus. The repo is not linked from the paper. It is an anonymized release (commits by "Anonymous") under the first author's GitHub account and has no licence file. Generated results are not included. A different paper is also called MemTrace (arXiv 2605.28732, zjunlp; HF zjunlp/MemTraceBench) and is unrelated.
+sources:
+  name: arXiv 2606.17328 title/abstract; repo README heading '# MemTrace'
+  release_date: 'arXiv API: 2606.17328v1 published 2026-06-15'
+  venue: arXiv API entry has no journal_ref/comment; repo calls itself an 'anonymized release'; web search found no acceptance record (checked 2026-10-10)
+  memory_types: 'paper §3.1-3.2: multi-session user histories (HaluMem-Medium); static/dynamic/preference facts probed as current, historical and trajectory questions, with present, missing or false-premise evidence conditions'
+  links.paper: arXiv abs page 2606.17328
+  links.code: 'github.com/ivyllll/MemTraceBench: owner profile name ''XIANXUAN LONG'' (first author); ivyllll.github.io lists MSU DSE Lab, advisor Jiliang Tang; README counts match the paper (20 users, 835 KPs, 5,677 base probes, 15,422 question rows)'
+  links.data: data ships in the repo (memtrace_data/); no separate official dataset page found; the HF search hit zjunlp/MemTraceBench belongs to a different paper
+  scale.conversations: 'paper §3.1 and Appendix A Table 6: 20 users; repo memtrace_index.json n_users=20'
+  scale.questions: 'paper §3.1 and Table 6: 15,422 question rows; recounted from repo memtrace_index.json non-null question fields = 15,422 (2026-10-10)'
+  scale.avg_context_length: not reported in paper; repo index stats.total_tokens per user ranges 131K-188K (mean computed ~160K); left null because no figure is reported verbatim
+  metrics: paper §3.3 (Gist accuracy, Verbatim completeness, Response type), §3.4/§4.2 (Fresh, Saturated, Delta-Forget), Table 4 (abstention, hallucination rates), §4.4/Table 5 (reach/use, Oracle Gist), Appendix D Table 13 (Cohen's kappa)
+  judge_model: 'paper §3.3 and Appendix D: GPT-4o primary judge, with Gemini-3-Flash as the cross-judge on a 200-probe sample; repo score_probes.py default --scoring-model gpt-4o'
+  repro_level: repo tree has run_probes_universal.py (system adapters), score_probes.py (GPT-4o judge), validate_benchmark_design.py, run_phased.sh/run_all.sh, plus memtrace_data/memtrace_index.json and user_00..19_sessions.json, downloaded and parsed (checked 2026-10-10)
+  notes: paper §3.1 and Limitations (derived from HaluMem-Medium); repo commits and README; GitHub API shows license null; arXiv search shows the separate 2605.28732 MemTrace paper
+  scale.notes: paper Table 6; repo memtrace_index.json per-user stats (n_sessions, total_tokens) and probes lists, counted 2026-10-10

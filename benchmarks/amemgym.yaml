@@ -1,0 +1,43 @@
+name: AMemGym
+slug: amemgym
+release_date: 2026-03
+venue: ICLR 2026
+memory_types:
+- conversational_longterm
+- personalization
+- semantic_knowledge_update
+links:
+  paper: https://arxiv.org/abs/2603.01966
+  code: https://github.com/AGI-Eval-Official/amemgym
+  data: https://huggingface.co/datasets/AGI-Eval/AMemGym
+scale:
+  conversations: 20
+  questions: 200
+  avg_context_length: 60K to 140K tokens on average (base version; varies by assistant model)
+  notes: 'Base config (v1.base): 20 simulated user profiles, each one long-horizon conversation (11 periods; 943 sessions total). 200 multiple-choice questions (10 per user, 4-7 options), each re-asked at 11 positions (2,200 answers). The Extra config (20 users, 420 periods, 1,632 sessions, 512K+ context) appears in the paper but is not on HF.'
+metrics:
+- Overall score (average multiple-choice QA accuracy)
+- Normalized memory score (overall accuracy rescaled between a random baseline and a perfect-memory upper bound)
+- Write / read / utilization failure rates (diagnostics)
+- Memory Factual Recall (R_fact; self-evolution experiment only)
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'The evaluation is on-policy: the assistant talks live with an LLM-simulated user (gpt-4.1 in the paper; deepseek-v3 is an alternative), so running it requires OpenAI-compatible API access. Answers are scored by multiple-choice option matching, not by an LLM judge. GPT-4.1 judges factual consistency only for the auxiliary R_fact metric in the self-evolution experiment. The HF dataset (CC-BY-4.0, ungated) has only v1.base. The README arXiv badge is still a placeholder.'
+sources:
+  name: 'arXiv title and repo README: ''AMemGym: Interactive Memory Benchmarking for Assistants in Long-Horizon Conversations'''
+  release_date: 'arXiv API: 2603.01966v1 published 2026-03-02'
+  venue: arXiv API comment 'Accepted to ICLR 2026'; repo README BibTeX booktitle 'The Fourteenth International Conference on Learning Representations', 2026, openreview.net/forum?id=sfrVLzsmlf (OpenReview page itself blocked by a browser challenge)
+  memory_types: 'Paper abstract and Sec 3-4: multi-period, multi-session long-horizon conversations; ''memory-driven personalization'' over user profiles and preferences; latent user states evolve across periods, and questions are re-asked at N_p+1 positions with answers that change as states update'
+  links.paper: arXiv API entry 2603.01966
+  links.code: Repo README states 'This repo contains the code and data for the paper'; arXiv abstract footnote links the project site agi-eval-official.github.io/amemgym
+  links.data: Repo README Dataset badge -> huggingface.co/datasets/AGI-Eval/AMemGym; HF API shows public, not gated, license cc-by-4.0, file v1.base/data.json
+  scale.conversations: 'Paper Table 4 (Total Users 20, Base); HF v1.base/data.json counted on 2026-10-10: 20 items, 11 periods each, 943 sessions total'
+  scale.questions: 'Paper Sec 4.1 and Table 4 (Evaluation Questions 200); HF data.json counted on 2026-10-10: 200 qas (10 per user), 4-7 answer choices'
+  scale.avg_context_length: 'Paper Appendix C.1: ''ranging from 60K to 140K tokens on average for the base version''; Sec 4.1 says the base config requires a 128K+ context window'
+  scale.notes: Paper Table 4 (Base vs Extra statistics) and Sec 4.1/Appendix F.1; repo configs/env/v1.base.json and v1.extra.json; the HF repo lists only v1.base/data.json
+  metrics: Paper Sec 3.3 (average QA accuracy, normalized memory score S_memory = (S_overall - S_random)/(S_UB - S_random), write/read/utilization failure rates; Table 3); Appendix E (Memory Factual Recall for self-evolution)
+  judge_model: 'null: main scoring compares the chosen option''s state with the golden state (repo src/amemgym/eval/overall.py and metric.py, ''accuracy''). GPT-4.1 serves as the user simulator and as the factual-consistency checker only for the auxiliary R_fact metric (Appendix E, C.6)'
+  repro_level: Repo tree has src/amemgym/eval/overall.py, upperbound.py, random.py, diagnosis.py and evolution.py, with README commands; data on HF (v1.base/data.json downloaded and parsed on 2026-10-10)
+  notes: arXiv/paper Sec 3.2, 4.1 and Appendix F.2 (user simulator); repo README (OPENAI_API_KEY setup, arXiv badge 'coming-soon'); HF API metadata

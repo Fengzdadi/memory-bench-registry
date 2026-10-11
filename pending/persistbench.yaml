@@ -1,0 +1,40 @@
+name: PersistBench
+slug: persistbench
+release_date: 2026-02
+venue: ICML 2026
+memory_types:
+- personalization
+links:
+  paper: https://arxiv.org/abs/2602.01146
+  code: https://github.com/ivaxi0s/PersistBench
+  data: null
+scale:
+  conversations: null
+  questions: 500
+  avg_context_length: ~10 memories per sample (range 4-16)
+  notes: 'questions = 500 human-validated samples (200 cross-domain leakage, 200 sycophancy, 100 beneficial memory use), each a memory set plus one query. There are no dialogue histories, so conversations is null. The §5.3 multi-turn robustness check embeds 150 queries in simulated conversations. Release files counted 2026-10-10: 500/200/200/100 lines, mean 10.6 memories.'
+metrics:
+- Failure rate (FR, %) for cross-domain leakage, with 95% bootstrap CI (LLM-judge score 1-5, >=3 = failure, failure if any of 3 generations fails)
+- Failure rate (FR, %) for memory-induced sycophancy, with 95% bootstrap CI (LLM-judge score 1-5, >=3 = failure, any of 3 generations)
+- Failure rate (FR, %) for beneficial memory use (LLM-judge score 1-3, >=2 = failure, 1 generation)
+judge_model: Kimi-K2-Thinking
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'The main evaluation is single-turn: user memories go in the system prompt, followed by one query. 18 LLMs evaluated. The repo README recommends the Inspect-native implementation (UKGovernmentBEIS/inspect_evals, persistbench). The repo''s beneficial judge prompt scores 3 = pass, and analysis/failure_rates.py counts only a score of 1 as failure. Paper §4.3 instead uses 1 = best, with >=2 as failure. No licence file in the repo. An unrelated Hugging Face dataset, ''PersistBenchDataset'' (4D foundation models), shares the name.'
+sources:
+  name: arXiv 2602.01146 title; repo README title
+  release_date: 'arXiv API: 2602.01146v1 published 2026-02-01T10:44:58Z (v2 2026-06-02)'
+  venue: ICML 2026 virtual site poster page icml.cc/virtual/2026/poster/63204 (OpenReview Z7Rhzk13NT); arXiv comment 'ICML (2026)'; repo description '[ICML'26]'
+  memory_types: 'paper §1/§3 (arXiv v2 HTML): evaluates appropriate use of stored user memories (cross-domain leakage, memory-induced sycophancy, beneficial memory use); memories given in system context, single-turn; leakage framed as appropriateness, explicitly contrasted with privacy/PII work, so memory_security not assigned'
+  links.paper: arXiv abs page 2602.01146
+  links.code: 'GitHub URL in paper header (arXiv v2 HTML): github.com/ivaxi0s/PersistBench; README cites arXiv 2602.01146'
+  links.data: no separate official dataset page; data ships in repo benchmark_samples/ (HF search hit 'therealguangzhaohe/PersistBenchDataset' is an unrelated 4D-model benchmark)
+  scale.conversations: 'null: samples are memory-set + single query, no dialogue histories (paper §4.2/§4.3)'
+  scale.questions: paper §4.2 'The final benchmark contains 500 human-validated samples' (Table 3/4/5 breakdowns); repo benchmark_samples/full_benchmark.jsonl has 500 lines (counted 2026-10-10)
+  scale.avg_context_length: 'paper §4.1 ''Memory Expansion'' / Appendix C.2.4 Fig. 6: 4-16 memories per sample, mean ~10; no token counts reported'
+  scale.notes: paper §4.2, §5.3; repo experiments/multi_turn/data/samples_150.json; line counts of repo benchmark_samples/*.jsonl
+  metrics: paper §4.3 'Metric' (failure rates, thresholds, 3 inferences per sample) and Table 2 (FR with 95% bootstrap CIs)
+  judge_model: 'paper Appendix E.2 (judge selection: Kimi-K2-Thinking chosen for best exact-match accuracy, open weights); repo README ''Judge'': all evaluations use moonshotai/kimi-k2-thinking at temperature 0'
+  repro_level: repo tree has benchmark_samples/full_benchmark.jsonl (+ per-category jsonl), CLI entry point 'benchmark' = src/benchmark/eval_cli.py (pyproject), runner src/benchmark/benchmark_runner.py, judge src/benchmark/execution/judgment.py, analysis/failure_rates.py; README 'uv run benchmark run <config>' (checked 2026-10-10)
+  notes: repo README (Inspect-native recommendation, judge); prompts/judges/beneficial_samples.txt and analysis/failure_rates.py vs paper §4.3; GitHub API license null; HF API dataset search 'persistbench'

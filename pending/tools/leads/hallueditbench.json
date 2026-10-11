@@ -1,0 +1,14 @@
+{
+ "name": "HalluEditBench",
+ "slug": "hallueditbench",
+ "leads": {
+  "registry_key": "arxiv:2410.16251",
+  "tier": "P0",
+  "arxiv": "2410.16251 (arXiv API: v1 ?; title: None)",
+  "phase1_verified_types": {
+   "parametric": "Paper Sec. 2.3 'chose 7 representative techniques': ROME, MEMIT, FT-L, FT-M, LoRA (weight editing) plus ICE and GRACE. Abstract: five dimensions, Efficacy, Generalization, Portability, Locality and Robustness."
+  },
+  "paper_hint": "https://arxiv.org/abs/2410.16251",
+  "code_hint": "https://github.com/baixianghuang/HalluEditBench"
+ }
+}

@@ -1,0 +1,36 @@
+{
+ "name": "StoryBench",
+ "slug": "storybench",
+ "leads": {
+  "registry_key": "arxiv:2506.13356",
+  "tier": "P1",
+  "arxiv": "2506.13356 (arXiv API: v1 2025-06-16; title: StoryBench: A Dynamic Benchmark for Evaluating Long-Term Memory with Multi Turns)",
+  "community_list_entries": [
+   {
+    "source": "tsinghua",
+    "section": "Benchmark",
+    "name": "StoryBench",
+    "paper_url": "https://arxiv.org/abs/2506.13356",
+    "code_url": null,
+    "data_url": null
+   },
+   {
+    "source": "iaar",
+    "section": "Resources / Benchmarks and Tasks / Long-Term Memory Evaluation",
+    "name": "StoryBench",
+    "paper_url": "https://arxiv.org/pdf/2506.13356",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "episodic"
+   ],
+   "extra_tags": [
+    "interactive_fiction_decision_making"
+   ],
+   "kind_reason": "A long-term memory benchmark built on an interactive-fiction game (311 scene nodes, 86 choice nodes). Choices depend on events from earlier turns, scored by knowledge-retention and sequential-reasoning metrics in immediate-feedback and self-recovery modes. The paper gives no code or data URL."
+  }
+ }
+}

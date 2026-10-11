@@ -1,0 +1,26 @@
+{
+ "name": "LoCoMo-Refined",
+ "slug": "locomo-refined",
+ "leads": {
+  "registry_key": "name:locomorefined",
+  "tier": "P2",
+  "community_list_entries": [
+   {
+    "source": "teleai",
+    "section": "📏 Benchmarks / 💬 Plain-Text Benchmarks / 🗓️ 2026",
+    "name": "LoCoMo Refined: Recalibrating LoCoMo with Stricter LLM Judging and A Cleaned Dataset",
+    "paper_url": null,
+    "code_url": "https://github.com/mem-eval-suite/LoCoMo_refined",
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "conversational_longterm",
+    "episodic"
+   ],
+   "extra_tags": [],
+   "kind_reason": "Recalibrated LoCoMo: 1,382 questions, 337 revised after human audit, with a stricter Qwen3-14B judge. It evaluates recall of time, events, relationships and preferences in very long multi-session dialogues. The technical report is listed as 'coming soon'."
+  }
+ }
+}

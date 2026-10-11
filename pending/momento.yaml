@@ -1,0 +1,45 @@
+name: Momento
+slug: momento
+release_date: 2026-05
+venue: arXiv preprint
+memory_types:
+- conversational_longterm
+- personalization
+- semantic_knowledge_update
+links:
+  paper: https://arxiv.org/abs/2606.00832
+  code: https://github.com/ninoaddict/momento
+  data: https://huggingface.co/datasets/adrilmanurung/momento
+scale:
+  conversations: null
+  questions: 161
+  avg_context_length: null
+  notes: 161 = multi-session task instances (paper §2.3), matching the 161 rows of the HF scenarios.jsonl test split. The paper reports no session or turn counts. The HF file holds 472 seeded prior sessions (1-5 per task, 89 users), and 37 tasks include images (counted 2026-10-10). Each task runs for 3 trials.
+metrics:
+- DB State (final database state matches goal)
+- Output (response satisfies user request; information coverage)
+- Tool Recall (correct tools in correct order)
+- Task success (all three satisfied)
+- Pass@3
+- Pass^3
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'Agentic benchmark: past sessions are seeded into memory, then a tool-using agent (26 restaurant-domain tools, PostgreSQL in Docker) serves an LLM-simulated user (Qwen3.6-35B-A3B in the paper). The paper does not name the model behind the LLM-judged Output metric; the repo defaults to gpt-4o-mini and the sample config uses gemma-4-31b-it. The paper states a CC-BY-SA dataset licence, but the HF card says CC-BY-4.0. Images ship separately (images.zip). Unrelated to the MEMENTO entry.'
+sources:
+  name: arXiv 2606.00832 title/abstract; repo README title
+  release_date: 'arXiv API: 2606.00832v1 published 2026-05-30 (only version listed)'
+  venue: arXiv API comment field 'Preprint', no journal_ref; web search found no venue listing
+  memory_types: 'paper §2.3/§3: tasks span multiple sessions with latent memory dependencies, evolving preferences, contradictory updates; agent must re-validate stale user state (Error Analysis); personalized user goals (abstract). Multimodal not tagged: images (37 tasks) are user-shared in the current session, while the remembered prior sessions are text-only in scenarios.jsonl'
+  links.paper: arXiv abs page for 2606.00832
+  links.code: paper footnote 1 (arXiv v1 HTML §1) links github.com/ninoaddict/momento; repo exists (Apache-2.0, created 2026-05-28)
+  links.data: 'paper footnote 1 links huggingface.co/datasets/adrilmanurung/momento; HF API: public, not gated, files scenarios.jsonl + images.zip'
+  scale.questions: paper §2.3 'It contains 161 task instances'; HF scenarios.jsonl has 161 lines/unique task_ids (counted 2026-10-10)
+  scale.conversations: paper reports no count of conversations/sessions; HF file holds 472 seeded prior sessions across 161 tasks (counted 2026-10-10)
+  scale.avg_context_length: not reported in paper, repo or dataset card
+  scale.notes: paper §2.3, Table 1 (K=3); HF scenarios.jsonl counted 2026-10-10
+  metrics: paper §3 Metrics paragraph and Table 1 (DB State, Output, Tool Recall, Pass@3, Pass^3; K=3)
+  judge_model: paper does not name a judge model; repo momento/eval/evaluator.py implements Output as LLM-as-judge information coverage with default openai/gpt-4o-mini; configs/sample_config.json uses google/gemma-4-31b-it
+  repro_level: repo tree has momento/run.py (benchmark driver), momento/eval/evaluator.py, momento/evaluation.py, momento/aggregate.py; run.py loads scenarios from HF adrilmanurung/momento (public, ungated) (checked 2026-10-10)
+  notes: 'paper §1 footnote (CC-BY-SA), HF dataset card (license: cc-by-4.0), paper §3 User Simulator, repo README'

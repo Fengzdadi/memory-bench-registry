@@ -1,0 +1,45 @@
+name: EvoMemBench
+slug: evomembench
+release_date: 2026-05
+venue: arXiv preprint
+memory_types:
+- procedural_workflow
+- semantic_knowledge_update
+- embodied
+- conversational_longterm
+links:
+  paper: https://arxiv.org/abs/2605.18421
+  code: https://github.com/DSAIL-Memory/EvoMemBench
+  data: null
+scale:
+  conversations: null
+  questions: 5754
+  avg_context_length: null
+  notes: 'questions is the sum of paper Table 2 evaluation samples: InEp-Know 2,800; InEp-Exec 800 (run at 16K/32K/64K/128K context budgets); CrossEp-Know 884 (120 contexts); CrossEp-Tool 800; CrossEp-Web 270; CrossEp-Emb 200. The suite is not conversation-based, so conversations is null. No average context length is reported.'
+metrics:
+- Answer accuracy (InEp-Know, CrossEp-Know)
+- Success rate (InEp-Exec, CrossEp-Tool, CrossEp-Web, CrossEp-Emb)
+- Progress score (InEp-Exec, CrossEp-Tool)
+- Average steps (execution settings)
+- Token usage (efficiency)
+- Average rank across subsets
+judge_model: 'Not named in the paper. Repo defaults: GPT-5.1 (CrossEp-Know rubric grading), GPT-4o (InEp-Know LongMemEval subset), deepseek-chat (CrossEp-Web LLM judge in run_full_pipeline_*.sh; run_pipeline.py fallback gemini-2.5-flash)'
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: The suite reuses MemoryAgentBench, BFCL multi-turn, CL-Bench, xbench-DeepSearch, WebWalkerQA and ALFWorld. The paper names no judge model; repo scripts default to GPT-5.1 (CrossEp-Know), GPT-4o (LongMemEval) and deepseek-chat (CrossEp-Web) as LLM judges. The repo's BFCL file for InEp-Exec and CrossEp-Tool holds 200 samples (50 per environment), against 200 per environment in paper Table 2 (counted 2026-10-10). InEp-Know data loads from HF ai-hyz/MemoryAgentBench; ALFWorld via alfworld-download. The repo has no licence file.
+sources:
+  name: 'arXiv API title ''EvoMemBench: Benchmarking Agent Memory from a Self-Evolving Perspective''; repo README'
+  release_date: 'arXiv API: 2605.18421v1 published 2026-05-18 (v2 updated 2026-06-15)'
+  venue: arXiv API entry has no journal_ref or comment; the paper HTML (v1/v2) and repo README citation give only arXiv:2605.18421; a web search found no venue
+  memory_types: 'Paper §4.1-4.4 + Table 3. procedural_workflow: §4.4 says cross-episode execution reuses experience from previous episodes on future tasks (CrossEp-Tool/Web/Emb). semantic_knowledge_update: InEp-Know Selective Forgetting/FactConsolidation ''memory revision'' (Table 3, Finding 2). embodied: CrossEp-Emb uses ALFWorld success. conversational_longterm: the InEp-Know LME(S*) (LongMemEval) column in Table 3'
+  links.paper: arXiv API entry 2605.18421
+  links.code: 'Paper abstract: ''Our code is available at https://github.com/DSAIL-Memory/EvoMemBench''. Opened with gh api 2026-10-10'
+  links.data: No separate official dataset page. HF search for EvoMemBench/DSAIL-Memory returns nothing; data ships in the repo, plus third-party HF ai-hyz/MemoryAgentBench and the ALFWorld download
+  scale.questions: 'Sum of paper Table 2 #Samples (arXiv v2 HTML §4): 2000+800+800+884+800+100+170+200 = 5754. CrossEp-Know 884 samples / 120 contexts confirmed by counting the repo CL-bench_context_ge5.jsonl'
+  scale.conversations: 'null: the evaluation units are samples/tasks, not conversations (CrossEp-Know has 120 shared contexts, §4.3)'
+  scale.avg_context_length: 'null: the paper reports only InEp-Exec context budgets (16K/32K/64K/128K, Appendix B.2), not an average'
+  metrics: Paper §5.1 'Metrics' and Appendix A.2 (Answer Accuracy, Success Rate, Progress Score, Average Steps, Token Usage); average rank in §5.1
+  judge_model: 'Paper v1/v2 HTML searched 2026-10-10: no judge model named (§5.1/A.2 define accuracy and success only as binary correct/success; GPT-5-mini appears only for data reconstruction and as a memory-free baseline). Repo (checked 2026-10-10): Cross-Episode-Knowledge/CROSSEP-KNOW/eval.py --judge-model default ''gpt-5.1''; In-Episode-Knowledge/INEP-KNOW/MemoryAgentBench/llm_based_eval/longmem_qa_evaluate.py metric_model=''gpt-4o''; Cross-Episode-Execution/Web-Search/CROSSEP-WEB/Flash-Searcher-main/run_full_pipeline_*.sh set JUDGE_MODEL="${DEFAULT_JUDGE_MODEL:-deepseek-chat}" (run_full_pipeline_gpt-5-mini.sh uses gpt-5-mini), and run_pipeline.py --judge_model defaults to DEFAULT_JUDGE_MODEL or ''gemini-2.5-flash'''
+  repro_level: 'Repo tree checked 2026-10-10. It has eval entry points (INEP-KNOW/MemoryAgentBench/main.py, INEP-EXEC/scripts/run_eval_*.sh, CROSSEP-KNOW/run_context_memory.sh + eval.py, CROSSEP-TOOL/bfcl_eval/scripts/cross_episode/run_batch_evaluate.py, CROSSEP-WEB/Flash-Searcher-main/run_pipeline.py, CROSSEP-EMB/scripts/eval_alfworld_with_memory.py). Downloaded data files: CL-bench_context_ge5.jsonl (884 rows), BFCL_v4_multi_turn_ours.json (200), DeepSearch.csv (100), webwalkerqa_subset_170.jsonl (170). HF ai-hyz/MemoryAgentBench is public, not gated'
+  notes: 'BFCL count: repo BFCL_v4_multi_turn_ours.json has 200 lines and the cross_episode/ids/*.json lists have 50 ids per environment; the InEp-Exec and CrossEp-Tool copies are md5-identical. License: gh api reports license null. Judge defaults: see judge_model source'

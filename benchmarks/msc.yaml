@@ -1,0 +1,44 @@
+name: Multi-Session Chat (MSC)
+slug: msc
+release_date: 2021-07
+venue: ACL 2022
+memory_types:
+- conversational_longterm
+- personalization
+links:
+  paper: https://arxiv.org/abs/2107.07567
+  code: https://github.com/facebookresearch/ParlAI/tree/main/projects/msc
+  data: https://parl.ai/downloads/msc/msc_v0.1.tar.gz
+scale:
+  conversations: 501
+  questions: null
+  avg_context_length: ~66 utterances per 5-session valid/test episode; avg 1614 tokens (BlenderBot BPE)
+  notes: 'conversations = 501 test episodes for each of sessions 2-5 (paper Table 1). Session 1 is PersonaChat: 1,015 test episodes. Test totals: 30,382 utterances and 24,375 summaries. Valid split: 1,000 session-1 episodes, 500 episodes per session 2-5, 31,456 utterances. Train split: 4,000 episodes of 3 sessions plus 1,001 episodes of 4 sessions, 236,987 utterances (Table 1). MSC is a next-response generation task, not QA, so it has no question count. The ~66-utterance figure and the 1614-token average both come from paper §3 ''Dataset Statistics''. The 1614 figure is given as an example of context size right after the valid/test statement; the paper does not say exactly which split it covers. Training episodes average ~53 utterances (4 sessions).'
+metrics:
+- perplexity (per session 1-5 and on session openings)
+- F1
+- BLEU-1
+- BLEU-2
+- BLEU-4
+- 'human eval: engaging response rate'
+- 'human eval: final engagingness rating (out of 5)'
+- 'human eval: rate of referencing own topic / partner''s topic / new topic'
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: Human-human crowdsourced English dataset with up to 5 chat sessions per episode. Session 1 reuses PersonaChat, and gold summaries of each session ('extended personas') are included. The task is next-utterance generation, mainly scored by perplexity. It is not a QA benchmark. Data loads through ParlAI '-t msc'. The default teacher covers sessions 1-4 for valid/test; '--include-last-session True' adds session 5. 'msc:PersonaSummary' is the dialogue-summarization subtask. The official tarball msc_v0.1.tar.gz (51,116,516 bytes) redirects to dl.fbaipublicfiles.com and returned HTTP 200 on 2026-10-10. The facebookresearch/ParlAI repo is archived (read-only). Hugging Face copies such as nayohan/multi_session_chat are community mirrors, not official. projects/msc/README.md states no separate data licence; ParlAI code is MIT. Human evaluation used crowdworkers (Mephisto), not an LLM judge.
+sources:
+  name: 'paper §1 and §3: ''we name our dataset Multi-Session Chat (MSC)'' (ACL Anthology PDF 2022.acl-long.356)'
+  release_date: 'arXiv abs page 2107.07567: only version is [v1] Thu, 15 Jul 2021 (the export.arxiv.org API returned HTTP 429 when checked on 2026-10-10)'
+  venue: 'ACL Anthology 2022.acl-long.356: Proceedings of the 60th Annual Meeting of the ACL (Volume 1: Long Papers), May 2022, pp. 5180-5197; arXiv page has no journal-ref'
+  memory_types: 'paper §3/§5: models must use dialogue history or summaries from previous sessions (conversational_longterm, which the registry definition names MSC as an example of). Summaries act as ''extensions of the original given personas''. Table 4 ablates partner vs. self persona summaries. Table 8 human eval measures references to own/partner''s persona topics from earlier sessions (personalization). Only two speakers, so not multi_agent_group.'
+  links.paper: arXiv 2107.07567; projects/msc/README.md links https://arxiv.org/abs/2107.07567
+  links.code: github.com/facebookresearch/ParlAI projects/msc/README.md (official author project page; paper Appendix D says ParlAI was used for all training and evaluation)
+  links.data: 'parlai/tasks/msc/build.py RESOURCES: http://parl.ai/downloads/msc/msc_v0.1.tar.gz. curl HEAD on 2026-10-10 followed the redirect to https://dl.fbaipublicfiles.com/parlai/msc/msc_v0.1.tar.gz: HTTP 200, application/gzip, 51,116,516 bytes'
+  scale.conversations: 'paper Table 1: 501 test episodes for sessions 2, 3, 4 and 5 (1,015 for session 1)'
+  scale.questions: 'null: MSC is a response-generation task with no QA items. Table 1 instead reports 30,382 test utterances.'
+  scale.avg_context_length: 'paper §3 ''Dataset Statistics'': valid/test chats over 5 sessions average ~66 utterances; ''an average of 1614 tokens as tokenized by the BlenderBot BPE dictionary'''
+  metrics: paper Tables 3-7 and 15 (perplexity), Appendix A Tables 11-14 (test BLEU-1/2/4, F1), Table 8 (human evaluation)
+  judge_model: 'null: the paper reports perplexity, F1 and BLEU plus a crowdworker human evaluation (§5.1); no LLM judge'
+  repro_level: 'ParlAI repo tree, checked 2026-10-10: parlai/tasks/msc/{agents.py,build.py} (MscTeacher, PersonaSummaryTeacher, data download), parlai/scripts/eval_model.py, parlai/zoo/msc/*.py (released models), projects/msc/agents/*.py. projects/msc/README.md gives ''parlai eval_model -mf zoo:msc/... -t msc -dt valid'' commands. Data tarball is reachable (HTTP 200).'

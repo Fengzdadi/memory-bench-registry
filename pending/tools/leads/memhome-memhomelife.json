@@ -1,0 +1,30 @@
+{
+ "name": "MemHome / MemHomeLife",
+ "slug": "memhome-memhomelife",
+ "leads": {
+  "registry_key": "arxiv:2604.10110",
+  "tier": "P2",
+  "arxiv": "2604.10110 (arXiv API: v1 2026-04-11; title: Trust Your Memory: Verifiable Control of Smart Homes through Reinforcement Learning with Multi-dimensional Rewards)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "Trust Your Memory: Verifiable Control of Smart Homes through Reinforcement Learning with Multi-dimensional Rewards",
+    "paper_url": "https://arxiv.org/abs/2604.10110",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "personalization",
+    "semantic_knowledge_update",
+    "conversational_longterm"
+   ],
+   "extra_tags": [
+    "smart_home_tool_use"
+   ],
+   "kind_reason": "Releases MemHomeLife (real multi-session interaction logs, about 7.2 sessions on average) and MemHome (1,945 samples) to evaluate memory-driven smart-home control: memory use, no-memory, and memory state change (add/delete). The benchmark sits alongside the PRISM RL method."
+  }
+ }
+}

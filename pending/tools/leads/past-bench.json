@@ -1,0 +1,14 @@
+{
+ "name": "PAST-Bench",
+ "slug": "past-bench",
+ "leads": {
+  "registry_key": "arxiv:2608.04003",
+  "tier": "P0",
+  "arxiv": "2608.04003 (arXiv API: v1 ?; title: None)",
+  "phase1_verified_types": {
+   "procedural_workflow": "Sec 1/3.1: four capabilities incl. \"procedural reuse (8/64)\"; task families share \"a reusable artifact (procedural reuse)\"; later episodes test reuse vs matched no-persistence controls."
+  },
+  "paper_hint": "https://arxiv.org/abs/2608.04003",
+  "code_hint": "https://github.com/Gen-Verse/PAST-Bench"
+ }
+}

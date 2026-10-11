@@ -1,0 +1,39 @@
+{
+ "name": "LOCCO",
+ "slug": "locco",
+ "leads": {
+  "registry_key": "url:aclanthology.org/2025.findings-acl.1014",
+  "tier": "P0",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Resources / Benchmarks and Tasks / Long-Term Memory Evaluation",
+    "name": "LOCCO",
+    "paper_url": "https://aclanthology.org/2025.findings-acl.1014.pdf",
+    "code_url": null,
+    "data_url": null
+   },
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "Evaluating the Long-term memory of large language models",
+    "paper_url": "https://aclanthology.org/2025.findings-acl.1014.pdf",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "conversational_longterm",
+    "parametric"
+   ],
+   "extra_tags": [],
+   "kind_reason": "The LOCCO dataset (Long-Order Chronological Conversations, Findings of ACL 2025, no arXiv version found) evaluates LLM long-term memory of chronological dialogues. Memory is imparted by sequential supervised (LoRA) fine-tuning on each time period, and retention and forgetting are then measured."
+  },
+  "phase1_verified_types": {
+   "parametric": "§2.2: \"We adjust model parameters through supervised fine-tuning, enabling models to internalize key information from long-term dialogues\". §4.3: models are trained sequentially over six periods and tested on D1 using Q1 after each phase."
+  },
+  "paper_hint": "https://aclanthology.org/2025.findings-acl.1014",
+  "code_hint": "https://github.com/JamesLLMs/LoCoGen"
+ }
+}

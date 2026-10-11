@@ -1,0 +1,46 @@
+name: EvolMem
+slug: evolmem
+release_date: 2026-01
+venue: arXiv preprint
+memory_types:
+- conversational_longterm
+- semantic_knowledge_update
+- personalization
+links:
+  paper: https://arxiv.org/abs/2601.03543
+  code: https://github.com/shenye7436/EvolMem
+  data: null
+scale:
+  conversations: 1600
+  questions: null
+  avg_context_length: 6.82 sessions / 29.49 turns per dialogue on average
+  notes: 1,600 synthetic multi-session dialogues covering 7 abilities (Retrieval, Summarization, Isolation, Inference, Reproduction, Learning, Habituation). Each dialogue ends in one final query (§3.2.1), but no separate question count is reported. Per-ability counts appear only in a chart (Fig. 7), with no numbers. No token-length statistic is reported.
+metrics:
+- Accuracy (exact match)
+- Precision
+- LCS-based sequence order matching score (Reproduction, Learning)
+- LLM-as-a-Judge weighted checklist score
+- Instruction Compliance (Habituation; judge score binarized at 0.8)
+- Per-ability and overall average score (%)
+- Per-sample time (s) for memory agents
+judge_model: null
+repro_level: paper_only
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'The data is not released as of 2026-10-10. The repo README says "under construction" and holds only generations.py and evaluations.py. Open GitHub issues #1 and #2 ask about a data release. Dialogues were synthesized by DeepSeek-V3.2, GPT-4.1 and Grok-4-Fast-Reasoning. The Inference and part of the Learning data come from RULER Variable Tracking. Dialogues that DeepSeek-V3.2 scored at or above 0.8 were filtered out. The paper does not name its judge model.'
+sources:
+  name: arXiv 2601.03543 title and abstract; repo README citation
+  release_date: 'arXiv API: 2601.03543v1 published 2026-01-07 (only v1 exists)'
+  venue: arXiv API shows no journal_ref; comment is '14 pages, 7 figures, 8 tables'; the README cites it as @misc arXiv; a web search found no peer-reviewed venue
+  memory_types: 'paper §3.1 taxonomy and App. B/E. conversational_longterm: multi-session dialogue QA. semantic_knowledge_update: Summarization updates memory as conditions change, and Inference is RULER variable tracking with injected conflicting assignments (App. B.2). personalization: Habituation scores whether earlier user instructions or style preferences persist across sessions (App. E, §5.6 case study)'
+  links.paper: arXiv abs page 2601.03543
+  links.code: linked in the paper abstract ('Data and code will be released at https://github.com/shenye7436/EvolMem'); gh api repos/shenye7436/EvolMem
+  links.data: 'no dataset page: HF API search for ''EvolMem'' and author shenye7436 returned []; repo tree has no data files (checked 2026-10-10)'
+  scale.conversations: 'paper §4.1: ''EvolMem comprises 1,600 dialogues, with 6.82 sessions and 29.49 turns on average'''
+  scale.questions: 'null: no separate question count is reported; §3.2.1 says each dialogue overview has a final query Q; App. C.1 Fig. 7 shows the ability distribution only as a chart'
+  scale.avg_context_length: paper §4.1 (6.82 sessions, 29.49 turns on average); no token count reported
+  scale.notes: paper §3.1, §3.2.1, §4.1, App. C.1
+  metrics: paper §3.3, Table 7 (Acc/Prec/LCS/LLM judge per ability), App. E (Instruction Compliance with a 0.8 threshold), Tables 2-4 (scores in %, per-sample time for agents)
+  judge_model: 'null: the paper uses LLM-as-a-Judge (§3.3, App. E) but never names the judge model; repo evaluations.py has argparse default --judge_model gpt-4.1, which is not confirmed as the paper''s setting'
+  repro_level: 'repo tree has only README.md, generations.py and evaluations.py, with no data; data is not on HF and GitHub issues #1/#2 asking for the data are open, so the benchmark cannot be run despite the eval script (checked 2026-10-10)'
+  notes: repo README, file tree, issues and commits (last push 2026-01-16); paper §3.2.1, §4.1, App. B

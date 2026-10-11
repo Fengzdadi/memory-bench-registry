@@ -1,0 +1,36 @@
+name: RMBench
+slug: rmbench
+release_date: 2026-03
+venue: arXiv preprint
+memory_types:
+- embodied
+- multimodal
+links:
+  paper: https://arxiv.org/abs/2603.01229
+  code: https://github.com/RoboTwin-Platform/RMBench
+  data: https://huggingface.co/datasets/TianxingChen/RMBench
+scale:
+  conversations: null
+  questions: null
+  avg_context_length: null
+  notes: 'Not a dialogue/QA benchmark. It has 9 simulated manipulation tasks: 5 M(1) and 4 M(n). Each policy trains on 50 demos per task and is evaluated on 100 rollouts per task, so 900 rollouts in total. Real-world: 3 tasks with 100 demos and 40 trials each. The paper gives no episode length. Repo step limits range from 250 to 3500 steps per task.'
+metrics:
+- Success rate (per task, averaged per memory-complexity level M(1)/M(n), and overall)
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'Robot-manipulation benchmark in RoboTwin 2.0 simulation. Memory means history of visual observations within an episode. Counted on 2026-10-10, the repo eval list has 10 tasks: it adds place_block_mat, which the paper does not mention. The HF dataset is MIT-licensed and not gated. It holds 50-demo demo_clean zips per task, plus demo_clean_200 sets for 4 tasks. The README links a policy/ folder that is missing from the repo tree. Adapters come through the XPolicyLab submodule. Mem-0 checkpoints were retrained and re-released on 2026-07-14.'
+sources:
+  name: 'arXiv API title ''RMBench: Memory-Dependent Robotic Manipulation Benchmark with Insights into Policy Design'''
+  release_date: 'arXiv API: 2603.01229v1 published 2026-03-01 (v2 2026-03-15, v3 2026-07-30)'
+  venue: 'arXiv abs page: no journal-ref, comment is only the website link; repo README and rmbench.github.io say ''Under Review''; BibTeX in README is arXiv preprint. The paper''s keyword line says ''ICML'', but that is template text and no acceptance was found'
+  memory_types: 'Paper abstract and Sec. 3: simulated robotic manipulation tasks need memory of past RGB observations (M(1): one past observation, M(n): n past observations). Scored by task success in the simulator (embodied), with image observations the policy must process itself (multimodal, Sec. 4.1)'
+  links.paper: arXiv 2603.01229
+  links.code: Paper (arXiv v3 HTML) and website both link github.com/robotwin-Platform/rmbench, which resolves to RoboTwin-Platform/RMBench (gh api)
+  links.data: 'Repo data/_download.py DEFAULT_REPO=''TianxingChen/RMBench''. HF API, checked 2026-10-10: not gated, not private, MIT; data/<task>/demo_clean.zip for 10 tasks'
+  scale.notes: 'Paper Table 1 caption and Sec. 5.1 (50 expert demonstrations, 100 rollout episodes); Sec. 5.3 (real world: 100 demos, 40 trials, 3 tasks); repo env_cfg/task_config/_eval_step_limit.yml'
+  metrics: Paper Tables 1-3 report success rates only (per task, per TMC level and overall average)
+  judge_model: No LLM judge. Success comes from the simulator's check_success(). Qwen3-VL-8B is only a component of the Mem-0 policy (Appendix B.1)
+  repro_level: Repo has scripts/eval_policy.py (test_num=100, writes success rate), scripts/eval_policy.sh, scripts/eval_policy_multitask.py and env_cfg/eval/all_tasks.yml. Data downloads via scripts/_download_data.sh from the public HF dataset (checked 2026-10-10)
+  notes: Repo tree, env_cfg/eval/all_tasks.yml, README updates section, and HF dataset file listing (checked 2026-10-10); paper v3 HTML task list

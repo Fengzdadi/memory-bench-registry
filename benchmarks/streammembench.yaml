@@ -1,0 +1,44 @@
+name: StreamMemBench
+slug: streammembench
+release_date: 2026-06
+venue: Findings of EMNLP 2026
+memory_types:
+- personalization
+- episodic
+links:
+  paper: https://arxiv.org/abs/2606.14571
+  code: https://github.com/landian60/StreamMemBench
+  data: null
+scale:
+  conversations: null
+  questions: 16214
+  avg_context_length: ~200 timestamped observations per five-minute segment (paper v1; released data mean 195.8, median 199; paper v2 says ~12)
+  notes: questions = tasks in released v1 data (two per evidence anchor; 8,107 anchors = evaluation trajectories), from 2,854 evidence-task items over 3,347 five-minute segments (6 EgoLife participants x 7 days). No dialogue sessions, so conversations is null. Paper v2 reports 7,760 anchors / 15,520 queries. Chinese and English releases share the same counts.
+metrics:
+- Fidelity (evidence retained in memory delta, pass rate)
+- Initial Evidence Use (IEU, pass rate)
+- Feedback Incorporation (FI, pass rate on correction cases)
+- Follow-up Reuse (FUR, pass rate)
+- Storage / latency / token cost per segment
+- Cohen's kappa vs human annotations (validation)
+judge_model: DeepSeek-V4-Pro (Preview)
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: Paper v1 and the repo release (metadata.json) report 8,107 anchors / 16,214 tasks; v2 (2026-08-26) reports 7,760 anchors (6,712 stated, 1,048 inferred) / 15,520 queries and ~12 (vs v1 ~200) observations per segment; repo last pushed 2026-07-17, before v2. Stream is text (EgoLife dense captions + transcripts), released in Chinese and English; raw video is not evaluated. Data follows EgoLife license; paper restricts use to academic research. Third-party memory systems need upstream installs.
+sources:
+  name: 'arXiv title and repo README header: ''StreamMemBench: Streaming Evaluation of Agent Memory for Future-Oriented Assistance'''
+  release_date: 'arXiv API: 2606.14571v1 published 2026-06-12T15:48:43Z (v2 updated 2026-08-26)'
+  venue: arXiv API arxiv:comment 'Accepted to Findings of EMNLP 2026'; EMNLP 2026 not yet on ACL Anthology (events/emnlp-2026 returned 404 on 2026-10-10)
+  memory_types: 'paper v2 §3.1/§4.1 and App. I: anchors hold user-specific evidence (capability, preference, relationship, plan, constraint) from a chronological EgoLife egocentric lifelog stream; 47.4% of queries concern the user''s own preferences/routines; Fidelity checks participant attribution and temporal scope of segment-anchored evidence. Not multimodal: input is text captions/transcripts and docs/dataset_card.md lists raw video understanding as a non-goal'
+  links.paper: arXiv abs page 2606.14571
+  links.code: 'paper abstract and README: https://github.com/landian60/StreamMemBench (MIT, authors'' repo)'
+  links.data: 'no separate dataset page: data ships in repo data/streammembench_v1 and data/streammembench_v1_en; HF dataset search for StreamMemBench returned none (2026-10-10)'
+  scale.conversations: 'null: benchmark has no dialogue sessions; stream is 3,347 five-minute segments from 6 participants x 7 days (paper §4.1, data/streammembench_v1/metadata.json)'
+  scale.questions: data/streammembench_v1/metadata.json counts.tasks = 16214 (evidence_anchors 8107), matching README and paper v1 §4.1 'Data'; paper v2 §4.1 reports 15,520 queries from 7,760 anchors
+  scale.avg_context_length: 'paper v1 HTML §4.1 ''Data'': ''Each segment contains roughly 200 timestamped observations''; recount on 2026-10-10 of len(stream_segment.observations) over all 3,347 segments in data/streammembench_v1_en/segments and data/streammembench_v1/segments (42 files each): mean 195.8, median 199, range 1-502 in both languages (metadata.num_events identical); paper v2 HTML §4.1 says ''roughly 12'', which does not match the release'
+  scale.notes: repo metadata.json, README Data section, paper v1/v2 §4.1
+  metrics: paper v2 §3.2 and Table 2 (Fidelity, FI, IEU, FUR pass rates), Table 4 (storage, latency, tokens), Table 3 (human validation with Cohen's kappa); repo docs/evaluation.md canonical metric keys
+  judge_model: 'paper v2 §4.1 ''Backbones'': A_anchor, A_review, A_eval and A_user use DeepSeek-V4-Pro (Preview), 3 runs with majority vote; App. F re-scores with Claude Sonnet 5 as a robustness check; repo configs/evaluation/paper_full.yaml default model deepseek-v4-pro'
+  repro_level: repo tree (checked 2026-10-10) has CLI src/streammembench/cli.py (eval/reproduce commands, console script 'streammembench'), src/streammembench/evaluation/runner.py, configs/evaluation/paper_full.yaml, and full data files in data/streammembench_v1(_en)/segments and evidence_tasks (all 84 segment files downloaded and parsed)
+  notes: arXiv v1 vs v2 HTML §4.1; repo metadata.json; GitHub API pushed_at 2026-07-17; paper App. A/B; README License; docs/dataset_card.md; docs/reproduction.md

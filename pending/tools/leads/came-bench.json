@@ -1,0 +1,29 @@
+{
+ "name": "CAME-Bench",
+ "slug": "came-bench",
+ "leads": {
+  "registry_key": "arxiv:2601.10702",
+  "tier": "P2",
+  "arxiv": "2601.10702 (arXiv API: v1 2026-01-15; title: Grounding Agent Memory in Contextual Intent)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Framework & Methods",
+    "name": "Grounding Agent Memory in Contextual Intent",
+    "paper_url": "https://arxiv.org/pdf/2601.10702",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "conversational_longterm",
+    "semantic_knowledge_update"
+   ],
+   "extra_tags": [
+    "context_aware_retrieval"
+   ],
+   "kind_reason": "The paper proposes STITCH (method) and also introduces CAME-Bench: 14 long synthetic goal-oriented trajectories (travel-planning user-assistant dialogue and two-agent debate, 23k to 408k tokens) with 373 questions. Question types are Incremental Memory Revision (entity state changes), Context-Aware "
+  }
+ }
+}

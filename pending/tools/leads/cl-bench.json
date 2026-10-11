@@ -1,0 +1,14 @@
+{
+ "name": "CL-Bench (Continual Learning Bench)",
+ "slug": "cl-bench",
+ "leads": {
+  "registry_key": "arxiv:2606.05661",
+  "tier": "P0",
+  "arxiv": "2606.05661 (arXiv API: v1 ?; title: None)",
+  "phase1_verified_types": {
+   "procedural_workflow": "Sec 3.1: \"a system that identifies recurring patterns can exploit them in future instances\"; Sec 4.2: gain = stateful reward minus the same system's stateless reward per instance.",
+   "coding_cross_session": "App. A.2 (Codebase Adaptation): \"Each issue is presented in a fresh Docker container at the issue's base commit\"; an agent that records repo knowledge means \"its stateful version outperforms the stateless one\"."
+  },
+  "paper_hint": "https://arxiv.org/abs/2606.05661"
+ }
+}

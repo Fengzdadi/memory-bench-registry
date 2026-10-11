@@ -1,0 +1,39 @@
+name: Trust-Memevo
+slug: trust-memevo
+release_date: 2026-02
+venue: EMNLP 2026
+memory_types:
+- procedural_workflow
+links:
+  paper: https://arxiv.org/abs/2602.03224
+  code: https://github.com/SII-YUCHENG2002/tame_code
+  data: null
+scale:
+  conversations: null
+  questions: 2329
+  avg_context_length: null
+  notes: 'questions = 2,329 v2 trustworthiness-evaluation instances (sum of reported per-domain counts: Science 946, Math 700, Code 385, Tool-use 298). The v2 evolution streams total 4,850 tasks: MMLU-Pro 1,000, GPQA 400, GSM8K 1,000, MATH 1,000, AIME 150, TaskBench 500, and LiveCodeBench 2x400. v1 had no Code domain (1,944 trust instances). Not conversational, and no context length is reported.'
+metrics:
+- Accuracy (task performance on evolution streams; v1 also says task completion rate)
+- Trustworthiness compliance rate (overall, weighted by number of examples per dimension)
+- 'Per-dimension compliance: safety, robustness, truthfulness, privacy, fairness'
+judge_model: null
+repro_level: paper_only
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'Introduced in the TAME paper. v1 (Feb 2026) covered Math, Science and Tool-use. v2 (Jun 2026) added a Code domain (LiveCodeBench). Evolution streams are sampled from public benchmarks. Trust sets draw on TrustLLM, ASSEBench, TruthfulQA and others. Checked 2026-10-10: the official repo releases only TAME method code and a one-item MMLU-Pro smoke test. Trust-Memevo data and trust-evaluation code are not released. The venue comes from the authors'' README and homepage; the paper is not yet in ACL Anthology.'
+sources:
+  name: 'arXiv 2602.03224 abstract and v2 HTML §3.2: ''we construct the Trust-Memevo benchmark'''
+  release_date: 'arXiv API: 2602.03224v1 published 2026-02-03 (v2 updated 2026-06-06)'
+  venue: Official repo README (github.com/SII-YUCHENG2002/tame_code) says 'Code accompanying our EMNLP 2026 paper'. The corresponding author's publication page (edu-yinzhaoxia.github.io/publications) lists 'Proceedings of the 2026 Conference on EMNLP, EMNLP 2026'. arXiv has no journal_ref or comments. aclanthology.org/events/emnlp-2026 returned 404 on 2026-10-10.
+  memory_types: 'arXiv v2 §3.1/§5.1: the agent accumulates transferable problem-solving strategies/experiences from a benign task stream and reuses them on later tasks. Task accuracy and trustworthiness are evaluated with the evolved, frozen memory bank after each stage, so this is procedural_workflow. It is not tagged memory_security because no attacks on memory are evaluated; the degradation arises during benign evolution.'
+  links.paper: arXiv abs page 2602.03224
+  links.code: Repo SII-YUCHENG2002/tame_code (owner 'SII-yucheng', Shanghai Innovation Institute, matching first author Yu Cheng). It is linked as 'Codes' from corresponding author Zhaoxia Yin's publication page, and its README links arXiv 2602.03224. The paper itself contains no code link.
+  links.data: No Hugging Face dataset or paper page exists (HF API reports 'Paper not found'). The repo dataset/ folder holds only MMLU-Pro_smoke.json (1 item).
+  scale.questions: 'arXiv v2 HTML §3.2: trustworthiness evaluation sets for Science, Math, Code, Tool-use contain 946, 700, 385, 298 instances (summed = 2,329). §5.1 gives evolution-set sizes. v1 §3.2 gives 946/700/298 (no Code).'
+  scale.conversations: 'Not applicable: task-stream benchmark, no conversations.'
+  scale.avg_context_length: Not reported in paper.
+  metrics: 'arXiv v2 §5.1 ''Trustworthiness Evaluation'': task performance measured by accuracy; trustworthiness as the overall compliance rate weighted by examples per dimension. Appendix A Tables 5-9 give per-dimension results (fairness, privacy, robustness, safety, truthfulness).'
+  judge_model: Null because the paper names no judge model. v2 Appendix E describes a 'judge-based' automatic trustworthiness evaluation (91.7% human agreement on 50 trajectories), and v1 Appendix prompts include a JUDGE_PROMPT. The repo's example config config/tame_config_gpt52.yaml lists judge_model gpt-5.2, but the smoke script prints that judge_model is 'present in config but not wired yet'.
+  repro_level: 'Repo tree checked 2026-10-10: tame/, infra/, config/tame_config_gpt52.yaml, dataset/MMLU-Pro_smoke.json (1 item), scripts/evaluation/tame_science_qa_benchmark_smoke.py. It is a TAME method smoke test only. There are no Trust-Memevo evolution or trustworthiness sets and no trust-evaluation script, and no releases or other branches. The benchmark data is not public, so the entry is paper_only.'
+  notes: arXiv v1 vs v2 HTML; official repo README and tree; ACL Anthology check 2026-10-10

@@ -1,0 +1,39 @@
+name: LifelongAgentBench
+slug: lifelongagentbench
+release_date: 2025-05
+venue: arXiv preprint
+memory_types:
+- procedural_workflow
+links:
+  paper: https://arxiv.org/abs/2505.11942
+  code: https://github.com/caixd-220529/LifelongAgentBench
+  data: https://huggingface.co/datasets/csyq/LifelongAgentBench
+scale:
+  conversations: null
+  questions: 1396
+  avg_context_length: null
+  notes: 'questions = 1,396 tasks (Table 1 ''# Instance''): 500 Database (MySQL; selected from 1,306 DeepSeek-R1-generated), 500 Operating System (bash), 396 Knowledge Graph (from GrailQA). Each environment runs as one ordered task stream, with no dialogues, so conversations is null. No average context length is reported; Table 6 gives average input tokens per replay setting. HF dataset has 1,396 rows (counted 2026-10-10).'
+metrics:
+- Task success rate (accuracy; binary per-task success)
+- Average input tokens (Table 6, group self-consistency settings)
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: Agents run DB/OS/KG tasks in strict sequence; past successful trajectories are replayed as experience (0-64), and group self-consistency is proposed. Scoring is execution-based. An OpenReview record lists it as submitted to ICLR 2026, with no acceptance found. The HF data is Parquet and ungated. Repo configs point to local JSON files (./data/v0303/...) that are not in the repo, and the conversion from the HF files is undocumented. Neither the repo nor the HF page declares a licence.
+sources:
+  name: 'arXiv API title: ''LifelongAgentBench: Evaluating LLM Agents as Lifelong Learners''; repo README title'
+  release_date: 'arXiv API: 2505.11942v1 published 2025-05-17T10:09:11Z (v3 2025-05-30)'
+  venue: 'arXiv API shows no journal_ref (comment only gives project page); OpenReview search: ''Submitted to ICLR 2026'' (Submission24174) plus a DBLP ''CoRR 2025'' record; no acceptance found (checked 2026-10-10)'
+  memory_types: 'paper §3/§5.3/§6.1: strict sequential execution ''to preserve the integrity of experience accumulation''; experience replay of prior successful trajectories scored by task success over the task stream (Tables 2-6)'
+  links.paper: arXiv 2505.11942
+  links.code: README of caixd-220529/LifelongAgentBench links the arXiv paper and dataset; arXiv HTML names this repo as the source code
+  links.data: 'README ''Dataset'' link and paper; HF API: csyq/LifelongAgentBench, private=false, gated=false, files db_bench/, knowledge_graph/, os_interaction/ train-00000-of-00001.parquet'
+  scale.questions: 'paper Table 1 ''# Instance'' = 1396; §4: 500 DB, 500 OS, 396 KG (same in v1 and v3 HTML); HF datasets-server num_rows=1396'
+  scale.conversations: 'null: tasks are agent episodes in DB/OS/KG environments, not conversations'
+  scale.avg_context_length: 'null: paper reports no per-task context length; Table 6 gives average input tokens only per replay/grouping setting'
+  metrics: 'paper §6.1: ''task success rate, defined as correct action sequences completing the task''; Table 6 caption: ''accuracy (average input tokens)'''
+  judge_model: 'null: success is checked by execution (result comparison/DB state hash for DB, exit codes/eval scripts for OS, output check for KG). Table 1 mentions ''LLM judgement'' only for label verification during data construction, not for scoring'
+  repro_level: repo tree has src/run_experiment.py (README run command with configs/assignments/experiments/<model>/instance/<env>/instance/standard.yaml), src/tasks/task.py calculate_metric; data on HF (ungated parquet) (checked 2026-10-10)
+  notes: arXiv HTML v1/v3; repo README + configs (data_file_path.yaml points to ./data/v0303/...); gh api license=null; HF API no licence tag; OpenReview search
+  scale.notes: paper §4 + Table 1; HF datasets-server /size

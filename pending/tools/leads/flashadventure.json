@@ -1,0 +1,28 @@
+{
+ "name": "FlashAdventure",
+ "slug": "flashadventure",
+ "leads": {
+  "registry_key": "url:aclanthology.org/2025.emnlp-main.1192",
+  "tier": "P2",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "FlashAdventure — Long-Term Memory for GUI Agents",
+    "paper_url": "https://aclanthology.org/2025.emnlp-main.1192/",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "episodic"
+   ],
+   "extra_tags": [
+    "gui_agent_long_horizon",
+    "multimodal"
+   ],
+   "kind_reason": "FlashAdventure (arXiv 2509.01052) is a benchmark of 34 Flash adventure games for GUI agents. It targets the 'observation-behavior gap', the challenge of remembering and acting on earlier gameplay information within a full story arc. Memory is a stated design target. It does not test cross-task reuse"
+  }
+ }
+}

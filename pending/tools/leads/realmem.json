@@ -1,0 +1,47 @@
+{
+ "name": "RealMem",
+ "slug": "realmem",
+ "leads": {
+  "registry_key": "arxiv:2601.06966",
+  "tier": "P1",
+  "arxiv": "2601.06966 (arXiv API: v1 2026-01-11; title: RealMem: Benchmarking LLMs in Real-World Memory-Driven Interaction)",
+  "community_list_entries": [
+   {
+    "source": "tsinghua",
+    "section": "Benchmark",
+    "name": "RealMem",
+    "paper_url": "https://arxiv.org/abs/2601.06966",
+    "code_url": "https://github.com/AvatarMemory/RealMemBench",
+    "data_url": null
+   },
+   {
+    "source": "iaar",
+    "section": "Resources / Benchmarks and Tasks / Long-Term Memory Evaluation",
+    "name": "RealMem",
+    "paper_url": "https://arxiv.org/pdf/2601.06966",
+    "code_url": null,
+    "data_url": null
+   },
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "RealMem: Benchmarking LLMs in Real-World Memory-Driven Interaction",
+    "paper_url": "https://arxiv.org/pdf/2601.06966",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "conversational_longterm",
+    "semantic_knowledge_update",
+    "personalization",
+    "episodic"
+   ],
+   "extra_tags": [
+    "project_state_tracking"
+   ],
+   "kind_reason": "Benchmark of 2,000+ cross-session project-oriented dialogues across 11 scenarios (1,415 questions: static retrieval, dynamic updating, implicit preference, temporal reasoning). Only one scenario (Code Architecture Design) touches software, and it is design dialogue, not a coding agent, so not coding"
+  }
+ }
+}

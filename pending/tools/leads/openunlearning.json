@@ -1,0 +1,33 @@
+{
+ "name": "OpenUnlearning",
+ "slug": "openunlearning",
+ "leads": {
+  "registry_key": "arxiv:2506.12618",
+  "tier": "P0",
+  "arxiv": "2506.12618 (arXiv API: v1 2025-06-14; title: OpenUnlearning: Accelerating LLM Unlearning via Unified Benchmarking of Methods and Metrics)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Framework & Methods",
+    "name": "OpenUnlearning:Accelerating LLM unlearning via unified benchmarking of methods and metrics",
+    "paper_url": "https://arxiv.org/pdf/2506.12618",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "parametric"
+   ],
+   "extra_tags": [
+    "machine_unlearning"
+   ],
+   "kind_reason": "A unified benchmarking framework and evaluation suite for LLM unlearning (TOFU, MUSE, WMDP, 16 evaluations, 450+ checkpoints, plus a new meta-evaluation benchmark), published at NeurIPS D&B '25. It is framed as unlearning rather than memory, but it evaluates forgetting of knowledge stored in model w"
+  },
+  "phase1_verified_types": {
+   "parametric": "Repo README: 'An easily extensible framework unifying LLM unlearning evaluation benchmarks' (TOFU, MUSE, WMDP). It releases 'TOFU Models w & w/o Knowledge' and unlearned models for meta-evaluating forgetting metrics."
+  },
+  "paper_hint": "https://arxiv.org/abs/2506.12618",
+  "code_hint": "https://github.com/locuslab/open-unlearning"
+ }
+}

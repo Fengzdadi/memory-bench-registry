@@ -1,0 +1,42 @@
+name: MemoryAgentBench
+slug: memoryagentbench
+release_date: 2025-07
+venue: ICLR 2026
+memory_types:
+- conversational_longterm
+- episodic
+- semantic_knowledge_update
+links:
+  paper: https://arxiv.org/abs/2507.05257
+  code: https://github.com/HUST-AI-HYZ/MemoryAgentBench
+  data: https://huggingface.co/datasets/ai-hyz/MemoryAgentBench
+scale:
+  conversations: null
+  questions: 2071
+  avg_context_length: 103k-1.44M tokens
+  notes: 'questions = 2071 total questions for MemoryAgentBench in paper Table 1 (v4). This equals the sum of Table 6 ''# of Sequences : QAs'': AR = SH-Doc QA 1:100, MH-Doc QA 1:100, LongMemEval(S*) 5:300, EventQA 5:500; TTL = BANKING-77/CLINC-150/NLU/TREC-Coarse/TREC-Fine 1:100 each, Movie-Rec Redial 1:200; LRU = InfBench-Sum 100:100, DetectiveQA 10:71; SF = FactConsolidation-SH 1:100, FactConsolidation-MH 1:100. conversations = null because the paper reports no total. Its units are long context ''sequences'' (mostly documents or novels split into chunks and wrapped as user-assistant turns), not natural conversations. The Table 6 sequence counts add up to 130, but the paper never states that total. avg_context_length is the ''Context Depth'' range in Table 1. The per-dataset averages in Tables 2 and 6 (GPT-4o-mini tokenizer, 1K = 1024) are: SH-Doc QA 197K, MH-Doc QA 421K, LongMemEval(S*) 355K, EventQA 534K, the 5 classification tasks 103K, Movie-Rec 1.44M, InfBench-Sum 172K, DetectiveQA 124K, FactConsolidation 262K. FactConsolidation also comes in 6K/32K/64K versions. arXiv v1 used a different main set: AR = RULER-QA (2:200), RULER-NIAH-MQ (1:100), InfBench-QA (100:100), LME(S*) (5:300), EventQA (5:500); no DetectiveQA. The Hugging Face splits (Accurate_Retrieval 22, Test_Time_Learning 6, Long_Range_Understanding 110, Conflict_Resolution 8 rows) count context rows, including the context-length variants. They do not match the per-question counts above.'
+metrics:
+- Accuracy (substring exact match or exact match, depending on task; SH/MH-Doc QA, EventQA, DetectiveQA, 5 classification tasks, FactConsolidation)
+- Recall@5 (Movie Recommendation)
+- F1-Score with GPT-4o-judged fluency (InfBench-Sum summarization)
+- LLM-as-judge accuracy (GPT-4o; LongMemEval S*)
+judge_model: GPT-4o
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'The paper tests 4 competencies: Accurate Retrieval, Test-Time Learning, Long-Range Understanding, and Selective Forgetting. v1 called the fourth one ''Conflict Resolution'', and the HF split and repo configs still use the name Conflict_Resolution. Most contexts are existing long-context datasets (RULER-style doc QA, InfBench, DetectiveQA, classification sets, ReDial) split into chunks and given as user-assistant turns. The new datasets are EventQA and FactConsolidation (built from MQuAKE counterfactual edits). memory_types mapping: conversational_longterm = LongMemEval(S*); episodic = EventQA (recalling the order of events in novels); semantic_knowledge_update = FactConsolidation (later facts override earlier ones). TTL is not tagged as procedural_workflow or parametric: it is in-context many-shot classification plus movie recommendation from concatenated ReDial dialogues, tested on held-out inputs of the same task, with no weight updates. The dataset composition changed between versions: v2 (Sep 2025) dropped NIAH-MQ and InfBench-QA and added a DetectiveQA subset, and the HF dataset was edited on 2025-07-22, 07-26, 08-05 and 09-29. Pin a revision for comparable results. Licence mismatch: the repo LICENSE and HF card say MIT, but the paper''s ethics statement says datasets/benchmark artifacts are released under CC BY 4.0, and third-party sources keep their original licences. Running the evaluation needs an OpenAI API key, and the GPT-4o judge is used for LongMemEval and InfBench-Sum. The repo README points to bash_files/eniac/*.sh, but the scripts are actually at bash_files/sh/*.sh. The README warns that exact_match parsing is strict (''label: 43'' does not match ''43''). The paper is published at ICLR 2026 (OpenReview id DT7JyQC3MR).'
+sources:
+  name: arXiv abs page title/abstract ('We introduce MemoryAgentBench'); repo README title
+  release_date: 'arXiv abs page submission history: v1 Mon, 7 Jul 2025 17:59:54 UTC (export.arxiv.org API returned HTTP 429, so the abs page was used)'
+  venue: arXiv v4 PDF header 'Published as a conference paper at ICLR 2026'; repo README update 'accepted by ... ICLR 2026' and @inproceedings citation booktitle 'The Fourteenth International Conference on Learning Representations', 2026, url openreview.net/forum?id=DT7JyQC3MR (could not load the OpenReview page because of a browser challenge); arXiv abs has no journal-ref
+  memory_types: 'paper v4 §3.1 Dataset Preparation: LongMemEval(S*) = QA over long dialogue histories; EventQA = ''recall and reason about temporal sequences in long-form narratives''; FactConsolidation = conflicting fact pairs where the agent must prioritize later information (Selective Forgetting); TTL defined in App. B.2.1/H.1 as in-context skill learning applied to unseen inputs, with no fine-tuning'
+  links.paper: arXiv 2507.05257 (linked from repo README and repo homepage field)
+  links.code: 'gh api repos/HUST-AI-HYZ/MemoryAgentBench: authors'' repo (Hu, Wang, McAuley), description ''Open source code for ICLR 2026 Paper'', homepage = arxiv.org/abs/2507.05257, MIT'
+  links.data: 'HF API api/datasets/ai-hyz/MemoryAgentBench: exists, gated=false, private=false, 4 parquet files + entity2id.json; linked from repo README and loaded by utils/eval_data_utils.py'
+  scale.questions: 'paper v4 Table 1 (#Q = 2071 for MemoryAgentBench); matches the sum of the Table 6 ''# of Sequences : QAs'' column (arXiv HTML v4)'
+  scale.conversations: 'null: paper gives only per-task sequence counts (Table 6, sum 130 context sequences); no total is reported and the sequences are chunked documents, not conversations'
+  scale.avg_context_length: paper v4 Table 1 'Context Depth' 103k-1.44M; per-dataset AvgL in Table 2 / Table 6 (GPT-4o-mini tokenizer)
+  metrics: paper v4 Table 2 Metrics column (Accuracy, Recall@5, F1-Score); App. B.1.2 (GPT-4o judge for LongMemEval), App. B.3.2 (GPT-4o fluency x F1 for InfBench-Sum); repo README 'Clarification on Evaluation Metrics' table mapping accuracy to substring_exact_match/exact_match
+  judge_model: paper v4 App. B.1.2 'employ the GPT-4o model to assess...' (LongMemEval), App. B.3.2 and App. L.1 (LLM-as-a-judge on LongMemEval and InfBench-Sum); repo llm_based_eval/longmem_qa_evaluate.py metric_model='gpt-4o', llm_based_eval/summarization_evaluate.py uses 'gpt-4o-2024-05-13'
+  repro_level: 'repo tree (checked 2026-10-10): main.py (--agent_config/--dataset_config), bash_files/sh/run_memagent_longcontext.sh, run_memagent_rag_agents.sh, run_memagent_rag_agents_chunksize.sh, configs/data_conf/* for every task, llm_based_eval/longmem_qa_evaluate.py and summarization_evaluate.py; data auto-downloaded from ungated HF ai-hyz/MemoryAgentBench via utils/eval_data_utils.py load_dataset (parquet file resolved with HTTP 200, 1,491,588 bytes)'
+  notes: arXiv v1 vs v4 HTML tables; HF dataset card update log; paper v4 Ethics Statement (MIT code, CC BY 4.0 data); repo README

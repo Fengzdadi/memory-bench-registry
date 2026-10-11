@@ -1,0 +1,14 @@
+{
+ "name": "MQuAKE",
+ "slug": "mquake",
+ "leads": {
+  "registry_key": "arxiv:2305.14795",
+  "tier": "P0",
+  "arxiv": "2305.14795 (arXiv API: v1 ?; title: None)",
+  "phase1_verified_types": {
+   "parametric": "Sec.2: \"For the methods we assess in Section 4, [the editor] modifies the weights of [the model] in an attempt to incorporate [edits]\"; MeLLo keeps model frozen with external store."
+  },
+  "paper_hint": "https://arxiv.org/abs/2305.14795",
+  "code_hint": "https://github.com/princeton-nlp/MQuAKE"
+ }
+}

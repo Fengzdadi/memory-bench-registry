@@ -1,0 +1,38 @@
+name: OdysseyBench
+slug: odysseybench
+release_date: 2025-08
+venue: arXiv preprint
+memory_types:
+- conversational_longterm
+links:
+  paper: https://arxiv.org/abs/2508.09124
+  code: https://github.com/microsoft/OdysseyBench
+  data: null
+scale:
+  conversations: 602
+  questions: 602
+  avg_context_length: 3468.9 tokens per conversation (OdysseyBench+); 5169.9 tokens per conversation (OdysseyBench-Neo)
+  notes: '602 tasks, each paired with one multi-day user-assistant dialogue history: OdysseyBench+ 300 (93 single-app, 95 two-app, 112 three-app) and OdysseyBench-Neo 302 (60/71/171). Average sessions per conversation: 27.9 (Plus) vs 5.0 (Neo). The repo tree on 2026-10-10 held 300 subtasks_plus and 302 subtasks_neo task files.'
+metrics:
+- 'Pass rate (fraction of tasks passing all rule-based checks: exact match, fuzzy/keyword match, execution-based checks)'
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'The data ships inside the GitHub repo (MIT licence) under tasks/, with chat_histories_* and subtasks_* folders for each split. There is no Hugging Face release. The task testbed files must be copied separately from the OfficeBench repo (zlwang-cs/OfficeBench, Apache-2.0), as the README describes. Running agents requires OpenAI API access. Memory settings are chosen in configs/base_config.yaml: long-context (raw_chat), or RAG over raw dialogue or summaries at session, utterance or chunk level. The paper was submitted to ICLR 2026 and withdrawn. As of 2026-10-10, arXiv has only v1.'
+sources:
+  name: arXiv API title for 2508.09124 and the repo README heading
+  release_date: 'arXiv API: 2508.09124v1 published 2025-08-12 (the only version)'
+  venue: 'arXiv API: no journal_ref or comment. OpenReview API: ''ICLR 2026 Conference Withdrawn Submission'' (note tMbmBCfSTz). The Microsoft Research page lists the venue as ''ArXiv''. The README cites arXiv preprint arXiv:2508.09124.'
+  memory_types: 'Paper §3 and Abstract: each task requires the agent to find key information in multi-day, multi-session user-assistant dialogue histories (at least 5 days) before acting in office apps. The paper compares long-context against RAG over raw or summarized dialogue (Tables 4-6). The repo description reads ''Evaluating Agent Memory on Long-horizon Productivity Workflows''.'
+  links.paper: arXiv abs page for 2508.09124
+  links.code: Paper footnote links github.com/microsoft/OdysseyBench, and the repo is under the microsoft org with the paper's citation in its README
+  links.data: 'null: no separate dataset page. A Hugging Face search for ''OdysseyBench'' returned nothing on 2026-10-10, and the data sits in the repo''s tasks/ directory.'
+  scale.conversations: 'Paper Table 1 ''Total # conversation'': 300 (OdysseyBench+) + 302 (OdysseyBench-Neo) = 602. This matches the repo tree count on 2026-10-10.'
+  scale.questions: 'Paper Abstract and Table 1: 300 + 302 = 602 tasks. Repo tree: 300 tasks/*/subtasks_plus/*.json and 302 tasks/*/subtasks_neo/*.json.'
+  scale.avg_context_length: 'Paper Table 1 ''Avg. # tokens / conversation'' overall: 3468.9 (Plus), 5169.9 (Neo)'
+  scale.notes: Paper Table 1 (per-app breakdown, sessions per conversation) and the repo tree count
+  metrics: 'Paper §3.2.1 Evaluation: pass rate = #successful tasks / #total tasks, with success meaning all rule-based criteria are met. Results are in Tables 4-6.'
+  judge_model: 'null: agent outputs are scored by rule-based checks (paper §3.2.1; repo evaluation/task_evaluator.py uses utils/evaluate.py). GPT-4.1 judges (llm-as-a-judge.py, majority vote of 5) and o3 are used only to validate the quality of the generated dataset, not to score evaluated agents.'
+  repro_level: Repo tree checked 2026-10-10. run_all.py (with --neo for the Neo split) runs agents on the tasks. evaluate_all.sh calls evaluation/main.py and evaluation/task_evaluator.py to compute pass rate. Task data is in tasks/; testbed files come from the public OfficeBench repo.
+  notes: Repo README (preparation step, config), GitHub API (MIT licence, no HF dataset), OpenReview API (ICLR 2026 withdrawn), arXiv API (v1 only)

@@ -1,0 +1,42 @@
+name: MemSecBench
+slug: memsecbench
+release_date: 2026-07
+venue: arXiv preprint
+memory_types:
+- memory_security
+links:
+  paper: https://arxiv.org/abs/2607.27080
+  code: null
+  data: null
+scale:
+  conversations: null
+  questions: 310
+  avg_context_length: null
+  notes: questions = 310 linked lifecycle cases (Code & Science 113, Daily Life 107, Office Work 90) from 48 contexts with 6-10 cases each. Each case compiles into Write, Execute and Forget stage tasks, 930 in total. The paper reports no conversation count or context length. Main results cover 24 harness x backend x LLM configurations, each run on all 310 cases. A Chinese mirror of the corpus exists.
+metrics:
+- Memory Poisoning Success Rate (MPSR)
+- Memory Exploitation Success Rate (MESR)
+- End-to-End Attack Success Rate (E2E-ASR)
+- Selective Repair Success Rate (SRSR)
+- Per-checkpoint pass rates (W1 Write Operation, W2 Persistence, E1 Recall Exposure, E2 Adoption, E3 Externalization, F1 Repair, F2 Benign Preservation)
+judge_model: DeepSeek-V4-Pro
+repro_level: paper_only
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: The arXiv v1 paper gives no code or data link. As of 2026-10-10 none was found on GitHub, Hugging Face or alphaXiv, although the paper mentions a released case-authoring Skill and released cases. GPT-5.5 authored the cases under human review. Experiments use the English task packages; a Chinese mirror also exists. Running the benchmark needs Docker, the OpenClaw/Hermes harnesses, the Mem0/Mem0-Graph/A-MEM backends and simulated services (web gateway, Mailpit, GitLab). Each configuration-case pair was run once.
+sources:
+  name: 'arXiv 2607.27080v1 title and abstract: ''MemSecBench: Tracking Agent Memory Poisoning from Persistence to Consequence and Repair'''
+  release_date: 'arXiv API: 2607.27080v1 published 2026-07-29T16:06:54Z; abs page submission history lists only v1'
+  venue: arXiv API entry has no journal_ref or comments; the PDF first page carries no venue or copyright header; listed as 'Preprint 2026' in community lists
+  memory_types: 'paper Sec. ''MemSecBench Benchmark'' and ''Lifecycle Evaluation Workflow'': the Write-Execute-Forget protocol tests poisoning persistence, exploitation via recall and adoption, and selective repair or deletion of malicious memory (Table 2, Table 6)'
+  links.paper: arXiv abs page https://arxiv.org/abs/2607.27080
+  links.code: 'null: the arXiv v1 HTML and PDF contain no code or data URL (the only PDF link annotation is the arXiv self-link). Searches on 2026-10-10 found no official repo: GitHub repo and code search for ''MemSecBench'' and ''Build-MemSecBench-Case'' returned only third-party paper notes, Hugging Face datasets and papers APIs found nothing, and the alphaXiv page lists no repo'
+  links.data: 'null: no dataset page found (Hugging Face dataset search for MemSecBench/memsec empty; HF arxiv repos API for 2607.27080 empty), checked 2026-10-10'
+  scale.questions: 'abstract and Appendix A.4/A.5 (arXiv v1 HTML): 310 cases from 48 contexts, split 113/107/90 across domains, compiled into 930 stage tasks; Appendix D Table 5 lists ''Task cases 310'''
+  scale.conversations: 'null: the benchmark is organized as lifecycle cases (Write/Execute/Forget sessions), and the paper reports no conversation count'
+  scale.avg_context_length: 'null: the paper reports only execution budgets (900 s per stage, at most 32 Hermes turns, 8,192 output tokens per OpenClaw response), not input context length'
+  scale.notes: Appendix A.4 corpus composition; Appendix A.5 Chinese mirror and 930 stage tasks; Appendix D Table 5 for the 24 configurations
+  metrics: paper Sec. 'Evaluation Metrics' (Eq. 1) defines MPSR, MESR, E2E-ASR and SRSR; Table 2; Figure 4 and Findings 1-2 report checkpoint-level pass rates for W1-F2
+  judge_model: paper Sec. 'Lifecycle Evaluation Workflow' step 5 ('judge-model (DeepSeek-V4-Pro)') and Appendix D Table 5 (DeepSeek-V4-Pro pinned separately, temperature 0); W1 is deterministic; judge-human agreement 90.6% and 91.8% on 500 records (Table 7)
+  repro_level: paper read in full (arXiv v1 HTML and PDF). No public code or data was found via paper links, GitHub search, Hugging Face API or alphaXiv (checked 2026-10-10), so the level is paper_only
+  notes: Appendix A.2 ('released Build-MemSecBench-Case Skill'), A.5 (English corpus plus Chinese mirror), Appendix C/D (Docker runtime, backends, services), Sec. Evaluation Metrics ('Each configuration-case pair is evaluated once')

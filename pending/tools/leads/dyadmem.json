@@ -1,0 +1,31 @@
+{
+ "name": "DyadMem",
+ "slug": "dyadmem",
+ "leads": {
+  "registry_key": "arxiv:2610.03020",
+  "tier": "P2",
+  "arxiv": "2610.03020 (arXiv API: v1 2026-10-02; title: DyadMem: A Long-Term Memory Benchmark of How Agents Work with Users)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "DyadMem: A Long-Term Memory Benchmark of How Agents Work with Users",
+    "paper_url": "https://arxiv.org/pdf/2610.03020",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "conversational_longterm",
+    "personalization",
+    "episodic",
+    "semantic_knowledge_update"
+   ],
+   "extra_tags": [
+    "relational_agent_memory"
+   ],
+   "kind_reason": "A benchmark of 3,065 episodes, 50,961 sessions and 61,210 QA instances, annotated for capture, update and recall plus Gold-Memory and Full-Pipeline QA. It covers user-side memory and user-conditioned agent memory across 6 categories, including agent_method (collaboration procedures). Those procedure"
+  }
+ }
+}

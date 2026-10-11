@@ -1,0 +1,30 @@
+{
+ "name": "RUMBA",
+ "slug": "rumba",
+ "leads": {
+  "registry_key": "arxiv:2607.21447",
+  "tier": "P2",
+  "arxiv": "2607.21447 (arXiv API: v1 2026-07-23; title: RUMBA: Russian User Memory Benchmark)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "RUMBA: Russian User Memory Benchmark",
+    "paper_url": "https://arxiv.org/pdf/2607.21447",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "conversational_longterm",
+    "episodic",
+    "semantic_knowledge_update"
+   ],
+   "extra_tags": [
+    "non_english_multilingual"
+   ],
+   "kind_reason": "A Russian (plus aligned English subset) long-term conversational memory benchmark: 85 dialogues of 12-85 timestamped sessions each and 1,543 QA pairs. Its taxonomy includes UpdatingInfo, DeleteInfo, temporal reasoning and multi-session questions."
+  }
+ }
+}

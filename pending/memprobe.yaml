@@ -1,0 +1,46 @@
+name: MemAudit (formerly MEMPROBE)
+slug: memprobe
+release_date: 2026-06
+venue: arXiv preprint
+memory_types:
+- personalization
+- conversational_longterm
+- episodic
+links:
+  paper: https://arxiv.org/abs/2606.24595
+  code: https://github.com/sora1998/MEMAUDIT-bench
+  data: null
+scale:
+  conversations: 50
+  questions: 1550
+  avg_context_length: 2.4–2.5 turns per episode on average (31 episodes per user, 25-turn cap)
+  notes: '50 = synthetic users, each a persistent-memory trajectory of 31 leak-controlled assistance tasks (1,550 episodes per system). 1,550 = hidden user-state recovery targets (31 per user: 7 skill, 7 knowledge, 7 episodic, 5 self-model, 5 assistance-preference), each scored under full-store and top-5 access. Dialogues are regenerated for each evaluated system. There is no train/test split.'
+metrics:
+- Category-balanced recovery/reconstruction score B (0-1, judge scale {0,0.25,0.5,0.75,1}) under full-store (dump_all) and top-k=5 (retrieve) access
+- Per-category recovery (skill, knowledge, episodic, self-model, assistance preference)
+- Task-completion rate A (%)
+- Preference score D (1-5)
+- Average turns per episode C
+- Memory footprint E (number of items, chars per item)
+- Failure-attribution counts and recovery rate Recovered/(Recovered+Memory)
+judge_model: gpt-5.4-mini
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: arXiv v1 (2026-06-23) was titled MEMPROBE. From v2 (2026-09-18) it is MemAudit, and the repo was renamed from sora1998/MemProbe to sora1998/MEMAUDIT-bench. It is unrelated to MEMAUDIT (arXiv 2605.02199). A gpt-5.4-mini user simulator generates the dialogues at evaluation time, so reruns need OpenAI API access, and Mem-T also needs a local Mem-T-4B server. The repo's main branch has an updated simulator; the paper code and results are on the paper-v1 branch. The data are synthetic and CC BY 4.0.
+sources:
+  name: 'arXiv v1 citation_title ''MEMPROBE: Probing Long-Term Agent Memory via Hidden User-State Recovery''; v2/v3 title ''MemAudit: ...''; repo README heading ''MemAudit'' and its citation keeps the original MEMPROBE title'
+  release_date: 'arXiv API and abs page: 2606.24595v1 published 2026-06-23 (v2 2026-09-18, v3 2026-10-01)'
+  venue: 'arXiv abs page has no journal_ref or comments; v3 PDF/HTML has no venue line; CITATION.cff says journal: arXiv; a web search found no OpenReview or venue page (checked 2026-10-10)'
+  memory_types: 'paper §3.2–3.4 (v1 HTML): hidden user bank of skills, knowledge, episodic events, self-model and assistance preferences, recovered after 31 tasks with memory persisting across them; Table 3 reports episodic recovery separately'
+  links.paper: arXiv abs 2606.24595
+  links.code: 'paper footnote 1 (v1: github.com/sora1998/MemProbe; v3: github.com/sora1998/MEMAUDIT-bench). gh api shows the old name redirects to sora1998/MEMAUDIT-bench, created 2026-06-22'
+  links.data: data ship inside the GitHub repo (Deeppersona/data, benchmark_data/). No separate HF dataset; the edgeclustr/memaudit-data HF dataset belongs to the different MEMAUDIT paper 2605.02199
+  scale.conversations: paper abstract and §4.1 (N=50, T=31); repo docs/data.md '50 synthetic users ... 31 per user; 1,550 total' tasks
+  scale.questions: 'paper abstract ''50 simulated users with 31 hidden dimensions each (1,550 recovery targets)''. Verified: the downloaded bank JSON has 50 users and 1,550 dims in total'
+  scale.avg_context_length: 'v3 HTML §4.2: ''2.4–2.5 turns per episode on average''; 25-turn cap in §4.1'
+  scale.notes: repo docs/data.md (7/7/7/5/5 category split, no train/val/test split) and paper Table 8
+  metrics: paper §3.4 and Table 2 (A, D, C, B full-store/top-k, footprint), Table 3 (per-category B), Table 4 (attribution, recovery rate); repo docs/results.md metric table
+  judge_model: 'paper §4.1: ''The slot-filling evaluator, recovery judge, disclosure judge, and attribution oracle use gpt-5.4-mini''. v3 Appendix H.1 adds a robustness rescoring with gpt-5.4, gpt-5.5 and Claude Sonnet 5'
+  repro_level: repo has runner.py (runs trajectories + dump_all/retrieve scoring), scorer.py, failure_attribution.py and scripts/summarize_results.py, documented in docs/reproduction.md. Data files were downloaded and parsed (checked 2026-10-10)
+  notes: arXiv abs v1/v2/v3 titles; repo README note on the paper-v1 branch; main commit 'Improve user simulator.' 2026-09-25; LICENSE CC-BY-4.0 per gh api

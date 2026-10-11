@@ -1,0 +1,28 @@
+{
+ "name": "LOCOMO-CONV",
+ "slug": "locomo-conv",
+ "leads": {
+  "registry_key": "arxiv:2609.03467",
+  "tier": "P2",
+  "arxiv": "2609.03467 (arXiv API: v1 2026-09-03; title: When Users Don't Ask: Benchmarking Context-Driven Memory Retrieval in Conversational Agents)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "When Users Don't Ask: Benchmarking Context-Driven Memory Retrieval in Conversational Agents",
+    "paper_url": "https://arxiv.org/pdf/2609.03467",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "conversational_longterm"
+   ],
+   "extra_tags": [
+    "proactive_memory_use"
+   ],
+   "kind_reason": "Conversational memory benchmark derived from LoCoMo with four query styles (dialog, implicit, counterfactual, composed), 6,581 items in total. Evaluates retrieval recall and end-to-end response quality across five memory systems. Preferences and updates are not targeted."
+  }
+ }
+}

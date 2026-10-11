@@ -1,0 +1,14 @@
+{
+ "name": "FinEvolveBench",
+ "slug": "finevolvebench",
+ "leads": {
+  "registry_key": "arxiv:2606.06960",
+  "tier": "P0",
+  "arxiv": "2606.06960 (arXiv API: v1 ?; title: None)",
+  "phase1_verified_types": {
+   "procedural_workflow": "Sec 3.2: \"The agent then uses this feedback to update or generate experience, which becomes available for subsequent tasks.\" App A.5: \"Every experience store is empty before the first evaluation date.\""
+  },
+  "paper_hint": "https://arxiv.org/abs/2606.06960",
+  "code_hint": "https://github.com/DavidDeng01/FinEvolveBench"
+ }
+}

@@ -1,0 +1,37 @@
+{
+ "name": "VoxMem",
+ "slug": "voxmem",
+ "leads": {
+  "registry_key": "arxiv:2609.32607",
+  "tier": "P1",
+  "arxiv": "2609.32607 (arXiv API: v1 2026-09-26; title: VoxMem: Benchmarking Multimodal Memory in Large Audio Language Models)",
+  "community_list_entries": [
+   {
+    "source": "teleai",
+    "section": "📏 Benchmarks / 🎬 Multimodal Benchmarks / 🗓️ 2026",
+    "name": "VoxMem: Benchmarking Multimodal Memory in Large Audio Language Models",
+    "paper_url": "https://arxiv.org/abs/2609.32607",
+    "code_url": "https://github.com/swagshaw/voxmem",
+    "data_url": "https://huggingface.co/datasets/AudioMemory/voxmembench"
+   },
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "VoxMem: Benchmarking Multimodal Memory in Large Audio Language Models",
+    "paper_url": "https://arxiv.org/pdf/2609.32607",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "conversational_longterm",
+    "semantic_knowledge_update"
+   ],
+   "extra_tags": [
+    "multimodal_audio"
+   ],
+   "kind_reason": "Benchmark of 3,196 instances over 34,743 spoken sessions with multi-session histories (9-66 sessions); operations include multi-session reasoning and temporal tracking of how information changes across sessions. Sessions are user-assistant dialogues (one assistant serving several users), not group c"
+  }
+ }
+}

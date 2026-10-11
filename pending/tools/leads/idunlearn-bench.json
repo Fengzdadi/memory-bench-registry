@@ -1,0 +1,33 @@
+{
+ "name": "IDUnlearn-Bench",
+ "slug": "idunlearn-bench",
+ "leads": {
+  "registry_key": "arxiv:2609.33481",
+  "tier": "P0",
+  "arxiv": "2609.33481 (arXiv API: v1 2026-09-27; title: What Does It Mean to Forget a Person? Individual-Level Unlearning in Vision-Language Models)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "What Does It Mean to Forget a Person? Individual-Level Unlearning in Vision-Language Models",
+    "paper_url": "https://arxiv.org/pdf/2609.33481",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "parametric"
+   ],
+   "extra_tags": [
+    "multimodal",
+    "memory_privacy_unlearning"
+   ],
+   "kind_reason": "Introduces a benchmark for individual-level multimodal unlearning in VLMs: 60 synthetic individuals are injected into VLMs by LoRA fine-tuning, then unlearned, and evaluated on 4,860 probes in four task families (attribute access, identity access, binding, reconstruction). This writes and erases kno"
+  },
+  "phase1_verified_types": {
+   "parametric": "Sec. 4.1: 'We fine-tune each Base model on the profile supervision set to obtain Vanilla and initialize every unlearning method from the same checkpoint'. Sec. 3.1: 'The supervision set contains 10,050 direct profile QAs.'"
+  },
+  "paper_hint": "https://arxiv.org/abs/2609.33481"
+ }
+}

@@ -1,0 +1,44 @@
+name: MemToC
+slug: memtoc
+release_date: 2026-08
+venue: arXiv preprint
+memory_types:
+- parametric
+links:
+  paper: https://arxiv.org/abs/2608.26295
+  code: https://github.com/ArceniyVarlamov/memtoc
+  data: null
+scale:
+  conversations: null
+  questions: 6504
+  avg_context_length: null
+  notes: 6,504 evaluation episodes = 542 quality-controlled factual questions x 4 tool conditions (correct, near-incorrect, tool error, no return) x 3 instruction formulations. A far-incorrect condition covers 443 questions. Released files hold 575 questions x 5 conditions (2,875 episodes per formulation). Not a conversational benchmark. No context length is reported.
+metrics:
+- correct-answer retention
+- correct-tool following
+- conflict-resolved accuracy
+- incorrect-tool following
+- tool-error abstention
+- agreement-case accuracy (secondary)
+- conflict acknowledgment (secondary)
+judge_model: Qwen2.5-7B-Instruct
+repro_level: data_public
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: The benchmark tests arbitration between a model's parametric (closed-book) answer and a controlled tool return whose correctness is known. Closed-book answers are elicited per model, so case sizes differ by model. The repo (Apache-2.0) ships the benchmark JSONs, per-episode scoring decisions without raw generations, and a harness that re-derives the paper's numbers. It has no script that runs a new model end to end. The paper's 6,504 count excludes 33 of the 575 released questions.
+sources:
+  name: arXiv API title for 2608.26295 and repo README
+  release_date: 'arXiv API: 2608.26295v1 published 2026-08-26T18:22:03Z'
+  venue: 'arXiv API: no journal_ref, comment only ''26 pages, 2 figures''; paper and repo README name no venue, and the README citation is @misc arXiv'
+  memory_types: 'paper abstract and Section 3: arbitration between parametric memory (model-specific elicited closed-book answers) and tool returns of known correctness, plus SFT/DPO fine-tuning; this is a parametric vs non-parametric conflict under one protocol'
+  links.paper: arXiv API entry 2608.26295
+  links.code: paper Section 8 'Data and Code Availability' links https://github.com/ArceniyVarlamov/memtoc (Apache-2.0), and the README cites arXiv:2608.26295
+  links.data: data ships in the repo under benchmark/; a Hugging Face search for 'memtoc' returned no datasets (checked 2026-10-10)
+  scale.questions: 'arXiv abstract: ''6,504 evaluation episodes constructed from 542 quality-controlled factual questions''; repo README: 6,504 = 542 x 4 x 3'
+  scale.notes: 'repo README ''The benchmark'' section, plus benchmark/reference.json counted on 2026-10-10: 2,875 episodes, 575 x 5 conditions (tool_right, tool_wrong, tool_error, no_tool, no_conflict); paper Appendix B gives far distractors for 443 questions'
+  scale.conversations: not a dialogue benchmark; episodes are single factual QA instances
+  scale.avg_context_length: no context or episode length is reported in the paper or README
+  metrics: 'paper Section 4.2: retention, correct-tool following, conflict-resolved accuracy, incorrect-tool following and tool-error abstention are primary; agreement-case accuracy and conflict acknowledgment are secondary (Table 1 reports Ret./Tool/Wrong/Err.)'
+  judge_model: 'paper Appendix B: ''The judge layer is Qwen2.5-7B-Instruct'' (temperature 0). Section 3.3 says an LLM extractor normalizes ambiguous responses before a rule-based matcher decides, and Section 4.2 says retention and tool-following metrics come from this judge-normalized layer. The repo has code/scripts/build_judge_requests.py and apply_judge.py'
+  repro_level: 'repo tree checked 2026-10-10. benchmark/reference.json, paraphrase_a.json and paraphrase_b.json are downloadable (reference.json fetched: 2,875 episodes). Present: library code (code/memtoc/runner.py clients, code/memtoc/scoring.py score_episode, code/memtoc/agentic.py run_episode), judge and aggregation scripts that read stored run outputs, and tools/verify_paper_numbers.py, which re-derives numbers from the shipped results/. No script calls the runner or scorer to evaluate a model, and CLAIM-TO-FILE.md says raw outputs and serving config are not included'
+  notes: repo README and CLAIM-TO-FILE.md ('Not in this archive'); paper abstract and Section 8

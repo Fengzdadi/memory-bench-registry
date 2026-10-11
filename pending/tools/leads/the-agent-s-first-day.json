@@ -1,0 +1,14 @@
+{
+ "name": "The Agent's First Day (EvoEnv)",
+ "slug": "the-agent-s-first-day",
+ "leads": {
+  "registry_key": "arxiv:2601.08173",
+  "tier": "P0",
+  "arxiv": "2601.08173 (arXiv API: v1 ?; title: None)",
+  "phase1_verified_types": {
+   "procedural_workflow": "Sec 3.3: \"While the sequence, quantity, and types of tasks remain invariant across both days, the specific input parameters for task instantiation vary\"; insights \"guide task execution on Day 2\" (Table 6)"
+  },
+  "paper_hint": "https://arxiv.org/abs/2601.08173",
+  "code_hint": "https://github.com/KnowledgeXLab/EvoEnv"
+ }
+}

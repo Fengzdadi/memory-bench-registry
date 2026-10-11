@@ -1,0 +1,32 @@
+{
+ "name": "MLE-InsightBench",
+ "slug": "mle-insightbench",
+ "leads": {
+  "registry_key": "arxiv:2610.04927",
+  "tier": "P0",
+  "arxiv": "2610.04927 (arXiv API: v1 2026-10-04; title: Assembling Insights for Agentic Machine Learning Engineering Systems)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "Assembling Insights for Agentic Machine Learning Engineering Systems",
+    "paper_url": "https://arxiv.org/pdf/2610.04927",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "procedural_workflow"
+   ],
+   "extra_tags": [
+    "external_insight_injection"
+   ],
+   "kind_reason": "Introduces MLE-InsightBench: 160 Kaggle competitions with a leakage-controlled source/target split. It measures how insights from related tasks (domain, competition and improvement insights, injected as skills or a playbook) change agent performance on held-out targets. The paper motivates this with"
+  },
+  "phase1_verified_types": {
+   "procedural_workflow": "§3 (held-out split): \"an agentic MLE system facing a new task can draw on prior experience, but not on experience derived from the new task itself\"; insights injected \"as on-demand skills\" (Abstract)."
+  },
+  "paper_hint": "https://arxiv.org/abs/2610.04927"
+ }
+}

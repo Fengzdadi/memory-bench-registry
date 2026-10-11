@@ -1,0 +1,43 @@
+name: PrecisionMemBench
+slug: precisionmembench
+release_date: 2026-05
+venue: arXiv preprint
+memory_types:
+- semantic_knowledge_update
+links:
+  paper: https://arxiv.org/abs/2605.11325
+  code: https://github.com/tenurehq/precisionMemBench
+  data: https://huggingface.co/datasets/tenurehq/precisionmembench
+scale:
+  conversations: 2
+  questions: 89
+  avg_context_length: null
+  notes: 89 scored cases = 77 single-turn retrieval cases (43 active, 25 structural, 9 trivially empty) + 12 turn-level assertions across 2 session scenarios (an 11-turn topic-drift session + a 1-turn cross-session case). conversations = those 2 session scenarios. Fixed seed corpus of 35 beliefs (23 code, 7 writing, 5 universal) plus a secondary-user fixture. Counted in repo fixtures on 2026-10-10.
+metrics:
+- Case pass count / pass rate (all mustInclude / mustExclude / shouldOnlyInclude belief-ID assertions satisfied; split into active, structural, trivially-empty passes)
+- Retrieval precision
+- Retrieval recall
+- Drift score (fraction of retrieved non-pinned beliefs from off-topic turns, session cases)
+- Retrieval latency (mean / p50 / p95 ms)
+- Ingestion time
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'arXiv v1 (2026-05-11) had a different title ("Beyond Similarity Search: Tenure...") and a 72-case evaluation; the PrecisionMemBench name and 89-case set appear from v2 (2026-05-27). Retrieval-only: scores returned belief IDs, with no answer generation. The benchmark''s author also built Tenure, the system that scores 89/89. Case fixtures are in the GitHub repo (MIT). The HF dataset holds only leaderboard and result files. README results (Sept 2026) were re-run after an adapter fix, and the original reports are kept in test-results/baseline/original/.'
+sources:
+  name: arXiv v2-v4 abstract and repo README ('PrecisionMemBench')
+  release_date: 'arXiv API: 2605.11325 published 2026-05-11T23:22:36Z (v1); abs page history v1 11 May 2026, v2 27 May 2026, v3 8 Jul 2026, v4 29 Jul 2026'
+  venue: arXiv API shows no journal_ref; comment only 'v4 removes duplicate prose and adds external adoption'; paper v4 and repo README name no venue
+  memory_types: 'paper v4 Table 2 / README case categories: supersession chain exclusion, counter-signal retrieval, belief mutability (beliefs updated mid-session), and scope/alias retrieval from an external structured belief store'
+  links.paper: arXiv API entry 2605.11325
+  links.code: paper v4 links github.com/tenurehq/precisionmembench; repo README links back to arXiv 2605.11325
+  links.data: 'repo README ''Dataset: HuggingFace'' link; HF API tenurehq/precisionmembench is public, not gated, MIT, and holds README, leaderboard.csv/json, and results/*.json(l)'
+  scale.conversations: 'paper v4 Evaluation: ''12 turn-level assertions across two session scenarios''; repo fixtures/session-retrieval.cases.json has 2 cases (11 + 1 turns with expectations)'
+  scale.questions: 'paper v4 abstract: ''89-case benchmark''; Evaluation: 77 single-turn + 12 session; repo fixtures/retrieval.cases.json has 77 entries (counted 2026-10-10)'
+  scale.avg_context_length: not reported in paper or README
+  scale.notes: paper v4 'Pass Taxonomy' and 'Seed Corpus as a Contrast Set'; repo fixtures/beliefs.seed.json has 35 entries
+  metrics: paper v4 Evaluation, Tables 1, 3, 4, 5 (pass counts, precision/recall, latency mean/p95, drift score, ingestion time); README Results/Metrics sections (p50 latency, pinned coverage, question precision/recall)
+  judge_model: 'paper v4 ''Common Evaluation Harness'': scoring compares returned belief IDs with required/prohibited IDs, with no LLM judge. Claude Sonnet 4.6 is only a dependency of LLM-based providers under test'
+  repro_level: repo tenurehq/precisionMemBench (checked 2026-10-10) has eval entry points src/retrieval.external.eval.test.ts, src/session-retrieval.external.eval.test.ts, src/retrieval.vector.eval.test.ts, src/session-retrieval.vector.eval.test.ts (npm scripts eval / eval:vector) plus data in fixtures/*.json
+  notes: arXiv abs v1 page (title 'Beyond Similarity Search...', 72-case evaluation); arXiv abs v2 abstract (89 cases, PrecisionMemBench); repo README 'Recent Change' section; HF API file listing

@@ -1,0 +1,28 @@
+{
+ "name": "DMV-Bench",
+ "slug": "dmv-bench",
+ "leads": {
+  "registry_key": "arxiv:2606.27499",
+  "tier": "P2",
+  "arxiv": "2606.27499 (arXiv API: v1 2026-06-25; title: DMV-Bench: Diagnosing Long-Horizon Multimodal Agents' Visual Memory with Incidental Cue Injection)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "DMV-Bench: Diagnosing Long-Horizon Multimodal Agents' Visual Memory with Incidental Cue Injection",
+    "paper_url": "https://arxiv.org/pdf/2606.27499v1",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "episodic"
+   ],
+   "extra_tags": [
+    "multimodal"
+   ],
+   "kind_reason": "An interactive benchmark for incidental visual memory in multimodal agents. Agents run chains of multi-session e-commerce shopping sessions and are later asked to recall pre-rendered visual cues from products seen earlier. The paper also proposes DualMem."
+  }
+ }
+}

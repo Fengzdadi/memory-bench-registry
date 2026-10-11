@@ -1,0 +1,26 @@
+{
+ "name": "MPBench",
+ "slug": "mpbench",
+ "leads": {
+  "registry_key": "arxiv:2606.04329",
+  "tier": "P2",
+  "arxiv": "2606.04329 (arXiv API: v1 2026-06-03; title: From Untrusted Input to Trusted Memory: A Systematic Study of Memory Poisoning Attacks in LLM Agents)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "From Untrusted Input to Trusted Memory: A Systematic Study of Memory Poisoning Attacks in LLM Agents",
+    "paper_url": "https://arxiv.org/abs/2606.04329",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [],
+   "extra_tags": [
+    "memory_security"
+   ],
+   "kind_reason": "A systematic study of memory poisoning that releases MPBench: 3,240 attack cases plus 2,997 benign cases, scored by attack success rate on memory writes and retrieval success rate in a later session. It is a security benchmark. 'Script and code execution' and 'Skill-Procedure Insertion' are only att"
+  }
+ }
+}

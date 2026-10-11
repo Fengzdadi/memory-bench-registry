@@ -1,0 +1,33 @@
+{
+ "name": "SEAGym",
+ "slug": "seagym",
+ "leads": {
+  "registry_key": "arxiv:2606.17546",
+  "tier": "P0",
+  "arxiv": "2606.17546 (arXiv API: v1 2026-06-16; title: SEAGym: An Evaluation Environment for Self-Evolving LLM Agents)",
+  "community_list_entries": [
+   {
+    "source": "teleai",
+    "section": "📏 Benchmarks / 🎮 Dynamic Benchmarks & Simulation Environments / 🗓️ 2026",
+    "name": "SEAGym: An Evaluation Environment for Self-Evolving LLM Agents",
+    "paper_url": "https://arxiv.org/abs/2606.17546",
+    "code_url": "https://github.com/antropy-research/SEAGym",
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "procedural_workflow"
+   ],
+   "extra_tags": [
+    "self_evolving_harness"
+   ],
+   "kind_reason": "An evaluation environment for self-evolving agents. It measures harness updates (prompts, memory, tools) using train batches, frozen validation, held-out ID/OOD transfer, replay and cost records. Memory is one part of the harness: ACE builds a skillbook and TF-GRPO keeps an experience store. It is i"
+  },
+  "phase1_verified_types": {
+   "procedural_workflow": "Sec.3.3: \"Train batches produce update evidence, while validation and test views are reserved for frozen assessment\"; App.C.1: \"ACE mainly stores process-level skills, TF-GRPO stores task-family experiences\"."
+  },
+  "paper_hint": "https://arxiv.org/abs/2606.17546",
+  "code_hint": "https://github.com/antropy-research/SEAGym"
+ }
+}

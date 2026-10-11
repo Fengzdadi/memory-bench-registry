@@ -1,0 +1,45 @@
+name: ECCBench
+slug: eccbench
+release_date: 2026-08
+venue: arXiv preprint
+memory_types:
+- multimodal
+- episodic
+links:
+  paper: https://arxiv.org/abs/2609.00103
+  code: https://github.com/princeton-vl/ECCBench
+  data: https://huggingface.co/datasets/anonstreammem/substream-recollection
+scale:
+  conversations: null
+  questions: 16190
+  avg_context_length: null
+  notes: '16,190 = rows across the four HF configs (counted 2026-10-10): text 7,640 (L=8-4096 symbols), synthetic_video 6,065 (L<=1024 frames), natural_video 1,813 (1,028 clips; 1,028 designed + 785 density questions), easyhuman 672. Paper: 20 streams x 16 queries per (length, band) cell. Not dialogue, so conversations is null; no average stream length is reported.'
+metrics:
+- Accuracy / correct-answer rate C (capacity; abstentions count as wrong)
+- Total FLOPs per response (efficiency; accuracy-vs-FLOPs curves)
+- 'Compression: accuracy gap low- vs max-entropy streams (synthetic) and low- vs high-density contrast (natural video, also balanced accuracy)'
+- Coverage R and accuracy on answered items C/R
+- Calibration responsiveness (coverage drop between payoff arms A +3/-1 and B +1/-4)
+- Calibration selectivity (kept-vs-declined accuracy gap, one-sided Fisher test)
+- Payoff under arm-B scoring
+- Coverage-vs-accuracy curves at fixed FLOPs budgets (trained backbones, softmax confidence)
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'The paper evaluates open-weight VLMs, with FLOPs counted analytically, and small memory backbones trained from scratch. The task is a yes/no/abstain question about whether a short substream appeared in a longer stream. The Hugging Face release (''Substream Recollection'') adds a ''medium'' entropy band that the paper does not use; the paper reports only low and max-entropy. Licences are mixed: synthetic data CC BY 4.0, EPIC-Kitchens-derived clips CC BY-NC 4.0, and SoccerNet rows provenance-only (media not redistributed). Closed API models are evaluated only on the EasyHuman split.'
+sources:
+  name: 'arXiv abstract and repo README title: ''We introduce ECCBench''; README: ''ECCBench (published on the Hub as substream-recollection)'''
+  release_date: 'arXiv API: 2609.00103v1 published 2026-08-31'
+  venue: arXiv API entry has no journal_ref or comments; repo README BibTeX lists journal = {arXiv preprint}; a web search found no venue acceptance (checked 2026-10-10)
+  memory_types: 'paper §4.1 and App. A.3/B.6: the system watches synthetic text streams, rendered-letter videos and natural EPIC-Kitchens-100/SoccerNet videos, then must recognise whether an ordered event subsequence or an activity (e.g. ''Did the person open the fridge in this video?'') occurred. Video input makes it multimodal; event-occurrence recall from an observed stream makes it episodic'
+  links.paper: arXiv API id 2609.00103
+  links.code: 'paper §1 (''Our code is available here'') and App. A.4 name https://github.com/princeton-vl/ECCBench; gh api: MIT licence, created 2026-08-31'
+  links.data: 'paper App. A: ''released under CC-BY-4.0 at https://huggingface.co/datasets/anonstreammem/substream-recollection''; HF API shows the dataset is public and not gated'
+  scale.questions: 'HF API cardData.dataset_info num_examples: text 7640, synthetic_video 6065, natural_video 1813, easyhuman 672 (summed to 16,190, counted 2026-10-10); the same counts appear in the repo README table and docs/DATASET.md'
+  scale.notes: paper App. A.1 (20 sequences per (length, band) cell, 16 queries each); App. B.6.1 (natural buckets 252x3+110x2+52 videos); docs/DATASET.md (1,028 clips; designed 1,028 + density_topup 785); HF datasets-server statistics for the text config (entropy_band low 3166 / medium 1274 / max-entropy 3200)
+  scale.avg_context_length: 'null: the paper reports stream lengths per bucket (text L=8-4096 symbols; video L=8-1024 frames at 1 fps) but no average'
+  metrics: paper §3 (capacity, efficiency in FLOPs, Comp(L,F;D)=C_D-C_Dmax, coverage R and C/R, responsiveness, selectivity), §4.3, App. B.6.2/Table 8 (density contrast, balanced accuracy), App. B.8/Table 10 (gap, Fisher p, payoff), App. C.3 (coverage-vs-accuracy at FLOPs budgets)
+  judge_model: 'null: App. B.1 says outputs are parsed by extracting the last bracketed {0}/{1}/{2} token, and ground truth comes from generation or source annotations. No LLM judge is used. Claude/Gemini/GPT appear only as evaluated models on EasyHuman'
+  repro_level: repo has the substream-eval CLI (pyproject [project.scripts] -> src/substream/eval/runner.py:main), which auto-downloads HF configs and reports accuracy, accuracy excluding IDK, and --arm A/B calibration runs. src/substream/backbones/evaluation/runner.py evaluates backbones. HF parquet download returned HTTP 200 (checked 2026-10-10)
+  notes: HF README/licence files (LICENSES/EPIC-Kitchens-100-CC-BY-NC-4.0.txt, SoccerNet-NOTE.txt), docs/DATASET.md licences section, paper App. A.1 (two bands only) vs HF entropy_band values (three bands), paper App. A.2 Table 1

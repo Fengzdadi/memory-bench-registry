@@ -1,0 +1,39 @@
+name: RippleEdits
+slug: rippleedits
+release_date: 2023-07
+venue: TACL 2024
+memory_types:
+- parametric
+links:
+  paper: https://arxiv.org/abs/2307.12976
+  code: https://github.com/edenbiran/RippleEdits
+  data: null
+scale:
+  conversations: null
+  questions: 4000
+  avg_context_length: null
+  notes: questions = factual edits in paper Table 1 (Recent 2,000; Random 1,000; Popular 1,000). Each edit has ~18.8-26.8 test queries across six criteria (v2 Table 1); the paper gives no total query count. Released JSONs hold 4,755 edits (1,948/1,922/885) and 46,754 test queries. No conversations; prompts are short single sentences.
+metrics:
+- 'Accuracy per evaluation criterion (Logical Generalization, Compositionality I, Compositionality II, Subject Aliasing, Preservation/Forgetfulness, Relation Specificity): a generation (max 20 tokens) counts as correct if any alias of the target object appears in it'
+- Average accuracy across criteria (Avg.)
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: The paper (v1 and the TACL version) reports 4,000 edits, but its abstract says "5K". The released repo files hold 4,755 edits (Random has 1,922, not 1,000), counted on 2026-10-10. Results cover only edits that succeeded for each model and method (Table 2). src/evaluation.py samples 200 edits per subset and also instantiates an OpenAI text-davinci-003 executor. The v1 criterion "Forgetfulness" appears as "Preservation" (PV) in v2. The code is MIT-licensed.
+sources:
+  name: paper title/abstract and repo README (benchmark named RippleEdits)
+  release_date: 'arXiv API: 2307.12976 <published>2023-07-24T17:52:46Z (v1); v2 updated 2023-12-20'
+  venue: arXiv comment 'Accepted for publication in TACL, 2024'; ACL Anthology 2024.tacl-1.16 (TACL vol. 12, pp. 283-298, DOI 10.1162/tacl_a_00644)
+  memory_types: 'paper abstract and §5.1: evaluates knowledge-editing methods that update model weights (MEND, ROME, MEMIT) against an in-context editing baseline (ICE) under the same protocol'
+  links.paper: arXiv API entry 2307.12976
+  links.code: paper footnote 1 'We release RippleEdits and our code at https://github.com/edenbiran/RippleEdits'; repo README calls it the official code
+  links.data: 'null: the data ships in the repo under data/benchmark/; HF search for ''RippleEdits'' returned no datasets and huggingface.co/api/datasets/edenbiran/RippleEdits returned no public dataset (checked 2026-10-10)'
+  scale.questions: paper v1 PDF Table 1 and §4.2 ('collect edits for 2,000 RECENT facts, 1,000 RANDOM facts, and 1,000 POPULAR facts'); same in v2 HTML Table 1
+  scale.conversations: 'null: not a conversational benchmark (edit + test query format)'
+  scale.avg_context_length: 'null: prompts are single-sentence fact edits and queries; the paper reports no context length'
+  scale.notes: v2 HTML Table 1 (queries per edit 26.8/18.8/25.6); released counts from streaming data/benchmark/{recent,random,popular}.json from the repo main branch on 2026-10-10
+  metrics: paper §5.1 'Evaluation' (average accuracy over test queries per example, then over examples; success when a target alias appears in a 20-token generation); Tables 3-5 report per-criterion accuracy and Avg.
+  judge_model: 'null: paper §5.1 scores by alias string matching; no LLM judge'
+  repro_level: repo tree has src/evaluation.py (Evaluator loop over models/editors on ../data/benchmark/{recent,random,popular}.json) plus data/benchmark/*.json, publicly downloadable (checked 2026-10-10)
+  notes: paper v1 PDF (abstract '5K', Table 1, §4.2, Table 2), v2 HTML Table 1 (PV criterion), repo src/evaluation.py (num_of_examples = 200; GPT3QueryExecutor text-davinci-003), repo LICENSE.txt (MIT) / GitHub API license field

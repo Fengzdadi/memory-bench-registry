@@ -1,0 +1,49 @@
+name: ES-MemEval
+slug: es-memeval
+release_date: 2026-02
+venue: WWW 2026
+memory_types:
+- conversational_longterm
+- personalization
+- episodic
+- semantic_knowledge_update
+links:
+  paper: https://arxiv.org/abs/2602.01885
+  code: https://github.com/slptongji/ES-MemEval
+  data: https://doi.org/10.5281/zenodo.18338564
+scale:
+  conversations: 18
+  questions: 1209
+  avg_context_length: '~13.3K tokens per conversation (Table 2: 13,291.6 avg tokens/conversation)'
+  notes: 'conversations = 18 multi-session conversations, one per virtual user, with 401 sessions in total. Table 2 also gives 22.3 avg sessions/conv, 23.4 avg turns/session and a 14.9-month avg span; the Intro says about 510 turns and up to 33 sessions. questions = 1,209 QA items: IE 271, TR 236, CD 226, UM 251, Abs 225. Other tasks are summarization (125) and dialogue generation (34 scenarios). The paper reports different session counts in different places: 22.3 avg sessions/conv in Table 2 and 27.2 in Sec 4.3. The released data/evo_emo.json matches the paper on 18 users, 401 sessions, 125 summaries and 34 scenarios, but a registry count of it gives 1,427 QA items, not 1,209.'
+metrics:
+- F1 score (QA)
+- BERTScore (QA)
+- LLM-as-Judge score 0-2 (QA)
+- Recall@k (retrieval)
+- nDCG@k (retrieval)
+- ROUGE-1/ROUGE-2/ROUGE-L (summarization)
+- Event-based Precision/Recall/F1 (summarization)
+- LLM score 0-5 (summarization)
+- Observation Recall (dialogue generation)
+- Weighted Score (dialogue generation)
+- LLM ratings 1-5 for LT-Mem., Pers., ES (dialogue generation)
+judge_model: GPT-4o (QA, summarization and dialogue-rating judge); Mistral-Small-3.1-24B-Instruct-2503 for dialogue-generation observation-based metrics
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'Domain is emotional support. The EvoEmo dataset has 18 virtual users. Their initial sessions come from ESConv dialogues, and later sessions were generated with GPT-4o from user profiles and event timelines. The paper states the dataset contains no real user conversations and is for research use only, not clinical deployment. Discrepancy: the released data/evo_emo.json holds 1,427 QA items (registry count), while paper Table 2 reports 1,209, and qa_experiment.py scores every item without filtering. The GitHub file and the Zenodo v1.0.0 archive have the same SHA-256. Zenodo is a GitHub release snapshot licensed CC-BY-4.0; the GitHub repo has no LICENSE file. Running the scripts needs an OpenAI API key for the GPT-4o judge and the GPT models, plus vLLM-served Mistral-24B, Ministral-8B and Phi-3-Medium. The community list reported no code link, but the official code exists. The paper evaluates only full-context and RAG baselines (bge-m3 retriever); it does not evaluate dedicated memory systems.'
+sources:
+  name: arXiv abs page title; repo README
+  release_date: 'arXiv abs 2602.01885 submission history: v1 Mon 2 Feb 2026 (API rate-limited, 429)'
+  venue: arXiv comment 'Accepted to The Web Conference (WWW) 2026'; DOI 10.1145/3774904.3792143 resolves to Proceedings of the ACM Web Conference 2026, pp. 5810-5821
+  memory_types: paper Sec 4.1.1 defines five abilities (IE, temporal reasoning, conflict detection, abstention, user modeling); data has dated event timelines and multi-session dialogues
+  links.paper: arXiv 2602.01885
+  links.code: paper Resource Availability section names github.com/slptongji/ES-MemEval
+  links.data: 'paper Resource Availability: Zenodo DOI 10.5281/zenodo.18338564 (Zenodo API: open, CC-BY-4.0, v1.0.0)'
+  scale.conversations: 'paper Table 2: Total conversations 18'
+  scale.questions: 'paper Table 2: Total questions 1,209'
+  scale.avg_context_length: 'paper Table 2: Avg tokens/conversation 13,291.6; Intro: ~13.3k tokens'
+  metrics: paper Sec 4.4 and Tables 3-8; repo README table mapping
+  judge_model: 'paper Sec 4.4 (arXiv HTML, checked 2026-10-10): GPT-4o scores QA (0-2), scores summaries (0-5), extracts events, and gives the 1-5 dialogue ratings. Paper App. D.1: for each dialogue turn Mistral-24B scores observation relevance and judges whether the response used relevant observations; Observation Recall and Weighted Score are computed from these judgments. Paper Sec 5 gives Mistral-24B''s full name as Mistral-Small-3.1-24B-Instruct-2503. Repo: src/exe/qa/*.py set judge_model = gpt4o; src/exe/dg/dg_gpt4o_full.py sets turn_evaluation_model = mistral24b (passed as observation_scorer and observation_usage_judge in src/lib/dg/dg_experiment_parameters.py) and overall_evaluation_model = gpt4o (overall_scorer); src/exe/common_configurations.py maps mistral24b to ''mistralai/Mistral-Small-3.1-24B-Instruct-2503'''
+  repro_level: repo tree has src/exe/qa/*.py, src/exe/sum/*.py, src/exe/dg/*.py, src/lib/qa/qa_experiment.py and data/evo_emo.json (checked 2026-10-10)

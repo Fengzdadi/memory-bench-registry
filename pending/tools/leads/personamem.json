@@ -1,0 +1,52 @@
+{
+ "name": "PersonaMem",
+ "slug": "personamem",
+ "leads": {
+  "registry_key": "arxiv:2504.14225",
+  "tier": "P1",
+  "arxiv": "2504.14225 (arXiv API: v1 2025-04-19; title: Know Me, Respond to Me: Benchmarking LLMs for Dynamic User Profiling and Personalized Responses at Scale)",
+  "community_list_entries": [
+   {
+    "source": "teleai",
+    "section": "📏 Benchmarks / 💬 Plain-Text Benchmarks / 🗓️ 2025",
+    "name": "Know Me, Respond to Me: Benchmarking LLMs for Dynamic User Profiling and Personalized Responses at Scale",
+    "paper_url": "https://arxiv.org/abs/2504.14225",
+    "code_url": "https://github.com/bowen-upenn/PersonaMem",
+    "data_url": null
+   },
+   {
+    "source": "iaar",
+    "section": "Resources / Benchmarks and Tasks / Personalized Task Evaluation",
+    "name": "PERSONAMEM",
+    "paper_url": "https://arxiv.org/pdf/2504.14225",
+    "code_url": null,
+    "data_url": null
+   },
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "Know Me, Respond to Me, benchmarking LLMs for Dynamic User profiling and personalized response at scale",
+    "paper_url": "https://arxiv.org/pdf/2504.14225",
+    "code_url": null,
+    "data_url": null
+   },
+   {
+    "source": "cognee",
+    "section": "PersonaMem",
+    "name": "PersonaMem",
+    "paper_url": "https://arxiv.org/abs/2504.14225",
+    "code_url": "https://github.com/bowen-upenn/PersonaMem",
+    "data_url": "https://huggingface.co/datasets/bowen-upenn/PersonaMem"
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "personalization",
+    "conversational_longterm",
+    "semantic_knowledge_update"
+   ],
+   "extra_tags": [],
+   "kind_reason": "A benchmark of 180+ simulated user-LLM histories, each with up to 60 sessions across 15 tasks. It tests whether models internalize user traits, 'track how the user profiling and preferences evolve over time', and pick the right personalized response."
+  }
+ }
+}

@@ -1,0 +1,43 @@
+name: RPEval
+slug: rpeval
+release_date: 2026-01
+venue: arXiv preprint
+memory_types:
+- personalization
+links:
+  paper: https://arxiv.org/abs/2601.16621
+  code: https://github.com/XueyangFeng/RPEval
+  data: null
+scale:
+  conversations: null
+  questions: 953
+  avg_context_length: null
+  notes: '953 = preference-query samples in each test set (Test-Exp explicit memory, Test-Imp implicit memory as short dialogues): 691 Ignore / 129 Support / 133 Dominate. Each set holds 300 query-level records (150 single-preference, 150 multi-preference with several preferences each). Paper data pool: 8,255 samples. Repo generation pool: 756 queries / 8,567 annotations.'
+metrics:
+- 'Single-preference intent-matching accuracy (overall and per class: Ignore/Support/Dominate)'
+- Multi-preference MacroAcc (all preferences for a query correct)
+- Multi-preference MicroAcc (per-preference accuracy)
+- Generative intent-match accuracy
+- 'LLM-judge error severity scores 0-5: Filter Bubble, Under-Personalization, Redundant Information, Low Feasibility, Verbose Generation'
+- Overall Judge error severity score (0-5, lower is better)
+judge_model: GPT-4.1
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: The released data is in Chinese, while the paper's examples are in English. The paper reports an 8,255-sample data pool; the repo README reports a generation pool of 756 queries / 8,567 atomic annotations. The test-set counts (953 per setting) match the paper. Data is CC BY-NC 4.0 and code is MIT. Not to be confused with the unrelated role-playing benchmark also named RPEval (arXiv 2505.13157; HF yelboudouri/RPEval). Model calls go through OpenAI-compatible APIs set in utils/api_config.json.
+sources:
+  name: 'arXiv abstract 2601.16621: ''we develop RPEval, a benchmark comprising a personalized intent reasoning dataset and a multi-granularity evaluation protocol'''
+  release_date: 'arXiv API: 2601.16621v1 published 2026-01-23'
+  venue: arXiv API entry has no journal_ref/comment; paper HTML and repo README name no venue; web search found no venue (checked 2026-10-10)
+  memory_types: 'paper §3: tests whether LLMs rationally use stored user preferences (Ignore/Support/Dominate) given explicit or implicit (dialogue-embedded) personalized memory'
+  links.paper: arXiv API entry 2601.16621
+  links.code: 'arXiv abstract: ''Our benchmark is publicly available at https://github.com/XueyangFeng/RPEval'''
+  links.data: data is shipped inside the GitHub repo (benchmark_dataset/); no separate HF dataset found (HF search for RPEval returns only an unrelated yelboudouri/RPEval)
+  scale.questions: 'paper Appendix B.5 / Figure 7: Test-Exp and Test-Imp each 953 samples (691 Ignore, 129 Support, 133 Dominate); confirmed by counting released JSON files (150+803 annotations per setting) and README statistics table'
+  scale.conversations: 'null: benchmark unit is preference-query samples, not conversations; implicit setting rewrites each preference as a short dialogue'
+  scale.avg_context_length: 'null: paper reports no token/turn length; multi-preference sets use n in [3,8] preferences (§3.1)'
+  scale.notes: paper §3.1 and Appendix B.5 (8,255 pool, 953 test); repo README Dataset Statistics tables; counted on 2026-10-10 from benchmark_dataset/*.json
+  metrics: paper §3.2 Eqs. 1-4 (Acc_all, Acc_c, MacroAcc, MicroAcc), Table 3, Table 4 (Macro/Micro/Judge), Appendix B.6 generative error types
+  judge_model: 'paper Appendix D.5 (Figures 13-14): GPT-4.1 as LLM-as-a-Judge; QWK 0.87 agreement with humans (Figure 18); repo generation_task/single_intent.sh sets JUDGE_MODEL_KEY=gpt-41'
+  repro_level: repo tree has benchmark_dataset/{explicit,implicit}_preference/{single,multi}_testset.json plus entry scripts discrimation_task/{single,multi}_intent.sh -> eval_single.py/eval_multi.py and generation_task/{single,multi}_intent.sh -> eval_single.py/eval_multi.py (checked 2026-10-10)
+  notes: released JSON inspected 2026-10-10 (Chinese text); README Dataset Statistics and License sections; LICENSE file; HF API search for RPEval

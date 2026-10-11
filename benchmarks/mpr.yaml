@@ -1,0 +1,40 @@
+name: MPR
+slug: mpr
+release_date: 2025-08
+venue: arXiv preprint
+memory_types:
+- personalization
+- parametric
+links:
+  paper: https://arxiv.org/abs/2508.13250
+  code: https://github.com/nuster1128/MPR
+  data: https://drive.google.com/file/d/1a0Ya9buk1I0hsGoaRX8bW0QJjsKuN4FR/view?usp=sharing
+scale:
+  conversations: 12
+  questions: 108000
+  avg_context_length: 104,376 ± 846 words per user (13,097 ± 6.34 statements per user)
+  notes: 12 = users (specific graphs), not dialogues; each has its own statement corpus (157,166 statements total). 108,000 = QA total in Table 2 (9,000 per user, 2-10 hops). The paper's experiments use a 2,700-question subset spread evenly over 2-10 hops. Section 3.3.3 instead says 10,800 QA, with 1,000 per hop for 2-9.
+metrics:
+- Accuracy (ACC) via Exact Match after normalization
+- Average task completion time (efficiency)
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'The paper''s reported QA counts do not agree: 108,000 in Table 2 and Section 3.3.1, 10,800 in Section 3.3.3. Results use a 2,700-question subset with Qwen2.5-7B as the base model. The data (mpr_dataset.zip, about 9.3 MB) is on Google Drive rather than in the repo. The repo has no licence file. run_qa.py writes model responses and ground truth to JSONL but includes no EM/ACC scoring script. The data is synthetic: the LLM that generated it is not named.'
+sources:
+  name: paper Section 3 and repo README ('We identify the MPR tasks'; 'MPR Dataset')
+  release_date: 'arXiv API: 2508.13250v1 published 2025-08-18 (only v1 exists)'
+  venue: 'arXiv API shows no journal_ref (comment: ''15 pages, 13 figures, 3 tables''); the README citation says ''arXiv preprint arXiv:2508.13250''; a web search found no venue'
+  memory_types: 'personalization: the task is multi-hop reasoning over per-user personalized statements (arXiv v1 HTML Sections 3.1 and 3.3). parametric: under one protocol (Section 3.4.1), implicit memory via LoRA fine-tuning (MaskSFT/SelfAskSFT, Section 5) is compared with explicit RAG memory (Section 4), all scored by EM'
+  links.paper: arXiv abs page 2508.13250
+  links.code: repository named in the paper abstract ('we release this project at https://github.com/nuster1128/MPR'); repo description says 'The official repository'
+  links.data: the repo README's 'MPR Dataset' link points to a Google Drive file, mpr_dataset.zip. The download endpoint returned HTTP 200 with content-length 9,290,370 and the zip contains mpr_dataset/question_answer/question_answer_0.json (checked 2026-10-10)
+  scale.conversations: 'paper Section 3.3.3: ''the MPR dataset contains 12 different specific graphs'' (one per user); Table 2 is consistent (108,000 QA / 9,000 per user)'
+  scale.questions: paper Table 2 'QA (Total) 108,000'; Section 3.3.1 also says 108,000. Section 3.4.1 says experiments use a 2,700-question subset
+  scale.avg_context_length: 'paper Table 2: ''Statement (Word/User) 104,376 ± 846''; ''Statement (Piece/User) 13,097 ± 6.34'''
+  scale.notes: paper Sections 3.3.3 and 3.4.1 and Table 2 (arXiv v1 HTML)
+  metrics: paper Section 3.4.1 ('average accuracy (ACC) using Exact Match (EM)'); Sections 4.6, 5.6 and 6.6 report average task completion time
+  judge_model: 'no LLM judge: the paper scores answers by normalized Exact Match only (Section 3.4.1)'
+  repro_level: repo tree has run_qa.py (entry point that runs reasoning structure x memory method over the dataset's QA), plus config.py, baselines/ and reasonings/. The data is obtainable from the Google Drive link in the README. There is no EM aggregation script (checked 2026-10-10)
+  notes: 'the 10,800 vs 108,000 conflict is in paper Section 3.3.3 vs Table 2. Licence: GitHub API reports license null. Scoring: grep of run_qa.py, utils.py and the base classes found no EM/accuracy code'

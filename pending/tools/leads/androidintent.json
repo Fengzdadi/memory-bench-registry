@@ -1,0 +1,29 @@
+{
+ "name": "AndroidIntent (PersonalAlign)",
+ "slug": "androidintent",
+ "leads": {
+  "registry_key": "arxiv:2601.09636",
+  "tier": "P2",
+  "arxiv": "2601.09636 (arXiv API: v1 2026-01-14; title: PersonalAlign: Hierarchical Implicit Intent Alignment for Personalized GUI Agent with Long-Term User-Centric Records)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Framework & Methods",
+    "name": "PersonalAlign: Hierarchical Implicit Intent Alignment for Personalized GUI Agent with Long-Term User-Centric Records",
+    "paper_url": "https://arxiv.org/pdf/2601.09636",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "personalization"
+   ],
+   "extra_tags": [
+    "gui_agent",
+    "proactive_assistance"
+   ],
+   "kind_reason": "Introduces AndroidIntent, a benchmark built from about 2 months of Android interaction logs per user (Fingertip20K, 91 users): 775 annotated preferences and 215 routines. Agents use long-term user records (first 80% as history) to resolve vague instructions and proactively suggest time- or scenario-"
+  }
+ }
+}

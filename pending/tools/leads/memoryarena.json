@@ -1,0 +1,37 @@
+{
+ "name": "MemoryArena",
+ "slug": "memoryarena",
+ "leads": {
+  "registry_key": "arxiv:2602.16313",
+  "tier": "P1",
+  "arxiv": "2602.16313 (arXiv API: v1 2026-02-18; title: MemoryArena: Benchmarking Agent Memory in Interdependent Multi-Session Agentic Tasks)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "MemoryArena: Benchmarking Agent Memory in Interdependent Multi-Session Agentic Tasks",
+    "paper_url": "https://arxiv.org/pdf/2602.16313.pdf",
+    "code_url": null,
+    "data_url": null
+   },
+   {
+    "source": "cognee",
+    "section": "Agentic and stateful benchmarks / MemoryArena",
+    "name": "MemoryArena",
+    "paper_url": "https://arxiv.org/abs/2602.16313",
+    "code_url": "https://github.com/ZexueHe/MemoryArena",
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "episodic",
+    "personalization"
+   ],
+   "extra_tags": [
+    "agentic_multi_session_tasks"
+   ],
+   "kind_reason": "An evaluation gym with 701 tasks and 4,850 interdependent subtasks across separate sessions: bundled web shopping, group travel planning, progressive web search, and math/physics derivations. Agents must carry memory of earlier subtask results, constraints, and preferences forward. Checked against t"
+  }
+ }
+}

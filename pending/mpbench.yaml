@@ -1,0 +1,42 @@
+name: MPBench
+slug: mpbench
+release_date: 2026-06
+venue: ICML 2026 Workshop on Agents in the Wild (AIWILD)
+memory_types:
+- memory_security
+links:
+  paper: https://arxiv.org/abs/2606.04329
+  code: https://github.com/Digital-Trust-Lab/mp-bench
+  data: null
+scale:
+  conversations: null
+  questions: 3240
+  avg_context_length: null
+  notes: 'questions = adversarial test cases across 6 attack classes and 7 domains (paper Table 7: 5 classes x 600, plus 240 Skill-Procedure Insertion cases for HERMES only). A further 2,997 benign examples are used to measure defense FPR. Each case is a task session (write phase) followed by a retrieval query. It contains no dialogue sessions, and the paper does not report context length.'
+metrics:
+- Attack Success Rate (ASR, memory write)
+- Retrieval Success Rate (RSR, cross-session influence, conditioned on ASR)
+- True Positive Rate (TPR) of defenses
+- False Positive Rate (FPR) of defenses
+- Detection rate by attack signal strength
+judge_model: null
+repro_level: data_public
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'Workshop paper. The arXiv paper does not link the official repo (Apache-2.0); the first author''s website does. The repo holds only two JSONL data files, with no agent harness, judge prompts or eval code. Counted on 2026-10-10: 3,241 adversarial records (line 1080 holds two concatenated objects) and 2,999 benign, against the paper''s 3,240 and 2,997. Released attack_type labels (e.g. fact_injection, experience_injection) differ from the paper''s class names. Results use GPT-OSS-120B on the OpenClaw and HERMES agents.'
+sources:
+  name: 'paper §4.1 ''MPBench Design'' (arXiv 2606.04329v2 HTML); repo README title ''MPBench: Memory Poisoning Benchmark for LLM Agents'''
+  release_date: 'arXiv API: 2606.04329v1 published 2026-06-03 (v2 2026-06-18)'
+  venue: 'ICML virtual page icml.cc/virtual/2026/67964 lists it as a poster at ''The Second Workshop on Agents in the Wild: Safety, Security, and Beyond''; repo README citation says AIWILD @ICML 2026; arXiv entry has no journal_ref or comments'
+  memory_types: 'paper §4.1.1/§4.1.3: adversarial payloads written to persistent memory (ASR), then their influence in a later session (RSR); §4.5 tests prompt-injection defenses'
+  links.paper: arXiv abs page 2606.04329
+  links.code: github.com/Digital-Trust-Lab/mp-bench (commits by Pritam Dash, first author), linked as [Code] for this paper on the first author's site (dashpritam.github.io repo, _pages/about.md); the paper itself gives no code link
+  links.data: data ships inside the repo; HF dataset pritamdash/mp-bench exists but holds only .gitattributes (checked 2026-10-10), so no separate data page
+  scale.questions: 'paper §4.1.2 and Appendix D Table 7: 3,240 test cases (plus 2,997 benign)'
+  scale.conversations: the benchmark consists of task test cases, not conversations
+  scale.avg_context_length: not reported in paper or README
+  metrics: paper §4.1.3 (ASR, RSR equations 1-2), §4.5 Tables 3-4 (TPR, FPR, detection rate by signal strength)
+  judge_model: paper §4.1.1/§4.1.3 uses an LLM judge for ASR and RSR (validated by manual annotation) but never names the judge model in HTML or PDF text; GPT-OSS-120B is the agent backbone and Llama-3.1-70B-Instruct the data generator
+  repro_level: repo tree (checked 2026-10-10) has only LICENSE, README.md, adversarial_data.jsonl.jsonl and benign_data.jsonl.jsonl; both were downloaded and parsed; there is no evaluation script
+  notes: record counts from parsing the repo JSONL files on 2026-10-10; paper counts from Table 7
+  scale.notes: paper Appendix D Table 7, D.1-D.3

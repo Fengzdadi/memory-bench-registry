@@ -1,0 +1,40 @@
+name: Agent-Memory Integrity Benchmark
+slug: agent-memory-integrity-benchmark
+release_date: 2026-07
+venue: null
+memory_types:
+- semantic_knowledge_update
+- memory_security
+links:
+  paper: null
+  code: https://github.com/DanceNitra/agent-memory-integrity
+  data: null
+scale:
+  conversations: null
+  questions: 20
+  avg_context_length: null
+  notes: 'n=20 per cell: run.py has 20 hard-coded entity/value triples (ENTS), each run once in the revert cell and once in the echo cell (40 judged probes in all). Each probe is 3 short statements. The erasure self-check uses one marker per installed backend. RAMR''s later cross-system echo table uses n=30.'
+metrics:
+- revert success rate (value-obscuring revert honored), with Wilson 95% CI
+- echo resurrection rate (lower is better), with 95% CI
+- clean current-truth rate (answer clarity after echo)
+- 'erasure self-check: marker residue present/absent after backend delete + compaction'
+judge_model: gpt-4o-mini
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: No paper. The GitHub repo (archived; no licence file, README says MIT) now redirects to DanceNitra/ramr integrity/. The cells there are described in RAMR's self-published preprint and Zenodo record, which are not on arXiv. The repo only ships a mnemo adapter. The published mem0/Graphiti numbers came from probes in a different (Agora) repo. The default judge is local qwen2.5, and the canonical judge is gpt-4o-mini. For mem0 echo, results/canonical.json says 0.00 but METHODOLOGY.md says 0.05. The author also builds the mnemo/inspeximus system being compared.
+sources:
+  name: repo README.md / run.py docstring title 'Agent-Memory Integrity Benchmark' (checked 2026-10-10)
+  release_date: 'No paper. GitHub API: repos/DanceNitra/agent-memory-integrity created_at 2026-07-12T15:36:53Z; first commit 2026-07-12 ''Agent-Memory Integrity Benchmark: open, cross-system, submittable'''
+  venue: 'null: arXiv API searches for the title, ''Retrieval-Augmented Memory Reliability'', ti:RAMR and the author returned no paper. RAMR paper/SUBMISSION_CHECKLIST.md says arXiv submission is still an owner action, and the only write-ups are a self-published preprint PDF and a Zenodo record'
+  memory_types: 'METHODOLOGY.md: Cell 1 is a value-obscuring revert of a corrected fact and Cell 2 is echo resurrection of a retired value (semantic_knowledge_update; echo is framed as an ''injected restatement''/''attack''). erasure_selfcheck.py checks whether a backend''s own delete actually removes stored data (memory_security)'
+  links.paper: 'null: no paper for this benchmark. The RAMR preprint (github.com/DanceNitra/ramr/paper/ramr_preprint.tex, §''Cross-system integrity'') and Zenodo concept DOI 10.5281/zenodo.20818291 describe the later RAMR integrity/ module'
+  links.code: 'Community-list lead, confirmed via GitHub API: owner DanceNitra, archived=true. README redirects to https://github.com/DanceNitra/ramr/tree/main/integrity'
+  links.data: 'null: the fixture is hard-coded in run.py (ENTS, 20 triples). There is no separate dataset page (HF Danchi17/ramr holds RAMR chain data, not this fixture)'
+  scale.questions: METHODOLOGY.md tables 'revert success (n=20)' and echo cell '(n=20)'; run.py ENTS list has 20 entries and --n defaults to 20
+  scale.notes: run.py cell_revert/cell_echo loop over min(n, len(ENTS)); RAMR preprint Table 'Cross-system echo...' uses n=30
+  metrics: METHODOLOGY.md Cell 1/Cell 2 tables (revert success, resurrection rate, clean current-truth rate, 95% CI); run.py wilson() and score(); erasure_selfcheck.py docstring
+  judge_model: 'results/canonical.json ''judge'': ''gpt-4o-mini'' and SUBMISSION.md canonical judge JUDGE_MODEL=gpt-4o-mini. run.py default is qwen2.5 via local Ollama'
+  repro_level: 'The repo tree has run.py (runs the revert and echo cells: python run.py --systems <name> --cell both --n 20) with the fixture inline, plus erasure_selfcheck.py and results/canonical.json (checked 2026-10-10). Only MnemoAdapter is included'
+  notes: repo README.md (archived, moved to RAMR); GitHub API license=null; METHODOLOGY.md vs results/canonical.json; RAMR CITATION.cff / .zenodo.json; checked 2026-10-10

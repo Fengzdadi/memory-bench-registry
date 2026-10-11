@@ -1,0 +1,42 @@
+name: RECON
+slug: recon
+release_date: 2026-07
+venue: arXiv preprint
+memory_types:
+- semantic_knowledge_update
+- episodic
+links:
+  paper: https://arxiv.org/abs/2607.16716
+  code: https://anonymous.4open.science/r/RECON-Bench
+  data: null
+scale:
+  conversations: 24
+  questions: 1414
+  avg_context_length: 50K–100K tokens per case file
+  notes: '24 = case files (8 each in criminal, medical and financial domains), not dialogues. 1,414 = contamination-filtered main evaluation set; the full release has 1,604 questions (190 flagged in dataset/flagged_questions.json). The questions cover six tasks and five answer formats: single- and multi-choice MCQ, integer, ordering and freeform.'
+metrics:
+- 'Score (mean per-question score: penalized MCQ scoring, exact match for integer answers, Kendall''s tau for ordering, LLM-judge verdicts for freeform)'
+- Accuracy (strict correctness, no partial credit)
+- Abstain %
+- Tokens per question
+judge_model: GPT-4o (gpt-4o-2024-08-06) and Gemini-2.5-Flash, two cross-family judges for freeform answers only
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: The code and data are hosted only on an Anonymous GitHub mirror (anonymous.4open.science), which may expire. No GitHub or Hugging Face release was found. MIT licence. The paper and README describe about 800 log entries per case, but the released case files each contain 550 timestamped entries (header and line count, checked 2026-10-10). Running the evaluation needs OpenAI and Gemini API keys, and some memory solvers need their own services. The headline numbers use the contamination-filtered 1,414-question split.
+sources:
+  name: 'arXiv 2607.16716 title/abstract: ''RECON (Reasoning over Extended Contexts with Obfuscated Narratives)'''
+  release_date: 'arXiv API: 2607.16716v1 published 2026-07-18'
+  venue: arXiv API shows no journal_ref; comment says only '25 pages'; the paper names no venue; web search found only arXiv/alphaXiv listings
+  memory_types: Abstract and §2.2 of arXiv HTML. The tasks include cascading invalidations (which conclusions break after evidence changes), source conflicts and temporal fact retrieval over ~30-day timestamped case logs held in context or memory stores.
+  links.paper: arXiv API entry 2607.16716
+  links.code: 'Paper abstract: ''Our benchmark and code are available at https://anonymous.4open.science/r/RECON-Bench'''
+  links.data: Data ships inside the repo under dataset/; no Hugging Face dataset found (HF API search 'RECON', 2026-10-10)
+  scale.conversations: 'Abstract and README: 24 case files. The repo lists dataset/{crime,finance,medical}/case_1..8.'
+  scale.questions: 'Paper §4.1/Table 2: 1,604 questions, 190 flagged, 1,414 clean. Verified on 2026-10-10 by counting 1,604 unique ids across the 24 questions.json files, with 190 flagged:true in flagged_questions.json.'
+  scale.avg_context_length: 'Paper abstract and §3.1: ''contexts of 50K–100K tokens'''
+  scale.notes: 'Paper Table 4: per-task counts (336/288/264/264/236/216), matching the released questions.json type counts'
+  metrics: Paper §4.1 Metrics and Table 2 columns (Score, Acc.%, Abst.%, Tok./Q); README scoring description
+  judge_model: 'Paper §4.1 Scoring and App. D.1/D.3: gpt-4o (gpt-4o-2024-08-06) and gemini-2.5-flash. Confirmed in evaluator/judge.py docstring.'
+  repro_level: Anonymous repo tree on 2026-10-10 contains evaluate_dataset.py, eval.py and evaluator/ (runner.py, scorer.py, judge.py, solvers/). It also has dataset/ with 24 cases (case_file.txt, questions.json, skeleton.json, blueprint.json) and flagged_questions.json, all downloadable.
+  notes: 'Repo LICENSE (MIT, ''The RECON Authors''). The case_file.txt headers read ''Total log entries: 550'' for all 24 cases, and the line count of crime/case_1 and medical/case_8 gives 550 each. This differs from paper App. B.5, which says ~800 entries.'

@@ -1,0 +1,34 @@
+{
+ "name": "Cross-Lingual Unlearning Tensor",
+ "slug": "cross-lingual-unlearning-tensor",
+ "leads": {
+  "registry_key": "arxiv:2609.40286",
+  "tier": "P0",
+  "arxiv": "2609.40286 (arXiv API: v1 2026-09-30; title: Linguistic Loopholes in LLM Unlearning: From a 174-Language Benchmark to Coverage-Aware Unlearning)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Framework & Methods",
+    "name": "Linguistic Loopholes in LLM Unlearning: From a 174-Language Benchmark to Coverage-Aware Unlearning",
+    "paper_url": "https://arxiv.org/pdf/2609.40286",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "parametric"
+   ],
+   "extra_tags": [
+    "multilingual",
+    "unlearning"
+   ],
+   "kind_reason": "The paper introduces an unlearning benchmark spanning 174 language-script pairs and 25 paraphrase types. It tests whether forgetting of knowledge in model weights generalizes, using SimNPO, RMU and GradDiff on TOFU, LUME and LORELEI. It also proposes the COVER method. Only a data subset is released;"
+  },
+  "phase1_verified_types": {
+   "parametric": "Repo README: models are \"fine-tuned on fictional biography facts (TOFU) in one language, unlearned with SimNPO, GradDiff or RMU, and then asked about those facts in 174 languages\". Paper §2 Evaluation protocol scores oracle-normalized residual access (R=0 matc"
+  },
+  "paper_hint": "https://arxiv.org/abs/2609.40286",
+  "code_hint": "https://github.com/tskow99/crosslingual-unlearning-tensor"
+ }
+}

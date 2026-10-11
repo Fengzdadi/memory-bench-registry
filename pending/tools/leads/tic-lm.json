@@ -1,0 +1,14 @@
+{
+ "name": "TiC-LM",
+ "slug": "tic-lm",
+ "leads": {
+  "registry_key": "arxiv:2504.02107",
+  "tier": "P0",
+  "arxiv": "2504.02107 (arXiv API: v1 ?; title: None)",
+  "phase1_verified_types": {
+   "parametric": "Sec.4.2: TiC-Wiki aims to \"isolate changed/unchanged factual knowledge\"; metrics: \"Backward transfer ... capturing how well continual checkpoints do on older months\" (forgetting)."
+  },
+  "paper_hint": "https://arxiv.org/abs/2504.02107",
+  "code_hint": "https://github.com/apple/ml-tic-lm"
+ }
+}

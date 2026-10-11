@@ -1,0 +1,44 @@
+name: SkillEvolBench
+slug: skillevolbench
+release_date: 2026-05
+venue: arXiv preprint
+memory_types:
+- procedural_workflow
+links:
+  paper: https://arxiv.org/abs/2605.24117
+  code: https://github.com/AIoT-MLSys-Lab/SkillEvolBench
+  data: https://huggingface.co/datasets/SkillEvolBench-Team/Skill-Evol-Bench
+scale:
+  conversations: null
+  questions: 180
+  avg_context_length: null
+  notes: '180 tasks = 6 environments x 5 skill families x 6 role-conditioned tasks: 3 acquisition (canonical/enriched/variant) and 3 frozen deployment (context-shift/adversarial/composition) per family. Each environment runs as one lifelong episode; there are no conversations. 30 curated seed skills. 180 task dirs in both repo and HF dataset (counted on 2026-10-10).'
+metrics:
+- LSR (learning/acquisition success rate)
+- RSR (replay success rate)
+- ESR (frozen evaluation/deployment success rate)
+- CSSR (context-shift success rate)
+- ARSR (adversarial-role success rate)
+- CompSR (composition success rate)
+- Cost per attempted task (USD)
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'Agent benchmark, not QA: success comes from deterministic verifiers (public, hidden and process tests). Running it needs Harbor, a Docker runtime image and paid model access (Azure OpenAI, AWS Bedrock Claude or Gemini). The GitHub repo has no LICENSE file and the HF dataset card states no licence (checked 2026-10-10). An unlinked earlier parquet copy exists at HF skillevolbench/skillevolbench (CC-BY-4.0). The repo lists two of the paper''s eight primary variants (failure-only revision) as ablations and adds Kimi presets that the paper does not use.'
+sources:
+  name: arXiv 2605.24117 title and abstract; repo README title
+  release_date: 'arXiv API: 2605.24117v1 published 2026-05-22 (only version)'
+  venue: arXiv API has no journal_ref or comments; repo README BibTeX is 'arXiv preprint arXiv:2605.24117'; project page names no venue; web search found no peer-reviewed venue (checked 2026-10-10)
+  memory_types: 'paper §4.1 says each environment is ''an independent lifelong episode'': the skill library is updated from acquisition trajectories plus verifier feedback, then frozen, and ESR/CSSR/ARSR/CompSR are measured on held-out deployment tasks (§4.5). That is procedural memory reused on later, different tasks. E1 is code debugging, but the memory tested is procedural skills, not cross-session coding context'
+  links.paper: arXiv abs page 2605.24117
+  links.code: project page skillevolbench.github.io links github.com/AIoT-MLSys-Lab/SkillEvolBench; the repo README carries the paper's authors and arXiv link
+  links.data: 'HF API: SkillEvolBench-Team/Skill-Evol-Bench is the only dataset tagged arxiv:2605.24117. It is public and not gated, with 180 task dirs and 30 skills, and its card links the repo and arXiv (checked 2026-10-10)'
+  scale.questions: 'paper §3.1 / abstract: ''180 tasks across six real-world agent environments''. The repo has 180 dirs under benchmark/tasks/ and the HF dataset has 180 dirs under tasks/ (counted on 2026-10-10)'
+  scale.conversations: 'null: the benchmark is task-based, with no dialogues. Paper §4.1 runs each of the 6 environments as one lifelong episode'
+  scale.avg_context_length: 'null: the paper reports no context-length statistic'
+  metrics: paper §4.5 Scoring (Eq. 6) defines SR, LSR, RSR, ESR, CSSR, ARSR and CompSR; Tables 1-2 report them; §5.6 reports cost per attempted task in USD
+  judge_model: 'null: paper §3.3/§4.5 verifiers are public tests, hidden tests and process verifiers, with no LLM judge. Repo task rubrics set judge_mode: deterministic, and configs/strategies/chain.yaml says ''Judge fields are accepted for config compatibility; chain ignores them'''
+  repro_level: repo tree has scripts/run.py, scripts/launch_main_experiment.py and scripts/launch_multi_model.py; skillevolbench/metrics/task_success.py and reporter.py compute learning/eval SR; benchmark/tasks/ holds 180 task dirs, and the data is also on HF SkillEvolBench-Team/Skill-Evol-Bench (checked 2026-10-10)
+  notes: repo README (Harbor/Docker/provider setup, baselines tables); gh api reports license null; HF card has no license field; HF API on skillevolbench/skillevolbench shows cc-by-4.0, 180 tasks parquet, created 2026-05-06 and linked from neither the paper nor the repo
+  scale.notes: paper §3.1-3.3 (six-role progression, gap-exposed curated skills), README Benchmark Structure table, HF dataset card

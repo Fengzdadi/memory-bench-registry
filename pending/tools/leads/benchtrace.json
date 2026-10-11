@@ -1,0 +1,14 @@
+{
+ "name": "BenchTrace",
+ "slug": "benchtrace",
+ "leads": {
+  "registry_key": "arxiv:2605.29225",
+  "tier": "P0",
+  "arxiv": "2605.29225 (arXiv API: v1 ?; title: None)",
+  "phase1_verified_types": {
+   "procedural_workflow": "Sec 3.3.2: \"agents evolve through evolution snapshots and are evaluated on a test snapshot\"; Type 3: \"s0 is from a different subtask of the same task\""
+  },
+  "paper_hint": "https://arxiv.org/abs/2605.29225",
+  "code_hint": "https://github.com/Alab-NII/BenchTrace"
+ }
+}

@@ -1,0 +1,53 @@
+name: MADial-Bench
+slug: madial-bench
+release_date: 2024-09
+venue: NAACL 2025
+memory_types:
+- conversational_longterm
+- episodic
+links:
+  paper: https://arxiv.org/abs/2409.15240
+  code: https://github.com/hejunqing/MADial-Bench
+  data: null
+scale:
+  conversations: 160
+  questions: null
+  avg_context_length: ~9.21 turns per dialogue (avg 44.39 length per turn, unit unstated)
+  notes: 160 dialogues (100 proactive, 60 passive recall) with a 171-memory bank (paper; the English release has 160). The paper gives no question count. Released files mark 262 (zh) / 263 (en) test turns, and retrieval is scored once per dialogue, 160 queries (counted on 2026-10-10). Generation is evaluated in Settings 1-3, which differ in the memory candidates given.
+metrics:
+- MAP@k
+- MRR@k
+- nDCG@k
+- Recall@k
+- Precision@k (k=1,3,5,10; memory retrieval)
+- BLEU-1/2
+- Rouge-L
+- BERTScore
+- Dist-1/2
+- 'Human\: Naturalness'
+- 'Human\: Style Coherence'
+- 'Human\: Memory-injection Ability'
+- 'Human\: ES Proficiency'
+- 'Human\: Emotion Improvement'
+- 'Human\: Intimacy (side-by-side win rate / pick-the-best)'
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: Bilingual (English/Chinese). The Chinese release matches the paper (171 memories, 1,474 turns). The English release has 160 memories and 1,439 utterances (counted on 2026-10-10). Human annotation is the primary measure of response quality; the paper calls automatic metrics unreliable. The repo scripts need manual path edits, and evaluate.py imports process_ano, which is not in the repo. The data was generated with GPT-4-Turbo and revised by hand. MIT licence.
+sources:
+  name: arXiv title and repo README title 'MADial-Bench'
+  release_date: 'arXiv API: 2409.15240v1 published 2024-09-23 (v2 updated 2024-10-23)'
+  venue: ACL Anthology 2025.naacl-long.499 (NAACL 2025 Long Papers, April 2025, pp. 9902-9921); repo README says 'NAACL 2025'; arXiv comment 'Submitted to NAACL 2025'
+  memory_types: 'paper §3-3.3 (NAACL PDF): models retrieve dated user event memories (time/emotion/scene/event) from a memory bank and inject them into long-term chatbot dialogue, with passive and proactive (emotion-triggered) recall'
+  links.paper: arXiv abs 2409.15240
+  links.code: 'NAACL paper footnote 1: ''Codes and data will be released in https://github.com/hejunqing/MADial-Bench''; repo is by first author hejunqing'
+  links.data: no separate dataset page; data is in the repo under data/en and data/ch
+  scale.conversations: 'NAACL paper §3 and Table 2: 160 dialogues (100 proactive, 60 passive), 171 memories, 1474 turns'
+  scale.questions: 'null: the paper reports no question or sample count; test-turn counts were taken from the released data/*/MADial-Bench-*-dialogue.json files on 2026-10-10'
+  scale.avg_context_length: 'NAACL paper Table 2: Avg Turn 9.21, Avg Len. (average length per turn) 44.39'
+  scale.notes: 'NAACL paper Table 2 and Fig. 2; released files counted on 2026-10-10 (en: 160 dialogues, 160 memories, 263 test turns; zh: 160 dialogues, 171 memories, 262 test turns)'
+  metrics: 'NAACL PDF (aclanthology 2025.naacl-long.499, re-checked 2026-10-10): §4.1.2 MAP/MRR/nDCG/Recall/Precision at @1/@3/@5/@10 (Table 4); §4.2.2 BLEU, Rouge-L, BertScore plus human aspects Naturalness, Style Coherence, Memory-injection Ability, ES Proficiency, Emotion Improvement, Intimacy (side-by-side and pick-the-best; Appendix C); §5.3 intimacy win rate (Table 6); Appendix D Tables 11-12 (BertScore, Rouge-L, BLEU-1/2, Dist-1/2). The stray backslash in the drafted human-metric strings was removed.'
+  judge_model: 'null: NAACL paper §5.4 says judging with GPT-4 was tried, but its scores were unreliable and were not used; the paper relies on human annotation, and the Limitations section lists LLM-as-a-judge as future work'
+  repro_level: 'repo tree checked 2026-10-10: embedding_score_new.py (retrieval MAP/MRR/nDCG/Recall/Precision), evaluate.py (BLEU/Rouge-L/BERTScore/Dist), infer_setting{1,2,3}_{en,ch}.py, Embedding.py, embedding_top_20_new.py; data files in data/en and data/ch are publicly downloadable (MIT)'
+  notes: data files downloaded from the repo and counted on 2026-10-10; evaluate.py source and repo tree checked for process_ano; repo licence MIT per GitHub API

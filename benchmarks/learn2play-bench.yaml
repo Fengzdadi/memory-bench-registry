@@ -1,0 +1,43 @@
+name: Learn2Play Bench
+slug: learn2play-bench
+release_date: 2026-10
+venue: arXiv preprint
+memory_types:
+- procedural_workflow
+links:
+  paper: https://arxiv.org/abs/2610.08215
+  code: https://github.com/liushiliushi/Learn2Play-Bench
+  data: null
+scale:
+  conversations: null
+  questions: 20
+  avg_context_length: null
+  notes: 'questions = 20 game instances, one pinned seed per game template: 10 fixed and 10 re-shuffled games, 5 of them challenge games. Each configuration plays 3 independent trials of 5 episodes (normal games) or 10 (challenge games), giving 375 scored episodes (project website). The paper reports no dialogue count and no context length. The human study has 21-30 participants per game.'
+metrics:
+- Max (average over trials of peak normalized terminal score)
+- Mean (average normalized score across evaluated episodes)
+- 'Learning Gain (LG: mean of last k_g episodes minus mean of first k_g episodes, k_g = min(3, floor(T_g/2)))'
+- 'Learning Slope (LS: slope of a linear fit of mean normalized score on episode index)'
+- LS drop (Control LS minus Re-shuffled LS, RQ4 transfer)
+- Mean cost per episode (RQ5)
+judge_model: null
+repro_level: data_public
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: v1 (2026-10-06) compares nine OpenCode backbones. v2 (2026-10-08) adds Claude Opus 5.5 and GPT-6 Astra, for eleven. Scores are normalized by per-game reference scores (Table 6), and challenge games carry 3x weight. The repo is an anonymous-review snapshot of the 20 games and play.py. It has no licence, no human records, no agent harness and no metric pipeline. Repo IDs differ from the paper's game names (hezu = Roommates, modelkeeper_expert = Model Auditor). An issue requesting a Hugging Face release was open on 2026-10-10.
+sources:
+  name: 'arXiv API title of 2610.08215: ''Learn2Play Bench: How Well Do LLM Agents Learn from Experience in Unfamiliar Environments?''; repo README heading ''# Learn2Play Bench'''
+  release_date: 'arXiv API: 2610.08215v1 published 2026-10-06T12:08:45Z (v2 updated 2026-10-08); the abs page says ''Submitted on 6 Oct 2026 (v1), last revised 8 Oct 2026 (v2)'''
+  venue: 'The arXiv abs page and API have no journal_ref and no comments. The repo README says only ''code snapshot for anonymous peer review'' and names no venue. Result: arXiv preprint.'
+  memory_types: 'procedural_workflow: agents must discover hidden game rules ''by acting, observing textual feedback, and carrying useful experience into later episodes, without updating model weights'' (§1). LG and LS ''measure improvement across episodes'' (§4.1). The compared methods are experience-memory methods: Memory, Reflexion, EvoTest, ReasoningBank and AWM (§4.2). RQ4 re-shuffled games change the visible instance while keeping the rule, testing whether learned knowledge transfers (§4.5). The other types do not apply. There is no event-recall QA (not episodic) and no weight updates (not parametric, §2). The games are mostly abstract text games such as menus, prediction and social rules, not navigation or manipulation (not embodied).'
+  links.paper: https://arxiv.org/abs/2610.08215 (arXiv API and abs page checked 2026-10-10)
+  links.code: The project website https://liushiliushi.github.io/learn2play-bench-website/ is linked from the paper abstract, and its 'GitHub' button points to https://github.com/liushiliushi/Learn2Play-Bench. The repo description is 'Anonymous-review code snapshot for Learn2Play Bench' (gh api, checked 2026-10-10).
+  links.data: 'null: no separate dataset page exists. Hugging Face API searches for ''learn2play''/''Learn2Play'' and author liushiliushi returned []. The open repo issue ''Release Learn2Play Bench on Hugging Face'' indicates no HF release yet. The games are the benchmark content and are hosted in the GitHub repo.'
+  scale.conversations: 'null: the paper reports no conversation or dialogue count. Episodes per configuration follow from §4.1 / App. A.2.1: 3 trials × (15 games × 5 + 5 games × 10 episodes). The project website states ''375 episodes in the manuscript''s scoring window''.'
+  scale.questions: '§4.1 Datasets: ''We evaluate all agents on the same 20 game instances from Learn2Play Bench, using one fixed seed per game template''. §3 says ''20 game templates''. Appendix D seeds match repo default_seeds.json (20 entries).'
+  scale.avg_context_length: 'null: the paper reports no benchmark context length. It reports only agent token usage per episode in Table 12, e.g. Kimi K3 0.56M tokens (§4.6).'
+  metrics: 'arXiv v2 HTML §4.1 Metrics (re-checked 2026-10-10): Max_g averages the peak normalized terminal scores m_{g,r} over the R_g scored trials; Mean_g averages y_{g,t} over all T_g episodes; LG ''compares average performance in the first and last k_g = min(3, floor(T_g/2)) episodes'' (LG_g = k_g^-1 (sum of last k_g y_{g,t} minus sum of first k_g y_{g,t})); LS fits y_{g,t} = b0 + b1*t over all evaluated episodes and reports the fitted slope (App. B.3.2: ''LS fits a line at the original episode indices''). Metrics are aggregated across games with weight 3 for challenge games, 1 for normal. Table 3 (§4.5, RQ4): ''LS drop is Control minus Re-shuf.''. §4.6 RQ5, Figure 3 and Table 12: ''mean cost per episode''. The drafted LG wording (''last-episode minus first-episode'') was corrected to the k_g-window definition.'
+  judge_model: 'null: scoring is automatic and deterministic by the game engines (§3 ''Automatic scoring''). The rule-discovery labels in App. D are supplementary qualitative annotations, not scores, and the paper names no LLM judge.'
+  repro_level: data_public, checked 2026-10-10. The repo tree contains all 20 game implementations under games/, default_seeds.json with the 20 pinned seeds, and play.py. play.py is an interactive/--replay-json game entry point that returns a per-episode score. The repo has no agent harness and no script that runs trials or computes the normalized Max/Mean/LG/LS. games/modelkeeper/compare_memory.py calls a main.py that is absent from the repo.
+  scale.notes: §4.1, App. A.1 Tables 4-5 (10 re-shuffled, 10 fixed), footnote 1 (5 challenge games), App. A.2.1, §4.4 (21-30 participants per game), project website protocol section
+  notes: arXiv v1 vs v2 HTML §4.2 'Baseline models' (nine vs eleven backbones). Table 6 and App. A.2.3 cover normalization and weights. The repo README, the GitHub API (license null), the repo tree, default_seeds.json and the issues list were checked 2026-10-10. Repo-to-paper game mapping is inferred from default_seeds.json and the App. D seeds.

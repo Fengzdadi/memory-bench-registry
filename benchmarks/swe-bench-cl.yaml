@@ -1,0 +1,48 @@
+name: SWE-Bench-CL
+slug: swe-bench-cl
+release_date: 2025-06
+venue: arXiv preprint
+memory_types:
+- coding_cross_session
+- procedural_workflow
+links:
+  paper: https://arxiv.org/abs/2507.00014
+  code: https://github.com/thomasjoshi/agents-never-forget
+  data: https://huggingface.co/datasets/thomasjoshi/swe-bench-cl
+scale:
+  conversations: 8
+  questions: 273
+  avg_context_length: null
+  notes: 8 = repository task sequences (django 50, sympy 50, sphinx 44, matplotlib 34, scikit-learn 32, astropy 22, xarray 22, pytest 19); 273 = SWE-Bench Verified issue-resolution tasks, ordered chronologically and then by difficulty. Average context length is not reported. The repo also holds SWE-Bench-CL-Task-Stream.json (5 streams, 500 issues), which the paper does not describe.
+metrics:
+- Success rate / pass rate (SR_i,j; FAIL_TO_PASS + PASS_TO_PASS tests)
+- Average accuracy (ACC)
+- Average forgetting (F)
+- Forward transfer (FT)
+- Backward transfer (BWT)
+- Area under learning curve (AULC)
+- Tool-use efficiency (TUE)
+- Composite CL-Score
+- CL-F1 / CL-F-beta (from CL-Plasticity and CL-Stability)
+- Character Levenshtein distance to gold patch (preliminary harness experiments)
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: Only arXiv v1 exists, and it is marked "Preprint. Under review." The paper defines the CL metrics but says full agentic evaluation is ongoing. Its reported results are preliminary SWE-Bench-harness pass rates (generally below 8.5%) and Levenshtein distances. Tasks derive from SWE-Bench Verified. README paths are stale; the actual files are data/SWE-Bench-CL-Curriculum.json and eval_v3_swe-agent/. eval_v2_agent fills forgetting and transfer with random placeholders, while eval_v1 computes them. Repo last pushed 2025-05-18 (checked 2026-10-10).
+sources:
+  name: 'arXiv API title ''SWE-Bench-CL: Continual Learning for Coding Agents''; repo README title'
+  release_date: 'arXiv API: 2507.00014v1 published 2025-06-13 (only version)'
+  venue: arXiv abs page has no journal_ref/comments; PDF footer reads 'Preprint. Under review.'; OpenReview API search returns only a DBLP 'CoRR 2025' import; repo contains SWE_Bench_CL_NeurIPS_Submission.pdf but no acceptance found
+  memory_types: 'paper §6.3: FAISS memory stores summaries of problem/solution/rationale, tool usage and success status from completed tasks and retrieves them for later tasks in the same repo sequence (coding_cross_session); §7-8: forward/backward transfer, forgetting and memory-enabled vs memory-disabled comparison across task streams (procedural_workflow)'
+  links.paper: arXiv abs 2507.00014
+  links.code: paper abstract and §1 link github.com/thomasjoshi/agents-never-forget; repo authored by first author, MIT licence
+  links.data: 'HF API: thomasjoshi/swe-bench-cl is public, not gated, MIT, file SWE-Bench-CL.json; md5 identical to repo data/SWE-Bench-CL-Curriculum.json; referenced in repo data/swe-bench-cl-croissant.json'
+  scale.conversations: paper §3.2 'comprises 8 sequences from distinct repositories' and Table 1; confirmed as 8 sequences in data/SWE-Bench-CL-Curriculum.json metadata.num_sequences (counted 2026-10-10)
+  scale.questions: paper §3.2 'totaling 273 tasks' and Table 1; confirmed as 273 tasks in data/SWE-Bench-CL-Curriculum.json metadata.total_tasks and summed sequence task lists (counted 2026-10-10)
+  scale.avg_context_length: not reported in paper or repo
+  metrics: paper §7 metric table (SR, ACC, F, FT, BWT, AULC, TUE, CL-Score) and §7.1 (CL-P, CL-S, CL-F1, CL-F-beta); §5 Figures 3-4 (pass rate, character Levenshtein distance)
+  judge_model: success is determined by executing FAIL_TO_PASS/PASS_TO_PASS tests; the paper uses no LLM judge
+  repro_level: repo tree has eval_v1/eval_procedure.py (loads ../data/SWE-Bench-CL-Curriculum.json, runs the SWE-bench harness, computes ACC/F/FT/BWT/AULC/CL-Score) and eval_v3_swe-agent/eval_procedure.py (LangGraph agent with memory on/off, success rate and tool efficiency); data in data/ and on HF (checked 2026-10-10)
+  notes: arXiv PDF p.1 footer and §8; repo README vs git tree; eval_v2_agent/eval_procedure.py calculate_model_metrics uses random.uniform; GitHub API pushed_at 2025-05-18
+  scale.notes: paper Table 1; data/SWE-Bench-CL-Task-Stream.json metadata (num_tasks 5, total_issues 500)

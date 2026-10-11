@@ -1,0 +1,14 @@
+{
+ "name": "SWE-ContextBench",
+ "slug": "swe-contextbench",
+ "leads": {
+  "registry_key": "arxiv:2602.08316",
+  "tier": "P0",
+  "arxiv": "2602.08316 (arXiv API: v1 ?; title: None)",
+  "phase1_verified_types": {
+   "procedural_workflow": "Sec. 2.2.5: \"1,100 experience tasks, whose solution trajectories form a reusable context pool, and 376 related tasks\". Tables 3-4 compare No-Context against Free/Oracle Context and Summary Learning, plus Mem0, LangMem and others.",
+   "coding_cross_session": "Sec. 1: 'The benchmark enables direct evaluation of how effectively agents can learn from previous context when solving new tasks.' Sec. 3.1: related tasks run 'in a fresh environment'."
+  },
+  "paper_hint": "https://arxiv.org/abs/2602.08316"
+ }
+}

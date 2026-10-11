@@ -1,0 +1,28 @@
+{
+ "name": "PRAGMA",
+ "slug": "pragma",
+ "leads": {
+  "registry_key": "arxiv:2609.09664",
+  "tier": "P2",
+  "arxiv": "2609.09664 (arXiv API: v1 2026-09-09; title: PRAGMA: Evaluating Personalized Guidance with Memory Alignment in Lifelong Conversations)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "PRAGMA: Evaluating Personalized Guidance with Memory Alignment in Lifelong Conversations",
+    "paper_url": "https://arxiv.org/pdf/2609.09664",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "conversational_longterm",
+    "personalization",
+    "semantic_knowledge_update"
+   ],
+   "extra_tags": [],
+   "kind_reason": "Introduces PRAGMA, a benchmark for personalized guidance in long-term conversations: 100 users, ~4,167 sessions (~160K tokens/user), 400 queries across Event/Traj-Align/Correct types testing evolving preferences and incorrect user assumptions. Code and HF data released."
+  }
+ }
+}

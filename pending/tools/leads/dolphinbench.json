@@ -1,0 +1,30 @@
+{
+ "name": "DolphinBench",
+ "slug": "dolphinbench",
+ "leads": {
+  "registry_key": "arxiv:2609.24971",
+  "tier": "P2",
+  "arxiv": "2609.24971 (arXiv API: v1 2026-09-21; title: DolphinBench: Mapping the Pareto Frontier of Agent Memory)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "DolphinBench: Mapping the Pareto Frontier of Agent Memory",
+    "paper_url": "https://arxiv.org/pdf/2609.24971",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "conversational_longterm",
+    "personalization"
+   ],
+   "extra_tags": [
+    "agentic_task_execution",
+    "memory_cost_accounting"
+   ],
+   "kind_reason": "Benchmark evaluating memory via agent task completion: three knowledge-work personas each with ~500k tokens of multi-year, session-organized user messages and 200 tasks verified to need history (decisions, preferences, project developments); reports cost and latency. Dataset and code at dolphinbench"
+  }
+ }
+}

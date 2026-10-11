@@ -1,0 +1,29 @@
+{
+ "name": "MemEmo (HLME)",
+ "slug": "mememo",
+ "leads": {
+  "registry_key": "arxiv:2602.23944",
+  "tier": "P2",
+  "arxiv": "2602.23944 (arXiv API: v1 2026-02-27; title: MemEmo: Evaluating Emotion in Memory Systems of Agents)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "MemEmo: Evaluating Emotion in Memory Systems of Agents",
+    "paper_url": "https://arxiv.org/pdf/2602.23944",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "conversational_longterm",
+    "semantic_knowledge_update"
+   ],
+   "extra_tags": [
+    "emotional_memory"
+   ],
+   "kind_reason": "Proposes an emotion-enhanced memory evaluation benchmark and the HLME dataset to test memory systems on emotional information extraction, updating and QA."
+  }
+ }
+}

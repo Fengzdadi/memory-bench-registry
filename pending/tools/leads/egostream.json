@@ -1,0 +1,29 @@
+{
+ "name": "EgoStream",
+ "slug": "egostream",
+ "leads": {
+  "registry_key": "arxiv:2605.31557",
+  "tier": "P2",
+  "arxiv": "2605.31557 (arXiv API: v1 2026-05-29; title: EGOSTREAM: A Diagnostic Benchmark for Streaming Episodic Memory in Egocentric Vision)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "EGOSTREAM: A Diagnostic Benchmark for Streaming Episodic Memory in Egocentric Vision",
+    "paper_url": "https://arxiv.org/abs/2605.31557",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "episodic"
+   ],
+   "extra_tags": [
+    "multimodal",
+    "streaming_video"
+   ],
+   "kind_reason": "Diagnostic benchmark for streaming episodic memory in egocentric video: 2,250 questions expanded to 8,528 recall-conditioned evaluations across seven cognitive dimensions. It compares KV-cache and context memory-management mechanisms, which are not weight-based memory. The paper links an anonymous G"
+  }
+ }
+}

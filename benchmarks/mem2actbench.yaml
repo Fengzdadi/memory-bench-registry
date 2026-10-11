@@ -1,0 +1,44 @@
+name: Mem2ActBench
+slug: mem2actbench
+release_date: 2026-01
+venue: ACL 2026
+memory_types:
+- conversational_longterm
+- personalization
+- semantic_knowledge_update
+links:
+  paper: https://arxiv.org/abs/2601.19935
+  code: https://github.com/Cantaloupe-M/Mem2ActBench
+  data: null
+scale:
+  conversations: 2029
+  questions: 400
+  avg_context_length: 3,238 tokens per session (avg, cl100k_base)
+  notes: 'conversations = 2,029 long dialogue sessions built by merging ToolACE, BFCL and OASST1 conversations (abstract, §3.4.2, Table 1). questions = 400 memory-dependent tool-use tasks (abstract, §3.4.2, Table 1 ''QA pairs''). The experiments (§4.1) do not use all 2,029 sessions. They use a 429-session subset that keeps only histories containing the QA evidence. This subset matches the repo''s toolmembench_small/ folder (429 sessions, 400 QA, avg 3,422.5 tokens/session, 1,468,262 tokens total). The full folder Mem2ActBench/ has 2,029 sessions with 6,569,928 tokens total and 1,185-15,834 tokens per session. That folder also contains a 400-line qa_dataset.jsonl, but it is a different file from the one in toolmembench_small/ (the files differ). The average session length is reported three ways: 12 turns (abstract), 13 turns (Table 1, §3.4.2) and 12.67 turns (repo benchmark_statistics.json). Table 1''s caption defines ''Tokens'' as a total over all sessions, but its value of 3238 equals the repo''s per-session average.'
+metrics:
+- F1 (parameter-level precision/recall)
+- BLEU-1
+- 'Tool Accuracy (TA: correct tool and all parameters match exactly)'
+- Tool Selection Accuracy (TSA) (§5.1 Table 4, §5.4 Table 5)
+- Exact Match (EM) (§5.4)
+- Arg_F1 (§5.4)
+- Slot Accuracy (per-argument exact match, §5.3 Fig. 4)
+judge_model: null
+repro_level: data_public
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'The benchmark tests whether agents can use long-term conversational memory to ground tool-call parameters (an offline tool-call generation task). In the main results (§4.1, Table 3) the model is given the ground-truth tool, and only §5.4 tests tool selection with candidate sets N∈{1,2,5}. The paper evaluates 7 memory systems (LTMemory/RAG, SCM, Generative Agents, MemTree, Mem0, LangMem, A-Mem) on Qwen2.5-7B/32B/72B-Instruct at temperature 0, using BGE-m3 for retrieval. The official repo contains only the dataset-construction pipeline (scripts 01-05 plus extract_tool_pool.py, which need an OpenAI-compatible API) and the data files. It has no script that runs or scores the evaluation. The repo has naming inconsistencies: the READMEs refer to Mem2ACT_conversation.jsonl / benchmark_normalized.jsonl and Mem2ACTbench_small/, but the actual files are toolmem_conversation.jsonl and toolmembench_small/. Difficulty levels are given as L1-L4 in the data and main README and as L1-L3 in the dataset README, while the paper defines no levels. On licensing, the repo README says ''MIT License'', but there is no LICENSE file and GitHub reports no licence. The data is derived from ToolACE, BFCL and OASST1. The arXiv v1 abstract links an anonymous.4open.science mirror, while the ACL Anthology page links the GitHub repo. Only one arXiv version (v1) exists.'
+sources:
+  name: 'arXiv abs page title and GitHub repo description: ''Mem2ActBench: A Benchmark for Evaluating Long-Term Memory Utilization in Task-Oriented Autonomous Agents'''
+  release_date: 'arXiv abs page 2601.19935: [v1] Tue, 13 Jan 2026 06:22:32 UTC, the only version. The arXiv export API returned HTTP 429 (rate limited) on 2026-10-10, so the date was read from the abs page.'
+  venue: 'ACL Anthology 2026.acl-long.370: Proceedings of the 64th Annual Meeting of the ACL (Volume 1: Long Papers), July 2026, San Diego, pp. 8173-8190, DOI 10.18653/v1/2026.acl-long.370'
+  memory_types: 'conversational_longterm: tasks are grounded in 2,029 long dialogue sessions that are ingested by memory systems (abstract, §3.4.2, §4.1). personalization: the abstract says the benchmark tests whether previously established user preferences and task states are applied implicitly, with dietary and seat/budget preference examples in Table 7 and Appendix C. semantic_knowledge_update: Table 1 marks ''Memory Evolution'' ✓ and §3.3.2/Appendix C describe conflict resolution where updates overwrite old values; the eval QA set (repo toolmembench_small/qa_dataset.jsonl) has 23 items with level_name ''Conflict-Resolution'' and has_temporal_conflict=true. procedural_workflow does not apply: the paper does not reuse tool-use experience across tasks.'
+  links.paper: https://arxiv.org/abs/2601.19935 (arXiv abs page opened 2026-10-10)
+  links.code: ACL Anthology page 2026.acl-long.370 lists the code link https://github.com/Cantaloupe-M/Mem2ActBench, and the repo description cites the paper title (gh api repos/Cantaloupe-M/Mem2ActBench)
+  links.data: 'null: no separate dataset page exists. The data is hosted in the GitHub repo (Mem2ActBench/, toolmembench_small/), and a Hugging Face API search for ''Mem2Act'', ''mem2actbench'', ''toolmembench'' and author Cantaloupe-M returned [].'
+  scale.conversations: 'abstract (''synthesizes 2,029 sessions''), §3.4.2, Table 1 Session=2029, and repo Mem2ActBench/benchmark_statistics.json total_sessions=2029 (toolmem_conversation.jsonl has 2,029 lines). The §4.1 experiments use 429 sessions (repo toolmembench_small: 429 lines).'
+  scale.questions: abstract ('400 tool-use tasks'), §3.4.2 and Table 1 'QA pairs'=400. Repo toolmembench_small/benchmark_statistics.json total_qa=400, and both qa_dataset.jsonl files have 400 lines.
+  scale.avg_context_length: repo Mem2ActBench/README.md ('平均每 Session 3238 tokens', cl100k_base) and benchmark_statistics.json avg_tokens_per_session=3238.01. Paper Table 1 'Tokens'=3238.
+  metrics: 'Dispute resolved in the auditor''s favour from the arXiv v1 PDF (2601.19935v1), downloaded and text-extracted on 2026-10-10. The main metrics are in §4.1 ''Evaluation Metrics'': ''F1 for parameter-level precision/recall, BLEU-1 for unigram overlap with the reference, and Tool Accuracy (TA)'', and they are the columns of Table 3 (F1/BLEU/TA). §5.1 Table 4 has the columns ''Retrieval Strategy | Recall@k | F1 | BLEU | TSA'' with numeric TSA values such as No Retrieval 73.8 and Oracle 88.2. Recall@k is not a metric: per the caption that column only gives the retrieval depth k∈{1,5,10}. §5.3 says ''we report Slot Accuracy, as the exact match of each individual argument value'', and Figure 4''s y-axis is ''Slot Accuracy (%)''. §5.4 says ''We report Tool Selection Accuracy (TSA) and end-to-end Exact Match (EM) ... we also report Arg_F1 conditioned on selecting the correct tool'', with the Table 5 rows TSA/EM/Arg_F1. §5.5/Fig. 5 is a breakdown of failure-mode proportions, not a separate metric. Table 2 (§3.6) is human validation of how the dataset was built, not model evaluation.'
+  judge_model: 'null: the paper scores outputs with F1/BLEU-1/TA (exact match) only. LLMs appear only in dataset construction: Qwen3-Next-80B-A3B-Instruct (§3.4 fn.1), Kimi-K2-Thinking (§3.4.2 fn.2), and an unnamed ''Blinded LLM Discriminator'' filter (Appendix B).'
+  repro_level: 'data_public: on 2026-10-10 the repo tree showed data files Mem2ActBench/{toolmem_conversation.jsonl, qa_dataset.jsonl} and toolmembench_small/{toolmem_conversation.jsonl, qa_dataset.jsonl}, which were downloaded and line-counted. The only scripts are the construction pipeline (01_conversation_builder.py ... 05_benchmark_normalization.py, extract_tool_pool.py). There is no evaluation or scoring entry point; LLMQualityEvaluator in 04_qa_construction.py is a construction-time filter.'

@@ -1,0 +1,44 @@
+name: MEMENTO
+slug: memento
+release_date: 2025-05
+venue: ICLR 2026
+memory_types:
+- personalization
+- episodic
+- embodied
+links:
+  paper: https://arxiv.org/abs/2505.16348
+  code: https://github.com/Connoriginal/MEMENTO
+  data: null
+scale:
+  conversations: null
+  questions: 438
+  avg_context_length: null
+  notes: '438 embodied episodes in 12 HSSD scenes (Habitat 3.0): 201 memory-acquisition episodes (89 object-semantics, 112 user-pattern), 201 single-memory utilization episodes (same split), and 36 joint-memory utilization episodes (12 object-semantics pairs, 12 user-pattern pairs, 12 mixed pairs). These are tasks, not dialogues, so the conversation count is left empty. The released JSON files match these counts (checked 2026-10-10).'
+metrics:
+- Percent Complete (PC)
+- Success Rate (SR)
+- ΔPC / ΔSR (acquisition-to-utilization gap)
+- Sim Steps
+- Planning Cycles
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: Embodied object-rearrangement benchmark built on PARTNR and Habitat 3.0 with a Spot robot. Agents first complete acquisition episodes, then must use the personal knowledge they gained to handle underspecified instructions. Episode files ship in the repo under resource/datasets/, but the README points to ./data/datasets/. Scenes and assets have to be installed separately through PARTNR's instructions. Only a Dockerfile is provided, not a Docker image. The README citation still uses the earlier v1 title. Code is MIT-licensed.
+sources:
+  name: 'arXiv abstract and repo README: ''we construct MEMENTO, an end-to-end two-stage evaluation framework'''
+  release_date: 'arXiv API: 2505.16348v1 published 2025-05-22 (current version v4, updated 2026-02-13)'
+  venue: arXiv comment 'Accepted at ICLR 2026'; listed under ICLR 2026 Conference on proceedings.iclr.cc (hash 08f805247677d42eac83664ccf9ef3ef)
+  memory_types: 'Paper abstract and §3: two-stage Habitat 3.0 framework. Agents acquire user-specific knowledge (object semantics, user patterns/routines) in acquisition episodes and recall it from past-episode memory to finish underspecified rearrangement tasks. Success is measured by simulator task completion. Sample instructions inspected in single_memory_utilization_stage.json.gz'
+  links.paper: arXiv API entry 2505.16348
+  links.code: 'Paper §5 and project site connoriginal.github.io/MEMENTO both link github.com/Connoriginal/MEMENTO (repo description: ''Official repository for ...'')'
+  links.data: No separate dataset page; the project site lists none, and the data ships in the repo under resource/datasets/
+  scale.questions: 'Paper Appendix C.3.4 ''Dataset Statistics'' (arXiv v4 HTML): 438 episodes = 201 acquisition + 201 single-memory + 36 multi-memory. Recounted from the repo JSON files (201/201/36, 12 scenes)'
+  scale.conversations: 'Not applicable: episodes are embodied tasks, not dialogues'
+  scale.avg_context_length: Paper reports no token or turn context length, only Sim Steps and Planning Cycles per model in Table 1
+  scale.notes: Paper Appendix C.3.4 and §5 ('12 scenes with a total of 438 episodes'); repo resource/datasets/*.json.gz
+  metrics: 'Paper §5 evaluation metrics: PC, SR, Sim Steps, Planning Cycles, and ΔPC/ΔSR as the gap between the acquisition and utilization stages. PC and SR come from the PARTNR evaluator (Appendix C.4)'
+  judge_model: The main benchmark metrics (PC/SR) come from the PARTNR simulator evaluator, so there is no LLM judge. GPT-4o is used as an LLM judge only in the auxiliary QA analysis in Appendix D.5 (long-context comprehension)
+  repro_level: Repo has scripts/acquisition_stage.sh, scripts/single_utilization_stage.sh, scripts/joint_utilization_stage.sh (python -m src.main with src/conf/v1_experiment/*.yaml) and src/evaluation/evaluation_runner.py (task_percent_complete / task_state_success). Episode data is at resource/datasets/*.json.gz, which downloaded OK. Checked 2026-10-10
+  notes: Repo README, Dockerfile, src/conf/habitat_conf/dataset/memento/acquisition_stage.yaml (data_path resource/datasets/..., scenes_dir data/hssd-hab), and LICENSE (MIT via GitHub API)

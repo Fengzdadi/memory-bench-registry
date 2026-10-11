@@ -1,0 +1,33 @@
+{
+ "name": "EconSkills",
+ "slug": "econskills",
+ "leads": {
+  "registry_key": "arxiv:2609.19523",
+  "tier": "P0",
+  "arxiv": "2609.19523 (arXiv API: v1 2026-09-17; title: EconSkills: Studying Skill Transfer and Retrieval for Web Agents on Live Economic Data)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "EconSkills: Studying Skill Transfer and Retrieval for Web Agents on Live Economic Data",
+    "paper_url": "https://arxiv.org/pdf/2609.19523",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "procedural_workflow"
+   ],
+   "extra_tags": [
+    "web_agent"
+   ],
+   "kind_reason": "Skill library + evaluation framework: distills verified EconWebArena trajectories into 50 parameterized procedures and evaluates transfer to held-out tasks (BASE vs TRAJ1 vs MATCH1) and library-scale retrieval over 360 tasks. Skills released on HF (https://huggingface.co/datasets/EconWebArena/EconSk"
+  },
+  "phase1_verified_types": {
+   "procedural_workflow": "Sec 3.3: 'Each of the 50 source skills is paired with two held-out task variants'. BASE vs MATCH1. Table 3: success 41.0% to 49.3%. Table 4: full-library RETR5/ALL50 on 360 tasks."
+  },
+  "paper_hint": "https://arxiv.org/abs/2609.19523",
+  "code_hint": "https://huggingface.co/datasets/EconWebArena/EconSkills"
+ }
+}

@@ -1,0 +1,27 @@
+{
+ "name": "DMR (Deep Memory Retrieval, from MemGPT)",
+ "slug": "dmr",
+ "leads": {
+  "registry_key": "arxiv:2310.08560",
+  "tier": "P2",
+  "arxiv": "2310.08560 (arXiv API: v1 2023-10-12; title: MemGPT: Towards LLMs as Operating Systems)",
+  "community_list_entries": [
+   {
+    "source": "cognee",
+    "section": "DMR (Deep Memory Retrieval)",
+    "name": "DMR (Deep Memory Retrieval)",
+    "paper_url": "https://arxiv.org/abs/2310.08560",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "conversational_longterm",
+    "personalization"
+   ],
+   "extra_tags": [],
+   "kind_reason": "The MemGPT paper is a system paper, but it introduces the DMR task on MSC, in which the user asks about facts from earlier sessions, plus a personalized conversation-opener task. The data is released on Hugging Face as MemGPT/MSC-Self-Instruct (500 items with self_instruct Q/A and persona fields), a"
+  }
+ }
+}

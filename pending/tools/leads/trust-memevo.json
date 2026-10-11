@@ -1,0 +1,13 @@
+{
+ "name": "Trust-Memevo",
+ "slug": "trust-memevo",
+ "leads": {
+  "registry_key": "arxiv:2602.03224",
+  "tier": "P0",
+  "arxiv": "2602.03224 (arXiv API: v1 ?; title: None)",
+  "phase1_verified_types": {
+   "procedural_workflow": "Sec. 5.1: \"After each evolution stage, we freeze the evolved memory bank and conduct static evaluation on the corresponding trustworthiness set, without adding or updating any memory.\""
+  },
+  "paper_hint": "https://arxiv.org/abs/2602.03224"
+ }
+}

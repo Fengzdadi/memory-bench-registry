@@ -1,0 +1,13 @@
+{
+ "name": "Insecure Coding Preferences in Long-Term Memory (dataset)",
+ "slug": "insecure-coding-preferences-in-long-term-memory",
+ "leads": {
+  "registry_key": "arxiv:2607.17619",
+  "tier": "P0",
+  "arxiv": "2607.17619 (arXiv API: v1 ?; title: None)",
+  "phase1_verified_types": {
+   "coding_cross_session": "Sec. 5.3: \"we construct a corresponding long-term memory entry in the target LLM system for each code prompt\"; Sec. 1: \"three independent code-generation runs in separate sessions\"."
+  },
+  "paper_hint": "https://arxiv.org/abs/2607.17619"
+ }
+}

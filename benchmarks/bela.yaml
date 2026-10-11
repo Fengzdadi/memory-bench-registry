@@ -1,0 +1,41 @@
+name: BELA
+slug: bela
+release_date: 2025-11
+venue: arXiv preprint
+memory_types:
+- personalization
+- procedural_workflow
+links:
+  paper: https://arxiv.org/abs/2511.22130
+  code: https://github.com/namkoong-lab/interactive-benchmark
+  data: https://huggingface.co/datasets/gilberty005/personas-product-database
+scale:
+  conversations: 40
+  questions: null
+  avg_context_length: 10 episodes per trajectory
+  notes: '40 = random seeds (multi-episode trajectories) of 10 episodes each in main setting (a): same customer, different choice sets. Repo benchmark configs define 40 trajectories x 10 episodes for each of variable_category, variable_persona and variable_settings. No fixed question set. Ablations use 40 or 60 seeds. Pool: 71,088 products, 2,030 categories, 1M personas.'
+metrics:
+- Regret (best product score minus recommended product score)
+- Number of questions asked
+- Confidence calibration (top-1/top-5 and regret-threshold confidence, ECE)
+judge_model: GPT-4o + Gemini-1.5-Pro (averaged persona-product scores that define regret)
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: The benchmark is interactive and has no fixed question set. A GPT-4o customer simulator answers the recommender, and regret uses persona-product scores from GPT-4o and Gemini-1.5-Pro, so runs need OpenAI and Google API keys (README). The Hugging Face product DB (MIT) lists 1,279,364 products and 7,397 categories (counted on 2026-10-10), versus 71,088 and 2,030 in the paper. The README says 40K+ personas; the paper says a 1M pool. The README title says "Experiential Reasoning". OpenReview lists the paper only as an ICLR 2026 submission.
+sources:
+  name: 'arXiv 2511.22130 abstract: ''Benchmark for Experiential Learning and Active exploration (BELA)''; repo README title ''BELA'''
+  release_date: 'arXiv API: 2511.22130v1 published 2025-11-27 (v2 updated 2026-08-08)'
+  venue: arXiv API has no journal_ref/comment; OpenReview API search shows forum Y89550WiZ1 with venue 'Submitted to ICLR 2026' (not accepted); README bibtex @inproceedings has no booktitle
+  memory_types: 'Paper Sec 2/4: agent history includes all past episodes, setting (a) keeps the same customer across episodes, so latent preferences must carry over (personalization). Agents should refine their questioning strategy across episodes, measured by regret per episode; App. A.3 tests summary-based memory (procedural_workflow). README: ''Leverage cross-episode memory to improve recommendations'''
+  links.paper: arXiv API entry 2511.22130
+  links.code: Paper (arXiv v1/v2 HTML) 'Code' link -> github.com/namkoong-lab/interactive-benchmark
+  links.data: Repo database/rebuild_from_parquet.py REPO_ID='gilberty005/personas-product-database'; HF API shows public, non-gated dataset with products/categories/product_category/persona_scores parquet files (checked 2026-10-10)
+  scale.conversations: 'Paper v2 Sec 4.1: ''10 episodes across 40 random seeds under setting (a)''; repo experiment_runners/configs/benchmark_configs/*.yaml each have 40 explicit_trajectories with episodes_per_trajectory: 10'
+  scale.questions: 'null: interactive benchmark with no fixed question set; recommender asks ''as few questions as they deem necessary'' (paper Sec 4)'
+  scale.avg_context_length: 'Paper Sec 4.1: 10 episodes per seed/trajectory; configs episodes_per_trajectory: 10'
+  scale.notes: Paper Sec 3.1 / App. F (71,088 products, 2,030 categories, 100,485 links), Sec 3.2 (1M personas from Li et al.), App. A.1/A.2 (40/60 seeds)
+  metrics: Paper Sec 2 ('main metric of merit ... is the regret'), Sec 4 ('we monitor the number of questions asked'), Sec 4.2 / App. B (top-1/top-5 and regret-threshold confidence, ECE calibration)
+  judge_model: 'Paper Sec 3.2: scoring function is ''an average of the scores generated using two models: GPT-4o and Gemini-1.5-Pro'', and these scores define regret. Claude Sonnet 4 is used as an LLM judge only to validate simulator faithfulness and stability (Sec 3.3, App. E), not to score agents'
+  repro_level: Repo has experiment_runners/run_experiment.py plus experiment_runners/configs/benchmark_configs/{variable_category,variable_persona,variable_settings}.yaml (README 'Running Each Benchmark'). Data auto-downloads from public HF datasets gilberty005/personas-product-database and Tianyi-Lab/Personas (checked 2026-10-10)
+  notes: HF metadata.json/README statistics (1,279,364 products, 7,397 categories, 0 cached scores), repo README (40K+ personas; API keys needed for scoring), OpenReview API (ICLR 2026 submission)

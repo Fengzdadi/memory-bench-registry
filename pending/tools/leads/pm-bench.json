@@ -1,0 +1,28 @@
+{
+ "name": "PM-Bench",
+ "slug": "pm-bench",
+ "leads": {
+  "registry_key": "arxiv:2607.12385",
+  "tier": "P2",
+  "arxiv": "2607.12385 (arXiv API: v1 2026-07-14; title: PM-Bench: Evaluating Prospective Memory in LLM Agents)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "PM-Bench: Evaluating Prospective Memory in LLM Agents",
+    "paper_url": "https://arxiv.org/pdf/2607.12385",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "semantic_knowledge_update"
+   ],
+   "extra_tags": [
+    "prospective_memory"
+   ],
+   "kind_reason": "A prospective-memory benchmark: a simulated 7-day week with 83 time- and event-based deferred intentions, cross-day tasks, and 11 update events that cancel, override or reschedule tasks, plus hidden state channels to monitor. It tests remembering future intentions, which none of the 8 types cover."
+  }
+ }
+}

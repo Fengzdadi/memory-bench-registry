@@ -1,0 +1,41 @@
+name: CAME-Bench
+slug: came-bench
+release_date: 2026-01
+venue: Findings of ACL 2026
+memory_types:
+- conversational_longterm
+- semantic_knowledge_update
+links:
+  paper: https://arxiv.org/abs/2601.10702
+  code: https://github.com/Seattleyrz/contextual-intent
+  data: https://huggingface.co/datasets/Seattleyrz/CAME-Bench
+scale:
+  conversations: 14
+  questions: 373
+  avg_context_length: 23k / 137k / 408k tokens (S / M / L subset averages)
+  notes: 14 = goal-oriented trajectories (Travel Planning user-assistant dialogues and two-agent Debate), split S 6 / M 6 / L 2; 373 = free-response questions, S 144 / M 168 / L 61, of four types (memory revision, context-aware recall, multi-hop, synthesis). No overall average length reported; figures are per-subset averages. Paper also evaluates on subsampled LongMemEval (N=50/50/15).
+metrics:
+- answer-set macro-averaged precision
+- answer-set macro-averaged recall
+- answer-set macro-averaged F1
+judge_model: gpt-4.1-mini
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'Introduced alongside the STITCH memory method. The full benchmark on Hugging Face (MIT, not gated) is XOR/Base64-encoded against contamination and must be decoded with the bundled codec.py; example_data/ holds only a decoded sample for the viewer. Evaluation is retrieval-centric: the method''s retrieved context (capped at 4,096 tokens) is fed to a fixed generator (gpt-5-mini in the paper), then judged. Paper-result scripts are on the repo''s paper-exp branch. arXiv comment says "ACL 2026"; ACL Anthology lists it in Findings.'
+sources:
+  name: paper Section 3 (CAME-Bench, 'Context-Aware Agent Memory Evaluation Benchmark'); HF dataset card
+  release_date: 'arXiv API: 2601.10702v1 published 2026-01-15'
+  venue: 'ACL Anthology 2026.findings-acl.584 (Findings of the Association for Computational Linguistics: ACL 2026, July 2026, pp. 12008-12042); arXiv comment field says ''ACL 2026'''
+  memory_types: 'paper Section 3.2 / HF dataset card: question types Incremental Memory Revision (entity-state updates), Context-Aware Factual Recall, Context-Aware Multi-Hop Reasoning, Information Synthesis over long user-assistant travel-planning dialogues and debate trajectories'
+  links.paper: arXiv abs page 2601.10702
+  links.code: project page https://contextual-intent.github.io (linked from paper footnote 1) links GitHub Seattleyrz/contextual-intent; repo README cites arXiv 2601.10702
+  links.data: 'project page and repo README link https://huggingface.co/datasets/Seattleyrz/CAME-Bench; HF API: public, not gated, license MIT'
+  scale.conversations: 'paper Table 4 (v2 HTML, Appendix A.5; Table 2 in v1): Trajs. 6/6/2; HF metadata.json lists traj-0..traj-13'
+  scale.questions: 'paper Table 4: Ques. 144/168/61 (sum 373); Table 1 caption N=144/168/61'
+  scale.avg_context_length: 'paper Table 4 ''Context Len.'' = average context length in tokens: 23k/137k/408k; HF card ~23k/~137k/~408k tokens'
+  scale.notes: paper Table 4, Table 1 caption, Section 3.2
+  metrics: 'paper Section 3.2 and Appendix A.3: answer-set macro-averaged precision, recall, F1 (Table 1 shows precision and F1)'
+  judge_model: 'paper Section 4 Implementation details: LLM-as-a-judge with gpt-4.1-mini (temperature 0.0, top_p 0.9); repo doc/README_CAME_BENCH_USAGE.md confirms'
+  repro_level: repo tree has example_run_benchmark.py, came_bench/benchmark.py (Benchmark.evaluate, auto-downloads HF data), came_bench/pipeline/evaluation/llm_eval.py; HF encoded_benchmark_codec/metadata.json downloads (HTTP 200) (checked 2026-10-10)
+  notes: HF dataset card sections 5-6; repo README (paper-exp branch); doc/README_CAME_BENCH_USAGE.md (4,096-token cap, gpt-5-mini generator)

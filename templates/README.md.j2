@@ -1,0 +1,50 @@
+<!-- 本文件由 scripts/build_readme.py 根据 benchmarks/*.yaml 生成，请勿手改。手写内容放在 templates/ 或 docs/。 -->
+# memory-bench-registry
+
+结构化的 agent memory benchmark 登记库：每个 benchmark 一个 YAML（`benchmarks/<slug>.yaml`），本 README 由脚本生成。
+所有字段都必须能在论文或官方仓库里找到出处（记录在各条目的 `sources` 中），找不到即为 `null`。
+
+- 字段与可复现等级定义：[docs/fields.md](docs/fields.md)
+- 现有汇总列表的覆盖缺口核对：[docs/coverage-gaps.md](docs/coverage-gaps.md)
+- 现有汇总列表及其核实状态：[docs/related-lists.md](docs/related-lists.md)
+
+当前共 **{{ entries | length }}** 条。可复现等级分布：{% for row in level_counts %}`{{ row.level }}` {{ row.count }}{% if not loop.last %} · {% endif %}{% endfor %}
+
+
+## 按记忆类型
+
+一个 benchmark 可属于多个类型，会在每个所属类型下各出现一次；组内按发布时间排序。
+
+{% for group in by_type %}
+### `{{ group.type }}`
+
+{% if group.entries %}
+| 名称 | 日期 | 类型 | 链接 | 规模 | 可复现等级 |
+| --- | --- | --- | --- | --- | --- |
+{% for e in group.entries %}
+| {{ e.name | cell }} | {{ e.release_date or "—" }} | {{ e | types }} | {{ e | links }} | {{ e | scale }} | `{{ e.repro_level }}` |
+{% endfor %}
+{% else %}
+_暂无条目。_
+{% endif %}
+
+{% endfor %}
+## 时间线
+
+按 `release_date`（论文首次公开的年月）从早到晚排列。
+
+{% for year in timeline %}
+### {{ year.year }}
+
+| 名称 | 日期 | 类型 | 链接 | 规模 | 可复现等级 |
+| --- | --- | --- | --- | --- | --- |
+{% for e in year.entries %}
+| {{ e.name | cell }} | {{ e.release_date or "—" }} | {{ e | types }} | {{ e | links }} | {{ e | scale }} | `{{ e.repro_level }}` |
+{% endfor %}
+
+{% endfor %}
+## 贡献
+
+1. 新增 `benchmarks/<slug>.yaml`，按 [docs/fields.md](docs/fields.md) 填写，每个非空字段在 `sources` 中注明出处。
+2. 运行 `python scripts/validate.py` 与 `python scripts/build_readme.py`。
+3. 不要手改本 README；CI 会检查它与数据是否同步。

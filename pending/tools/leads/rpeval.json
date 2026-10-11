@@ -1,0 +1,26 @@
+{
+ "name": "RPEval",
+ "slug": "rpeval",
+ "leads": {
+  "registry_key": "arxiv:2601.16621",
+  "tier": "P2",
+  "arxiv": "2601.16621 (arXiv API: v1 2026-01-23; title: How Does Personalized Memory Shape LLM Behavior? Benchmarking Rational Preference Utilization in Personalized Assistants)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "How Does Personalized Memory Shape LLM Behavior? Benchmarking Rational Preference Utilization in Personalized Assistants",
+    "paper_url": "https://arxiv.org/pdf/2601.16621",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "personalization"
+   ],
+   "extra_tags": [],
+   "kind_reason": "Introduces RPEval, a personalized intent-reasoning dataset with a multi-granularity evaluation protocol. It measures whether LLMs use stored personalized memories rationally or irrationally (e.g., irrelevant preference injection). RP-Reasoner is the accompanying method."
+  }
+ }
+}

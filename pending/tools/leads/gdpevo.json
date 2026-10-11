@@ -1,0 +1,14 @@
+{
+ "name": "GDPevo",
+ "slug": "gdpevo",
+ "leads": {
+  "registry_key": "arxiv:2608.03764",
+  "tier": "P0",
+  "arxiv": "2608.03764 (arXiv API: v1 ?; title: None)",
+  "phase1_verified_types": {
+   "procedural_workflow": "Abstract/Sec 1: rule hybridization \"distributes subsets of these rules across training tasks, and recombines them in held-out test tasks, so that test-time gains are attributable\"; skill-based evolution vs no-evolution base."
+  },
+  "paper_hint": "https://arxiv.org/abs/2608.03764",
+  "code_hint": "https://github.com/Prism-Shadow/GDPevo"
+ }
+}

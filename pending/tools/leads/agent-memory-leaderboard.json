@@ -1,0 +1,36 @@
+{
+ "name": "Agent Memory Leaderboard (AML)",
+ "slug": "agent-memory-leaderboard",
+ "leads": {
+  "registry_key": "name:agentmemoryleaderboard",
+  "tier": "P0",
+  "community_list_entries": [
+   {
+    "source": "teleai",
+    "section": "📏 Benchmarks / 💬 Plain-Text Benchmarks / 🗓️ 2026",
+    "name": "Agent Memory Leaderboard",
+    "paper_url": null,
+    "code_url": "https://github.com/AML-memory/agent-memory-leaderboard",
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "conversational_longterm",
+    "personalization",
+    "semantic_knowledge_update",
+    "episodic",
+    "coding_cross_session"
+   ],
+   "extra_tags": [
+    "epistemic_safety_privacy"
+   ],
+   "kind_reason": "Public evaluation platform and leaderboard with Add/Search APIs. The Textual Memory track covers PersonaMem, LoCoMo-Refined, CLBench, BEAM, LongMemEval and ScriptMem; the Coding Memory track (CAMBench Coding) is unreleased. The README also lists debug memory of repair strategies and workflows, but s"
+  },
+  "phase1_verified_types": {
+   "procedural_workflow": "Official AML HF leaderboard page: \"Coding Memory ranks by Task Solve (%)\"; README 'Coding memory capabilities': \"Retrieves past diagnostic data, repair strategies, and validation workflows to accelerate the resolution of similar issues.\"",
+   "coding_cross_session": "README.md 'Evaluation at a glance' table, Coding Memory row: 'Whether an agent can retrieve, filter, and reuse relevant engineering experience from earlier work in the same repository' (12 repos, 1,290 historical tasks)."
+  },
+  "code_hint": "https://github.com/AML-memory/agent-memory-leaderboard"
+ }
+}

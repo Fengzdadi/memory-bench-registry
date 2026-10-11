@@ -1,0 +1,43 @@
+name: LoCoMo-Plus
+slug: locomo-plus
+release_date: 2026-02
+venue: ACL 2026
+memory_types:
+- conversational_longterm
+- personalization
+links:
+  paper: https://arxiv.org/abs/2602.10715
+  code: https://github.com/xjtuleeyf/Locomo-Plus
+  data: null
+scale:
+  conversations: 10
+  questions: 401
+  avg_context_length: null
+  notes: questions = 401 new 'Cognitive' cue-trigger instances, counted in the official repo's data/locomo_plus.json (causal 101, state 100, goal 100, value 100). The paper text never states an exact count. Figure 2 shows the Cognitive bar at about 425 when read from the chart, but no number is printed, so the released file may not exactly match the evaluated set. conversations = 10 LoCoMo host conversations (data/locomo10.json). Each instance's cue and trigger are inserted as new sessions into one host conversation, placed according to its time_gap. unified_input.py assigns item i to conversation i mod 10, while data/README.md says build_conv.py picks one at random. So every instance gets its own stitched context. The unified evaluation also re-scores LoCoMo's original 1,986 QA from locomo10.json (single-hop 841, multi-hop 282, temporal 321, commonsense 96, adversarial 446), for 2,387 items in total. Average context length is not reported. The length-sensitivity analysis (Sec. 6.5) uses 100 cases per memory type (object / episodic / cognitive).
+metrics:
+- LLM-as-judge constraint-consistency score (correct=1, partial=0.5, wrong=0; 3-level labels for single-hop/multi-hop/commonsense, binary for temporal, adversarial and cognitive)
+- Per-category scores on the 5 LoCoMo categories + LoCoMo average
+- LoCoMo-Plus (cognitive) score
+- Gap = LoCoMo average minus LoCoMo-Plus score
+- Human-vs-LLM-judge normalized pairwise agreement (judge reliability)
+- EM, token F1, BLEU, ROUGE (evaluation-bias analysis only)
+- PDR (Precision Decay Ratio) and RTR (Recall Terminal Ratio) for length sensitivity
+judge_model: Gemini-2.5-Flash
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'LoCoMo-Plus adds a sixth ''Cognitive'' category to LoCoMo. It tests implicit constraints (causal / state / goal / value) where the later trigger is worded very differently from the earlier cue. Cognitive items have no reference answer: an LLM judge checks whether the response acknowledges or adapts to the cue. The ACL 2026 camera-ready adds a ''Note on Judge Stability'' that is not in arXiv v1: some closed-source judge models gave slightly different results from the original submission, and the authors plan to release an open-source judge (not in the repo as of 2026-10-10). The repo''s judge.sh defaults to gpt-4o-mini, not the paper''s gemini-2.5-flash, and it needs an OpenAI-compatible API. The repo has no LICENSE file. It redistributes LoCoMo''s locomo10.json, and upstream snap-research/locomo is licensed CC BY-NC 4.0. The paper says per-instance human annotations and judge rationales are released in the repo, but the current tree has none: the judged output files were deleted in commits on 2026-02-11. Open issues reported by users and not answered: #2 says some cue_dialogue lines are malformed (registry check: 44 of 401 cue strings with no real newline, 31 of them containing a literal ''\n''); #3 says the cognitive inputs have no session timestamps. The model_name field in locomo_plus.json (e.g. gpt-5.1, gpt-4o-mini) does not fully match the generator list in Appendix A. There is no official Hugging Face dataset; issue #1 asks for one.'
+sources:
+  name: Paper abstract and body (arXiv v1 and ACL version) use 'LoCoMo-Plus'; the title and repo spell it 'Locomo-Plus'
+  release_date: 'arXiv abs page 2602.10715: single version, ''[v1] Wed, 11 Feb 2026 10:22:35 UTC''; citation_date 2026/02/11 (export.arxiv.org API returned HTTP 429, so the abs page was used)'
+  venue: 'ACL Anthology 2026.acl-long.1150: Proceedings of the 64th Annual Meeting of the ACL (Volume 1: Long Papers), July 2026, pp. 25085-25100, DOI 10.18653/v1/2026.acl-long.1150; repo README also says ''ARR 2026 (January)'''
+  memory_types: 'conversational_longterm: paper Sec. 3-4, cues and triggers inserted into long multi-session LoCoMo dialogues. personalization: the cognitive category tests retaining and applying user-specific latent state / goal / value / causal constraints, and the Table 7 judge prompt asks whether the response ''acknowledges or adapts to the Memory/Cue''. Not tagged episodic: the temporal/event questions are LoCoMo''s original 5 categories, reused unchanged. Not tagged multi_agent_group: dyadic dialogue, and the Limitations section excludes multi-agent memory'
+  links.paper: arXiv abs page https://arxiv.org/abs/2602.10715 (opened 2026-10-10)
+  links.code: 'Paper abstract and repo README: ''https://github.com/xjtuleeyf/Locomo-Plus'' (gh api repos/xjtuleeyf/Locomo-Plus, public, created 2026-01-06, last push 2026-02-13)'
+  links.data: 'null: data ships inside the repo (data/locomo_plus.json, data/locomo10.json). Hugging Face searches for ''locomo-plus'', ''locomoplus'' and ''locomo plus'' returned no datasets, and open issue #1 asks the authors to upload one'
+  scale.conversations: Counted 10 conversations in official repo data/locomo10.json; paper Sec. 4.6 says each instance is embedded into a LoCoMo dialogue; data/README.md and unified_input.py describe the stitching
+  scale.questions: Counted 401 entries in official repo data/locomo_plus.json (causal 101 / state 100 / goal 100 / value 100). The paper gives no exact number in text; the Figure 2 Cognitive bar reads about 425 from the chart
+  scale.avg_context_length: 'null: neither the paper (arXiv v1 or ACL version) nor the repo README reports an average context length'
+  metrics: 'Paper Table 1 (per-category scores, average, Gap), Appendix B and Table 7 (judge label scheme), Table 2 (human-vs-judge agreement), Sec. 6.3 and Fig. 6 (EM/F1/BLEU/ROUGE bias analysis), Fig. 7 and Sec. 6.5 (PDR/RTR; defined in the ACL version); repo judge.sh: correct=1, partial=0.5, wrong=0'
+  judge_model: 'Paper Table 2 caption: ''the LLM judge (gemini-2.5-flash)''; Table 3 compares Gemini-2.5-Flash with GPT-4o as a second judge, and the Judge 1 column matches the Table 1 LoCoMo averages'
+  repro_level: 'Repo tree checked 2026-10-10: evaluation_framework/scripts/evaluate.sh (runs task_eval/evaluate_qa.py) and evaluation_framework/scripts/judge.sh (runs task_eval/llm_as_judge.py with prompt.py); data/unified_input.py builds the evaluation input from data/locomo_plus.json and data/locomo10.json, both present in the repo'

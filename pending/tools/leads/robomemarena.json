@@ -1,0 +1,26 @@
+{
+ "name": "RoboMemArena",
+ "slug": "robomemarena",
+ "leads": {
+  "registry_key": "arxiv:2605.10921",
+  "tier": "P2",
+  "arxiv": "2605.10921 (arXiv API: v1 2026-05-11; title: RoboMemArena: A Comprehensive and Challenging Robotic Memory Benchmark)",
+  "community_list_entries": [
+   {
+    "source": "teleai",
+    "section": "📏 Benchmarks / 🎬 Multimodal Benchmarks / 🗓️ 2026",
+    "name": "RoboMemArena: A Comprehensive and Challenging Robotic Memory Benchmark",
+    "paper_url": "https://arxiv.org/abs/2605.10921",
+    "code_url": "https://github.com/OpenHelix-Team/RoboMemArena",
+    "data_url": "https://huggingface.co/datasets/RoboMemArenaBenchmark/RoboMemArena"
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [],
+   "extra_tags": [
+    "embodied"
+   ],
+   "kind_reason": "Large-scale robotic memory benchmark of 26 simulated tasks plus 5 real-world tasks (transfer, occlusion, counting, sequence). Memory is within a single trajectory."
+  }
+ }
+}

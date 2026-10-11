@@ -1,0 +1,29 @@
+{
+ "name": "MemUse",
+ "slug": "memuse",
+ "leads": {
+  "registry_key": "arxiv:2608.24189",
+  "tier": "P2",
+  "arxiv": "2608.24189 (arXiv API: v1 2026-08-25; title: MemUse: Moving Memory Evaluation from Direct QA to Natural Integration in Long-Term Human-AI Conversation)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "MemUse: Moving Memory Evaluation from Direct QA to Natural Integration in Long-Term Human-AI Conversation",
+    "paper_url": "https://arxiv.org/pdf/2608.24189",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "conversational_longterm",
+    "personalization"
+   ],
+   "extra_tags": [
+    "memory_utilization"
+   ],
+   "kind_reason": "Releases a 4-month deployment corpus (40 users, 1,872 diary-companion sessions) and MemUse: 72 real user-cued memory moments, 316 decomposed questions, scored for Natural Integration by a GPT-5.4-nano judge. Memories are users' personal life details from earlier sessions."
+  }
+ }
+}

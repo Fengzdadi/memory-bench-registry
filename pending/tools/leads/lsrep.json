@@ -1,0 +1,29 @@
+{
+ "name": "LSREP",
+ "slug": "lsrep",
+ "leads": {
+  "registry_key": "arxiv:2609.16730",
+  "tier": "P2",
+  "arxiv": "2609.16730 (arXiv API: v1 2026-09-15; title: LSREP: A Longitudinal State-Replay Protocol for Evaluating Conversational Memory, with ICE v2 as an Audited Local-First Architecture)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "LSREP: A Longitudinal State-Replay Protocol for Evaluating Conversational Memory, with ICE v2 as an Audited Local-First Architecture",
+    "paper_url": "https://arxiv.org/pdf/2609.16730",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "conversational_longterm",
+    "semantic_knowledge_update"
+   ],
+   "extra_tags": [
+    "evaluation_protocol_no_public_data"
+   ],
+   "kind_reason": "Primary contribution is a 'system-independent protocol specification' (longitudinal state-replay evaluation of conversational memory with evolving reference answers) plus harness code; however its instantiation dataset (1,985 turns, 219 probes) is private personal data and not released, so it is an "
+  }
+ }
+}

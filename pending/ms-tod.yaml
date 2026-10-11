@@ -1,0 +1,46 @@
+name: MS-TOD
+slug: ms-tod
+release_date: 2025-05
+venue: AAAI 2026
+memory_types:
+- conversational_longterm
+links:
+  paper: https://arxiv.org/abs/2505.20231
+  code: https://github.com/Elvin-Yiming-Du/MS_TOD_Memory
+  data: null
+scale:
+  conversations: 132
+  questions: 956
+  avg_context_length: 140.38 utterances (21.67 sessions) per individual
+  notes: 'conversations = 132 individual memory banks (personas), each with over 20 sessions. Table 2 also lists 2,861 dialogues and 18,530 utterances. questions = 956 task goals, the evaluation unit. These are not QA items, and the paper does not give the exact number of confirmation sessions evaluated. The filter-training split is separate: 565 individuals, 4,534 goals and 13,441 dialogues (Table 7).'
+metrics:
+- GPT-4 score (1-10, LLM-judged response quality)
+- Joint Goal Accuracy (JGA)
+- Dialogue Turn Efficiency (DTE)
+- Success Rate (S.R.)
+- 'Human evaluation: Accuracy, Informativeness, Coherence (A.I.C.)'
+- Slot Accuracy
+- BLEU
+- ROUGE
+- Recall@3/5/10 (memory retrieval)
+judge_model: GPT-4
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'arXiv v1 had a different title ("Bridging the Long-Term Gap: A Memory-Active Policy...") and became MemGuide in v2. The data is built from SGD, with GPT-4 generating 3 sessions per task. Released files counted on 2026-10-10: 132 personas, 2,860 sessions, 18,481 utterances (paper: 2,861 / 18,530). The paper names the judge as GPT-4, but the repo eval script calls gpt-4o-2024-08-06. The eval scripts hard-code the authors'' local paths and expect a different file schema. The repo has no licence file.'
+sources:
+  name: Paper abstract (arXiv v2 and AAAI version) and repo README title 'Multi-session Task-oriented Dialogue Dataset (MS-TOD)'
+  release_date: 'arXiv API: 2505.20231v1 published 2025-05-26T17:10:43Z (v1 title ''Bridging the Long-Term Gap: A Memory-Active Policy for Multi-Session Task-Oriented Dialogue''; v2 2025-08-13 titled MemGuide)'
+  venue: 'AAAI OJS page: Proceedings of the AAAI Conference on Artificial Intelligence 40(36), 30584-30592, published 2026-03-14, DOI 10.1609/aaai.v40i36.40313; repo README says ''AAAI 2026 Oral''; arXiv has no journal_ref'
+  memory_types: 'Paper Dataset/Evaluation sections: per-user memory banks of 20+ sessions; the system must recall slot values from earlier sessions to produce confirmation responses (JGA, DTE, S.R.). Personalization was not tagged because ''personas'' are user partitions with no profile or preference modeling.'
+  links.paper: arXiv abs 2505.20231
+  links.code: 'AAAI PDF abstract footnote ''Code and Dataset: https://github.com/Elvin-Yiming-Du/MS TOD Memory'' (rendered with spaces), which resolves to the repo Elvin-Yiming-Du/MS_TOD_Memory by the first author; README links back to arXiv 2505.20231'
+  links.data: 'null: no separate dataset page; the data ships in the repo as data/persona_0..131.json'
+  scale.conversations: 'Paper Table 2 ''MS-TOD dataset statistics for evaluation'': Number of individuals 132; abstract: 132 diverse personas'
+  scale.questions: 'Paper Table 2: Task goals 956; abstract: 956 task goals'
+  scale.avg_context_length: 'Paper Table 2: Avg. utterances per individual 140.38; Avg. sessions per individual 21.67 (the paper gives no token counts)'
+  scale.notes: Paper Table 2 (evaluation) and arXiv v2 Appendix Table 7 (training set for the memory filter)
+  metrics: AAAI paper 'Evaluation Metrics' paragraph (GPT-4 score, JGA, DTE, S.R., human A.I.C.); Table 1 (Slot Acc.); arXiv v2 Appendix C tables (Slot Accuracy, BLEU, ROUGE; Recall@3/5/10)
+  judge_model: 'Paper: ''GPT-4 score (1-10)'' with footnote ''GPT-4-as-the-judge prompts can be found in Appendix'' (arXiv v2). Repo code/mem_guide/confirmation_evaluation/confirmation_response_eval.py defaults to model_name=''gpt-4o-2024-08-06'''
+  repro_level: Repo tree (checked 2026-10-10) has evaluation scripts code/mem_guide/confirmation_evaluation/confirmation_response_eval.py (LLM judge + BLEU/ROUGE), code/mem_guide/confirmation_evaluation/confirmation_response_bleu_evaluation.py (BLEU/ROUGE/slot accuracy) and code/eval/0804_Proactive_learning.py (turn-efficiency simulation), plus data/persona_*.json (132 files, downloaded and counted). Scripts need path and schema adaptation.
+  notes: 'Released data counted from the GitHub tarball on 2026-10-10 (132 personas, 2,860 sessions, 18,481 utterances, 19 intents, 13 service names). README statistics table: 2860 sessions / 18481 utterances. gh api shows license null.'

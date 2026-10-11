@@ -1,0 +1,46 @@
+name: H2HMem
+slug: h2hmem
+release_date: 2026-06
+venue: arXiv preprint
+memory_types:
+- conversational_longterm
+- multimodal
+- multi_agent_group
+- semantic_knowledge_update
+links:
+  paper: https://arxiv.org/abs/2606.09461
+  code: https://github.com/varib1/H2HMEM
+  data: https://huggingface.co/datasets/varib/H2HMEM
+scale:
+  conversations: 25
+  questions: 2236
+  avg_context_length: 22.9 rounds/session; 12.4 sessions/dialogue
+  notes: '25 dialogues (20 dyadic + 5 multi-party with 4-6 participants), 309 sessions, 7,078 dialogue rounds, 1,300 images; 2,236 QA pairs (2,046 dyadic + 190 multi-party) over 9 task types (UPR, CRR, KR, MCR, RET, TR, TTL, CD, AR), 618 with images. Dyadic: 18.7 rounds/session, 14.2 sessions; multi-party: 70.5 rounds/session, 5 sessions.'
+metrics:
+- LLM-as-Judge score (0/0.25/0.5/0.75/1 rubric; primary)
+- Precision
+- Recall
+- F1
+- BLEU-1
+- 'Efficiency: storage time (s/session), retrieval and answer latency (s/query)'
+judge_model: GPT-4o-mini
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'The dialogues are synthetic: DeepSeek-V3 generated them, and humans refined the images and QA pairs. All content is in English. There is a licence mismatch: the paper (App. C.1) states CC BY 4.0 for research use only, while the HF card and the README badge state MIT, and the GitHub repo has no LICENSE file. The HF release was counted on 2026-10-10. Its QA total (2,236) and utterance total (7,078) match the paper. However, it has 283 dyadic session.json files against the 284 sessions the paper reports: dyadic/dialogue3/session6 has questions and images but no session.json. A public leaderboard accepts submissions.'
+sources:
+  name: arXiv 2606.09461 title and repo README
+  release_date: 'arXiv API: 2606.09461v1 published 2026-06-08'
+  venue: arXiv API comment '22 pages, 6 figures', no journal_ref; README/HF card/project page cite only arXiv (@misc); no venue found
+  memory_types: 'paper §3.1/§3.3: multi-session dialogues with images (multimodal), dyadic + multi-party (4-6 participants, App. A.2), KR task = retrieving currently correct info after updates across sessions, CD = conflict detection'
+  links.paper: arXiv abs page / API for 2606.09461
+  links.code: paper HTML 'Code' link -> github.com/varib1/H2HMEM; README links back to arXiv 2606.09461
+  links.data: 'paper HTML ''Dataset'' link and README -> huggingface.co/datasets/varib/H2HMEM (HF API: not gated, 1,943 files incl. dyadic/ and multi-party/ folders)'
+  scale.conversations: 'paper Table 2: Dialogues 20 dyadic + 5 multi-party = 25; HF release has 20 + 5 dialogue folders'
+  scale.questions: 'paper Table 2: QA Pairs 2,046 + 190 = 2,236; matched by counting questions.json entries in HF release on 2026-10-10'
+  scale.avg_context_length: 'paper Table 2: Avg. rounds/session 22.9, Avg. sessions/dialogue 12.4'
+  scale.notes: paper Table 2, App. A.1/A.2; HF questions.json image-field count 596 + 22 = 618
+  metrics: paper §4.1 and App. C.3 (LLM-as-Judge, Precision, Recall, F1, BLEU-1), Table 5 (efficiency)
+  judge_model: 'paper §4.1 and App. C.3.1: GPT-4o-mini as a zero-shot evaluator, Cohen''s kappa 0.84 vs. human judgments on 200 samples'
+  repro_level: 'repo tree (checked 2026-10-10): baselines/{FullText,Naive-RAG,A-MEM,FullMM,MuRAG,NGM}/evaluate.sh, evaluate_metrics/LLM-as-judge/run_LLM_as_judge.sh + LLM_as_judge.py, evaluate_metrics/Lexical_metrics/run_Lexical_metrics.sh; data downloadable from ungated HF dataset'
+  notes: paper App. C.1 licence statement; HF API cardData license 'mit'; gh api shows license null for repo; HF file listing counted 2026-10-10

@@ -1,0 +1,29 @@
+{
+ "name": "MS-TOD (MemGuide)",
+ "slug": "ms-tod",
+ "leads": {
+  "registry_key": "arxiv:2505.20231",
+  "tier": "P2",
+  "arxiv": "2505.20231 (arXiv API: v1 2025-05-26; title: MemGuide: Intent-Driven Memory Selection for Goal-Oriented Multi-Session LLM Agents)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Framework & Methods",
+    "name": "MemGuide: Intent-Driven Memory Selection for Goal-Oriented Multi-Session LLM Agents",
+    "paper_url": "https://arxiv.org/pdf/2505.20231v2",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "conversational_longterm",
+    "personalization"
+   ],
+   "extra_tags": [
+    "task_oriented_dialogue"
+   ],
+   "kind_reason": "The paper offers a method (MemGuide) plus MS-TOD, which it calls 'the first multi-session TOD dataset and benchmark' for long-term memory across sessions. It has 132 personas and 956 task goals, with per-user memory banks of 20+ sessions holding slot facts. The paper says code and data will be relea"
+  }
+ }
+}

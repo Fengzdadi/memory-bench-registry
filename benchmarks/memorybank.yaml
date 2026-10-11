@@ -1,0 +1,40 @@
+name: MemoryBank
+slug: memorybank
+release_date: 2023-05
+venue: AAAI 2024
+memory_types:
+- conversational_longterm
+- episodic
+links:
+  paper: https://arxiv.org/abs/2305.10250
+  code: https://github.com/zhongwanjun/MemoryBank-SiliconFriend
+  data: null
+scale:
+  conversations: 15
+  questions: 194
+  avg_context_length: 10 days of conversations
+  notes: '15 = virtual users (ChatGPT role-play), each with a 10-day dialogue history. The histories exist in English and in Chinese (15 users per language). 194 = probing questions reported in the paper (97 English + 97 Chinese). Mismatch: the repo README says 100 probing questions, and the released files hold 100 per language (200 total), in eval_data/en/probing_questions_en.jsonl and eval_data/cn/probing_questions_cn.jsonl. Counted by the registry from the released files (2026-10-10): 15 users x 10 days = 150 days per language, 566 query/response pairs per language (about 38 per user). The English histories average about 2.1K whitespace-separated words per user. These counts come from the registry''s inspection, not from the paper. The AAAI version adds that the history covers 450 topics.'
+metrics:
+- Memory Retrieval Accuracy (human label 0/1)
+- Response Correctness (human label 0/0.5/1)
+- Contextual Coherence (human label 0/0.5/1)
+- Model Ranking Score (s = 1/r, relative rank among the 3 SiliconFriend variants)
+judge_model: null
+repro_level: data_public
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'MemoryBank is mainly a method paper (a memory mechanism plus the SiliconFriend chatbot). The benchmark is its quantitative memory-recall evaluation set, released under eval_data/ in the official repo. The paper gives no separate name for this set. Scoring in the paper was done by human annotators, not an LLM judge. The Ranking score only compares the three SiliconFriend variants, so it cannot be compared across other systems. The released probing-question files contain only the question strings, with no reference answers (open issue #22 asks for answers and has no author reply). The repo has no evaluation or scoring script (open issue #17 asks for one and has no reply). The paper reports 194 questions (97 EN + 97 CN), but the repo ships 100 per language. The README''s English data links mistakenly point to the cn/ files; the real files are eval_data/en/memory_bank_en.json and eval_data/en/probing_questions_en.jsonl. The repo is MIT licensed, and its last commit was on 2023-05-24.'
+sources:
+  name: 'arXiv 2305.10250 title ''MemoryBank: Enhancing Large Language Models with Long-Term Memory''; repo README ''Evaluation Data'' section'
+  release_date: 'arXiv API: 2305.10250v1 published 2023-05-17T14:40:29Z'
+  venue: 'AAAI OJS page ojs.aaai.org/index.php/AAAI/article/view/29946: Vol. 38 No. 17, AAAI-24 Technical Tracks 17 (NLP II), published 2024-03-24, DOI 10.1609/aaai.v38i17.29946; the arXiv entry has no journal_ref'
+  memory_types: 'Paper §4.2 (arXiv v3; AAAI version ''Quantitative Analysis''): probing questions over a 10-day multi-session memory storage test whether the model can recall the relevant memory, which gives conversational_longterm. The Table 1 example (memory from May 3rd, question asked May 10th) and the released eval_data/en/probing_questions_en.jsonl, where 36 of 100 questions are anchored to a date or time (''On May 4th, I shared...''), give episodic. About 20 questions recall user preferences, but they are scored only for recall correctness, not for tailoring, so personalization is not assigned.'
+  links.paper: arXiv abs page 2305.10250 (latest v3, 2023-05-21)
+  links.code: 'Paper footnote 1 (arXiv v3, p.1): ''The materials are released in https://github.com/zhongwanjun/MemoryBank-SiliconFriend''; gh api confirms the repo by zhongwanjun (first author)'
+  links.data: 'null: the data lives only in the repo under eval_data/en and eval_data/cn. A Hugging Face dataset search for ''memorybank'' found no official dataset page (checked 2026-10-10).'
+  scale.conversations: 'Paper §4.2 Memory Storage Construction: ''10 days of conversations involving 15 virtual users''; the repo eval_data/en/memory_bank_en.json has 15 users with 10 days each'
+  scale.questions: 'Paper §4.2: ''194 probing questions (97 in English and 97 in Chinese)'' (same in arXiv v3 and the AAAI PDF); the repo files contain 100 per language'
+  scale.avg_context_length: 'Paper §4.2: ''a memory storage of 10 days of conversations'' per virtual user'
+  metrics: Paper §4.2 'Evaluation Metrics' and Table 2 (Retrieval Acc., Correctness, Coherence, Ranking)
+  judge_model: 'null: paper §4.2 says ''We ask the human annotators to score the retrieved memories and responses''; no LLM judge'
+  repro_level: 'Repo tree (checked 2026-10-10) has eval_data/en/{memory_bank_en.json, probing_questions_en.jsonl} and eval_data/cn/{memory_bank_cn.json, probing_questions_cn.jsonl}; all four downloaded and parsed. The rest of the repo holds only demos (SiliconFriend-*/cli_demo.py, app_demo.py, cli_llamaindex.py), memory_bank/build_memory_index.py and summarize_memory.py. No scoring script; open issue #17 requests the evaluation code.'

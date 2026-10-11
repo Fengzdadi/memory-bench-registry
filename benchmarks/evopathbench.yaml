@@ -1,0 +1,46 @@
+name: EvoPathBench
+slug: evopathbench
+release_date: 2026-09
+venue: arXiv preprint
+memory_types:
+- procedural_workflow
+- semantic_knowledge_update
+links:
+  paper: https://arxiv.org/abs/2609.24663
+  code: https://github.com/HQ-Lin/EvoPathBench
+  data: null
+scale:
+  conversations: 1800
+  questions: 3600
+  avg_context_length: 5 episodes per stream; 24 market steps / 3 decisions per episode
+  notes: 'conversations = 1,800 longitudinal task streams: 600 per template (Accumulation, Interference, Reversal), 100 per template-family cell, 900 per market layer. questions = 3,600 held-out probe episodes. The release holds 4,800 episode specifications in total, which adds 1,200 learning/update episodes. Each stream has 5 update opportunities and 6 checkpoints (K0-K5). Counted 2026-10-10.'
+metrics:
+- Episode score (risk-adjusted terminal wealth ratio with violation and drawdown penalties; App. B.5 Eq. 9)
+- 'Capability Evolution Gain: CEG_N (near-distribution) and CEG_T (transfer) (Eq. 3, Table 2)'
+- Artifact State-Use Effect (SUE_H) (Eq. 4)
+- Retention loss ΔRL and ΔCVaR_τ (τ=0.2, 0.1) (Eqs. 5-6)
+- Backward transfer (BWT), forgetting rate, conditional loss, CVaR_0.1 (Sec. 4.5, Table 7)
+- Rule adaptation REV1 / REV2 (Eqs. 7-8)
+- Token Efficiency (TE) (Sec. 4.3, Table 3)
+- Commit rate, best gain, selection gap, harmful rate, missed rate (Table 4)
+- Agreement, Capture, Precision, Recall of update selection (Table 5)
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'Single finance track: semi-synthetic markets calibrated on public Binance Spot data. The raw market archives are not redistributed. The paper runs 10 memory/skill self-evolution conditions on two backbones, Qwen3.8-Max and Kimi-K3. Inference needs an OpenAI-compatible API. The README lists a results/main/ folder that was absent from the repo tree on 2026-10-10. analysis/evaluate_dimensions.py hard-codes 108 evolution paths per template, against 600 released streams per template. The paper does not state the size of its evaluated subset. Licence: MIT.'
+sources:
+  name: 'arXiv 2609.24663 abstract and §3: the paper proposes EvoPathBench. The repo README title is also EvoPathBench.'
+  release_date: 'arXiv API: 2609.24663v1 published 2026-09-21T14:28:06Z. It is the only version, and the abs page lists [v1] only.'
+  venue: arXiv API entry has no journal_ref and no comments. The abs page has no comments field, and neither the paper nor the repo README names a conference. Recorded as arXiv preprint.
+  memory_types: 'procedural_workflow: memories, skills and workflow rules are updated over a 5-episode task stream, frozen at checkpoints K0-K5, and evaluated on held-out near-distribution and transfer episodes. Retention is measured after learning unrelated families (§1, §3.1-3.2, Table 2). semantic_knowledge_update: the Reversal template introduces counterevidence that changes a previously useful relation and measures whether the stored rule is revised (REV1/REV2, §3.2 Eqs. 7-8, App. A.1). embodied was not assigned: the environment is a trading-market simulator, not navigation or manipulation.'
+  links.paper: https://arxiv.org/abs/2609.24663, from the arXiv API and the abs page
+  links.code: The paper's HTML front matter links [Code] https://github.com/HQ-Lin/EvoPathBench. The repo owner HQ-Lin matches first author Hongqiang Lin (gh api repos/HQ-Lin/EvoPathBench, created 2026-09-21).
+  links.data: 'null: the data is hosted in the GitHub repo under data/finance/. A Hugging Face API search for ''evopath'' and for author HQ-Lin returned [] on 2026-10-10.'
+  scale.conversations: 'Paper §1 Contributions and §3.1: ''The release contains 1,800 balanced longitudinal streams''. The Fig. 2 caption gives 600 streams per template and 100 per template-family cell. Repo manifest.json has stream_count=1800, and streams.jsonl has 1,800 lines (counted 2026-10-10).'
+  scale.questions: 'Repo data/finance/manifest.json coverage_audit.probe_episode_count=3600 (event_episode_count=1200, episode_count=4800). episodes.jsonl has 4,800 lines: 600 each for the roles probe_near, probe_transfer, retention_anchor, probe_update, stress and shortcut_control, plus learn_near and update (counted 2026-10-10). The paper itself does not report episode counts.'
+  scale.avg_context_length: 'Paper §4.1 Evaluation protocol: ''five learning episodes of 24 market steps and three decisions''. App. A.1: ''Each stream contains five episodes''. manifest.json generation_config gives horizon=24 and paper_decisions_per_episode=3. The paper reports no per-episode token length.'
+  metrics: Paper §3.2 Eqs. 3-8, Table 2 (CEG_N, CEG_T, SUE_H, ΔRL, ΔCVaR, REV1, REV2), §4.3 Table 3 (TE), §4.4 Tables 4-5 (commit rate, best gain, selection gap, harmful, missed, agreement, capture, precision, recall), §4.5 Table 7 (BWT, forgetting rate, conditional loss, CVaR_0.1), and App. B.5 Eq. 9 (episode score).
+  judge_model: 'null: scores come from simulated market outcomes on held-out episodes (episode score, App. B.5). Candidate updates are accepted through paired executions, not an LLM judge (§4.1, App. B.2). Qwen3.8-Max and Kimi-K3 are the evaluated backbones (App. B.4), not judges.'
+  repro_level: 'official_script: on 2026-10-10 the repo tree showed data/finance/{episodes.jsonl, streams.jsonl, manifest.json, resources/}, and the data files were downloaded and line-counted. evolens/cli.py defines the ''evaluate-model'' subcommand, run as python -m evolens evaluate-model --dataset data/finance, plus a scripted ''evaluate'' subcommand. analysis/evaluate_dimensions.py computes the three evaluation dimensions. Running requires an OpenAI-compatible API key.'
+  notes: Repo README (License, Running model inference, Release contents), repo tree (no results/ directory), analysis/evaluate_dimensions.py (expected = 12 * 3 * 3 paths), and paper App. B.4 and §3.1 (Binance Spot calibration).

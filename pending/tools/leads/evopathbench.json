@@ -1,0 +1,14 @@
+{
+ "name": "EvoPathBench",
+ "slug": "evopathbench",
+ "leads": {
+  "registry_key": "arxiv:2609.24663",
+  "tier": "P0",
+  "arxiv": "2609.24663 (arXiv API: v1 ?; title: None)",
+  "phase1_verified_types": {
+   "procedural_workflow": "Sec 1: \"At fixed checkpoints, it freezes these artifacts and reevaluates the same target capability on held-out episodes excluded from subsequent updates.\" Artifacts are memories, skills or workflows."
+  },
+  "paper_hint": "https://arxiv.org/abs/2609.24663",
+  "code_hint": "https://github.com/HQ-Lin/EvoPathBench"
+ }
+}

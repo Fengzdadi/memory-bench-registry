@@ -1,0 +1,14 @@
+{
+ "name": "RippleEdits",
+ "slug": "rippleedits",
+ "leads": {
+  "registry_key": "arxiv:2307.12976",
+  "tier": "P0",
+  "arxiv": "2307.12976 (arXiv API: v1 ?; title: None)",
+  "phase1_verified_types": {
+   "parametric": "Abstract: \"We evaluate prominent editing methods on RippleEdits, showing that they fail to introduce consistent changes in the model's knowledge\"; in-context baseline vs \"explicit parametric updates\"."
+  },
+  "paper_hint": "https://arxiv.org/abs/2307.12976",
+  "code_hint": "https://github.com/edenbiran/RippleEdits"
+ }
+}

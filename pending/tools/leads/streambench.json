@@ -1,0 +1,34 @@
+{
+ "name": "StreamBench",
+ "slug": "streambench",
+ "leads": {
+  "registry_key": "arxiv:2406.08747",
+  "tier": "P0",
+  "arxiv": "2406.08747 (arXiv API: v1 2024-06-13; title: StreamBench: Towards Benchmarking Continuous Improvement of Language Agents)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Resources / Benchmarks and Tasks / Comprehensive Evaluation",
+    "name": "StreamBench",
+    "paper_url": "https://arxiv.org/pdf/2406.08747",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "procedural_workflow",
+    "coding_cross_session"
+   ],
+   "extra_tags": [
+    "experiential_online_learning"
+   ],
+   "kind_reason": "Benchmark (NeurIPS 2024 D&B) that scores continuous improvement of LLM agents over an input-feedback stream. All baselines (GrowPrompt, MemPrompt, Self-StreamICL, MAM-StreamICL) keep an 'external memory' of past instances and reuse it on later ones. Streams: text-to-SQL (Spider, CoSQL, BIRD), Python"
+  },
+  "phase1_verified_types": {
+   "procedural_workflow": "Sec.1: \"with the goal to maximize the accuracy for the whole sequence of the agent's predictions\"; Sec.3.1: \"evaluate an agent by its aggregate metric at the final time step (T)\"; Sec.4.1.2 MemPrompt/Self-StreamICL keep past feedback in external memory."
+  },
+  "paper_hint": "https://arxiv.org/abs/2406.08747",
+  "code_hint": "https://github.com/stream-bench/stream-bench"
+ }
+}

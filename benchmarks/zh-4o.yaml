@@ -1,0 +1,44 @@
+name: ZH-4O
+slug: zh-4o
+release_date: 2025-09
+venue: arXiv preprint
+memory_types:
+- conversational_longterm
+- personalization
+links:
+  paper: https://arxiv.org/abs/2509.11860
+  code: https://github.com/cows21/MOOM-Roleplay-Dialogue
+  data: null
+scale:
+  conversations: 28
+  questions: 1068
+  avg_context_length: ~600 turns
+  notes: 28 = role-play dialogue sessions (each >=500 turns, avg 600); 1,068 = four-option multiple-choice probe questions (Sec. 4.3). Memory-extraction metrics use 1,115 human memory annotations (Sec. 4.2); Appendix H adds a 30-item Probe Table. The paper also evaluates on LoCoMo. Labeled repo dialogues average ~1,245 messages each (counted 2026-10-10).
+metrics:
+- BERTScore precision
+- M3E embedding similarity
+- ROUGE-2 precision
+- ROUGE-L precision
+- MemScore (LLM-rated 0-5 match to labels)
+- QA precision (multiple-choice probe accuracy)
+judge_model: Qwen2.5-72B
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'The MOOM memory-extraction paper introduces ZH-4O, a set of Chinese role-play dialogues. The data is in the GitHub repo, which has no licence file. Counts taken on 2026-10-10: data/ZH-4O_dataset.jsonl holds 29 dialogues, label/ holds 28 annotated files with 1,114 memory labels (the paper says 1,115), and label_qa/ holds 1,068 questions. The evaluation scripts need locally served Qwen models at hard-coded internal endpoints. qa_experiment.py uses an undefined variable (label_class) and loops over sessions 1-5 only.'
+sources:
+  name: 'arXiv abstract and paper Sec. 4: ''we present ZH-4O, a Chinese ultra-long dialogue dataset'''
+  release_date: 'arXiv API: 2509.11860v1 published 2025-09-15 (v2 2025-09-17)'
+  venue: arXiv API entry has no journal_ref/comment; abs page and repo README name no venue; web search found no venue listing (checked 2026-10-10)
+  memory_types: 'paper Sec. 4-5: memory extraction and probe QA over ~600-turn dialogues (conversational_longterm); annotated memories and probe questions cover user character-profile facts, and the Appendix H Probe Table tests replies that use user facts (personalization); label_qa files inspected'
+  links.paper: arXiv 2509.11860
+  links.code: github.com/cows21/MOOM-Roleplay-Dialogue is linked from the arXiv HTML (abstract 'available at here') and the README names the MOOM paper
+  links.data: 'null: the data ships inside the code repo (data/, label/, label_qa/); no separate dataset page found'
+  scale.conversations: 'paper Sec. 4.1: ''we collect 28 dialogue sessions''; repo label/ has 28 files'
+  scale.questions: 'paper Sec. 4.3: 1,068 multiple-choice probe questions; repo label_qa/ ZH4O_qa1-28.json total 1,068 entries (counted 2026-10-10)'
+  scale.avg_context_length: 'paper Sec. 4.1: ''each session averaging 600 turns in length'''
+  scale.notes: paper Sec. 4.2 (1,115 memory annotations), Appendix H (30-item Probe Table), Table 5 (LoCoMo); message counts computed from repo label/*.jsonl
+  metrics: 'paper Sec. 5.2 and Table 1 columns: BERTScore, M3E, ROUGE-2, ROUGE-L, MemScore, QA precision'
+  judge_model: 'paper Table 1 caption: ''The MemScore, evaluated using Qwen2.5-72B''; Appendix H also uses Qwen2.5-72B for 0-5 probe similarity'
+  repro_level: repo has indicator_calculate.py (BERTScore/M3E/ROUGE/LLM-score evaluation, README 'Evaluation' step) and qa_experiment.py (MC probe QA), plus data/ZH-4O_dataset.jsonl, label/*.jsonl, label_qa/*.json downloadable (checked 2026-10-10); GitHub repo opened and data files downloaded 2026-10-10
+  notes: repo tree and files downloaded and counted 2026-10-10; GitHub API shows license null; indicator_calculate.py lsl_qwen_70b uses a hard-coded internal IP

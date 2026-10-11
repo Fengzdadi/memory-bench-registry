@@ -1,0 +1,42 @@
+name: LongMemEval
+slug: longmemeval
+release_date: 2024-10
+venue: ICLR 2025
+memory_types:
+- conversational_longterm
+- personalization
+- semantic_knowledge_update
+- episodic
+links:
+  paper: https://arxiv.org/abs/2410.10813
+  code: https://github.com/xiaowu0162/LongMemEval
+  data: https://huggingface.co/datasets/xiaowu0162/longmemeval-cleaned
+scale:
+  conversations: 500
+  questions: 500
+  avg_context_length: ~115k tokens (LongMemEval_S, ~50 sessions); ~1.5M tokens (LongMemEval_M, 500 sessions)
+  notes: 'questions = 500 manually curated questions across 7 question types (single-session-user, single-session-assistant, single-session-preference, multi-session, knowledge-update, temporal-reasoning, plus 30 abstention/false-premise questions drawn from the other types). conversations = 500 per-question chat histories (haystacks): each evaluation instance carries its own timestamped user-assistant history (paper §3.2 ''For each question, LongMemEval compiles a coherent user-AI chat history''; README: 500 instances per file, each with haystack_sessions); histories are compiled from a shared session pool, so they are not 500 independent users. Paper Table 1 reports ~50k total sessions. Three settings with the same 500 questions: LongMemEval_S (~115k tokens/question, main long-context setting), LongMemEval_M (~500 sessions, ~1.5M tokens), and oracle (evidence sessions only). History length is freely extensible via the released compilation script.'
+metrics:
+- QA accuracy (LLM-judged correctness)
+- Recall@k (memory recall)
+- NDCG@k (memory recall)
+judge_model: GPT-4o (gpt-4o-2024-08-06)
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'Sept 2025: the authors released a cleaned dataset (xiaowu0162/longmemeval-cleaned; files longmemeval_s_cleaned.json, longmemeval_m_cleaned.json, longmemeval_oracle.json) that removes noisy history sessions interfering with answer correctness; the original HF dataset xiaowu0162/longmemeval is marked deprecated, so results on original vs cleaned data are not directly comparable. Data and code are MIT-licensed and not gated. The official QA evaluator (src/evaluation/evaluate_qa.py) calls the OpenAI API (gpt-4o-2024-08-06 as judge; the paper reports >97% agreement with human experts), so scoring needs an OpenAI key. Retrieval metrics skip the 30 abstention questions. The paper''s commercial-system pilot (ChatGPT, Coze) used only 97 questions. An earlier version appeared as a poster at the NeurIPS 2024 workshop ''Adaptive Foundation Models''. The authors also released a separate follow-up, LongMemEval-V2 (May 2026, agentic context), which is not this entry.'
+sources:
+  name: 'arXiv title ''LongMemEval: Benchmarking Chat Assistants on Long-Term Interactive Memory''; repo README'
+  release_date: 'arXiv API: 2410.10813v1 published 2024-10-14T17:59:44Z (abs page submission history: v1 Mon 14 Oct 2024, v2 4 Mar 2025)'
+  venue: arXiv API comment 'ICLR 2025'; ICLR virtual site iclr.cc/virtual/2025/poster/28290 (2025 Poster, OpenReview id pZiyCaVuti); repo README '[2025/02] LongMemEval is accepted at ICLR 2025'. OpenReview API itself returned a challenge page and was not used.
+  memory_types: 'paper §3.2 (arXiv v2 HTML): multi-session user-assistant chat histories (conversational_longterm); single-session-preference ''tests whether the model can utilize the user information to generate a personalized response'' (personalization); knowledge-update ''recognize changes in the user''s life states and update the memory'' (semantic_knowledge_update); temporal-reasoning over timestamped events with explicit time references and session timestamps (episodic). Two-party user-assistant chats only, so not multi_agent_group.'
+  links.paper: arXiv API entry 2410.10813
+  links.code: arXiv abstract 'Our benchmark and code are publicly available at https://github.com/xiaowu0162/LongMemEval'; gh api repos/xiaowu0162/LongMemEval (not a fork, MIT)
+  links.data: 'repo README ''The LongMemEval dataset is officially released at huggingface'' -> xiaowu0162/longmemeval-cleaned; HF API: public, gated=false, files longmemeval_oracle.json (15.4MB), longmemeval_s_cleaned.json (277MB), longmemeval_m_cleaned.json (2.74GB)'
+  scale.conversations: paper §3.2 History Compilation ('For each question, LongMemEval compiles a coherent user-AI chat history'); repo README Dataset Format ('Within each file, there are 500 evaluation instances', each with haystack_sessions)
+  scale.questions: 'arXiv abstract ''500 meticulously curated questions''; paper §1 ''500 manually created questions''; paper Table 1 #Q = 500; README ''500 high quality questions'''
+  scale.avg_context_length: paper §1 'LongMemEval_S with approximately 115k tokens per problem and LongMemEval_M with 500 sessions (around 1.5 million tokens)'; §3.2 '~115k tokens/question' and '500 sessions, ~1.5M tokens'; §3.4 '~50 sessions' for LongMemEval_S
+  metrics: 'paper §3.3 Evaluation Metric: QA correctness judged by an LLM; Memory Recall ''We report Recall@k and NDCG@k'''
+  judge_model: paper §3.3 'we prompt-engineer the gpt-4o-2024-08-06 model via the OpenAI API ... more than 97% agreement with human experts'; Appendix A.4; evaluate_qa.py model_zoo maps 'gpt-4o' -> 'gpt-4o-2024-08-06'
+  repro_level: 'repo tree (checked 2026-10-10) has src/evaluation/evaluate_qa.py (LLM-judge QA scoring, usage: evaluate_qa.py metric_model hyp_file ref_file), src/evaluation/print_qa_metrics.py, src/evaluation/print_retrieval_metrics.py, src/retrieval/run_retrieval.sh, src/generation/run_generation.sh; data publicly downloadable from HF (not gated, files listed via HF API)'
+  notes: HF API description of xiaowu0162/longmemeval ('This dataset is deprecated'); README News (2025/09 cleaned data, 2026/05 LongMemEval-V2); README 'we always skip the 30 abstention instances' for retrieval; paper §3.4 '97 questions' for commercial systems; neurips.cc/virtual/2024/104893 (workshop poster, Adaptive Foundation Models)

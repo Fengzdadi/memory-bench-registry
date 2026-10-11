@@ -1,0 +1,29 @@
+{
+ "name": "Video2Skill",
+ "slug": "video2skill",
+ "leads": {
+  "registry_key": "arxiv:2609.36691",
+  "tier": "P2",
+  "arxiv": "2609.36691 (arXiv API: v1 2026-09-29; title: Video2Skill: From Streaming Experience to Reusable Embodied Skills)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "Video2Skill: From Streaming Experience to Reusable Embodied Skills",
+    "paper_url": "https://arxiv.org/pdf/2609.36691",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "procedural_workflow"
+   ],
+   "extra_tags": [
+    "embodied",
+    "multimodal"
+   ],
+   "kind_reason": "It introduces a benchmark for streaming embodied skill discovery, using RoboInter and HD-EPIC videos and evaluating 19 VLMs. A model keeps a persistent skill library across videos and is scored on event localization, skill grouping and reuse-vs-create decisions. Data is on HF at Sterzhang/video2skil"
+  }
+ }
+}

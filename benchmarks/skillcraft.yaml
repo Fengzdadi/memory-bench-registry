@@ -1,0 +1,44 @@
+name: SkillCraft
+slug: skillcraft
+release_date: 2026-02
+venue: arXiv preprint
+memory_types:
+- procedural_workflow
+links:
+  paper: https://arxiv.org/abs/2603.00718
+  code: https://github.com/shiqichen17/SkillCraft
+  data: null
+scale:
+  conversations: null
+  questions: 126
+  avg_context_length: null
+  notes: '126 = tool-use tasks (21 task families x 6 scaled variants: 63 Easy, 42 Medium, 21 Hard; 3x3, 4x4, 5x5 entities x tool calls per entity). The repo matches (21 families, e1-e3/m1-m2/h1, counted 2026-10-10). There are no conversations. Modes: Base, Skill, Hierarchical, Cross-Task (Easy->Hard, Hard->Easy, Hard->Hard), and cross-model reuse.'
+metrics:
+- Success Rate (rule-based task score >= 90%, overall and Hard subset)
+- Skill Exec Rate (successful skill executions / attempts)
+- Skill Reuse Rate (avg invocations per saved skill)
+- Tokens (input/output)
+- Cost (USD)
+- Turns
+- Tool calls
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: Tests whether agents build a persistent library of executable "Skills" (composed tool calls) and reuse it within and across tasks. The task tools call live public web APIs (e.g. catfact.ninja, PokeAPI, Open-Meteo), so results may drift over time. Running it needs an LLM API key and Node.js/npx. The repo has no licence file. Within the paper, the domain count (6 vs. 8 domains in Table 5) and the per-level subtask counts (3/4/5 vs. 3/5/7) are inconsistent.
+sources:
+  name: 'arXiv API title ''SkillCraft: Can LLM Agents Learn to Use Tools Skillfully?''; repo README'
+  release_date: 'arXiv API: 2603.00718 <published>2026-02-28T15:44:31Z (v1); latest v2 updated 2026-03-10'
+  venue: 'arXiv comment field only says ''21 pages. Code: ...; Project page: ...''; no ICML/OpenReview/NeurIPS listing found by web search; project page BibTeX lists arXiv preprint (checked 2026-10-10)'
+  memory_types: paper Sec 3 skill protocol (save/list/get/execute skills into a persistent cache) and Sec 5.2 Cross-Task Mode (skills from e1-e3 reused on h1, Hard->Easy, Hard->Hard); repo utils/cross_task_runner.py shares skill_cache across difficulty levels
+  links.paper: arXiv abs page 2603.00718
+  links.code: 'arXiv comment ''Code: https://github.com/shiqichen17/SkillCraft''; README says ''Official implementation of the SkillCraft paper'''
+  links.data: no separate dataset page; tasks ship in repo tasks/scaled_tasks/; project page skillcraft-website.github.io/page only browses task definitions/trajectories; no Hugging Face dataset found
+  scale.questions: paper Figure 4 table (Easy 63, Medium 42, Hard 21; total 126) and Table 2 (x/126); repo tree has 21 families x 6 levels = 126 task dirs (counted 2026-10-10)
+  scale.conversations: agentic tool-use tasks; no conversation units
+  scale.avg_context_length: paper reports no per-task context length; token counts in Table 2 are model results (e.g. GPT-5.2 1.23M -> 0.26M tokens), not a benchmark statistic
+  metrics: paper Sec 4 and Table 2 (Success Rate with score >= 90%, Exec, Reuse, tokens, cost, turns, tool calls; Diff = (skill - base)/base)
+  judge_model: 'paper Sec 4: scoring by human-expert handcrafted evaluation rules following Toolathlon; repo per-task evaluation/main.py are rule-based (e.g. cat-facts-collector/h1 weighted checks); no LLM judge'
+  repro_level: repo has test_all_tasks.py (batch runner, modes base/skill/direct-exec/cross-task/cross-model/static-reuse), run.sh, and per-task tasks/scaled_tasks/*/*/evaluation/main.py; task data in repo (checked 2026-10-10)
+  notes: repo utils/aux_tools/*_tools.py base URLs (catfact.ninja, pokeapi.co, api.open-meteo.com); README prerequisites; GitHub API license null; paper Table 5 vs Figure 4 captions
+  scale.notes: paper Figure 4, Sec 2.2, Sec 5; repo tree count 2026-10-10

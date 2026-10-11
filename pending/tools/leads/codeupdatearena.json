@@ -1,0 +1,14 @@
+{
+ "name": "CodeUpdateArena",
+ "slug": "codeupdatearena",
+ "leads": {
+  "registry_key": "arxiv:2407.06249",
+  "tier": "P0",
+  "arxiv": "2407.06249 (arXiv API: v1 ?; title: None)",
+  "phase1_verified_types": {
+   "parametric": "README: goal is to 'update an LLM about code API update' and solve tasks 'without providing documentation of the update at inference time'. FT(U) runs continued pretraining on the update docstring (LoRA). Prepending is the in-context baseline."
+  },
+  "paper_hint": "https://arxiv.org/abs/2407.06249",
+  "code_hint": "https://github.com/leo-liuzy/CodeUpdateArena"
+ }
+}

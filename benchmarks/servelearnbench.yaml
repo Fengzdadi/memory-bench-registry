@@ -1,0 +1,46 @@
+name: ServeLearnBench
+slug: servelearnbench
+release_date: 2026-10
+venue: arXiv preprint
+memory_types:
+- procedural_workflow
+- semantic_knowledge_update
+- personalization
+links:
+  paper: https://arxiv.org/abs/2610.07792
+  code: https://github.com/Infini-AI-Lab/ServeLearnBench
+  data: null
+scale:
+  conversations: null
+  questions: 3210
+  avg_context_length: null
+  notes: 3,210 = held-out test tasks, the only tasks scored. Each run also serves 4,508 serving tasks with score-only feedback, for 7,718 tasks in total. These are spread over 9 scenarios (Retail/Banking/Pitch × tiers L1–L3) and 53 environment windows. The task stream is not split into conversations. Per-episode budgets are 50 tool calls, 100 turns and 256k output tokens.
+metrics:
+- Hidden-Dependent score (mean reward x100 on held-out test tasks)
+- Fully Specified score
+- Avg. H / Avg. F (unweighted means across settings)
+- API cost and token cost per task
+- AULC10 (learning speed after policy change)
+- exploration AUC
+- knowledge-acquisition AUC
+judge_model: GLM-5.3 Flash
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'Data is in the GitHub repo under dataset/; no Hugging Face release was found (checked 2026-10-10). The repo implements only the Blind, Oracle and RAG methods. Results for Mem0, SkillOpt, Continual Harness and Prime appear only in docs/leaderboard.csv. Runs need an OpenAI-compatible endpoint with native tool calling. Pitch is scored by an LLM judge (default glm-5p3-flash at high reasoning effort). The task ''evaluator'' fields and windows.json reveal the hidden policies, so they must not be shown to agents. Licence: Apache-2.0.'
+sources:
+  name: 'arXiv API title: ''ServeLearnBench: How Well Can Agents Self-Improve from Serving Experience?''; repo README'
+  release_date: 'arXiv API: 2610.07792v1 published 2026-10-06T05:39:42Z'
+  venue: arXiv API comment lists only pages/code/website, no journal_ref; paper HTML and repo README (BibTeX @misc, arXiv eprint) name no venue
+  memory_types: 'Paper abstract and Sec 3 / docs/benchmark.md. procedural_workflow: harnesses (RAG, Mem0, SkillOpt, Continual Harness, Prime) accumulate memory and skills from serving episodes and are tested on disjoint held-out tasks. semantic_knowledge_update: hidden policies are revised, removed or reversed between windows (L2/L3), and the agent must revise stale knowledge (AULC10, App. D.2). personalization: Pitch tasks score tailoring to the active customer''s hidden preference profile (Table 11, App. C.5).'
+  links.paper: arXiv API entry 2610.07792
+  links.code: 'arXiv comment ''Code: https://github.com/Infini-AI-Lab/ServeLearnBench''; README links the paper'
+  links.data: 'No separate dataset page: the HF API search for Infini-AI-Lab and ServeLearn returned no datasets. Data ships in repo dataset/data/<scenario>/{serving,test}.jsonl.'
+  scale.questions: Paper Table 1 and abstract (3,210 test, 4,508 serving, 7,718 total); docs/benchmark.md scenarios table. Line counts of the repo test.jsonl files sum to 3,210 (checked 2026-10-10).
+  scale.conversations: 'null: the benchmark uses task streams (9 scenarios, 53 windows), not conversations'
+  scale.avg_context_length: 'null: the paper reports budgets only (App. B.1), with no average turns or tokens'
+  scale.notes: Paper Table 1; docs/protocol.md budgets
+  metrics: Paper Table 2 (Hidden, Fully Specified, Avg. H/F), Sec 4.3 and App. D.4 (cost), Sec 5 and App. D.1/D.3 (AULC10, exploration AUC, knowledge-acquisition AUC); docs/protocol.md Scoring
+  judge_model: 'Paper App. B.1/C.6: ''fixed GLM-5.3 Flash judge with high reasoning effort'', used for the Pitch domain only (Retail/Banking are verified deterministically); README: --judge-model default glm-5p3-flash'
+  repro_level: Repo tree has servelearnbench/cli.py (slb run/score/verify), runner.py and scoring.py, plus dataset/data/*/serving.jsonl and test.jsonl for all 9 scenarios (checked 2026-10-10); Repo and HF API checked 2026-10-10
+  notes: Repo README Methods section, docs/data.md, dataset/README.md, GitHub licence metadata

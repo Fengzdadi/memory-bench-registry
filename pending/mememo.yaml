@@ -1,0 +1,45 @@
+name: MemEmo (HLME)
+slug: mememo
+release_date: 2026-02
+venue: arXiv preprint
+memory_types:
+- conversational_longterm
+- semantic_knowledge_update
+links:
+  paper: https://arxiv.org/abs/2602.23944
+  code: null
+  data: null
+scale:
+  conversations: null
+  questions: null
+  avg_context_length: null
+  notes: 'The paper gives no dialogue, session, question or token counts for HLME (checked text, tables and Figures 2-3 of arXiv v1). It has two versions: HLME-Medium and HLME-Large. The Large version adds noise and longer dialogues that exceed normal context windows. Section 6.1 calls it HLME-Long. The questions fall into 5 categories, and the emotion templates cover 49 EARL emotion categories.'
+metrics:
+- 'EIE: emotion classification accuracy'
+- 'EIE: emotion intensity MAE'
+- 'EIE: emotion slot extraction F1'
+- 'EMU: update decision accuracy'
+- 'EMU: intensity delta MAE'
+- 'EMU: Memory Stability Score (MSS)'
+- 'EQA: emotion QA accuracy'
+- 'EQA: evidence grounding F1'
+- Overall weighted score
+- Add/search latency (seconds)
+judge_model: GPT-4o-mini
+repro_level: paper_only
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'As of 2026-10-10, no official code or dataset was found. Places checked: paper PDF links, the arXiv page, the HF paper page (no linked datasets), MemTensor/IAAR-Shanghai GitHub repos, and GitHub/HF searches for MemEmo/HLME. The dialogues are synthetic and LLM-generated, seeded from PersonaHub personas. Systems are tested on memory frameworks (Mem0, Letta, MemOS, Mirix, MemoBase), not raw LLMs. The paper says six systems were evaluated but lists five. It also calls the large split both ''Large'' and ''Long''.'
+sources:
+  name: 'arXiv 2602.23944 title ''MemEmo: Evaluating Emotion in Memory Systems of Agents''; abstract/§1 name the Human-Like Memory Emotion (HLME) dataset/benchmark'
+  release_date: 'arXiv API: 2602.23944v1 published 2026-02-27T11:46:08Z (only version)'
+  venue: arXiv API entry has no journal_ref/comments; abs page shows only v1; no venue found via web search or HF papers page
+  memory_types: 'paper §3 and §5: multi-turn long human-computer dialogues (sessions, long-range anchor facts at turn t-100); EMU task tests update decision and memory stability against overwriting; EQA asks about historical emotional states and trends'
+  links.paper: https://arxiv.org/abs/2602.23944
+  links.code: 'null: no repo link in paper PDF annotations/HTML, arXiv abs page or HF papers page (linkedDatasets empty); gh search for MemEmo/HLME and MemTensor/IAAR-Shanghai org repos found none (2026-10-10)'
+  links.data: 'null: HF dataset search for HLME/MemEmo returns nothing; HF paper page lists 0 datasets (2026-10-10)'
+  scale.notes: paper §4 Stage 4 (Medium/Large versions, 5 question categories), §4 Stage 2 (49 emotion categories), §6.1 (HLME-Medium and HLME-Long); no dataset statistics table in arXiv v1
+  metrics: paper §5.1-5.4 (Eqs. 1-9), Table 2 (overall results), Table 3 (Add/Search latency), Table 4 (EQA at top-20/top-50)
+  judge_model: 'paper §6.1: ''LLM-as-a-Judge evaluation paradigm, using GPT-4o-mini as the evaluation model'''
+  repro_level: paper checked; no public code or data found on GitHub, Hugging Face, arXiv or HF papers page (checked 2026-10-10)
+  notes: paper §4 Stage 1 (PersonaHub seed, Ge et al. 2024), §6.1 (six vs five systems, HLME-Long), Table 2 (Medium/Large)

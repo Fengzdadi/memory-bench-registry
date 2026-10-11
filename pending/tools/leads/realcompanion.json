@@ -1,0 +1,29 @@
+{
+ "name": "RealCompanion",
+ "slug": "realcompanion",
+ "leads": {
+  "registry_key": "arxiv:2610.01780",
+  "tier": "P2",
+  "arxiv": "2610.01780 (arXiv API: v1 2026-10-01; title: RealCompanion: Benchmarking Human Understanding from Reasoning over Longitudinal Real-World Conversations)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "RealCompanion: Benchmarking Human Understanding from Reasoning over Longitudinal Real-World Conversations",
+    "paper_url": "https://arxiv.org/pdf/2610.01780",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "conversational_longterm",
+    "personalization"
+   ],
+   "extra_tags": [
+    "memory_need_detection"
+   ],
+   "kind_reason": "It releases ten real user-AI companion relationships (27,218 messages over up to 120 days) with profiles and personas. It includes 1,533 scoreable chat probes and 3,235 scoreable questions with evidence pointers. It tests distant-memory use, deciding when the past matters, and persona reconstruction"
+  }
+ }
+}

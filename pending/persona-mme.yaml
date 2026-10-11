@@ -1,0 +1,43 @@
+name: Persona-MME
+slug: persona-mme
+release_date: 2026-03
+venue: CVPR 2026
+memory_types:
+- personalization
+- conversational_longterm
+- multimodal
+- semantic_knowledge_update
+links:
+  paper: https://arxiv.org/abs/2604.13074
+  code: https://github.com/MiG-NJU/PersonaVLM
+  data: https://huggingface.co/datasets/ClareNie/Persona-MME
+scale:
+  conversations: 200
+  questions: 2034
+  avg_context_length: ~142.9 turns per dialogue (32k- and 128k-token configurations)
+  notes: '200 = synthetic personas, each with one long multi-session multimodal dialogue history; 2,034 = multiple-choice test cases. 32k config (dialogues under 100 turns): 1,129 cases / 100 personas; 128k config: 905 cases / 100 personas (counted on 2026-10-10 from released Persona-MME.json). 15.87% of turns are multimodal; 34.02% of questions need visual information.'
+metrics:
+- Accuracy (%) on multiple-choice questions (overall, per aspect, per 14 tasks)
+- Personality-alignment binary-choice accuracy
+- Pairwise win/tie/loss rate on open-ended generation (200 sampled questions, LLM-judged)
+judge_model: Gemini-2.5-Pro
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: Introduced in the PersonaVLM paper (repo calls it a CVPR 2026 Highlight). Dialogues are synthetic. Questions were generated with Gemini-2.5-Pro and then manually reviewed. Main results are multiple-choice accuracy. 406 cases add a binary personality-alignment test, scored once on the chosen and once on the rejected response (812 items). Dialogue histories and images are on Hugging Face (Apache-2.0, not gated); the GitHub repo holds only the question JSON. The official eval.py runs only the PersonaVLM agent (Qwen2.5-VL-7B), so other models need adaptation.
+sources:
+  name: 'arXiv abstract + paper Section 4 (''Persona-MME: Evaluating Long-Term Personalization of MLLMs''); repo README'
+  release_date: 'arXiv API: 2604.13074v1 published 2026-03-20; arXiv abs submission history [v1] Fri, 20 Mar 2026'
+  venue: arXiv comment 'Accepted by CVPR 2026'; CVF open access CVPR2026 listing has Nie_PersonaVLM_Long-Term_Personalized_Multimodal_LLMs_CVPR_2026_paper.html; repo citation @inproceedings CVPR 2026
+  memory_types: paper Table 5 task definitions (Visual Detail Recall, Semantic Information Recall, Latest Preference Recognition over older contradictory preferences, Long-term Goal Tracking, Personality Alignment) and Table 6 (142.9-turn multi-session dialogues, 15.87% multimodal turns, 34.02% image-related questions)
+  links.paper: arXiv 2604.13074, linked from the repo README
+  links.code: repo README is the 'Official implementation of PersonaVLM'; the arXiv paper lists project page PersonaVLM.github.io and the same authors (MiG-NJU)
+  links.data: 'repo README badge ''Persona-MME Benchmark'' -> huggingface.co/datasets/ClareNie/Persona-MME (HF API: public, not gated, apache-2.0, 4,742 files incl. Persona-MME.json and samples/{50,100,200,500}/*/user_data.json + images)'
+  scale.conversations: 'paper Sec. 4 + App. D: cases derived from 200 diverse personas, 100 per context configuration; HF Persona-MME.json has 200 distinct user_data.json paths (50 each in samples/50,100,200,500), counted 2026-10-10'
+  scale.questions: 'paper App. D ''comprising 2,034 in-situ test cases''; HF Persona-MME.json has 2,034 entries (32k: 1,129; 128k: 905), counted 2026-10-10'
+  scale.avg_context_length: paper Table 6 'Avg. turns per dialogue 142.9'; Sec. 4 two configurations, 32k and 128k context
+  scale.notes: paper Sec. 4, Table 6; split counts computed from HF Persona-MME.json on 2026-10-10 (eval.py maps samples/50+100 to 32k, 200+500 to 128k)
+  metrics: paper Table 1 caption 'We report accuracy (%)'; Table 2 / Sec. 5.2 alignment sub-task (812 items); Sec. 5.3 win/tie/loss pairwise comparison; Table 4 per-task results
+  judge_model: 'paper Sec. 5.3: open-ended evaluation on 200 sampled Persona-MME questions ''employing Gemini-2.5-Pro as an automated judge''. Main MCQ accuracy is scored by exact option match, with no LLM judge (eval.py check_result). Qwen3-30B-A3B is used only as the RL reward judge in training'
+  repro_level: repo tree has eval.py (runs Persona-MME at --bench_context 32k/128k and computes accuracy) + data/Persona-MME/Persona-MME.json; full dialogue samples are downloadable from HF dataset (checked 2026-10-10)
+  notes: repo description '[CVPR 2026 Highlight]'; paper App. D Quality Assurance (Gemini-2.5-pro-preview-06-05 question generation, 4 annotators); paper Sec. 4 (Seed1.6-thinking dialogue synthesis); eval.py alignment loop scores chosen and rejected responses; HF API licence/gating

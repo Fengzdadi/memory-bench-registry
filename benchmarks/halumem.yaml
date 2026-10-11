@@ -1,0 +1,49 @@
+name: HaluMem
+slug: halumem
+release_date: 2025-11
+venue: EMNLP 2026
+memory_types:
+- conversational_longterm
+- semantic_knowledge_update
+- personalization
+- episodic
+links:
+  paper: https://arxiv.org/abs/2511.03506
+  code: https://github.com/MemTensor/HaluMem
+  data: https://huggingface.co/datasets/IAAR-Shanghai/HaluMem
+scale:
+  conversations: 20
+  questions: 3467
+  avg_context_length: ~160k tokens per user (HaluMem-Medium); ~1M tokens per user (HaluMem-Long)
+  notes: 'conversations = 20 simulated users, each with one multi-session user-AI dialogue history (Medium: 1,387 sessions, 30,073 turns). questions = 3,467 QA pairs over 14,948 memory points. HaluMem-Long reuses the same users, memory points and questions but inserts irrelevant dialogues (53,516 turns, avg 120.85 sessions/user). The paper evaluates both splits.'
+metrics:
+- Memory Recall
+- Weighted Memory Recall
+- Memory Accuracy
+- Target Memory Precision
+- False Memory Resistance (FMR)
+- Memory Extraction F1 (added in arXiv v3)
+- Memory Updating Accuracy / Hallucination Rate / Omission Rate
+- Memory QA Accuracy / Hallucination Rate / Omission Rate
+- Time consumption (dialogue addition, memory retrieval, total)
+judge_model: GPT-4o
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: The venue comes only from the official README ("accepted to the EMNLP 2026 Main Conference", committed by the first author 2026-09-03). No arXiv journal_ref or Anthology entry was found on 2026-10-10. Memory Extraction F1 first appears in arXiv v3 (Jan 2026). The data is licensed CC BY-NC-ND 4.0. Systems must expose add-dialogue, per-session memory-dump and retrieval APIs, so Zep's extraction scores are missing. The HF Medium file matches the paper's counts (counted on 2026-10-10). The README title differs from the arXiv title.
+sources:
+  name: 'arXiv abstract: ''Hallucination in Memory Benchmark (HaluMem)''; repo README'
+  release_date: 'arXiv API: 2511.03506v1 published 2025-11-05T14:37:34Z (v2 2025-11-09, v3 2026-01-05)'
+  venue: github.com/MemTensor/HaluMem README 'What's New' [2026.08] says it was accepted to the EMNLP 2026 Main Conference (commit 718f16ff by first author Ding Chen, 2026-09-03). The arXiv abs page has no comments or journal_ref.
+  memory_types: paper §5 (memory extraction from multi-session user-AI dialogues, memory updating task), App. A.1 (Persona/Event/Relationship memory), App. A.2 question types (Dynamic Update, Memory Conflict, Generalization & Application from user preferences, temporal Multi-hop) (arXiv v3 HTML)
+  links.paper: arXiv API id 2511.03506
+  links.code: paper header '[Code] https://github.com/MemTensor/HaluMem' (arXiv v3 HTML); repo owned by MemTensor, commits by first author
+  links.data: 'paper header ''[Datasets] https://huggingface.co/datasets/IAAR-Shanghai/HaluMem''; HF API: public, not gated, files HaluMem-Medium.jsonl (33.5MB) and HaluMem-Long.jsonl (106.5MB)'
+  scale.conversations: paper §4 'HaluMem-Medium includes 30,073 rounds of dialogue from 20 users'; Table 6 (App. A.3). HF HaluMem-Medium.jsonl has 20 user records and 1,387 sessions (counted 2026-10-10)
+  scale.questions: paper Table 6 Total Questions 3,467 (Medium and Long); HF HaluMem-Medium.jsonl contains 3,467 questions (counted 2026-10-10)
+  scale.avg_context_length: 'paper §4 ''average context length of about 160k tokens'' and Long ''extends each user''s context to 1M tokens''; Table 6: 159,910.95 / 1,007,264.65 tokens/user'
+  scale.notes: paper Table 6 (App. A.3) and App. A.4 (HaluMem-Long construction)
+  metrics: paper §5.1-5.3 (Eq. 1-6), Table 3, Table 5 (time consumption) in arXiv v3. The F1 metric is absent in the v1/v2 HTML
+  judge_model: 'paper §6.1: ''we use GPT-4o for consistency determination and scoring'' (GPT-4o is also the answer generator); eval/.env-example OPENAI_MODEL=gpt-4o'
+  repro_level: repo tree has eval/eval_memzero.py, eval_memzero_graph.py, eval_memos.py, eval_memobase.py, eval_zep.py, eval_supermemory.py (run systems) plus eval/evaluation.py (scoring). Data is downloadable from HF (checked 2026-10-10)
+  notes: repo commit history, HF cardData license cc-by-nc-nd-4.0, paper App. B / README (Zep), arXiv v1-v3 HTML comparison

@@ -1,0 +1,45 @@
+name: AgenticSTS
+slug: agenticsts
+release_date: 2026-07
+venue: arXiv preprint
+memory_types:
+- procedural_workflow
+- episodic
+links:
+  paper: https://arxiv.org/abs/2607.02255
+  code: https://github.com/AlayaLab/AgenticSTS
+  data: https://huggingface.co/datasets/AlayaLab/AgenticSTS-trajectories
+scale:
+  conversations: null
+  questions: null
+  avg_context_length: median 67 strategic LLM calls/run (IQR 27–105) + ~500 other decisions/run
+  notes: 'No fixed question or conversation set: games are played live. Headline ablation: 50 completed Silent-A0 games (5 cells × 10). Archive: 298 completed trajectories (fixed-A0 cells, cross-backbone probe N=5/cell for Qwen/DeepSeek, auto-mode ascension ladder). External-agent comparison: 5 games per competitor. Median strategic user message is ~5k tokens (an estimate).'
+metrics:
+- Win rate (wins / completed games, Wilson 95% CI)
+- Derived analysis score (100 if victory, else floor + 52/3 x bosses cleared; 5,000-resample bootstrap 95% CI)
+- Mean floor reached
+- Mean bosses cleared
+- Highest attempted ascension (ladder endpoint)
+- Wall-clock minutes per floor
+- Fresh (non-cached) LLM tokens per score point
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'An interactive testbed rather than a fixed QA set. Running it requires owning Slay the Spire 2, the AGPL-3.0 C# mod, and paid LLM APIs. Released counts differ: the paper uses 298 completed games, the HF dataset has 312 records (298 + 14 decision-capped), and repo runs/history.jsonl has 385 rows (counted 2026-10-10). The paper links HF ShandaAI/AgenticSTS-trajectories, which now redirects to AlayaLab. The repo data README still calls it private, but it is public and ungated. The headline A0 gain is not statistically significant (Fisher p≈0.37).'
+sources:
+  name: 'arXiv API title ''AgenticSTS: A Bounded-Memory Testbed for Long-Horizon LLM Agents''; repo README'
+  release_date: 'arXiv API: 2607.02255v1 published 2026-07-02T14:44:32Z'
+  venue: arXiv API entry has no journal_ref or comment; repo README Citation section says the paper is under EMNLP 2026 ARR review (not accepted), so arXiv preprint
+  memory_types: 'procedural_workflow: §4.2/§4.5 L5 skill library distilled from earlier runs, ablated in Table 2 (3/10 -> 6/10), and §6.3 ladder with postrun-writable L4+L5 stores (A6–A8 vs A2–A4). episodic: §4.2/§4.4 L4 ''episodic memory'' of postrun summaries (case-based recall), ablated as full-frozen vs mode-a in Table 2'
+  links.paper: arXiv abs page 2607.02255
+  links.code: 'github.com/AlayaLab/AgenticSTS is linked in the arXiv v1 HTML and the README carries the arXiv badge; gh api: public, created 2026-06-18'
+  links.data: paper HTML and repo README link huggingface.co/datasets/ShandaAI/AgenticSTS-trajectories; HF API 307-redirects to AlayaLab/AgenticSTS-trajectories (private=false, gated=false, 319 files incl. runs_history.jsonl and 305 trajectories/*.jsonl.gz)
+  scale.conversations: 'null: no conversation set; the benchmark plays live game runs (paper §3, §5)'
+  scale.questions: 'null: no question set; the headline evaluation is 50 games (5×10, Table 2/Table 4) and the archive holds 298 trajectories (§3.3)'
+  scale.avg_context_length: 'paper §3.1 (P2): median ~80 min, 67 strategic LLM calls (IQR 27–105), roughly 500 additional per-run decisions'
+  scale.notes: paper §3.3, §5.1–5.2, Table 4 (denominator map), §7; README/HF card on 298/312/385 counts, verified by counting outcomes in HF runs_history.jsonl (202 defeat + 96 victory + 14 max_steps) and repo history.jsonl (385 rows)
+  metrics: paper §3.2 Eq. 1 (derived score), §5.3 and App. A (Wilson CI, bootstrap), Table 2, Table 3, Table 5 (floor, bosses), §6.3 Fig. 5 (highest attempted ascension), §7 Fig. 6b/6c (minutes per floor, fresh tokens per score point)
+  judge_model: 'null: outcome scoring is deterministic (win/floor/bosses, Eq. 1). An unnamed ''LLM judge'' appears only inside the agent''s L5 skill write gate (§4.5), not in the evaluation'
+  repro_level: repo has AgenticSTS/scripts/run_ablation.py and scripts/run_agent.py (play new games under the ablation conditions), plus scripts/reproduce/reproduce_table_2.py, reproduce_table_3.py, reproduce_fig_3.py, reproduce_fig_4.py, reproduce_app_2.py and recompute_all.sh (recompute paper tables from AgenticSTS-Data/runs/history.jsonl); data is in the repo and on public HF (checked 2026-10-10). New runs need the commercial game
+  notes: repo README (licenses, requirements, count explanation), AgenticSTS-Data/README.md ('currently private' statement), HF API (private=false, gated=false), paper §6.2

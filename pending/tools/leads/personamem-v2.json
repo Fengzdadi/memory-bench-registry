@@ -1,0 +1,51 @@
+{
+ "name": "PersonaMem-v2",
+ "slug": "personamem-v2",
+ "leads": {
+  "registry_key": "arxiv:2512.06688",
+  "tier": "P1",
+  "arxiv": "2512.06688 (arXiv API: v1 2025-12-07; title: PersonaMem-v2: Towards Personalized Intelligence via Learning Implicit User Personas and Agentic Memory)",
+  "community_list_entries": [
+   {
+    "source": "tsinghua",
+    "section": "Benchmark",
+    "name": "PersonaMem-v2",
+    "paper_url": "https://arxiv.org/abs/2512.06688",
+    "code_url": "https://github.com/bowen-upenn/PersonaMem",
+    "data_url": null
+   },
+   {
+    "source": "iaar",
+    "section": "Resources / Benchmarks and Tasks / Personalized Task Evaluation",
+    "name": "PERSONAMEM-v2",
+    "paper_url": "https://www.arxiv.org/pdf/2512.06688",
+    "code_url": null,
+    "data_url": null
+   },
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "PersonaMem-v2: Towards Personalized Intelligence via Learning Implicit User Personas and Agentic Memory",
+    "paper_url": "https://arxiv.org/pdf/2512.06688",
+    "code_url": null,
+    "data_url": null
+   },
+   {
+    "source": "cognee",
+    "section": "PersonaMem",
+    "name": "PersonaMem-v2",
+    "paper_url": "https://arxiv.org/abs/2512.06688",
+    "code_url": "https://github.com/bowen-upenn/PersonaMem-v2",
+    "data_url": "https://huggingface.co/datasets/bowen-upenn/ImplicitPersona"
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "personalization",
+    "conversational_longterm"
+   ],
+   "extra_tags": [],
+   "kind_reason": "Personalization dataset/benchmark simulating 1,000 user-chatbot interactions with 20,000+ mostly implicit preferences in up to 128k-token contexts; RFT and agentic-memory training are additional contributions. RFT trains reasoning, not storing a user's facts in weights, so not parametric."
+  }
+ }
+}

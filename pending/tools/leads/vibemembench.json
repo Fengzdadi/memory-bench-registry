@@ -1,0 +1,33 @@
+{
+ "name": "VibeMemBench",
+ "slug": "vibemembench",
+ "leads": {
+  "registry_key": "arxiv:2609.23570",
+  "tier": "P0",
+  "arxiv": "2609.23570 (arXiv API: v1 2026-09-20; title: VibeMemBench: Evaluating Memory Systems for Coding Agents on Real Repository Coding Tasks)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "VibeMemBench: Evaluating Memory Systems for Coding Agents on Real Repository Coding Tasks",
+    "paper_url": "https://arxiv.org/pdf/2609.23570",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "coding_cross_session",
+    "procedural_workflow"
+   ],
+   "extra_tags": [],
+   "kind_reason": "Benchmark of 111 executable SWE-style coding targets from 90 SWE-rebench V2 repos plus 3,634 history trajectories from earlier, separate tasks in the same repositories; memory systems ingest prior history before the target run and executable tests score resolution. Distilled experience = bug class, "
+  },
+  "phase1_verified_types": {
+   "procedural_workflow": "Sec 3.2: history 'admits only earlier instances from the same repository'. 'Each experience records a bug class, root cause, fix pattern, and reusable lesson.' Tables 1–2 score Resolved vs memory-off.",
+   "coding_cross_session": "Sec. 3.2: screen \"admits only earlier instances from the same repository and excludes every target identifier\". Sec. 3.5: memory systems \"ingest the full eligible prior-work history available to a target\"."
+  },
+  "paper_hint": "https://arxiv.org/abs/2609.23570",
+  "code_hint": "https://github.com/AlibabaResearch/DAMO-ConvAI/tree/main/VibeMemBench"
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "name": "MedEvoEval",
+ "slug": "medevoeval",
+ "leads": {
+  "registry_key": "arxiv:2606.28900",
+  "tier": "P0",
+  "arxiv": "2606.28900 (arXiv API: v1 ?; title: None)",
+  "phase1_verified_types": {
+   "procedural_workflow": "Sec 3.4: manager writes \"IF ... THEN\" / \"IF ... AVOID\" cards to memory banks; Table 3: held-out transfer H0→H3 total 0.338→0.413; maturation E0 0.246→E3 0.430"
+  },
+  "paper_hint": "https://arxiv.org/abs/2606.28900"
+ }
+}

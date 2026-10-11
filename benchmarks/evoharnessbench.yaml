@@ -1,0 +1,46 @@
+name: EvoHarnessBench
+slug: evoharnessbench
+release_date: 2026-09
+venue: arXiv preprint
+memory_types:
+- procedural_workflow
+links:
+  paper: https://arxiv.org/abs/2609.04280
+  code: null
+  data: https://huggingface.co/collections/ZixuanKe/evoharnessbench
+scale:
+  conversations: null
+  questions: 802
+  avg_context_length: null
+  notes: 802 unique verifier-checkable tasks in 17 harness streams (3-6 cumulative stages), instantiated as 1,510 axis-specific examples (tools 799, skills 353, agents 358). There are 520 tools, 42 skills and 62 agents. Each stage has disjoint adaptation and held-out test splits. EnterpriseOps-Gym and Agents' Last Exam sources. Not conversational.
+metrics:
+- Pass (%)
+- Score (average verifier score, partial credit)
+- Overall pass rate
+- Forward Transfer (FWT)
+- Backward Transfer (BWT)
+- Time (h)
+- Tokens (M)
+- Delegation precision/recall/exact match (agents axis)
+- Skill engagement rate
+judge_model: null
+repro_level: data_public
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: Tests harness evolution (tools/skills/agents). Memory is tested through the self-evolving adaptation setting, which compares baselines such as ReasoningBank, G-Memory and LEGOMem. No official code repo. HF data (Apache-2.0, ungated) is published as ZixuanKe/evovling_tools, evovling_skills and evovling_agents ("evovling" is the published spelling). Per the project page, scoring needs the authors' hosted API service. The HF tools set is larger than the paper's sample (README says 4,482 EOG tasks). The project page also lists seed benchmarks the paper does not use.
+sources:
+  name: 'arXiv API title: ''EvoHarnessBench: Can Your Agents Keep Pace with an Evolving Harness?'''
+  release_date: 'arXiv API: 2609.04280v1 published 2026-09-03T03:24:02Z (v2 2026-09-10, v3 2026-09-26)'
+  venue: arXiv API has no journal_ref; comment is only the project URL; project page BibTeX is @article with no venue (checked 2026-10-10)
+  memory_types: 'paper §3.4 (arXiv v3 HTML): self-evolving adaptation evaluation updates persistent state z_t from the cumulative adaptation split (episodic memories of tool-use patterns, self-generated procedural skills, routing policies) and evaluates on held-out splits across stages; §4 baselines Raw Memory, ReasoningBank, MemToolAgent, G-Memory, LEGOMem'
+  links.paper: arXiv abs page 2609.04280
+  links.code: 'null: neither the paper nor the project page (mas-orchestra.salesforceresearch.ai/evoharness/) links a code repo. GitHub search and the SalesforceAIResearch and ZixuanKe repo listings found none (checked 2026-10-10)'
+  links.data: project page links HF collection ZixuanKe/evoharnessbench; HF API lists datasets ZixuanKe/evovling_tools, evovling_skills, evovling_agents
+  scale.questions: 'arXiv abstract + §3.1: 802 tasks in 17 harness streams; Appendix C Table C.4: 1,510 axis-specific examples (799/353/358)'
+  scale.conversations: 'null: not a conversational benchmark (task streams)'
+  scale.avg_context_length: 'null: not reported in paper'
+  scale.notes: arXiv v3 HTML §3.1, Appendix C Tables C.3/C.4
+  metrics: paper §3.4 and §4, Tables 2/4/6, Figures 5/7/8 (arXiv v3 HTML)
+  judge_model: 'null: paper uses verifier-based scoring on final states; no LLM judge mentioned (§3.4, arXiv v3 HTML)'
+  repro_level: HF datasets ZixuanKe/evovling_{tools,skills,agents} ungated, Apache-2.0, train/test jsonl files; ale/v1/test.jsonl downloaded HTTP 200. No official repo with an eval script; project page says scoring goes through the hosted API service (checked 2026-10-10)
+  notes: HF evovling_tools README (Apache-2.0, 4,482 EOG tasks, 9 domains); project page text on hosted service and seed benchmarks (Terminal-Bench 2, APEX-Agents, Hyper-tau-Bench)

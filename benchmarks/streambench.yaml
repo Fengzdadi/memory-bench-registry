@@ -1,0 +1,41 @@
+name: StreamBench
+slug: streambench
+release_date: 2024-06
+venue: NeurIPS 2024 Datasets and Benchmarks Track
+memory_types:
+- procedural_workflow
+links:
+  paper: https://arxiv.org/abs/2406.08747
+  code: https://github.com/stream-bench/stream-bench
+  data: https://huggingface.co/datasets/appier-ai-research/StreamBench
+scale:
+  conversations: null
+  questions: 9702
+  avg_context_length: null
+  notes: 'questions = 9,702, the sum of the Table 1 test sizes (the paper states no total): Spider 2,147, CoSQL 1,007, BIRD 1,534, DS-1000 1,000, ToolBench 750, DDXPlus 1,764, HotpotQA 1,500. Each dataset is one shuffled stream. There are no conversations, and the paper reports no context length. The HF dataset also hosts train/validation splits for some datasets that are not used as streams.'
+metrics:
+- Execution accuracy (Spider, CoSQL, BIRD)
+- Pass@1 (DS-1000)
+- Accuracy (ToolBench, DDXPlus)
+- Exact Match (HotpotQA)
+judge_model: gpt-3.5-turbo-0125
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'StreamBench measures how much LLM agents improve over a shuffled input-feedback stream. The only feedback is binary correctness, and the ground truth is never revealed. Here memory is the agent''s own store of past instances it reuses, not a recall test. All seven datasets come from existing benchmarks: the CoSQL and BIRD dev sets serve as test sets, and HotpotQA is a 1,500-of-7,410 sample. The text-to-SQL databases are downloaded separately. The repo also has GSM8K and MATH configs that the paper does not use. The HF card gives no licence; the repo is Apache-2.0.'
+sources:
+  name: 'arXiv API title ''StreamBench: Towards Benchmarking Continuous Improvement of Language Agents''; repo README heading'
+  release_date: 'arXiv API: 2406.08747v1 published 2024-06-13 (v2 updated 2024-10-31)'
+  venue: 'arXiv API comment ''NeurIPS 2024 Track on Datasets and Benchmarks''; NeurIPS proceedings page (Advances in Neural Information Processing Systems 37, Datasets and Benchmarks Track): https://proceedings.neurips.cc/paper_files/paper/2024/hash/c189915371c4474fe9789be3728113fc-Abstract-Datasets_and_Benchmarks_Track.html'
+  memory_types: 'procedural_workflow: the benchmark scores an agent by its aggregate metric at the final time step T over a sequential input-feedback stream (paper §2, §3.1). The streaming baselines (GrowPrompt, MemPrompt, Self-StreamICL, MAM-StreamICL; §4.1.2) store past (x, y, fb) in an external memory and reuse it on later, different instances. Not tagged coding_cross_session: the SQL and Python streams are independent single-turn problems with no repo or user conventions, and they use the same generic mechanism as the non-code streams. Not tagged multi_agent_group: the shared memory in MAM-StreamICL is part of a baseline method, not something the benchmark tests.'
+  links.paper: https://arxiv.org/abs/2406.08747 (arXiv API and abs/HTML opened 2026-10-10)
+  links.code: 'Paper abstract ''Source code: https://github.com/stream-bench/stream-bench''; the repo README links the paper (gh api repos/stream-bench/stream-bench, Apache-2.0)'
+  links.data: Paper Appendix F.2 and the repo README link https://huggingface.co/datasets/appier-ai-research/StreamBench. The HF API shows it is public and not gated, with parquet files for bird, cosql, ddxplus, ds_1000, hotpotqa_distract, spider and toolbench.
+  scale.questions: 'Paper Table 1 ''Test size (T)'': 2,147 / 1,007 / 1,534 / 1,000 / 750 / 1,764 / 1,500, summed to 9,702. The HF test-split num_examples match each value.'
+  scale.conversations: 'null: the benchmark is a stream of independent task instances, not conversations'
+  scale.avg_context_length: 'null: neither the paper nor the repo or website reports one'
+  metrics: Paper Table 1 'Metric' row (Execution accuracy x3, Pass@1, Accuracy x2, Exact Match). Table 2 reports these per dataset. Cost in tokens (§5.4) and standard errors over 5 shuffles (§5.2) are analyses, not benchmark metrics.
+  judge_model: 'Paper App. F.2.5 (ToolBench): ''a judge LLM is used to evaluate the correctness of API arguments'' for APIs with natural-language inputs, but it does not name the model. The official repo stream_bench/benchmarks/toolbench.py sets self.llm = OpenAIChat(model_name="gpt-3.5-turbo-0125") and uses it in check_api_args. No other dataset uses an LLM judge.'
+  repro_level: official_script, checked 2026-10-10. The repo tree has the entry points stream_bench/pipelines/run_bench.py and run_bench_batch.py, configs/bench/{spider,cosql,bird,ds_1000,toolbench,ddxplus,hotpotqa}.yml, scripts/run_*.sh and download_text2sql_data.py (SQL databases). Benchmark classes load their data from HF appier-ai-research/StreamBench, which is public and lists its parquet files.
+  notes: Paper §2/§3.1/§3.2 and App. F; repo tree (configs/bench/gsm8k.yml, math.yml load appier-ai-research/robust-finetuning); HF dataset card (no license field); GitHub license Apache-2.0
+  scale.notes: Paper Table 1 and §3.2 (HotpotQA 1,500 of 7,410); HF API split counts

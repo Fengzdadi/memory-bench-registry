@@ -1,0 +1,28 @@
+{
+ "name": "Bad Memory",
+ "slug": "bad-memory",
+ "leads": {
+  "registry_key": "arxiv:2607.14611",
+  "tier": "P2",
+  "arxiv": "2607.14611 (arXiv API: v1 2026-07-16; title: Bad Memory: Evaluating Prompt Injection Risks from Memory in Agentic Systems)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "Bad Memory: Evaluating Prompt Injection Risks from Memory in Agentic Systems",
+    "paper_url": "https://arxiv.org/pdf/2607.14611",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "coding_cross_session"
+   ],
+   "extra_tags": [
+    "memory_security"
+   ],
+   "kind_reason": "An evaluation suite for prompt injection through persistent memory files in Claude Code and Codex. It uses a sandboxed synthetic workspace for a fictional software engineer, with coding/CLAUDE.md, AGENTS.md and stack_preferences.md, plus single-probe and multi-session attack sequences. It releases t"
+  }
+ }
+}

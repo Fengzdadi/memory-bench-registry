@@ -1,0 +1,44 @@
+name: OmniGameArena
+slug: omnigamearena
+release_date: 2026-06
+venue: arXiv preprint
+memory_types:
+- procedural_workflow
+- embodied
+- multimodal
+links:
+  paper: https://arxiv.org/abs/2606.09826
+  code: https://github.com/mxlin043/OmniGameArena
+  data: https://huggingface.co/datasets/mxlin043/OmniGameArena
+scale:
+  conversations: null
+  questions: null
+  avg_context_length: null
+  notes: 'Not a QA set: 12 UE5 games (7 Solo, 3 PvP, 2 Coop). Cold start: N=5 episodes per (agent, game), 12 agents, PvP over all pairings. IDC (arXiv v1): LastStand and SharedFloor, R=10 rounds x K=5 episodes, 4 agents, 3 held-out variants per game. Released environment: 60 maps (origin + Var1-Var4 per game).'
+metrics:
+- Normalized game progress score in [0,1] (per-game formulas, Table 1)
+- PvP Player-1 win rate over all pairings
+- IDC round score S_r (mean episode score per round) and curve [S_0..S_R]
+- Transfer gain V_best - V_0 and % change on held-out variants
+- Actions per episode and score per action (PDQ vs LCRT, appendix)
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'This is a game-playing benchmark for VLM agents. Memory is tested only through the IDC protocol: a reflector-written skill prompt (at most 1200 tokens) and a notebook (at most 2000 tokens) persist across rounds, then the skill is applied to held-out variants. arXiv v1 runs IDC on 2 games, 4 agents and 3 variants. The repo README and project page describe IDC on all 12 games, 6 models and Var1-Var4. The UE5 builds are ungated Apache-2.0 zips on Hugging Face (about 2.9 GB for Linux, about 2.7 GB for Windows). Linux needs a GPU with Vulkan SM6 support.'
+sources:
+  name: 'arXiv API title: ''OmniGameArena: A Unified UE5 Benchmark for VLM Game Agents with Improvement Dynamics'''
+  release_date: 'arXiv API: 2606.09826v1 published 2026-06-08 (only v1 listed in the abs page submission history)'
+  venue: 'arXiv abs page has no journal-ref or comments; repo README BibTeX is @misc arXiv, CITATION.cff says journal: arXiv, project page BibTeX says ''arXiv preprint''; no venue found'
+  memory_types: 'Paper §4.2: the IDC persistent module (experience notebook, validated skill, best-skill cache) carries reflector-distilled skills across rounds, and §5.3.2/Table 5 test the best skill on held-out variants (procedural_workflow). The agents act in real-time UE5 3D game environments and memory is judged through game task scores (embodied). The reflector, which is the same VLM as the player, reads trajectory screenshots via read_image (§4.2) to build that memory (multimodal).'
+  links.paper: arXiv API id 2606.09826; linked from the repo README badge
+  links.code: The paper's author line gives the project page mxlin043.github.io/OmniGameArena, which links github.com/mxlin043/OmniGameArena. The repo owner mxlin043 matches first author Mingxian Lin, and the repo README links arXiv 2606.09826.
+  links.data: Repo README step 1 and the project page link huggingface.co/datasets/mxlin043/OmniGameArena (UE5 environment builds). A ModelScope mirror also exists.
+  metrics: Paper §3.1 and Table 1 (normalized progress formulas); Figure 4 (PvP win rates); §4.2 (S_r and the IDC curve); Table 5 (V_best - V_0 and % change); Appendix Tables 8-9 (actions per episode, score per action)
+  judge_model: 'null: scores are computed by the games. The validate_skill ''independent LLM judge'' (paper §4.2) only vets skill drafts inside the harness and its model is not named. The repo reflectors/agentic.py defaults the validator to the reflector''s own model.'
+  repro_level: Repo has scripts/run_cold_start.py, scripts/run_idc.py, scripts/run_idc_best_skill_variants.py and configs/vlm/idc/*.yaml. The HF dataset is ungated; the resolve URLs for OmniGameArena_Linux.zip and OmniGameArena_Windows.zip return HTTP 200 (checked 2026-10-10).
+  scale.notes: Paper §5.1 (N=5, 12 agents), §5.3 (R=10, K=5, 4 agents, 3 held-out variants); repo README (12 games and 60 maps, Var1-Var4)
+  scale.conversations: 'null: game benchmark with no conversations'
+  scale.questions: 'null: game benchmark with no questions'
+  scale.avg_context_length: 'null: not reported; only the skill (1200 tokens) and notebook (2000 tokens) caps are given'
+  notes: 'Paper §4.2 (memory caps) and Limitations (IDC scope); repo README (six IDC models, Var1-Var4, Vulkan requirement); project page (''four variants'', 6 models x 12 games); HF API (sizes 2909635622 and 2722337975 bytes, gated: false, license apache-2.0)'

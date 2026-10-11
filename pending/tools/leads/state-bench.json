@@ -1,0 +1,31 @@
+{
+ "name": "STATE-Bench",
+ "slug": "state-bench",
+ "leads": {
+  "registry_key": "name:statebench",
+  "tier": "P0",
+  "community_list_entries": [
+   {
+    "source": "cognee",
+    "section": "Agentic and stateful benchmarks / STATE-Bench",
+    "name": "STATE-Bench",
+    "paper_url": null,
+    "code_url": "https://github.com/microsoft/STATE-Bench",
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "procedural_workflow"
+   ],
+   "extra_tags": [
+    "enterprise_tool_use_agent"
+   ],
+   "kind_reason": "Microsoft blog title: 'Introducing STATE-Bench: a benchmark for AI agent memory'. It has 450 enterprise workflow tasks in three domains (travel, customer support, shopping). Its Agent Learning Track gives 100 train trajectories and 50 held-out test tasks per domain and scores whether learnings retri"
+  },
+  "phase1_verified_types": {
+   "procedural_workflow": "docs/AGENT_LEARNING_TRACK.md: \"100 task trajectories per domain ... 50 held-out test tasks per domain ... The score asks whether learnings extracted from past trajectories improve agent performance.\""
+  },
+  "code_hint": "https://github.com/microsoft/STATE-Bench"
+ }
+}

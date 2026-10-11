@@ -1,0 +1,40 @@
+name: STATE-Bench
+slug: state-bench
+release_date: 2026-05
+venue: null
+memory_types:
+- procedural_workflow
+links:
+  paper: null
+  code: https://github.com/microsoft/STATE-Bench
+  data: null
+scale:
+  conversations: 300
+  questions: 150
+  avg_context_length: null
+  notes: 'questions = 150 held-out test tasks (50 per domain: travel, customer support, shopping assistant). Each is a simulated multi-turn conversation, run 5 times. conversations = 300 train trajectories (100 per domain) supplied for learning extraction. There are 450 scenarios in total, and the current main branch ships all 150 task definitions per domain (counted 2026-10-10). No average length is reported.'
+metrics:
+- Task Completion pass@1 (average over 5 runs; deterministic final-state checks plus an LLM judge for procedural/informational requirements)
+- 'Task Completion pass^5 (reliability: tasks passed on all 5 runs)'
+- UX Score (LLM-judged, 1-5)
+- Cost Per Task (USD)
+judge_model: GPT-5.1
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: No accompanying paper was found (arXiv API and web search, 2026-10-10). The benchmark was released through the GitHub repo (first release v0.4.5, 2026-05-20) and the Microsoft Open Source Blog (2026-05-19). Memory is evaluated in the Agent Learning Track, and the Main Track (no learning) uses the same test split. The locked simulator and judge moved from GPT-5.1 to GPT-5.4 in v0.7.0, so official runs need GPT-5.4 access. The data is LLM-generated synthetic data under the MIT licence. Not to be confused with Hugging Face parslee/statebench.
+sources:
+  name: 'repo README.md title and blog ''Introducing STATE-Bench: A benchmark for AI agent memory''; blog expands it as ''Stateful Task Agent Evaluation Benchmark'''
+  release_date: No paper exists. Microsoft Open Source Blog post dated 2026-05-19 (WP API date_gmt 2026-05-19T17:30); first GitHub release v0.4.5 published 2026-05-20; repo created 2026-05-11 (gh api)
+  venue: 'null: no paper found. arXiv API queries all:"STATE-Bench", abs:"STATE-Bench" and abs:"Stateful Task Agent Evaluation" returned 0 hits, web search found only the blog and repo, and the repo README links no paper'
+  memory_types: 'pyproject.toml description ''multi-domain benchmark for evaluating procedural memory in AI agents''; docs/AGENT_LEARNING_TRACK.md: learnings extracted from 100 train trajectories per domain are scored on 50 held-out test tasks per domain (''whether learnings extracted from past trajectories improve agent performance'')'
+  links.paper: 'null: no paper. The only write-up is the blog https://opensource.microsoft.com/blog/2026/05/19/introducing-state-bench-a-benchmark-for-ai-agent-memory/'
+  links.code: github.com/microsoft/STATE-Bench (Microsoft org, MIT); linked from the official blog post
+  links.data: 'null: data ships inside the repo (datasets/train_task_trajectories/, state_bench/domains/<domain>/tasks and task_envs/); the Hugging Face API search found no Microsoft STATE-Bench dataset'
+  scale.conversations: 'v0.4.5 README: ''The public release includes 300 train trajectories for memory extraction''; docs/AGENT_LEARNING_TRACK.md table lists 100 per domain; repo tree counted 100 files per domain on 2026-10-10'
+  scale.questions: 'v0.4.5 README: ''150 test task definitions with test environments for locked evaluation''; splits/train_test.json has 50 test IDs per domain (counted 2026-10-10); the protocol configs/eval_protocols/gpt54.json uses split ''test'''
+  scale.avg_context_length: 'null: no average turns or tokens reported in the README, docs or blog'
+  metrics: README 'Metrics' table (Task Completion pass@1, pass^5, UX Score, Cost Per Task); v0.4.5 README 'Scoring And Metrics'; state_bench/scripts/compute_metrics.py also outputs state_pass@1 and task_requirements_pass@1
+  judge_model: Original release v0.4.5 state_bench/configs/eval_protocols/gpt51.json sets judge.model to gpt-5.1 (reasoning_effort high). CHANGELOG 0.7.0 says the judge moved to GPT-5.4 (current gpt54.json)
+  repro_level: Repo tree has state_bench/scripts/run_batch.py and state_bench/scripts/compute_metrics.py, documented in docs/AGENT_LEARNING_TRACK.md and docs/RUN_BENCHMARK.md. Data is in datasets/train_task_trajectories/ and state_bench/domains/*/tasks (checked 2026-10-10)
+  notes: CHANGELOG.md; v0.4.5 vs main repo trees; README Disclosures (synthetic data); LICENSE (MIT); HF API search (parslee/statebench is a different benchmark)

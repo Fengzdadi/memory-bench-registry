@@ -1,0 +1,26 @@
+{
+ "name": "RMBench",
+ "slug": "rmbench",
+ "leads": {
+  "registry_key": "arxiv:2603.01229",
+  "tier": "P2",
+  "arxiv": "2603.01229 (arXiv API: v1 2026-03-01; title: RMBench: Memory-Dependent Robotic Manipulation Benchmark with Insights into Policy Design)",
+  "community_list_entries": [
+   {
+    "source": "teleai",
+    "section": "📏 Benchmarks / 🎬 Multimodal Benchmarks / 🗓️ 2026",
+    "name": "RMBench: Memory-Dependent Robotic Manipulation Benchmark with Insights into Policy Design",
+    "paper_url": "https://arxiv.org/abs/2603.01229",
+    "code_url": "https://github.com/robotwin-Platform/rmbench",
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [],
+   "extra_tags": [
+    "embodied"
+   ],
+   "kind_reason": "Simulation benchmark of 9 memory-dependent robotic manipulation tasks (M(1)/M(n) memory complexity); memory is within-episode observation history, scored by success rate."
+  }
+ }
+}

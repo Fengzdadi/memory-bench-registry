@@ -1,0 +1,30 @@
+{
+ "name": "Momento",
+ "slug": "momento",
+ "leads": {
+  "registry_key": "arxiv:2606.00832",
+  "tier": "P2",
+  "arxiv": "2606.00832 (arXiv API: v1 2026-05-30; title: Momento: Evaluating Persistent Memory and Reasoning with Multi-Session Agentic Conversations)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "Momento: Evaluating Persistent Memory and Reasoning with Multi-Session Agentic Conversations",
+    "paper_url": "https://arxiv.org/abs/2606.00832",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "conversational_longterm",
+    "personalization",
+    "semantic_knowledge_update"
+   ],
+   "extra_tags": [
+    "agentic_tool_use"
+   ],
+   "kind_reason": "Benchmark of 161 multi-session, tool-mediated tasks on a restaurant service platform with 26 tools. It requires tracking evolving preferences, contradictory updates and temporal dependencies across sessions. The paper describes no coding tasks, and procedural memory is not a scored ability."
+  }
+ }
+}

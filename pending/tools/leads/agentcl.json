@@ -1,0 +1,15 @@
+{
+ "name": "AgentCL",
+ "slug": "agentcl",
+ "leads": {
+  "registry_key": "arxiv:2606.02461",
+  "tier": "P0",
+  "arxiv": "2606.02461 (arXiv API: v1 ?; title: None)",
+  "phase1_verified_types": {
+   "procedural_workflow": "Sec 3.3 Metrics: \"Plasticity Gain (PG) measures whether experience accumulated from preceding tasks helps the agent solve the current task.\" Generalization Gain uses held-out independent tasks with frozen memory.",
+   "coding_cross_session": "Sec. 4.1: \"Each task pair, from subtask to complex task, is guaranteed to exhibit a function reuse relation\"; Sec. 3.3: \"The second pass is read-only with frozen memory.\""
+  },
+  "paper_hint": "https://arxiv.org/abs/2606.02461",
+  "code_hint": "https://huggingface.co/datasets/osunlp/AgentCL"
+ }
+}

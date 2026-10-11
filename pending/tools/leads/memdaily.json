@@ -1,0 +1,27 @@
+{
+ "name": "MemDaily (MemSim)",
+ "slug": "memdaily",
+ "leads": {
+  "registry_key": "arxiv:2409.20163",
+  "tier": "P2",
+  "arxiv": "2409.20163 (arXiv API: v1 2024-09-30; title: MemSim: A Bayesian Simulator for Evaluating Memory of LLM-based Personal Assistants)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Resources / Benchmarks and Tasks / Personalized Task Evaluation",
+    "name": "MemDaily",
+    "paper_url": "https://arxiv.org/pdf/2409.20163",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "personalization",
+    "conversational_longterm"
+   ],
+   "extra_tags": [],
+   "kind_reason": "MemSim, a Bayesian simulator, generates the MemDaily dataset of daily-life user messages with QAs. It is used to benchmark memory mechanisms of LLM-based personal assistants on user-specific facts."
+  }
+ }
+}

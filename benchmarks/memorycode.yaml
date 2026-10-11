@@ -1,0 +1,40 @@
+name: MemoryCode
+slug: memorycode
+release_date: 2025-02
+venue: ACL 2025
+memory_types:
+- coding_cross_session
+- conversational_longterm
+- semantic_knowledge_update
+links:
+  paper: https://arxiv.org/abs/2502.13791
+  code: https://github.com/Cohere-Labs-Community/MemoryCode
+  data: https://huggingface.co/datasets/CohereLabsCommunity/memorycode
+scale:
+  conversations: 360
+  questions: null
+  avg_context_length: ~3.20k tokens (short, <15 sessions); ~26.15k tokens (long); longest history 63k tokens
+  notes: '360 dialogue histories: 30 for each session count of 1, 2, 3, 4, 5, 10, 15, 20, 30, 40, 50 and 100. They draw on 51 coding instructions (16 can be updated up to 8 times) and 80 fillers. The paper gives no total number of evaluation queries; each instruction has one query, shared with its updates. Short histories are 54% of the set. The dataset totals 4.6M tokens.'
+metrics:
+- 'Macro-averaged accuracy (%) of instruction adherence: regex checks on the generated Python code; a sample scores 1 only if every relevant object follows the instruction and the code has no syntax errors. Reported for the Instruction, Session and History settings, with History split into short and long.'
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'Synthetic mentor-mentee dialogues generated with Command R+. The evaluated model acts as the mentee and, given the concatenated history, must apply coding instructions spread across sessions; only the last update of an instruction counts. The repo moved from for-ai/MemoryCode to Cohere-Labs-Community/MemoryCode and ships outputs for 5 models. The HF card config names split ''train'' (data/train-*), but the only file is data/test-*.parquet (checked 2026-10-10). Licence: Apache-2.0.'
+sources:
+  name: 'arXiv abstract and repo README: ''we introduce MemoryCode'''
+  release_date: 'arXiv API: 2502.13791v1 published 2025-02-19T14:58:04Z (latest v2 updated 2025-06-06)'
+  venue: ACL Anthology 2025.acl-long.964 (Proceedings of ACL 2025, Vol. 1 Long Papers, July 2025, pp. 19609-19642); arXiv comment 'Published as conference paper at ACL 2025'
+  memory_types: 'paper (arXiv v2 HTML) §1/§3-4: coding instructions are introduced across multi-session mentor-mentee dialogues, ''with only the last update being eventually relevant''; the History setting feeds ''the concatenation of all sessions'' and scores the code against the latest instructions'
+  links.paper: arXiv API entry 2502.13791
+  links.code: 'paper abstract footnote: ''The code and data are available at https://github.com/Cohere-Labs-Community/MemoryCode'' (gh api: for-ai/MemoryCode redirects there; Apache-2.0)'
+  links.data: 'HF API datasets/CohereLabsCommunity/memorycode: not gated, tagged arxiv:2502.13791, 1 parquet with 360 test examples; card links the paper and the for-ai/MemoryCode repo'
+  scale.conversations: 'paper §3.2: ''The resulting dataset contains 360 dialogue histories, 30 for each...''; repo dataset/ holds 360 dialogue_*.json (counted 2026-10-10)'
+  scale.questions: 'null: paper states one evaluation query per instruction but reports no total count'
+  scale.avg_context_length: 'paper Table 2 (Tokens row: 3.20k short / 26.15k long) and §3.2 (''the longest history contains 63k tokens'')'
+  scale.notes: paper §3.1-3.2, Table 2, Appendix G (dataset contains 4.6M tokens)
+  metrics: 'paper §4: ''The overall model''s performance is computed using macro-averaged accuracy''; regex-based scoring; Table 4 reports Instruction/Session/History scores; repo code/evaluate_model_output.py'
+  judge_model: 'null: paper §4 scores with regex/AST checks of generated code; no LLM judge (Command R+ only generates the dialogues)'
+  repro_level: 'repo tree (checked 2026-10-10): code/evaluate_model_output.py (README: python code/evaluate_model_output.py --dialogue_dir dataset --model_output_dir outputs/gpt-4o), scripts/generate_model_output.sh, code/generate_model_output.py, dataset/ with 360 dialogues; data also on HF (not gated)'
+  notes: paper §3 (Command R+ generator, mentee role, Apache 2.0); gh api repo metadata; HF README YAML configs vs siblings list (checked 2026-10-10)

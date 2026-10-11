@@ -1,0 +1,41 @@
+name: KnowEdit
+slug: knowedit
+release_date: 2024-01
+venue: arXiv preprint
+memory_types:
+- parametric
+links:
+  paper: https://arxiv.org/abs/2401.01286
+  code: https://github.com/zjunlp/EasyEdit
+  data: https://huggingface.co/datasets/zjunlp/KnowEdit
+scale:
+  conversations: null
+  questions: 5653
+  avg_context_length: null
+  notes: 5,653 = sum of paper Table 3 test edit instances over six datasets (WikiData_recent 1,266; ZsRE 1,230; WikiBio 1,392; WikiData_counterfact 885; ConvSent 800; Sanitation 80); train splits total 27,087. Released HF test files hold 4,592 items (ZsRE 1,301; WikiBio 306; counterfact 839), counted 2026-10-10. No dialogue/conversation structure.
+metrics:
+- Edit Success
+- Portability
+- Locality
+- Fluency (generative capacity; weighted bi-/tri-gram entropy)
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: KnowEdit re-organizes six existing datasets (WikiData_recent, ZsRE, WikiBio, WikiData_counterfact, ConvSent, Sanitation) to evaluate editing knowledge in LLMs (insertion, modification, erasure); main model Llama2-7b-chat. arXiv v5 (2024-11) revised Table 4 after EasyEdit bug fixes. Released HF file counts differ from paper Table 3 for ZsRE, WikiBio and WikiData_counterfact. examples/KnowEdit.md cites run_Sanitation_llama2.py, but the repo file is examples/run_santinization_llama2.py. HF data is MIT-licensed and ungated; the ZsRE training set is distributed via Google Drive.
+sources:
+  name: 'paper §3.4 ''New Benchmark: KnowEdit'' (arXiv v5 HTML); EasyEdit examples/KnowEdit.md title'
+  release_date: 'arXiv API: 2401.01286 <published>2024-01-02T16:54:58Z (v1); latest v5 updated 2024-11-17'
+  venue: 'arXiv API has no journal_ref (comment: ''Ongoing work (v5)''); EasyEdit README/KnowEdit.md BibTeX is @misc arXiv eprint; no proceedings listing found by web search. The repo''s ''[ACL 2024]'' tag refers to the EasyEdit framework paper, not this one'
+  memory_types: 'paper §3.4/Table 3: knowledge insertion, modification, erasure via editing LLM (Llama2-7b-chat) knowledge; methods include ROME/MEMIT/FT/AdaLoRA/MEND weight edits'
+  links.paper: arXiv abs page 2401.01286
+  links.code: paper links https://github.com/zjunlp/EasyEdit; repo README lists Paper (arXiv 2401.01286) and Benchmark links; examples/KnowEdit.md reproduces the paper
+  links.data: 'paper and EasyEdit README link https://huggingface.co/datasets/zjunlp/KnowEdit; HF API: gated=false, private=false, license mit, 13 files under benchmark/'
+  scale.questions: 'paper Table 3 (identical in arXiv v1 and v5 HTML), # Test row summed: 1,266+1,230+1,392+885+800+80; released-file counts from downloading HF JSON files on 2026-10-10'
+  scale.notes: paper Table 3; EasyEdit README Table (ZsRE test 1301); examples/KnowEdit.md table (WikiBio 464/306, ZsRE 1301); HF JSON record counts (wiki_counterfact test_cf 839/train_cf 1427, WikiBio 306/464, ZsRE 1301, trivia success 80)
+  scale.conversations: 'null: benchmark consists of single edit instances, no conversations'
+  scale.avg_context_length: 'null: not reported in paper'
+  metrics: paper §3.5 'Evaluation for Knowledge Editing' (Edit Success, Portability, Locality, Generative Capacity/Fluency) and Table 4
+  judge_model: 'null: paper uses exact-match/argmax accuracy, KL divergence (ConvSent locality), and n-gram entropy; no LLM judge in v1 or v5 text'
+  repro_level: 'EasyEdit repo tree (checked 2026-10-10): examples/run_knowedit_llama2.py (datatypes zsre/recent/counterfact/wikibio, computes Edit_Succ/portability/locality/fluency), examples/run_convsent_llama2.py, examples/run_santinization_llama2.py, easyeditor/dataset/knowedit.py; data downloadable from HF zjunlp/KnowEdit (ungated)'
+  notes: arXiv v5 comment; EasyEdit README news 2024-11-19 and 2024-11-09; examples/KnowEdit.md; HF dataset card license mit

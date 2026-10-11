@@ -1,0 +1,48 @@
+name: Ground Truth First
+slug: ground-truth-first
+release_date: 2026-07
+venue: arXiv preprint
+memory_types:
+- conversational_longterm
+- personalization
+- episodic
+- semantic_knowledge_update
+- memory_security
+links:
+  paper: https://arxiv.org/abs/2607.21962
+  code: https://github.com/veracium-ai/Veracium
+  data: null
+scale:
+  conversations: null
+  questions: 383
+  avg_context_length: ~2.8–5.2K tokens (full rendered history per user)
+  notes: '383 validated questions over 15 types: 275 short-horizon questions (14 users, chat and email) and 108 tenure questions (6 users with nine-week histories), asked as as-of-date sets at weeks 3, 6 and 9. Short-horizon histories hold about 30–60 records per user. The paper reports no total count of conversations, sessions or emails. Answerability audit: 215/220 passed.'
+metrics:
+- LLM-judged accuracy (overall and per question type)
+- Per-checkpoint tenure accuracy on as-of-date question sets (weeks 3/6/9)
+- Early-chapter (evicted-content) recall
+- Injection resistance (unsupported assertions on planted injection probes)
+- Confabulation vs abstention error share (wrong-specific share of errors)
+- Read cost (input tokens per question)
+- Write-stage audit (fact recall, errors per audit)
+judge_model: claude-sonnet-5 (primary, versioned rubric); deepseek.v3.2 for complete cross-family re-judging
+repro_level: paper_only
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: The authors give the instrument no separate name. Veracium is the memory library the paper released, not the benchmark. arXiv v1 says the study-artifact package (generator, harness, CC BY 4.0 corpus, verdicts, logs) is still "in preparation". As of 2026-10-10 the Veracium repo (v0.26.1, MIT) holds only the library and a 4-scenario acceptance eval, not the 383-question corpus or the generator. No Hugging Face or Zenodo release was found. The paper treats the judge as part of the benchmark definition.
+sources:
+  name: arXiv 2607.21962v1 title and §3; the paper calls it a 'ground-truth-first evaluation instrument' and gives no other benchmark name
+  release_date: 'arXiv API: 2607.21962v1 published 2026-07-24'
+  venue: 'arXiv API: no journal_ref; comment is only ''25 pages, 2 figures. Code: ...''; paper names no archival venue and refers to a future archival version; CITATION.cff lists it as an arXiv preprint'
+  memory_types: paper §3.2 question types (multi-session, preference current/application, episodic, temporal, knowledge-update current/past, expired-state, conflict-resolution, injection-probe) over chat and email histories; §5.7 injection probes and memory-poisoning ladder
+  links.paper: arXiv API entry 2607.21962
+  links.code: 'arXiv comment ''Code: https://github.com/veracium-ai/Veracium'' and paper Reproducibility statement; gh api repos/veracium-ai/Veracium (MIT)'
+  links.data: 'no dataset page: paper says the corpus is in preparation; Hugging Face dataset search for ''veracium'' and Zenodo search both empty (2026-10-10)'
+  scale.questions: 'paper §3.2 (arXiv v1 HTML): ''Total: 383 validated questions across 15 question types''; 275 short-horizon + 108 tenure'
+  scale.conversations: 'null: paper reports users (14 + 6) and records per user, not a conversation or session count'
+  scale.avg_context_length: 'paper §5.8: full history ''the entire corpus per question (~2.8–5.2K tokens here)''; §2.3: ''~30–60 records per user'''
+  scale.notes: paper §3.2, §3.3, §2.3
+  metrics: paper §4 ('totals, per-category splits ... per-checkpoint accuracy'), Table 2, Table 3, §5.4 early-chapter recall, §5.5 write audit, §5.7 injection and abstention, §5.8 cost
+  judge_model: 'paper §3.4: ''The judge (claude-sonnet-5, versioned rubric)''; cross-family judge deepseek.v3.2 via Bedrock (§3.4, §7, Appendix B); answerer claude-haiku-4-5-20251001'
+  repro_level: 'repo tree checked 2026-10-10: only the library, tests/eval/run_eval.py with scenarios.json (4 small acceptance scenarios) and tests/longmemeval/; no corpus generator, benchmark corpus or harness for the 383 questions; releases v0.4.4–v0.26.1 hold only the library wheel and sdist; paper Reproducibility statement says the artifact package is ''in preparation'''
+  notes: paper Reproducibility statement; repo README, ROADMAP.md, CITATION.cff, tests/eval/scenarios.json; GitHub releases listing

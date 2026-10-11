@@ -1,0 +1,36 @@
+{
+ "name": "ConvoMem",
+ "slug": "convomem",
+ "leads": {
+  "registry_key": "arxiv:2511.10523",
+  "tier": "P1",
+  "arxiv": "2511.10523 (arXiv API: v1 2025-11-13; title: Convomem Benchmark: Why Your First 150 Conversations Don't Need RAG)",
+  "community_list_entries": [
+   {
+    "source": "tsinghua",
+    "section": "Benchmark",
+    "name": "ConvoMem",
+    "paper_url": "https://arxiv.org/abs/2511.10523",
+    "code_url": "https://github.com/SalesforceAIResearch/ConvoMem",
+    "data_url": null
+   },
+   {
+    "source": "topoteretes",
+    "section": "Benchmarks & evaluation (prose mention, no link)",
+    "name": "ConvoMem",
+    "paper_url": null,
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "conversational_longterm",
+    "personalization",
+    "semantic_knowledge_update"
+   ],
+   "extra_tags": [],
+   "kind_reason": "Conversational memory benchmark with 75,336 QA pairs across user facts, assistant recall, abstention, preferences, temporal changes and implicit connections; compares full-context vs RAG-based memory."
+  }
+ }
+}

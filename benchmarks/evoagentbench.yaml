@@ -1,0 +1,45 @@
+name: EvoAgentBench
+slug: evoagentbench
+release_date: 2026-07
+venue: arXiv preprint
+memory_types:
+- procedural_workflow
+- coding_cross_session
+links:
+  paper: https://arxiv.org/abs/2607.05202
+  code: https://github.com/EverMind-AI/EvoAgentBench
+  data: https://huggingface.co/datasets/EverMind-AI/EvoAgentBench
+scale:
+  conversations: null
+  questions: 267
+  avg_context_length: null
+  notes: 267 = held-out test tasks (65 BrowseComp-Plus, 86 LiveCodeBench, 56 SWE-Bench Verified, 60 GDPVal); 528 train tasks supply experience. Drawn from a 1,108-task Ability Graph (2,605-task source pool, 170 canonical Abilities). No dialogues; context length not reported. HF card adds an OmniMath domain (478/100) not in the paper.
+metrics:
+- Average transfer gain Δ vs. no-evolution (Vanilla) baseline
+- Per-domain accuracy (%), mean ± SE over 3 runs
+- 'BrowseComp-Plus: LLM-as-judge binary correctness'
+- 'LiveCodeBench: pass@1 on hidden tests'
+- 'SWE-Bench Verified: resolve rate (hidden test suites)'
+- 'GDPVal: reference-based LLM-judge score'
+- Turn cost change ΔT% relative to Vanilla (all / solved / unsolved tasks)
+judge_model: Evaluation backbone itself (Qwen3.5-27B / Qwen3.5-397B / Gemma-4-31B) for the BrowseComp-Plus and GDPVal domains
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: Split files (repo and HF) hold task IDs only. Task data comes from the upstream benchmarks (BrowseComp-Plus decrypt plus FAISS index, LiveCodeBench, SWE-Bench Verified Docker images, GDPVal), each under its own terms. The HF card describes five domains (1006/367, adding OmniMath), but the paper and repo use four (528/267). The public release ships only the Baseline and EverOS paths; the Memento, ReasoningBank, GEPA and Anchor Skill conditions are not included. The repo's GDPVal evaluator defaults to gpt-4o.
+sources:
+  name: 'arXiv 2607.05202 title ''EvoAgentBench: Benchmarking Agent Self-Evolution via Ability Transfer'''
+  release_date: 'arXiv API: 2607.05202v1 published 2026-07-06 (only version)'
+  venue: 'arXiv API: no journal_ref; comment ''15 pages, 2 figures, 8 tables''; repo README cites as arXiv preprint arXiv:2607.05202'
+  memory_types: 'paper §3/§3.1: Abilities are reusable procedures (search strategy, debugging procedure, validation workflow) distilled from training trajectories into skills/cases/workflows/prompts; primary metric is transfer gain on held-out test tasks. Two of four domains are coding (SWE-Bench Verified repository-level repair, LiveCodeBench), where experience from separate training tasks is reused on later held-out tasks (§3.2, §4.1)'
+  links.paper: arXiv abs page 2607.05202
+  links.code: GitHub EverMind-AI/EvoAgentBench (authors' org EverMind; README links paper and HF dataset; benchmark/ holds the runner)
+  links.data: 'paper abstract: ''publicly available at https://huggingface.co/datasets/EverMind-AI/EvoAgentBench''; HF API: public, not gated, Apache-2.0'
+  scale.questions: paper §3.2.5 and Table 2 (267 test / 528 train); confirmed by counting the HF task_split.json files on 2026-10-10 (65+86+56+60 test, 154+182+87+105 train) and repo benchmark/data/splits/manifest.json totals
+  scale.conversations: 'not applicable: tasks are agentic problems, not dialogues'
+  scale.avg_context_length: not reported in paper or repo
+  scale.notes: paper §3.3, Table 2, Appendix A.1/A.5; HF README.md overview table
+  metrics: paper §3.1 (average transfer gain Δ_m), §4.1 'Protocol and metrics', Table 3 (accuracy ± SE), Table 4 (turn cost ΔT%), Appendix E.1
+  judge_model: 'paper Appendix E.1: BrowseComp-Plus ''we use the same prompt template with our evaluation backbone''; GDPVal ''official evaluation prompts with our evaluation backbone''; evaluation backbones listed in §4.1. LiveCodeBench and SWE-Bench are programmatic'
+  repro_level: 'repo tree checked 2026-10-10: benchmark/src/run.py (baseline runner, --split test), benchmark/src/skill_evolution/evermemos/extract_skills.py and eval_with_skills.py, domain evaluators (e.g. benchmark/src/domains/information_retrieval/judge.py, knowledge_work/evaluate.py), splits in benchmark/data/splits/*.json; HF dataset has the split files'
+  notes: 'HF README.md (five domains, 1006/367); repo benchmark/README.md ''Release scope''; benchmark/src/domains/knowledge_work/knowledge_work.yaml (eval_model_name: gpt-4o)'

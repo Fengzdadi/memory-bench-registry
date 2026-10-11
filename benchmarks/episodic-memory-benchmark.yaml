@@ -1,0 +1,42 @@
+name: Episodic Memory Benchmark
+slug: episodic-memory-benchmark
+release_date: 2025-01
+venue: ICLR 2025
+memory_types:
+- episodic
+- parametric
+links:
+  paper: https://arxiv.org/abs/2501.13121
+  code: https://github.com/ahstat/episodic-memory-benchmark
+  data: https://doi.org/10.6084/m9.figshare.28244480
+scale:
+  conversations: null
+  questions: 686
+  avg_context_length: ~100K tokens (102,870; long book)
+  notes: 'Questions: 686 QA pairs on the main long book (200 chapters, ~100K tokens; Table 2). The short book has 20 chapters, ~10K tokens (10,397) and 456 QA. The Table 3 recall-task bins sum to 548. The corpus is synthetic books, not conversations, so conversations is null. 11 books are released, the largest with 2,000 chapters (1M+ tokens).'
+metrics:
+- F1-score (optimistic bound over LLM-extracted items)
+- Kendall's tau (chronological ordering)
+- Latest-state exact-match fraction
+- All-states exact-match fraction
+judge_model: Claude 3.5 Sonnet (claude-3-5-sonnet-20240620)
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: The repo README calls it 'The Tulving Episodic Memory Benchmark' and has a leaderboard added after the paper (Simple Recall and Chronological Awareness scores on the long book, with models added Feb/Sep 2025). The paper does not name its judge LLM. In the repo code, the model that generated the book does the scoring (claude-3-5-sonnet-20240620 for the main books), so new runs need Anthropic/OpenAI API keys. Data is on figshare (CC0, v2, two zips). Code is MIT.
+sources:
+  name: Paper title 'Episodic Memories Generation and Evaluation Benchmark for Large Language Models'. Repo name episodic-memory-benchmark. README heading 'The Tulving Episodic Memory Benchmark'
+  release_date: 'arXiv API: 2501.13121v1 published 2025-01-21 (only version)'
+  venue: ICLR 2025 proceedings page proceedings.iclr.cc/paper_files/paper/2025/hash/7ff013b7e372ba5b790352ccd6908f03-Abstract-Conference.html. Camera-ready PDF header 'Published as a conference paper at ICLR 2025'. README says 'Accepted at ICLR 2025'. arXiv has no journal_ref
+  memory_types: 'episodic: paper §3-4, recall of events cued by time/space/entity/content, including latest-state and chronological questions (Tables 1, 3, 4). parametric: §5.1 compares ''(3) Parametric Memory via Fine-Tuning'' with in-context and RAG on the same questions (Table 3, fine-tuned gpt-4o-mini). semantic_knowledge_update excluded: latest-state questions are date-anchored episodic recall, not fact updating'
+  links.paper: arXiv abs 2501.13121
+  links.code: README links arXiv 2501.13121. Repo description cites the paper [ICLR 2025]. Authors' repo ahstat/episodic-memory-benchmark
+  links.data: 'README Installation section: ''The data is available at this address: https://doi.org/10.6084/m9.figshare.28244480''. figshare API: v2, CC0, files episodic-memory-benchmark-data.zip (151 MB) and episodic-memory-benchmark-additional-data-Feb25.zip (17 MB). Both download links returned HTTP 206 on 2026-10-10'
+  scale.questions: 'Paper Table 2 (ICLR camera-ready p.7 / arXiv v1 §4.3): long book, 686 selected QA pairs (short book 456)'
+  scale.avg_context_length: 'Paper Table 2: long book ≈100k tokens (102870). Short book ≈10k (10397)'
+  scale.conversations: 'null: the benchmark uses synthetic book documents (2 main books in Table 2), not conversations'
+  scale.notes: Paper Table 2, Table 3 (bins 150/150/90/98/60), footnote 3 (2000-chapter book), Table 28 / README 'Available Benchmarks' (11 datasets)
+  metrics: Paper §4.3 and App. B.3.2-B.3.3 (optimistic F1, Kendall's tau). Table 4 (Latest, All, Kendall τ). README defines the later Simple Recall and Chronological Awareness aggregate scores
+  judge_model: 'Paper §4.3 / App. B.3-B.4 uses an ''LLM-as-a-judge'' evaluator without naming the model. Repo epbench/src/evaluation/generator_answers_1_prompting.py, generate_evaluation_func and generate_chronological_func: model_name = model_parameters[''model_name''] with the comment ''# using the model that built the benchmark, not the one answering the questions''. Paper Table 2: main books produced with Claude 3.5 Sonnet 2024-06-20'
+  repro_level: Repo tree (checked 2026-10-10) contains epbench/experiments/quickstart.py (generation -> answering -> evaluation -> results), epbench/experiments/step_2_answering.ipynb, step_3_results.ipynb, epbench/src/evaluation/evaluation_wrapper.py and scoring_answers.py. Data is downloadable from figshare (CC0)
+  notes: README (Ranking section, Installation .env keys, License). figshare API metadata. Repo code comment on the judge model

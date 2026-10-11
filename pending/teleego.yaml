@@ -1,0 +1,41 @@
+name: TeleEgo
+slug: teleego
+release_date: 2025-10
+venue: arXiv preprint
+memory_types:
+- episodic
+- multimodal
+links:
+  paper: https://arxiv.org/abs/2510.23981
+  code: https://github.com/TeleAI-UAGI/TeleEgo
+  data: https://huggingface.co/datasets/David0219/TeleEgo
+scale:
+  conversations: 5
+  questions: 3291
+  avg_context_length: avg. 14.4 h of egocentric video per participant
+  notes: '5 = participant streams (3 days each, merged into one video). 3,291 human-verified QA: Memory 1,937, Understanding 897, Cross-Memory Reasoning 457, across 12 subtasks. Formats: single-choice 1,743, binary 614, multi-choice 493, open-ended 441. The v4 paper evaluated the proprietary models on one participant''s video only.'
+metrics:
+- Real-Time Accuracy (RTA, %)
+- Memory Persistence Time (MPT, minutes)
+- LLM-judge score (0-5) for open-ended questions
+judge_model: GPT-4o
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'Streaming protocol with a 5 s decision window. arXiv v1 reported MPT results (Table 4). v4 reports only RTA and says the current evaluation includes no MPT results. The HF data is ungated: a 47-part 7z archive holding five merged MP4s of about 35-58 GB each, plus the QA and timeline JSON. The HF tag says MIT, but the README restricts dataset use to research only. Human-verified transcripts are released separately as H-oliday/TeleEgo-Source. metrics.py hard-codes local paths.'
+sources:
+  name: 'arXiv title ''TeleEgo: Benchmarking Egocentric AI Assistants in the Wild''; repo README'
+  release_date: 'arXiv API: 2510.23981 published 2025-10-28 (v1); abs page lists v1 28 Oct 2025 to v4 10 Dec 2025'
+  venue: arXiv abs page shows no comments or journal-ref; README citation is 'arXiv preprint arXiv:2510.23981'; no venue found
+  memory_types: 'abstract and Sec. 3: QA over long streaming egocentric video, audio and text recalling past events (Memory: short-term, long-term and ultra-long memory, entity tracking, temporal comparison) and linking distant events (Cross-Memory Reasoning)'
+  links.paper: arXiv 2510.23981
+  links.code: paper author line links github.com/TeleAI-UAGI/TeleEgo; repo description reads 'The official repo of TeleEgo'
+  links.data: repo README links the dataset; HF API shows David0219/TeleEgo is public and not gated, with archive.7z.001-047
+  scale.conversations: 'paper Sec. 3.1 ''five participants''; README ''Participants: 5'', with one merged video and one QA file per participant'
+  scale.questions: 'abstract, Sec. 3.4 and Table 2 (arXiv v4 HTML): 3,291 QA items; v1 abstract also gives 3,291'
+  scale.avg_context_length: 'paper Table 1 ''avg. 14.4 h''; README ''Recording: 3 days/participant (~14.4 hours each)'''
+  scale.notes: paper Table 2 per-capability, per-subtask and per-type counts; Table 3 caption (v4) on proprietary models evaluated on one participant
+  metrics: paper Sec. 4.1 defines RTA and MPT; Sec. 4.2 GPT-4o judge score for open-ended items; v1 Table 4 reports MPT and v4 Sec. 4.4 says MPT results are not included
+  judge_model: 'paper Sec. 4.2 (v1 and v4): open-ended questions get an LLM-judge score (0-5) produced by GPT-4o; repo utils.py calls GPT-4o via Azure to score open-ended answers'
+  repro_level: repo tree has run.sh, evaluate_{gpt_4o,gemini25_pro,qwen25_omni,qwen25_vl,minicpm_o,videochat_online}.py and metrics.py (RTA/MPT); data downloadable from HF (checked 2026-10-10)
+  notes: HF dataset card (file sizes, 7z extraction, MIT tag, research-only line); README links to TeleEgo-Source; HF API shows H-oliday/TeleEgo-Source is public; arXiv v1 vs v4 HTML; metrics.py contents

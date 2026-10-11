@@ -1,0 +1,45 @@
+{
+ "name": "Minerva",
+ "slug": "minerva",
+ "leads": {
+  "registry_key": "arxiv:2502.03358",
+  "tier": "P1",
+  "arxiv": "2502.03358 (arXiv API: v1 2025-02-05; title: Minerva: A Programmable Memory Test Benchmark for Language Models)",
+  "community_list_entries": [
+   {
+    "source": "teleai",
+    "section": "📏 Benchmarks / 💬 Plain-Text Benchmarks / 🗓️ 2025",
+    "name": "Minerva: A Programmable Memory Test Benchmark for Language Models",
+    "paper_url": "https://arxiv.org/abs/2502.03358",
+    "code_url": "https://github.com/microsoft/minerva_memory_test",
+    "data_url": null
+   },
+   {
+    "source": "iaar",
+    "section": "Resources / Benchmarks and Tasks / Memory Mechanism Evaluation",
+    "name": "Minerva",
+    "paper_url": "https://arxiv.org/pdf/2502.03358",
+    "code_url": null,
+    "data_url": null
+   },
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "Minerva: A Programmable memory test benchmark for language models",
+    "paper_url": "https://arxiv.org/pdf/2502.03358",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "semantic_knowledge_update"
+   ],
+   "extra_tags": [
+    "long_context_single_input",
+    "synthetic_context_operations"
+   ],
+   "kind_reason": "A programmable memory-test benchmark, where memory means the context. It covers atomic tasks (search, recall/edit, match/compare, spot-the-difference, set operations, stateful processing of quantity and set state) plus composite tasks. Contexts are mostly 4K tokens, extended to 16K/32K in the append"
+  }
+ }
+}

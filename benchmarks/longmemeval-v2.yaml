@@ -1,0 +1,41 @@
+name: LongMemEval-V2
+slug: longmemeval-v2
+release_date: 2026-05
+venue: ICML 2026 Workshop SCALE
+memory_types:
+- episodic
+- procedural_workflow
+- multimodal
+links:
+  paper: https://arxiv.org/abs/2605.12493
+  code: https://github.com/xiaowu0162/LongMemEval-V2
+  data: https://huggingface.co/datasets/xiaowu0162/longmemeval-v2
+scale:
+  conversations: 1540
+  questions: 451
+  avg_context_length: 25M–115M tokens per haystack (Small/Medium)
+  notes: 'questions = 451 (abstract; release: 240 web, 211 enterprise; 134 static, 86 dynamic, 74 workflow, 29 gotchas, 128 abstention). conversations = 1,540 collected agent trajectories (§3.2: 599 WebArena + 941 WorkArena). LME-V2-Small: one 100-trajectory haystack per domain (~25M tokens). LME-V2-Medium: ~500-trajectory question-specific haystacks (~115M tokens; release mean 498, min 387).'
+metrics:
+- 'Accuracy (overall and per ability: static, dynamic, workflow, gotchas; deterministic normalized/ordered phrase, single-choice and multi-select matching for structured answers, binary LLM judge for gotchas and abstention)'
+- Query latency (seconds per memory query)
+judge_model: GPT-5.2 (medium reasoning effort)
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: This is a separate benchmark from LongMemEval (2024). Its histories are multimodal web and ServiceNow agent trajectories, not chats. Paper §3.2 reports a pool of 1,540 trajectories, but the HF trajectories.jsonl (~1.2 GB) holds 1,870 records (counted 2026-10-10), of which the haystacks reference 1,473. Running the harness needs a self-hosted Qwen3.5-9B reader, an OpenAI key for the GPT-5.2 judge, and a Codex binary for the coding-agent baselines. The leaderboard's LAFS-gain score comes from the repo and website only, not the paper. Code and data are Apache-2.0 and ungated.
+sources:
+  name: 'arXiv API title ''LongMemEval-V2: Evaluating Long-Term Agent Memory Toward Experienced Colleagues''; repo README ''This is the official LongMemEval-V2 repository'''
+  release_date: 'arXiv API: 2605.12493v1 published 2026-05-12T17:59:34Z (only version; updated = published)'
+  venue: 'icml.cc/virtual/2026/67422 (checked 2026-10-10): ''Poster in Workshop: SCALE: Scalable Learning and Optimization for Efficient Multimodal AI Agents'', Fri Jul 10 2026. Same seven authors. Workshop title ''...Benchmarking Agent Memory for Experienced Colleagues''; abstract names LongMemEval-V2 (LME-V2), 451 questions and AgentRunbook. OpenReview forum WUU5KTwCq5 is linked but showed a bot check, so its venue string was not read. arXiv API: no journal_ref, comment ''Work in Progress''. Repo README and project website give arXiv only. Workshop-poster format follows registry precedent dialsim.yaml (''ICLR 2026 Workshop MemAgents'').'
+  memory_types: 'Paper §3.1 defines five abilities. episodic = Static State Recall and Dynamic State Tracking: recall of specific UI states and observed state transitions from past agent trajectories (release question types static-environment 134 and dynamic-environment 86). procedural_workflow = Workflow Knowledge (''knows the steps needed to perform common tasks in the customized environment'') and Environment Gotchas (recurring failure modes), distilled across many trajectories (74 ''procedure'' and 29 ''errors-gotchas'' questions); this also matches the registry''s earlier phase-1 verification. It is scored by QA accuracy, not downstream task success. multimodal = Table 1 marks MM ✓ for context and question; trajectories contain screenshots (App. A.1); gotchas questions include screenshots (29 release questions have an image); memory systems may return image items (App. A.5). semantic_knowledge_update not tagged: dynamic questions test environment transition dynamics, not overriding facts that change. embodied not tagged: memory is scored via QA, not actions in the environment.'
+  links.paper: arXiv abs 2605.12493; linked from repo README Paper badge and HF dataset card
+  links.code: 'gh api repos/xiaowu0162/LongMemEval-V2: owner is first author Di Wu (xiaowu0162), description ''Official repository for LongMemEval-V2''; linked from the project website https://xiaowu0162.github.io/longmemeval-v2/, which the paper cites'
+  links.data: 'HF API api/datasets/xiaowu0162/longmemeval-v2: exists, gated=false, private=false, Apache-2.0; files questions.jsonl, trajectories.jsonl, haystacks/lme_v2_{small,medium}.json, question_screenshots/, trajectory_screenshots/*.tar.gz; default repo id in data/download_data.py'
+  scale.conversations: 'paper §3.2 Trajectory Collection: ''The final pool contains 599 trajectories from WebArena and 941 from WorkArena/WorkArena++'' (= 1,540). The release differs: HF DATA_CARD says 1,870 trajectories, trajectories.jsonl streamed and line-counted = 1,870 on 2026-10-10, and the union of small+medium haystacks references 1,473 unique ids.'
+  scale.questions: 'abstract and §1 (''451 manually curated questions''); Table 1 #Q = 451; HF questions.jsonl downloaded 2026-10-10 has 451 lines'
+  scale.avg_context_length: paper §1 '25M/115M tokens in the small/medium tiers', §3.2 'approximately 25M and 115M tokens', Table 1 '# Tok.' 25M–115M and '# Sess.' 100–498 (range across preset tiers per caption)
+  metrics: paper §1 and §3.3 'We report answer accuracy and query latency'; §3.3 'normalized string matching for structured answers and an LLM judge for free-form answers'; App. A.5 lists deterministic evaluators and the binary LLM judge; Table 2 columns Overall/Static/Dynamic/Workflow/Gotchas/Latency for LME-V2-Small and Medium
+  judge_model: 'paper App. A.5 Experimental Details: ''For evaluating the correctness for abstention and gotchas questions we use the GPT-5.2 model with medium reasoning effort as the LLM judge''; repo evaluation/run_eval.py default --evaluator-model gpt-5.2, --evaluator-reasoning-effort medium'
+  repro_level: 'repo tree checked 2026-10-10: evaluation/run_eval.py (--data-root/--domain/--tier/--method), evaluation/harness.py, evaluation/qa_eval_metrics.py (abstention/gotchas judges), evaluation/scripts/run_{no_retrieval,rag_query_to_slice,rag_query_to_slice_notes,agentrunbook_r,codex,agentrunbook_c}.sh, data/download_data.py + prepare_data.py + validate_data.py; data on ungated HF (questions.jsonl and haystack files downloaded, trajectories.jsonl streamed)'
+  notes: paper §3.2 vs HF DATA_CARD.md and trajectories.jsonl line count; repo README setup (Qwen3.5-9B reader, OPENAI_API_KEY for gpt-5.2 judge, CODEX_BINARY); leaderboard/README.md (LAFS gain); HF file sizes (trajectories.jsonl 1,195,604,539 bytes); repo and HF licence fields Apache-2.0
+  scale.notes: HF questions.jsonl question_type/domain counts; haystack files lme_v2_small.json (all lists length 100, 200 unique ids) and lme_v2_medium.json (min 387, max 500, mean 498.08) downloaded 2026-10-10; paper §3.2 Haystack Creation

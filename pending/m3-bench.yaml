@@ -1,0 +1,39 @@
+name: M3-Bench
+slug: m3-bench
+release_date: 2025-08
+venue: ICLR 2026
+memory_types:
+- episodic
+- multimodal
+links:
+  paper: https://arxiv.org/abs/2508.09736
+  code: https://github.com/ByteDance-Seed/m3-agent
+  data: https://huggingface.co/datasets/ByteDance-Seed/M3-Bench
+scale:
+  conversations: 1020
+  questions: 4490
+  avg_context_length: 2,039.9 s (robot) / 1,630.7 s (web) average video length
+  notes: 'Counts are long videos, not conversations: 100 M3-Bench-robot + 920 M3-Bench-web. Questions are open-ended QA pairs: 1,276 robot + 3,214 web, summed here (paper Table 2 gives them per subset). Repo annotation files match these counts (counted 2026-10-10). arXiv v1 reported 929 web videos / 5,037 web QAs. The paper also evaluates on VideoMME-long.'
+metrics:
+- Accuracy (GPT-4o-judged correctness vs. reference answer), overall and per question type
+judge_model: GPT-4o
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: Long-video QA benchmark released with the M3-Agent system. Robot videos, subtitles, intermediate outputs and memory graphs are on Hugging Face (ungated, CC-BY-NC-SA-4.0). The 920 web videos are distributed only as YouTube URLs in data/annotations/web.json, so availability may decay. The arXiv v1 web split (929 videos / 5,037 QAs) differs from the v4 and repo release (920 / 3,214). The repo's evaluation script calls gpt-4o-2024-11-20 through Azure. Code is Apache-2.0.
+sources:
+  name: 'arXiv abstract and repo README: ''M3-Bench'' (subsets M3-Bench-robot, M3-Bench-web)'
+  release_date: 'arXiv API: 2508.09736v1 published 2025-08-13'
+  venue: ICLR 2026 virtual poster page iclr.cc/virtual/2026/poster/10009685 (OpenReview id PMz29A7Muq); repo README title says ICLR 2026; arXiv shows no journal_ref
+  memory_types: 'paper/README: QA over long robot/web videos with visual and audio input; question types (person understanding, cross-modal reasoning, multi-hop, multi-evidence, general knowledge extraction) test recall of observed events and entities from the video stream; no actions in an environment, so not embodied'
+  links.paper: arXiv 2508.09736
+  links.code: 'arXiv abstract: ''Model, code and data are available at https://github.com/bytedance-seed/m3-agent'''
+  links.data: 'repo README Data badge -> huggingface.co/datasets/ByteDance-Seed/M3-Bench (HF API: not gated, cc-by-nc-sa-4.0, 239 files incl. videos/robot, subtitles/robot, intermediate_outputs, memory_graphs)'
+  scale.conversations: 'paper Table 2 (arXiv v4 HTML): 100 robot + 920 web videos; repo robot.json/web.json contain 100 and 920 videos (counted 2026-10-10)'
+  scale.questions: 'paper Table 2 (arXiv v4): 1,276 robot + 3,214 web QA pairs; repo annotation files contain 1,276 and 3,214 questions (counted 2026-10-10)'
+  scale.avg_context_length: 'paper Table 2 (arXiv v4): average length 2,039.9 s (robot), 1,630.7 s (web)'
+  scale.notes: 'arXiv v1 HTML Table 2: 929 web videos, 5,037 web QAs'
+  metrics: 'paper §5 / Tables 5-7 (arXiv v4): accuracy overall and by question type, judged by GPT-4o'
+  judge_model: 'paper (arXiv v4): GPT-4o judges each answer against the reference and agrees with the human majority vote on 96% of 100 sampled triples; repo m3_agent/control.py sets gpt_model = ''gpt-4o-2024-11-20'''
+  repro_level: repo tree has m3_agent/control.py (QA plus GPT-4o eval_answer on --data_file data/annotations/robot.json) and data/annotations/{robot,web}.json; robot videos downloadable from HF; web videos come from YouTube URLs (checked 2026-10-10)
+  notes: HF dataset card licence; web.json video_url hosts are all www.youtube.com; repo license Apache-2.0 (GitHub API)

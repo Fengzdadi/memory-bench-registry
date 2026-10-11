@@ -1,0 +1,28 @@
+{
+ "name": "MemTrace",
+ "slug": "memtrace",
+ "leads": {
+  "registry_key": "arxiv:2606.17328",
+  "tier": "P2",
+  "arxiv": "2606.17328 (arXiv API: v1 2026-06-15; title: MemTrace: Probing What Final Accuracy Misses in Long-Term Memory)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "MemTrace: Probing What Final Accuracy Misses in Long-Term Memory",
+    "paper_url": "https://arxiv.org/pdf/2606.17328",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "conversational_longterm",
+    "personalization",
+    "semantic_knowledge_update"
+   ],
+   "extra_tags": [],
+   "kind_reason": "Diagnostic benchmark of 835 typed knowledge points about users (from multi-session histories), expanded into 15,422 question rows. Each fact is probed by memory age, question type (current state, earlier state, change trajectory) and evidence condition (present, missing, false premise). No code URL "
+  }
+ }
+}

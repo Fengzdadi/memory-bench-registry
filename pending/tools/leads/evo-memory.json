@@ -1,0 +1,48 @@
+{
+ "name": "Evo-Memory",
+ "slug": "evo-memory",
+ "leads": {
+  "registry_key": "arxiv:2511.20857",
+  "tier": "P0",
+  "arxiv": "2511.20857 (arXiv API: v1 2025-11-25; title: Evo-Memory: Benchmarking LLM Agent Test-time Learning with Self-Evolving Memory)",
+  "community_list_entries": [
+   {
+    "source": "teleai",
+    "section": "📏 Benchmarks / 💬 Plain-Text Benchmarks / 🗓️ 2025",
+    "name": "Evo-Memory: Benchmarking LLM Agent Test-time Learning with Self-Evolving Memory",
+    "paper_url": "https://arxiv.org/abs/2511.20857",
+    "code_url": null,
+    "data_url": null
+   },
+   {
+    "source": "teleai",
+    "section": "📈 Papers - Memory for Agent Evolution / 🧭 Reinforcement Learning & Continual Learning / 🗓️ 2025",
+    "name": "Evo-Memory: Benchmarking LLM Agent Test-time Learning with Self-Evolving Memory",
+    "paper_url": "https://arxiv.org/abs/2511.20857",
+    "code_url": null,
+    "data_url": null
+   },
+   {
+    "source": "cognee",
+    "section": "Future directions",
+    "name": "Evo-Memory",
+    "paper_url": "https://arxiv.org/abs/2511.20857",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "procedural_workflow"
+   ],
+   "extra_tags": [
+    "test_time_learning"
+   ],
+   "kind_reason": "Streaming benchmark/framework restructuring datasets (AIME, GPQA, MMLU-Pro, ToolBench, AlfWorld, BabyAI, ScienceWorld, PDDL) into task streams to evaluate experience accumulation and reuse by 10+ memory modules; no coding/SWE datasets. No official code repo found (paper says code will be released)."
+  },
+  "phase1_verified_types": {
+   "procedural_workflow": "Sec.3.1: restructures datasets \"into streaming task sequences\" so that \"earlier tasks provide essential information or strategies for later ones\"; ExpRAG/ReMem retrieve and write experience memory each step."
+  },
+  "paper_hint": "https://arxiv.org/abs/2511.20857"
+ }
+}

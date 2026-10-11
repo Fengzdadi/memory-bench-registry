@@ -1,0 +1,46 @@
+name: Sequential-EQA
+slug: sequential-eqa
+release_date: 2026-07
+venue: IROS 2026
+memory_types:
+- embodied
+- multimodal
+links:
+  paper: https://arxiv.org/abs/2607.21571
+  code: https://github.com/jangablox/sequential-eqa
+  data: null
+scale:
+  conversations: 50
+  questions: 498
+  avg_context_length: ~10 questions per scene sequence
+  notes: 'conversations = 50 scene-level sequences, one per OpenEQA HM3D scene. questions = 498 in total, each run in paired episodic and sequential modes. Counts come from the repo README and manifest (counted on 2026-10-10: 1-13 questions per scene, mean 9.96). The paper gives only the Fig. 2 distribution. Real-robot trials (Unitree Go2, 5 questions each) are separate.'
+metrics:
+- Success Rate, episodic (SR)
+- Success Rate with memory, sequential (SR_mem)
+- Memory Advantage (MA = SR_mem - SR)
+- Path Length, episodic (PL)
+- Path Length with memory (PL_mem)
+- Step Advantage (SA)
+- Mean answer score (1-5)
+- Mean navigation time
+judge_model: Qwen3-8B-FP8
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: The protocol regroups OpenEQA HM3D questions by scene. The repo ships only question CSVs, so users must get HM3D scenes (Matterport licence) and an initial-pose CSV separately and install the four upstream agents. The paper says question order is shuffled with a fixed seed, but the repo manifest records source row order, with seed and source version unavailable. The repo includes 3 single-question scenes (lengths 1-13), while the project page states 6-14. The paper does not name the answer grader. The repo has no licence file.
+sources:
+  name: Repo README title 'Sequential-EQA'; paper Table II caption 'Performance comparison on Sequential-EQA benchmark'
+  release_date: 'arXiv API: 2607.21571v1 published 2026-07-23'
+  venue: arXiv comment 'Accepted to IROS 2026'; repo README BibTeX booktitle IEEE/RSJ IROS 2026; project page sequential-eqa.github.io
+  memory_types: 'Paper Sec. III-IV and V-A: a navigating agent (simulated HM3D/MP3D scenes plus a real Unitree Go2) answers several questions per scene with persistent visual/3D memory, scored by answer success and path length. Hence embodied and multimodal.'
+  links.paper: arXiv abs page 2607.21571
+  links.code: Project page https://sequential-eqa.github.io/ links code to github.com/jangablox/sequential-eqa (paper authors' repo, created 2026-07-22)
+  links.data: No separate dataset page. Sequence files are in the repo at benchmark/sequence_files/openeqa_hm3d/, and the project page has no Hugging Face or dataset link.
+  scale.conversations: Repo README ('50 HM3D scene sequences with 498 questions') and benchmark/sequence_files/openeqa_hm3d/manifest.json counts.scenes=50
+  scale.questions: manifest.json counts.questions=498 (sum of per-file counts verified 2026-10-10); README and project page also say 498
+  scale.avg_context_length: 'Computed from manifest: 498/50 = 9.96 questions per scene. Paper Sec. V-A: ''majority of scenes contain between 10 and 13 questions'''
+  scale.notes: manifest.json per-file question counts; paper Fig. 2 and Sec. VI-B (real robot)
+  metrics: Paper Sec. III-C Eqs. 4-9 (SR, SR_mem, MA, PL, PL_mem, SA), Table II; Fig. 3-4 (mean answer score 1-5, navigation time)
+  judge_model: Paper does not name a grader (only Qwen3-VL-8B-Instruct as the agent backbone). Official repo evaluation/grade_answers.py uses a local LLM grader with a 1-5 rubric, default --model Qwen/Qwen3-8B-FP8.
+  repro_level: Repo tree (checked 2026-10-10) has scripts/run_episodic.sh, scripts/run_sequential.sh -> adapters/runner.py, evaluation/grade_answers.py, evaluation/compute_metrics.py, and released question CSVs plus manifest.json. HM3D scenes must be obtained separately.
+  notes: Paper Sec. III-B (fixed-seed shuffle); repo benchmark/README.md and manifest.json (ordering=source_row_order, seed=null, source_version=unavailable); README Quick Start (HM3D_DATA_ROOT, HM3D_INITIAL_POSES); GitHub API license=null; project page '6-14' vs manifest min 1 / max 13

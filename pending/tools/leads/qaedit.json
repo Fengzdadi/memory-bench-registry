@@ -1,0 +1,14 @@
+{
+ "name": "QAEdit (with WILD evaluation)",
+ "slug": "qaedit",
+ "leads": {
+  "registry_key": "arxiv:2502.11177",
+  "tier": "P0",
+  "arxiv": "2502.11177 (arXiv API: v1 ?; title: None)",
+  "phase1_verified_types": {
+   "parametric": "Paper: 'QAEdit contains 19,249 samples across ten categories'. Sequential editing 'with a batch size of 1, i.e., updating knowledge incrementally'. FT-M 'directly optimizes model parameters at each step'."
+  },
+  "paper_hint": "https://arxiv.org/abs/2502.11177",
+  "code_hint": "https://github.com/WanliYoung/Revisit-Editing-Evaluation"
+ }
+}

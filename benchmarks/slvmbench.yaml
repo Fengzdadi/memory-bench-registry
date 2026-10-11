@@ -1,0 +1,41 @@
+name: SLVMBench
+slug: slvmbench
+release_date: 2026-07
+venue: arXiv preprint
+memory_types:
+- procedural_workflow
+- multimodal
+links:
+  paper: https://arxiv.org/abs/2607.11312
+  code: null
+  data: https://huggingface.co/datasets/SLVMBench/SLVMBench
+scale:
+  conversations: null
+  questions: 2261
+  avg_context_length: 10 minutes to 2 hours (range of merged video streams; no average reported)
+  notes: 2,261 human-verified five-option multiple-choice QA pairs from 1,220 videos in 11 categories. Each pair is evaluated in w/o Tutorial, w/ Tutorial and w/ Tutorial (Long) settings. Streams have no dialogue unit, so conversations is null. The mean overall_duration in the HF SLVMBench.json is about 74 min (computed 2026-10-10).
+metrics:
+- Accuracy (%) via option-letter matching, overall and per sub-task (NSP, SO, SGP, PR, TC, SC, MD, CB)
+- Delta / Delta_L (accuracy gain from tutorial over the w/o-Tutorial baseline)
+- Wilson 95% confidence intervals (Long setting)
+judge_model: null
+repro_level: data_public
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'arXiv v1 links no code or data. The self-described official HF dataset holds Apache-2.0 annotations plus tutorial/target clips and a concat script, but no evaluation script. Some long-setting distractors reference Video-MME videos that are not hosted there. The HF card claims NeurIPS 2026 Datasets & Benchmarks, which could not be verified; v1 was compiled with the preprint option. The paper is internally inconsistent: 11 vs 8 task types, and "up to 2-hour" vs "2-3 hour" streams. GitHub lark-png/SLVMBench is a README-only placeholder.'
+sources:
+  name: 'arXiv 2607.11312 title: ''SLVMBench: Skill Learning from Video Memory'''
+  release_date: 'arXiv API: 2607.11312v1 published 2026-07-13T09:26:13Z'
+  venue: arXiv abs page has no journal_ref or comments. OpenReview search for SLVMBench returned 0 notes, and no NeurIPS 2026 listing was found (checked 2026-10-10). The TeX source uses \usepackage[preprint]{neurips_2026}. The HF dataset card claims '[NeurIPS 2026 Datasets & Benchmarks Track]', but this is unverified.
+  memory_types: 'Paper §1/§3: the model must learn a skill from a tutorial video embedded in a long distractor stream and apply the procedural knowledge to a later, different target video. Table 3 Delta_L measures how tutorial memory changes performance, which fits procedural_workflow. The remembered content is video (with audio) processed by video-LLMs, which fits multimodal. The paper also calls the Long setting ''episodic memory capability'' (§3.3), but its questions test skill application rather than event recall.'
+  links.paper: arXiv abs page 2607.11312
+  links.code: No code URL in the paper (HTML/TeX searched) or on the HF Papers page (githubRepo=null). gh search found lark-png/SLVMBench, which holds only a README reading 'Hello!' and is not linked from the paper, so it is not treated as official.
+  links.data: 'HF dataset SLVMBench/SLVMBench: the README calls itself ''Official Hugging Face Dataset repository for SLVMBench''. It is not gated. SLVMBench.json has 2,261 entries and exactly 1,220 unique tutorial+target video IDs, matching the paper. It is not linked from the arXiv paper.'
+  scale.questions: 'Paper §1 contributions (TeX line 173): ''2,261 human-generated questions-answer pairs from 1,220 videos spanning 11 categories''. HF SLVMBench.json has 2,261 entries (counted 2026-10-10).'
+  scale.avg_context_length: 'Paper §4.1: ''merged videos are uniformly distributed in length, ranging from 10 minutes to 2 hours''. §3.3 says the temporal gap ranges ''from 10 minutes to 2 hours''.'
+  scale.conversations: 'Not applicable: samples are video streams, not dialogues.'
+  metrics: 'Paper Table 3 caption (result_all.tex): Accuracy (%), Delta and Delta_L, Wilson 95% CIs. Table 4 gives per-task accuracy. Appendix: accuracy by direct letter string matching.'
+  judge_model: 'No LLM judge: the appendix states accuracy is computed by direct string matching of the output letter. Gemini-2.5-Pro and GPT-4o were used only in dataset construction.'
+  repro_level: HF dataset SLVMBench/SLVMBench (checked 2026-10-10) is ungated and contains SLVMBench.json, Croissant.json, concat_video.py and 11,592 mp4 files in videos/trimmed_target_videos and videos/merged_short_videos. concat_video.py only concatenates clips, and no evaluation script exists. The GitHub repo is a README-only placeholder.
+  notes: arXiv TeX source v1, HF dataset card/README and file listing, SLVMBench.json videomme_data field (1,986 entries reference Video-MME video IDs), gh api for lark-png/SLVMBench.
+  scale.notes: Paper §1, §4.1; HF SLVMBench.json overall_duration field (min 616 s, mean 4,428 s, max 7,195 s; computed 2026-10-10).

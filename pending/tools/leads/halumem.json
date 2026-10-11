@@ -1,0 +1,39 @@
+{
+ "name": "HaluMem",
+ "slug": "halumem",
+ "leads": {
+  "registry_key": "arxiv:2511.03506",
+  "tier": "P1",
+  "arxiv": "2511.03506 (arXiv API: v1 2025-11-05; title: HaluMem: Evaluating Hallucinations in Memory Systems of Agents)",
+  "community_list_entries": [
+   {
+    "source": "teleai",
+    "section": "📏 Benchmarks / 💬 Plain-Text Benchmarks / 🗓️ 2025",
+    "name": "HaluMem: Evaluating Hallucinations in Memory Systems of Agents",
+    "paper_url": "https://arxiv.org/abs/2511.03506",
+    "code_url": "https://github.com/MemTensor/HaluMem",
+    "data_url": "https://huggingface.co/datasets/IAAR-Shanghai/HaluMem"
+   },
+   {
+    "source": "iaar",
+    "section": "Resources / Benchmarks and Tasks / Memory Hallucination Evaluation",
+    "name": "HaluMem",
+    "paper_url": "https://arxiv.org/pdf/2511.03506",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "conversational_longterm",
+    "semantic_knowledge_update",
+    "personalization",
+    "episodic"
+   ],
+   "extra_tags": [
+    "memory_hallucination"
+   ],
+   "kind_reason": "Operation-level hallucination benchmark for memory systems with memory extraction, memory updating and memory QA tasks over user-centric multi-turn dialogues (HaluMem-Medium/Long, ~15k memory points, 3.5k questions); memory points cover persona, events and relationships."
+  }
+ }
+}

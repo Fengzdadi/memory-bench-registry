@@ -1,0 +1,38 @@
+{
+ "name": "ZH-4O (MOOM)",
+ "slug": "zh-4o",
+ "leads": {
+  "registry_key": "arxiv:2509.11860",
+  "tier": "P1",
+  "arxiv": "2509.11860 (arXiv API: v1 2025-09-15; title: MOOM: Maintenance, Organization and Optimization of Memory in Ultra-Long Role-Playing Dialogues)",
+  "community_list_entries": [
+   {
+    "source": "teleai",
+    "section": "📏 Benchmarks / 💬 Plain-Text Benchmarks / 🗓️ 2025",
+    "name": "MOOM: Maintenance, Organization and Optimization of Memory in Ultra-Long Role-Playing Dialogues",
+    "paper_url": "https://arxiv.org/abs/2509.11860",
+    "code_url": "https://github.com/cows21/MOOM-Roleplay-Dialogue",
+    "data_url": "https://github.com/cows21/MOOM-Roleplay-Dialogue/tree/main/data"
+   },
+   {
+    "source": "iaar",
+    "section": "Paper List / Framework & Methods",
+    "name": "MOOM: Maintenance, Organization and Optimization of Memory in Ultra-Long Role-Playing Dialogues",
+    "paper_url": "https://arxiv.org/pdf/2509.11860",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "conversational_longterm",
+    "personalization"
+   ],
+   "extra_tags": [
+    "role_play_dialogue",
+    "memory_extraction"
+   ],
+   "kind_reason": "Primarily a memory-extraction method (MOOM), but the paper also contributes ZH-4O, a Chinese ultra-long (avg ~600 turns) role-play dialogue dataset with manually annotated memory information used to evaluate memory extraction; repo has data folder and evaluation script."
+  }
+ }
+}

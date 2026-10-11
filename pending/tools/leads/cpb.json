@@ -1,0 +1,29 @@
+{
+ "name": "CPB (Correlated Promotion Benchmark)",
+ "slug": "cpb",
+ "leads": {
+  "registry_key": "arxiv:2609.30813",
+  "tier": "P2",
+  "arxiv": "2609.30813 (arXiv API: v1 2026-09-25; title: A Benchmark and Diagnostic Study of Epistemic Admission in Shared Agent Memory)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "A Benchmark and Diagnostic Study of Epistemic Admission in Shared Agent Memory",
+    "paper_url": "https://arxiv.org/pdf/2609.30813",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "multi_agent_group"
+   ],
+   "extra_tags": [
+    "memory_admission",
+    "memory_security"
+   ],
+   "kind_reason": "Introduces CPB (Static + Live tracks) evaluating whether claims should be admitted to a shared agent memory store; Live runs six agents for six rounds over one shared store. Official repo lxy1134/iclr_2027 README confirms it ships benchmark data, gold and evaluation code. Paper's Appendix K says cor"
+  }
+ }
+}

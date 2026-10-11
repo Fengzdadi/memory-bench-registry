@@ -1,0 +1,14 @@
+{
+ "name": "SkillLearnBench",
+ "slug": "skilllearnbench",
+ "leads": {
+  "registry_key": "arxiv:2604.20087",
+  "tier": "P0",
+  "arxiv": "2604.20087 (arXiv API: v1 ?; title: None)",
+  "phase1_verified_types": {
+   "procedural_workflow": "Sec 3.1: \"the skill is generated once per task and then tested on all instances\"; Sec 5.2 compares seed-instance vs held-out-instance accuracy; Level 3 compares against no-skill baseline."
+  },
+  "paper_hint": "https://arxiv.org/abs/2604.20087",
+  "code_hint": "https://github.com/cxcscmu/SkillLearnBench"
+ }
+}

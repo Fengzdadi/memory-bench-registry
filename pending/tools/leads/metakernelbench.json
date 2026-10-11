@@ -1,0 +1,33 @@
+{
+ "name": "MetaKernelBench",
+ "slug": "metakernelbench",
+ "leads": {
+  "registry_key": "arxiv:2610.05014",
+  "tier": "P0",
+  "arxiv": "2610.05014 (arXiv API: v1 2026-10-04; title: MetaKernelBench: Measuring GPU Kernel Knowledge Transfer Beyond Code)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "MetaKernelBench: Measuring GPU Kernel Knowledge Transfer Beyond Code",
+    "paper_url": "https://arxiv.org/pdf/2610.05014",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "procedural_workflow",
+    "coding_cross_session"
+   ],
+   "extra_tags": [],
+   "kind_reason": "Benchmark (74 paired CuTe/TIRx GPU-kernel problems) of the reuse value of retained experience. The agent distills a natural-language skill during a solo attempt in one DSL, and the skill is the only extra input to a fresh attempt in the other DSL; scoring is paired lift in correctness and runtime. C"
+  },
+  "phase1_verified_types": {
+   "procedural_workflow": "Abstract: \"instructed to distill what it learns into a natural-language skill ... The skill is the only extra input to a skill-conditioned attempt\"; Sec 3.3 Eq.3 paired lift/help/harm rates",
+   "coding_cross_session": "Abstract: agents \"retain what they learn in knowledge bases or as distilled skills\"; benchmarks \"leave the reuse value of retained experience unmeasured.\" §2.2: \"fresh execution\"; skill is \"the only additional task input\"."
+  },
+  "paper_hint": "https://arxiv.org/abs/2610.05014",
+  "code_hint": "https://github.com/YIGE24/MetaKernelBench"
+ }
+}

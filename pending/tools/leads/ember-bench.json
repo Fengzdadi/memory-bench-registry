@@ -1,0 +1,30 @@
+{
+ "name": "EMBER-Bench",
+ "slug": "ember-bench",
+ "leads": {
+  "registry_key": "arxiv:2610.05013",
+  "tier": "P2",
+  "arxiv": "2610.05013 (arXiv API: v1 2026-10-04; title: EMBER-Bench: Benchmarking Cross-Event Causal Memory in Long-Horizon Embodied Tasks)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "EMBER-Bench: Benchmarking Cross-Event Causal Memory in Long-Horizon Embodied Tasks",
+    "paper_url": "https://arxiv.org/pdf/2610.05013",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "episodic"
+   ],
+   "extra_tags": [
+    "embodied",
+    "multimodal_video",
+    "causal_reasoning"
+   ],
+   "kind_reason": "New egocentric video benchmark (189 household tasks, 699 QA pairs) for cross-event causal memory in long-horizon embodied tasks: next-action prediction from history and causal traceback to past events. The project page says the public dataset release is pending."
+  }
+ }
+}

@@ -1,0 +1,29 @@
+{
+ "name": "TeleEgo",
+ "slug": "teleego",
+ "leads": {
+  "registry_key": "arxiv:2510.23981",
+  "tier": "P2",
+  "arxiv": "2510.23981 (arXiv API: v1 2025-10-28; title: TeleEgo: Benchmarking Egocentric AI Assistants in the Wild)",
+  "community_list_entries": [
+   {
+    "source": "teleai",
+    "section": "📏 Benchmarks / 🎬 Multimodal Benchmarks / 🗓️ 2025",
+    "name": "TeleEgo: Benchmarking Egocentric AI Assistants in the Wild",
+    "paper_url": "https://arxiv.org/abs/2510.23981",
+    "code_url": "https://github.com/TeleAI-UAGI/TeleEgo",
+    "data_url": "https://huggingface.co/datasets/David0219/TeleEgo"
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "episodic"
+   ],
+   "extra_tags": [
+    "multimodal",
+    "streaming_egocentric"
+   ],
+   "kind_reason": "Long-duration streaming omni-modal egocentric benchmark (14+ h per participant, 3,291 QA, 12 subtasks) with Memory, Understanding and Cross-Memory Reasoning capabilities and a Memory Persistence Time metric."
+  }
+ }
+}

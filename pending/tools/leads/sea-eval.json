@@ -1,0 +1,13 @@
+{
+ "name": "SEA-Eval",
+ "slug": "sea-eval",
+ "leads": {
+  "registry_key": "arxiv:2604.08988",
+  "tier": "P0",
+  "arxiv": "2604.08988 (arXiv API: v1 ?; title: None)",
+  "phase1_verified_types": {
+   "procedural_workflow": "Paper: 92 sequences (correlated/orthogonal/implicit-intent) of length 5 from 32 atomic tasks; agents keep procedural/episodic/declarative memory; metrics SR, token cost, Keff(Evo), Keff(Stab), Keff(Ret)."
+  },
+  "paper_hint": "https://arxiv.org/abs/2604.08988"
+ }
+}

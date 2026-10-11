@@ -1,0 +1,38 @@
+{
+ "name": "StreamMemBench",
+ "slug": "streammembench",
+ "leads": {
+  "registry_key": "arxiv:2606.14571",
+  "tier": "P1",
+  "arxiv": "2606.14571 (arXiv API: v1 2026-06-12; title: StreamMemBench: Streaming Evaluation of Agent Memory for Future-Oriented Assistance)",
+  "community_list_entries": [
+   {
+    "source": "teleai",
+    "section": "📏 Benchmarks / 🎮 Dynamic Benchmarks & Simulation Environments / 🗓️ 2026",
+    "name": "StreamMemBench: Streaming Evaluation of Agent Memory for Future-Oriented Assistance",
+    "paper_url": "https://arxiv.org/abs/2606.14571",
+    "code_url": null,
+    "data_url": null
+   },
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "StreamMemBench: Streaming Evaluation of Agent Memory for Future-Oriented Assistance",
+    "paper_url": "https://arxiv.org/pdf/2606.14571v1",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "episodic",
+    "personalization"
+   ],
+   "extra_tags": [
+    "multimodal",
+    "streaming_egocentric"
+   ],
+   "kind_reason": "Streaming benchmark built from EgoLife egocentric streams: 7,760 evidence anchors, each with an initial and a follow-up task. The follow-up tests reuse of anchored user-specific evidence and corrective feedback (capabilities, preferences, plans), not how-to or procedural knowledge, so it is not flag"
+  }
+ }
+}

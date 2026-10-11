@@ -1,0 +1,26 @@
+{
+ "name": "CICM",
+ "slug": "cicm",
+ "leads": {
+  "registry_key": "arxiv:2609.38866",
+  "tier": "P2",
+  "arxiv": "2609.38866 (arXiv API: v1 2026-09-30; title: When Context Changes: Understanding Update Failures in LLMs)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "When Context Changes: Understanding Update Failures in LLMs",
+    "paper_url": "https://arxiv.org/pdf/2609.38866",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "semantic_knowledge_update"
+   ],
+   "extra_tags": [],
+   "kind_reason": "The paper introduces Controlled In-Context Memory, a benchmark for tracking and using updated values in conversations and agent logs. It has 1,200 preference dialogues, 180 ledgers, 24 decision scenarios and 40 operational histories, scored current/old/other. The paper says code and data will be rel"
+  }
+ }
+}

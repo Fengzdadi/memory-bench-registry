@@ -1,0 +1,31 @@
+{
+ "name": "MobileMem",
+ "slug": "mobilemem",
+ "leads": {
+  "registry_key": "arxiv:2608.13606",
+  "tier": "P2",
+  "arxiv": "2608.13606 (arXiv API: v1 2026-08-11; title: MobileMem: Learning from a Year of Mobile Experiences)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "MobileMem: Learning from a Year of Mobile Experiences",
+    "paper_url": "https://arxiv.org/pdf/2608.13606",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "conversational_longterm",
+    "personalization",
+    "episodic",
+    "semantic_knowledge_update"
+   ],
+   "extra_tags": [
+    "multimodal"
+   ],
+   "kind_reason": "Introduces a benchmark for on-device long-term memory built from year-scale synthesized mobile user-app sessions. MobileMem-Omni has 16 users, about 202 sessions each, and 7,415 QA pairs covering single/multi-hop, knowledge update, temporal reasoning, implicit preference, abstention and visual reaso"
+  }
+ }
+}

@@ -1,0 +1,31 @@
+{
+ "name": "SimLife-BP",
+ "slug": "simlife-bp",
+ "leads": {
+  "registry_key": "arxiv:2609.19610",
+  "tier": "P2",
+  "arxiv": "2609.19610 (arXiv API: v1 2026-09-17; title: SIMLIFE: Pattern Understanding for Long-Horizon Human-Agent Partnership)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "SIMLIFE: Pattern Understanding for Long-Horizon Human-Agent Partnership",
+    "paper_url": "https://arxiv.org/pdf/2609.19610",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "personalization",
+    "semantic_knowledge_update"
+   ],
+   "extra_tags": [
+    "embodied",
+    "multimodal",
+    "behavior_pattern_inference"
+   ],
+   "kind_reason": "SimLife-BP benchmark: 106 simulated household-life episodes (avg 15.49 h, 38.57 in-game days) with video, action logs and audio dialogue, 1,439 QA pairs testing inference of a person's behavioral rules and how they change over time. Paper gives project page https://roihn.github.io/SimLife but does n"
+  }
+ }
+}

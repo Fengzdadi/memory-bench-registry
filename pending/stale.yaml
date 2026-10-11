@@ -1,0 +1,41 @@
+name: STALE
+slug: stale
+release_date: 2026-05
+venue: arXiv preprint
+memory_types:
+- semantic_knowledge_update
+- conversational_longterm
+- personalization
+links:
+  paper: https://arxiv.org/abs/2605.06527
+  code: https://github.com/icedreamc/STALE
+  data: https://huggingface.co/datasets/STALEproj/STALE
+scale:
+  conversations: 400
+  questions: 1200
+  avg_context_length: ~151.8K tokens (o200k_base; 50 sessions, ~593 turns per instance)
+  notes: '400 = conflict instances (200 Type I co-referential, 200 Type II propagated), each a 50-session user-assistant haystack padded with LongMemEval distractor sessions; 1,200 = 3 probing queries (SR, PR, IPA) per instance. Formatted context: median 151.8K, max 164.9K tokens. HF release is a single 400-row file (T1_T2_400_FULL.json).'
+metrics:
+- 'Accuracy (LLM-judge Boolean pass rate) per conflict type (Type I / Type II) and probing dimension: State Resolution (SR), Premise Resistance (PR), Implicit Policy Adaptation (IPA)'
+- Overall accuracy (average across the six type x dimension settings)
+judge_model: Gemini-3.1-flash-lite
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'Data on Hugging Face (CC BY 4.0, ungated): one ~306 MB JSON, 400 rows. Repo is MIT-licensed. It also holds the generation pipeline and the CUPMem baseline. Evaluation needs API keys, and the judge defaults to gemini-3.1-flash-lite-preview. The repo README results table adds a Claude-Opus-4.6 row that is not in paper v1 Table 2. Distractor sessions come from LongMemEval (MIT). Models with short context windows are evaluated with evidence-preserving truncation, and memory frameworks use a GPT-4o-mini backbone.'
+sources:
+  name: 'arXiv abstract / paper title: ''STALE: Can LLM Agents Know When Their Memories Are No Longer Valid?'' (STALE = State Tracking And Latent Evaluation, §1)'
+  release_date: 'arXiv API: 2605.06527v1 published 2026-05-07 (only version listed)'
+  venue: arXiv API entry has no journal_ref/comment; repo README cites only arXiv; web search found only arXiv and aggregator pages
+  memory_types: 'paper §3.4-3.5: implicit-conflict user-state invalidation (knowledge update) embedded in 50-session user-assistant histories; IPA probes require tailoring downstream recommendations to the user''s updated personal state'
+  links.paper: arXiv API id 2605.06527
+  links.code: 'paper Appendix G ''Code: https://github.com/icedreamc/STALE''; repo README links arXiv 2605.06527'
+  links.data: 'paper Appendix G ''Dataset: https://huggingface.co/datasets/STALEproj/STALE''; HF API: public, not gated, file T1_T2_400_FULL.json (305,908,212 bytes, HTTP 200)'
+  scale.conversations: 'paper abstract/§1 (400 conflict scenarios) and Table 5 (Appendix D.4: Type I 200, Type II 200, All 400); HF datasets-server reports num_rows=400'
+  scale.questions: 'paper abstract: 1,200 evaluation queries across three probing dimensions'
+  scale.avg_context_length: 'paper Appendix D.4 / Table 5: formatted context mean 151,784 tokens (o200k_base), 50 sessions, 593.40 turns per instance'
+  scale.notes: paper Table 5 (Appendix D.4) and §3.4 Step 4; HF repo file listing
+  metrics: paper Table 2 caption ('Overall denotes the average accuracy across all six settings') and §3.5; repo README results table
+  judge_model: 'paper §4.1 and Appendix C: ''We use Gemini-3.1-flash-lite as the LLM judge''; repo STALE/Evaluation/full_eval_performance.py default JUDGE_MODEL=gemini-3.1-flash-lite-preview'
+  repro_level: repo tree has STALE/Evaluation/run_target_model.py (reads uid, probing_queries, haystack_session, relevant_session_index, matching HF card fields) and STALE/Evaluation/full_eval_performance.py (LLM-judge scoring); data downloadable from HF (checked 2026-10-10)
+  notes: HF dataset card + API (license cc-by-4.0, gated=false); GitHub API license MIT; repo README results table vs paper Table 2; paper Appendix G and §4.1

@@ -1,0 +1,42 @@
+name: ChainSWE
+slug: chainswe
+release_date: 2026-07
+venue: EMNLP 2026
+memory_types:
+- coding_cross_session
+links:
+  paper: https://arxiv.org/abs/2607.02606
+  code: null
+  data: https://huggingface.co/datasets/C-lister/ChainSWE
+scale:
+  conversations: 100
+  questions: 304
+  avg_context_length: 3.04 bug-fix tasks per chain (avg chain length)
+  notes: conversations = 100 time-ordered chains, each a sequence of separate agent sessions on one repo. questions = 304 bug-fix tasks across 54 Python repos (§3.4; HF data.jsonl counted 2026-10-10). Chain lengths are 97x3, 2x4 and 1x5. Every chain is run in Oracle, Seq and Seq+Mem modes. Table 8 reports an average peak agent context of 41.8k-63.6k tokens per chain.
+metrics:
+- '%Resolved (per-bug accuracy: agent patch passes FAIL_TO_PASS and PASS_TO_PASS tests)'
+- Full-chain success rate (chain counts only if all its bugs are resolved)
+- Per-position resolution rate
+- Relative change vs. Oracle mode
+- Average API cost per task / per chain
+judge_model: null
+repro_level: data_public
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: The paper links its 'data and code' to the HF dataset, which holds only data.jsonl (MIT, ungated). The dataset card says evaluation uses microsoft/SWE-Edit, but that repo has no ChainSWE harness. The first author's fork C-lister/SWE-Edit has rollout-only scripts in evaluation/swechain/ that do no test grading. github.com/C-lister/ChainSWE returned 404 (checked 2026-10-10). Memory is tested by comparing Seq+Mem (transcript carried across bugs) with Seq. v1 names Section 3 'SWEChain', and v2 adds contamination analysis (Tables 10-11).
+sources:
+  name: 'arXiv API title ''ChainSWE: Benchmarking Coding Agents on Multi-Bug Software Maintenance''; HF dataset card pretty_name ''ChainSWE'''
+  release_date: 'arXiv API: 2607.02606 <published>2026-07-01T13:32:15Z (v1); v2 is dated 2026-09-01'
+  venue: 'Official EMNLP 2026 detailed program (the Google Sheet linked from https://2026.emnlp.org/program/, exported as CSV on 2026-10-10) lists ''1018-MAIN, ChainSWE: Benchmarking Coding Agents on Multi-Bug Software Maintenance'', presenter Qirui Jin, Virtual 2 session on 2026-10-25. The sheet''s MAIN track is separate from FIND (Findings). The first author''s homepage (C-lister/c-lister.github.io data/publications.json) agrees: ''EMNLP 2026 Main'', type accepted. The arXiv API has no journal_ref or comments. The ACL Anthology 2026.emnlp-main volume is not yet published (404). OpenReview XJaANR7Pw8 is behind a browser challenge and was not opened.'
+  memory_types: 'coding_cross_session: §4.3 ''Seq+Mem'' mode, where ''The agent enters bug k+1 with the transcript from bug k'' and which ''isolates the effect of transcript-level memory from repository-level state''. Seq carries repository state across separate bug sessions with a fresh conversation. §5.1 compares Seq+Mem with Seq (36.9% vs 36.5%).'
+  links.paper: https://arxiv.org/abs/2607.02606 (abs page and HTML v1/v2 opened 2026-10-10)
+  links.code: 'null: the paper''s ''data and code'' link (abstract) points to the HF dataset, which has no code. https://github.com/C-lister/ChainSWE returns 404 (gh api, 2026-10-10). The HF card''s linked microsoft/SWE-Edit is the agent scaffold and has only evaluation/swebench-verified. The author fork C-lister/SWE-Edit is not linked from the paper or the card.'
+  links.data: Paper abstract hyperlink https://huggingface.co/datasets/C-lister/ChainSWE. The HF API shows private=false, gated=false, license mit, and files README.md and data.jsonl (14.2 MB).
+  scale.conversations: §3.4 '100 accepted chains with an average length of 3.04'; Table 2 caption 'all 100 chains'. HF data.jsonl has 100 rows (counted 2026-10-10).
+  scale.questions: §3.4 '304 bug-fix tasks drawn from 54 unique repositories'. The bug_fixes entries in HF data.jsonl sum to 304 across 54 repos (counted 2026-10-10).
+  scale.avg_context_length: §3.4 'average length of 3.04' bugs per chain. Agent peak context is in Appendix A.4, Table 8.
+  scale.notes: §3.4, §5.2 (97 length-3, 2 length-4 and 1 length-5 chains, which matches the HF data count), §4.3 modes, and Appendix A.4 Table 8
+  metrics: '§4.5 Metrics: %Resolved, per-chain success by position, full-chain success rate, and average API cost per task and per chain. Tables 2-4 report per-bug and chain results with relative drop vs Oracle.'
+  judge_model: 'null: grading runs the source benchmarks'' FAIL_TO_PASS/PASS_TO_PASS tests (§3.2, §4.5). Qwen3.7-Max is used only to filter chain difficulty (§3.3), not as a judge.'
+  repro_level: data_public, checked 2026-10-10. HF data.jsonl was downloaded and parsed (100 chains, 304 bugs). Neither the HF repo nor microsoft/SWE-Edit has a ChainSWE eval script. The author fork C-lister/SWE-Edit has evaluation/swechain/main.py (rollout only, with modes sequential/sequential-memory/interleaved) and no test grading; it expects an unreleased parent 'SWE-Chain' repo.
+  notes: HF card README; gh api trees of microsoft/SWE-Edit and C-lister/SWE-Edit; arXiv HTML v1 vs v2 (v1 §3 heading 'SWEChain', v2 adds Tables 10-11)

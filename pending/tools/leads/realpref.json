@@ -1,0 +1,27 @@
+{
+ "name": "RealPref",
+ "slug": "realpref",
+ "leads": {
+  "registry_key": "arxiv:2603.04191",
+  "tier": "P2",
+  "arxiv": "2603.04191 (arXiv API: v1 2026-03-04; title: Towards Natural Personalization: Evaluating Long-Horizon Preference Following in Personalized User-LLM Interactions)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "Towards Realistic Personalization: Evaluating Long-Horizon Preference Following in Personalized User-LLM Interactions",
+    "paper_url": "https://arxiv.org/pdf/2603.04191",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "personalization",
+    "conversational_longterm"
+   ],
+   "extra_tags": [],
+   "kind_reason": "Benchmark (EMNLP 2026 Findings) for long-horizon preference following: 100 user profiles, 1,300 preferences, explicit-to-implicit expression in long interaction histories."
+  }
+ }
+}

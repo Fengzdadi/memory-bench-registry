@@ -1,0 +1,34 @@
+{
+ "name": "ImplexConv",
+ "slug": "implexconv",
+ "leads": {
+  "registry_key": "url:aclanthology.org/2025.emnlp-main.580",
+  "tier": "P2",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Resources / Benchmarks and Tasks / Personalized Task Evaluation",
+    "name": "IMPLEXCONV",
+    "paper_url": "https://aclanthology.org/2025.emnlp-main.580.pdf",
+    "code_url": null,
+    "data_url": null
+   },
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "Toward Multi-Session Personalized Conversation: A Large-Scale Dataset and Hierarchical Tree Framework for Implicit Reasoning",
+    "paper_url": "https://aclanthology.org/2025.emnlp-main.580.pdf",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "conversational_longterm",
+    "personalization"
+   ],
+   "extra_tags": [],
+   "kind_reason": "ImplexConv (arXiv 2503.07018) is a long-term dataset of 2,500 examples, each about 100 conversation sessions. It is built to test implicit reasoning over personalized multi-session dialogue history. The paper also proposes the TaciTree method."
+  }
+ }
+}

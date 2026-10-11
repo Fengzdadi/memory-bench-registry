@@ -1,0 +1,29 @@
+{
+ "name": "UtilMem",
+ "slug": "utilmem",
+ "leads": {
+  "registry_key": "arxiv:2608.30508",
+  "tier": "P2",
+  "arxiv": "2608.30508 (arXiv API: v1 2026-08-31; title: UTILMEM: Benchmarking Evidence Utilization in Long-Term Conversational Memory)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "UTILMEM: Benchmarking Evidence Utilization in Long-Term Conversational Memory",
+    "paper_url": "https://arxiv.org/pdf/2608.30508",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "conversational_longterm",
+    "personalization"
+   ],
+   "extra_tags": [
+    "memory_utilization"
+   ],
+   "kind_reason": "Diagnostic benchmark of 1,717 instances across 5 domains (learning support, finance, mental wellness, fitness, 10-K document analysis). Each instance is a multi-session user-assistant history of about 60–70 sessions (~120K tokens) with adversarial distractors. Tests implicit relevance, dense-history"
+  }
+ }
+}

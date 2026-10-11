@@ -1,0 +1,43 @@
+name: SuperMemory-VQA
+slug: supermemory-vqa
+release_date: 2026-05
+venue: arXiv preprint
+memory_types:
+- episodic
+- multimodal
+links:
+  paper: https://arxiv.org/abs/2606.00825
+  code: https://github.com/AIoT-MLSys-Lab/supermemory-vqa
+  data: https://huggingface.co/datasets/OSU-AIoT-MLSys-Lab/SuperMemory-VQA
+scale:
+  conversations: null
+  questions: 4853
+  avg_context_length: 3 to 12 hours of egocentric video per participant (52.9 hours total)
+  notes: '4,853 four-way multiple-choice QAs (single ''test'' split) from 10 participants over 52.9 h of Aria-glasses video. Counted 2026-10-10: 3,385 answerable, 1,468 unanswerable. Per category: object/location 933, conversational 932, visual recall 850, timeline 750, in-context retrieval 731, intent 657. The release has 83 recording sessions, a count the paper does not report.'
+metrics:
+- Answerability F1 (Ans-F1)
+- QA Accuracy (QA-Acc, 4-way MCQ)
+- QA Mean Reciprocal Rank (QA-MRR)
+- Per-video / per-person accuracy (mean, std)
+- Partial-credit accuracy (vague option = 0.5, diagnostic)
+judge_model: null
+repro_level: data_public
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'The official GitHub repo contains only the Gemini-based QA-generation pipeline and the annotation review UI. It has no baseline or evaluation code. Licences conflict: the paper says CC BY-NC, the HF card says CC BY-NC-SA 4.0, and the repo is Apache-2.0. Raw audio is withheld and redacted transcripts are released instead. One mismatch was counted on 2026-10-10: the paper reports N=1,017 questions for Person 1 (Table 3), but the release has 1,023. The README says the paper is under review at the NeurIPS 2026 E&D track.'
+sources:
+  name: arXiv 2606.00825 title; HF dataset card; repo README
+  release_date: 'arXiv API: 2606.00825v1 published 2026-05-30'
+  venue: 'arXiv API has no journal_ref (comment: ''34 pages, 21 figures, 5 tables''). The repo README says ''under review at NeurIPS 2026 (Datasets and Benchmarks Track)''. The project page cites arXiv only. No acceptance was found by web search.'
+  memory_types: 'paper abstract and Section 3: QA over long-horizon egocentric life-log video (object/location, intent, scene, timeline, conversational recall), so episodic. Evaluated systems must process RGB video frames plus transcripts (Section 4.1, Video-RAG gets 32 frames per shard), so multimodal.'
+  links.paper: arXiv abs page 2606.00825
+  links.code: linked from the paper (Appendix B.4) and the project page supermemory-vqa.github.io; gh api repos/AIoT-MLSys-Lab/supermemory-vqa
+  links.data: 'linked from the paper (Appendix B.4); HF API: OSU-AIoT-MLSys-Lab/SuperMemory-VQA, gated=false, private=false'
+  scale.questions: 'abstract and Section 3.5: 4,853 QA pairs. Confirmed by counting 4,853 items in HF data/json/all_qa.json on 2026-10-10.'
+  scale.avg_context_length: 'paper Section 3.1 and HF card: ''Each participant contributed 3 to 12 hours of recordings'', 52.9 hours total. Table 1 Context column is ''>1h''.'
+  scale.conversations: 'null: not a dialogue benchmark, and the paper reports no session or video count. 83 sessions were counted in the HF release (data/raw/*.vrs).'
+  scale.notes: counts from parsing HF all_qa.json (is_answerable, metadata.skill) and the HF file listing, 2026-10-10
+  metrics: paper Section 4.3 and Appendix H (Ans-F1, QA-Acc, QA-MRR); Table 4 (per-video/per-person); Table 5 (partial credit 0.5 for vague choices); HF card Evaluation section
+  judge_model: 'null: scoring is by the selected option or the ordered choice scores against ground truth (Section 4.3). Gemini models were used only for dataset generation and verification (Section 3.4), not as an evaluation judge.'
+  repro_level: HF dataset is public, not gated, and lists data/json/all_qa.json, 10 per-person QA files, data/video/*.mp4, data/raw/*.vrs, transcripts and MPS outputs. The GitHub tree (main and strengthen-multi-qa branches) has only src/pipeline/stage1_v2.py, stage2_loop_concurrent.py (QA generation) and app.py/frontend (review UI). It has no evaluation or baseline script. Checked 2026-10-10.
+  notes: paper Appendix B.3/B.4 (CC BY-NC, raw audio withheld); HF card license cc-by-nc-sa-4.0; GitHub license Apache-2.0; paper Table 3 caption N=1,017 for Person 1 vs 1,023 subject=1 items in all_qa.json; repo README NeurIPS under-review badge

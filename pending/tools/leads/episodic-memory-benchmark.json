@@ -1,0 +1,33 @@
+{
+ "name": "Episodic Memory Benchmark",
+ "slug": "episodic-memory-benchmark",
+ "leads": {
+  "registry_key": "arxiv:2501.13121",
+  "tier": "P0",
+  "arxiv": "2501.13121 (arXiv API: v1 2025-01-21; title: Episodic Memories Generation and Evaluation Benchmark for Large Language Models)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "Episodic Memory Benchmark: Episodic Memories Generation and Evaluation Benchmark for Large Language Models",
+    "paper_url": "https://arxiv.org/abs/2501.13121",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "episodic",
+    "parametric",
+    "semantic_knowledge_update"
+   ],
+   "extra_tags": [],
+   "kind_reason": "Synthetic, contamination-free episodic-memory benchmark (ICLR 2025 per repo). Books of 10k-1M+ tokens contain events cued by time, place, entity and content. It tests recall, latest-state tracking, chronological ordering and confabulation, comparing in-context, RAG and fine-tuning (parametric) memor"
+  },
+  "phase1_verified_types": {
+   "parametric": "Sec. 5.1: '(3) Parametric Memory via Fine-Tuning, where memory is stored within the model's parameters'. Table 3 scores fine-tuned GPT-4o-mini against in-context and RAG on the same questions (F1 0.83 vs 0.54/0.60 on single-event questions)."
+  },
+  "paper_hint": "https://arxiv.org/abs/2501.13121",
+  "code_hint": "https://github.com/ahstat/episodic-memory-benchmark"
+ }
+}

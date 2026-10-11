@@ -1,0 +1,26 @@
+{
+ "name": "CMSC-E (Memory Canonicalization)",
+ "slug": "cmsc-e",
+ "leads": {
+  "registry_key": "arxiv:2610.05124",
+  "tier": "P2",
+  "arxiv": "2610.05124 (arXiv API: v1 2026-10-04; title: Memory Canonicalization: A Framework and Benchmark for Cross-Model Drift in Persistent LLM Memory)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "Memory Canonicalization: A Framework and Benchmark for Cross-Model Drift in Persistent LLM Memory",
+    "paper_url": "https://arxiv.org/pdf/2610.05124",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [],
+   "extra_tags": [
+    "cross_model_memory_interpretation"
+   ],
+   "kind_reason": "The paper proposes a write-time canonicalization framework and a companion CMSC-E benchmark, which it calls 'the first benchmark to jointly measure semantic and emotional cross-model drift in retrieved memory objects' (176 synthetic objects, pilot study). The benchmark and datasets are in the offici"
+  }
+ }
+}

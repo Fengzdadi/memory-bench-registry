@@ -1,0 +1,33 @@
+{
+ "name": "Harness the Memory",
+ "slug": "harness-the-memory",
+ "leads": {
+  "registry_key": "arxiv:2608.15008",
+  "tier": "P0",
+  "arxiv": "2608.15008 (arXiv API: v1 2026-08-15; title: Harness the Memory: A Holistic Evaluation of Memory Substrates in Memory Agents)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "Harness the Memory: A Holistic Evaluation of Memory Substrates in Memory Agents",
+    "paper_url": "https://arxiv.org/pdf/2608.15008",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "conversational_longterm",
+    "semantic_knowledge_update",
+    "procedural_workflow",
+    "parametric"
+   ],
+   "extra_tags": [],
+   "kind_reason": "A controlled evaluation harness/suite for memory substrates: 11 methods across 7 families, 3 backbones and 26 metrics, run over LoCoMo, MemoryAgentBench (incl. LongMemEval-S and conflict resolution), ALFWorld and BigCodeBench-Hard. It is an evaluation suite rather than a new dataset, and code has no"
+  },
+  "phase1_verified_types": {
+   "parametric": "App. B.2, M9 Adapter Tuning: 'A LoRA adapter (r=8) is then fine-tuned on these pairs ... no explicit retrieval step occurs'. Sec. 3 uses a 'shared harness, backbone, prompting'; Tables 1-2 list M9 with the non-parametric substrates."
+  },
+  "paper_hint": "https://arxiv.org/abs/2608.15008"
+ }
+}

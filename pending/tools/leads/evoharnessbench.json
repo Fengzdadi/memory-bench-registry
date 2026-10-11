@@ -1,0 +1,13 @@
+{
+ "name": "EvoHarnessBench",
+ "slug": "evoharnessbench",
+ "leads": {
+  "registry_key": "arxiv:2609.04280",
+  "tier": "P0",
+  "arxiv": "2609.04280 (arXiv API: v1 ?; title: None)",
+  "phase1_verified_types": {
+   "procedural_workflow": "Sec. 3.4 (self-evolving adaptation evaluation): \"measures whether experience accumulated under earlier harnesses continues to support effective adaptation as new capabilities are introduced\". Evaluation uses a held-out split."
+  },
+  "paper_hint": "https://arxiv.org/abs/2609.04280"
+ }
+}

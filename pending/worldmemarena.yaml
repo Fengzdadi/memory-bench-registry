@@ -1,0 +1,55 @@
+name: WorldMemArena
+slug: worldmemarena
+release_date: 2026-05
+venue: arXiv preprint
+memory_types:
+- conversational_longterm
+- episodic
+- semantic_knowledge_update
+- multimodal
+links:
+  paper: https://arxiv.org/abs/2605.29341
+  code: https://github.com/UCSB-AI/WorldMemArena
+  data: https://huggingface.co/datasets/LCZZZZ/WorldMemArena
+scale:
+  conversations: 461
+  questions: 24258
+  avg_context_length: ~9.1K tokens
+  notes: 'conversations = multi-session samples (8,489 sessions, avg 18.4 per sample); questions = checkpoint QA pairs, with 15,595 images/screenshots. Release splits: 203 GUI + 220 embodied agent trajectories, 18 lifelong-project + 20 lifelong-personal samples. The repo also defines a 150-sample ''small'' split. arXiv v1, the abstract metadata and the project page state 400 tasks.'
+metrics:
+- Memory Recall
+- Memory Correctness
+- Memory Hallucination
+- Memory Irrelevance
+- Update Handling
+- Interference Rejection
+- QA Correct (QA-C)
+- QA Hallucination (QA-H)
+- QA Omission (QA-O)
+- Retrieval Coverage (RC)
+- Recall@K
+- NDCG@K
+- Answer F1
+- BLEU-1
+- Per-question-type QA-C accuracy (11 types)
+judge_model: GPT-5.4-mini
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'Sample count differs by version: arXiv v1 and the project page say 400 tasks, while v2 and the HF release have 461. scripts/run_worldmemarena.sh uses a 400-sample quota subset. Data is CC BY-NC 4.0 (code is MIT). Agent trajectories, taken from EmbodiedBench, VisualAgentBench and Agent-Arena, are scored offline through checkpoint QA, not by acting in environments. The paper''s judge is GPT-5.4-mini, but the repo''s .env.example defaults to deepseek-v4-flash. TTL means ''Test-Time Learning'' in the paper and ''Time-to-Live'' on the dataset card.'
+sources:
+  name: 'arXiv title and repo README: ''WorldMemArena: Evaluating Multimodal Agent Memory Through Action-World Interaction'''
+  release_date: 'arXiv API: 2605.29341v1 published 2026-05-28 (v2 2026-06-01)'
+  venue: 'arXiv API has no journal_ref (comment: ''25 pages, 8 figures''); repo README cites it as an arXiv @misc; project page lists only arXiv'
+  memory_types: 'paper §4.1/§4.4 and Table 4 (arXiv v2 HTML): multi-session dialogue in Lifelong Evolution (conversational_longterm); fact recall and temporal reasoning over sessions and agent trajectories (episodic); Dynamic Update, Memory Conflict and the Update Handling metric (semantic_knowledge_update); images and screenshots with visual QA types VFR/VS/VU/CMR (multimodal). Embodied, personalization and procedural types were not assigned because the evaluation is offline checkpoint QA only'
+  links.paper: arXiv abs page 2605.29341
+  links.code: paper HTML links github.com/UCSB-AI/WorldMemArena; gh api repo description says 'Official codebase for the paper'
+  links.data: 'paper HTML ''Dataset'' link and repo README point to huggingface.co/datasets/LCZZZZ/WorldMemArena; HF API: not gated, not private'
+  scale.conversations: paper v2 §4.3 '461 multi-session samples'; HF dataset card table total 461; HF file listing counted 461 sample JSONs on 2026-10-10
+  scale.questions: 'paper §4.3 and Table 1: 24,258 QA pairs; HF dataset card total 24,258'
+  scale.avg_context_length: 'paper §4.3: ''average of 18.4 sessions and approximately 9.1K tokens per sample'''
+  scale.notes: HF dataset card split table; eval_framework/cli.py --split help '(full 461 samples) or small (150-sample subset)'; diff of arXiv v1 and v2 HTML (400 vs 461)
+  metrics: paper Appendix B.2–B.5 and Tables 2–3
+  judge_model: 'paper Table 2 caption: ''All judgments are conducted with GPT-5.4-mini as the evaluator'' (Appendix A also says the judge inherits the answer-stage model)'
+  repro_level: repo tree has eval_framework/cli.py, scripts/run_worldmemarena.sh, scripts/run_worldmemarena_harness.sh and eval_framework/evaluators/; HF dataset is ungated with 461 JSON samples and 15,595 images (checked 2026-10-10)
+  notes: arXiv v1 vs v2 HTML diff; project page worldmemarena-mem.github.io (400 = 38 + 362); header of scripts/run_worldmemarena.sh; repo .env.example OPENAI_MODEL_JUDGE; HF card license and question-type tables; paper Appendix C.1 data sources

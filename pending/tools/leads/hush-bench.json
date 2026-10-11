@@ -1,0 +1,26 @@
+{
+ "name": "HUSH-Bench",
+ "slug": "hush-bench",
+ "leads": {
+  "registry_key": "arxiv:2606.06055",
+  "tier": "P2",
+  "arxiv": "2606.06055 (arXiv API: v1 2026-06-04; title: HUSH-Bench: Measuring Memory-Use Boundaries for Sensitive History in Conversational Agents)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "When Should Memory Stay Silent: Measuring Memory-Use Boundaries in Memory-Augmented Conversational Agents",
+    "paper_url": "https://arxiv.org/abs/2606.06055",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [],
+   "extra_tags": [
+    "memory_privacy"
+   ],
+   "kind_reason": "The current arXiv title is 'HUSH-Bench'; the list name and the list's 'RBI-Eval' description come from an earlier title. It is a controlled benchmark of 2,400 prompts paired with histories that contain one sensitive disclosure, measuring unsolicited use of that history. It is about memory-use bounda"
+  }
+ }
+}

@@ -1,0 +1,49 @@
+name: SeqMem-Eval
+slug: seqmem-eval
+release_date: 2026-05
+venue: arXiv preprint
+memory_types:
+- procedural_workflow
+- embodied
+links:
+  paper: https://arxiv.org/abs/2605.15384
+  code: https://github.com/ShenGroup/SeqMem-Eval
+  data: null
+scale:
+  conversations: null
+  questions: 3726
+  avg_context_length: null
+  notes: questions = sum of Table 6 sequential-test sizes (HumanEval 132, MATH500 500, MMLU-Pro-Engineering 873, MMLU-Pro-Physics 1170, APIBench-HF 911, ALFWorld 140). ID hold-out sets total 681 (32/280/96/129/120/24). Appendix C.2 adds OOD hold-out on AIME2024, AIME2025 and MMLU-Pro-Physics using MATH500-stream memory. Task streams, not conversations; no context length reported.
+metrics:
+- Online Accuracy (OnlineAcc)
+- Peak-to-End Drop (PED)
+- Minimum-to-End Recovery (MER)
+- Extremum timing r_min
+- Hold-out Accuracy (HoldOutAcc)
+- Hold-out Trend (Trend_HO)
+- Backward Transfer BWT(t)
+- Immediate Validity (IV = BWT(1))
+- Forgetting F(t)
+- Token consumption
+- Runtime
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'SeqMem-Eval is an evaluation framework built on existing public datasets: HumanEval, MATH500, MMLU-Pro Engineering/Physics, APIBench-HF and ALFWorld. The Apache-2.0 repo ships code only, so each dataset must be downloaded from its upstream source. As of 2026-10-10, the repo lacks two things that configs/holdout.py references: the hold-out split files under data/Holdout-data/ and the harness scripts/holdout/run.py. Only sequential online runs through main.py can be reproduced directly. The paper''s backbones are Qwen3-8B and MiniMax-M2.7.'
+sources:
+  name: 'arXiv abstract and paper Section 3 title: ''SeqMem-Eval: A Diagnostic Evaluation Framework'''
+  release_date: 'arXiv API: 2605.15384v1 published 2026-05-14'
+  venue: 'arXiv API has no journal_ref (comment: ''29 pages, 13 figures''). The paper and the repo README name no venue.'
+  memory_types: 'Paper §3.1: external, prompt-mediated memory that accumulates experience such as workflows and reflections. §3.3: hold-out generalization is measured on unseen tasks under different memory states, giving procedural_workflow. ALFWorld (Table 6, 140 sequential / 24 hold-out) is a simulated household environment scored by task success, giving embodied.'
+  links.paper: arXiv API entry 2605.15384
+  links.code: 'Paper abstract: ''Code and evaluation framework are available at: https://github.com/ShenGroup/SeqMem-Eval'''
+  links.data: 'null: the repo README says ''Datasets are not bundled'' and points to upstream sources (HF MATH-500, MMLU-Pro, openai_humaneval, Gorilla APIBench, ALFWorld). No dedicated dataset page exists.'
+  scale.questions: 'Paper Appendix A.1, Table 6 (arXiv v1 HTML): Sequential test 132+500+873+1170+911+140 = 3726. Hold-out 32+280+96+129+120+24 = 681.'
+  scale.conversations: 'null: the benchmark uses sequential task streams, not conversations'
+  scale.avg_context_length: 'null: not reported in the paper'
+  scale.notes: Paper Table 6, Appendix A.1 and Appendix C.2 (OOD hold-out)
+  metrics: Paper Table 1 and §3.2–3.6 (online utility, hold-out generalization, backward transfer, forgetting, efficiency)
+  judge_model: 'null: the paper defines correctness as binary Acc(x;M). Repo scoring is rule-based: boxed-answer matching (tasks/math_answer_utils.py), unit-test execution (tasks/humaneval_code_exec.py), AST matching (tasks/apibench_ast_eval.py) and ALFWorld environment success. No LLM judge.'
+  repro_level: Repo has a main.py entry point plus runner.py, tasks/task_*.py and methods/*. Its --memory-seed-file and --task-data-override flags support hold-out runs. Data comes from public upstream HF/GitHub sources (HF APIs for MATH-500, MMLU-Pro and openai_humaneval are ungated). Checked 2026-10-10.
+  notes: Repo README 'Data' section; configs/holdout.py references scripts/holdout/run.py and data/Holdout-data/*, and neither is in the repo tree. Paper Appendix A.2 gives the backbones.

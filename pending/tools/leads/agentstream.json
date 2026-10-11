@@ -1,0 +1,14 @@
+{
+ "name": "AgentStream",
+ "slug": "agentstream",
+ "leads": {
+  "registry_key": "arxiv:2608.00155",
+  "tier": "P0",
+  "arxiv": "2608.00155 (arXiv API: v1 ?; title: None)",
+  "phase1_verified_types": {
+   "procedural_workflow": "Sec. 3: \"an agent processes a stream of tasks and, after each attempt, distills the interaction trajectory into persistent experience (e.g., refined context, memory entries, reusable skills\". Eq. 1 defines the evolution gain."
+  },
+  "paper_hint": "https://arxiv.org/abs/2608.00155",
+  "code_hint": "https://github.com/Jasper-Yan/AgentStream"
+ }
+}

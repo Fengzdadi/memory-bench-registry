@@ -1,0 +1,13 @@
+{
+ "name": "Stateful SWE-bench (from TOM-SWE)",
+ "slug": "stateful-swe-bench",
+ "leads": {
+  "registry_key": "arxiv:2510.21903",
+  "tier": "P0",
+  "arxiv": "2510.21903 (arXiv API: v1 ?; title: None)",
+  "phase1_verified_types": {
+   "coding_cross_session": "Sec. 4: \"agents have access to previous conversation histories with the same user profile, requiring them to derive user preferences from past interactions\"; \"we randomly sample 20 sessions from the same developer\"."
+  },
+  "paper_hint": "https://arxiv.org/abs/2510.21903"
+ }
+}

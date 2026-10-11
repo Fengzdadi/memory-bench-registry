@@ -1,0 +1,45 @@
+name: RealMem
+slug: realmem
+release_date: 2026-01
+venue: Findings of ACL 2026
+memory_types:
+- conversational_longterm
+- semantic_knowledge_update
+- personalization
+- episodic
+links:
+  paper: https://arxiv.org/abs/2601.06966
+  code: https://github.com/AvatarMemory/RealMemBench
+  data: null
+scale:
+  conversations: 10
+  questions: 1415
+  avg_context_length: 269,190 tokens per user
+  notes: '10 = per-user multi-session histories (repo dataset/*_dialogues_256k.json), totalling 2,055 sessions (paper: "over 2,000 cross-session dialogues", avg. 205 sessions/user, 6.8 turns/session, 14,028 turns) over 11 scenarios. 1,415 queries = 1,075 Static Retrieval, 156 Dynamic Updating, 160 Implicit Preference, 24 Temporal Reasoning. Session and query totals match the repo files (counted 2026-10-10).'
+metrics:
+- Recall@K (K=10,20)
+- NDCG@K (K=10,20)
+- Mem Recall (LLM-judged)
+- Mem Helpful (LLM-judged)
+- QA Score (LLM-judged 0-3 rubric)
+judge_model: GPT-4o
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: The dialogues were synthesized by a multi-agent pipeline; the paper's limitations section names the Gemini 2.5 series and adds human label verification. Data ships in the GitHub repo (dataset/, 10 persona JSON files); there is no separate dataset page. The ACL Anthology page links to an anonymous 4open.science mirror instead. The ACL version adds a DeepSeek-V3 cross-judge check (App. A.2.2) that is absent from arXiv v1. The README badge says MIT, but the LICENSE file is Apache-2.0. Eval scripts expect retrieval results in eval/retrieval_result, which contains only examples.
+sources:
+  name: 'arXiv title ''RealMem: Benchmarking LLMs in Real-World Memory-Driven Interaction''; repo README'
+  release_date: 'arXiv API: 2601.06966v1 published 2026-01-11'
+  venue: 'ACL Anthology 2026.findings-acl.703 (Findings of the Association for Computational Linguistics: ACL 2026, July 2026, pp. 14349-14365); repo README News 2026.04.06 ''accepted by ACL 2026 Findings'''
+  memory_types: 'paper Sec. 4 / App. A.1.1 query types: Static Retrieval of accumulated multi-session project context (conversational_longterm), Dynamic Updating = modification/deletion/conflict resolution of plans (semantic_knowledge_update), Implicit Preference/Proactive Alignment + persona memories (personalization), Temporal Reasoning over time-sensitive events/schedules (episodic); Table 4 per-category scores'
+  links.paper: arXiv abs 2601.06966
+  links.code: arXiv abstract and ACL PDF both state 'Our code and datasets are available at https://github.com/AvatarMemory/RealMemBench'
+  links.data: no separate dataset page; data files live in repo dataset/ (checked 2026-10-10)
+  scale.conversations: repo dataset/ holds 10 per-persona *_dialogues_256k.json files with 2,055 sessions in total (counted 2026-10-10); paper Table 7 gives avg. 205 sessions per user and the abstract says 'over 2,000 cross-session dialogues'
+  scale.questions: 'paper Table 7 (App. A.1, arXiv v1 HTML and ACL PDF): Total Questions 1,415; repo files contain 1,415 is_query turns (counted 2026-10-10)'
+  scale.avg_context_length: 'paper Table 7: Avg. Context Length (tokens/user) 269,190'
+  scale.notes: paper Table 7 + repo dataset counts
+  metrics: paper Sec. 4 Evaluation (Recall@k, NDCG@k for k in {10,20}; Mem Recall, Mem Helpful; QA Score), Tables 2-4
+  judge_model: 'paper Sec. 5.1: ''we adopt GPT-4o as the LLM-as-a-Judge for all evaluations''; ACL version App. A.2.2 adds DeepSeek-V3 as an alternative judge'
+  repro_level: repo tree has eval/eval_mem0.py, eval/run_generation.py, eval/compute_auto_metrics_for_realmem.py (Recall/NDCG), eval/compute_llm_metrics_for_realmem.py (GPT-4o judge) and the dataset/*.json data files (checked 2026-10-10)
+  notes: ACL Anthology page code link; arXiv v1 HTML has no DeepSeek mention; GitHub API reports Apache-2.0 license, while the README badge says MIT

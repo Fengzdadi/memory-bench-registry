@@ -1,0 +1,43 @@
+name: Neuromem
+slug: neuromem
+release_date: 2026-02
+venue: ICML 2026
+memory_types:
+- conversational_longterm
+- semantic_knowledge_update
+links:
+  paper: https://arxiv.org/abs/2602.13967
+  code: https://github.com/RIDE-Lab/neuromem-bench
+  data: null
+scale:
+  conversations: 10
+  questions: null
+  avg_context_length: null
+  notes: conversations = the 10 LoCoMo conversations ('10 core tasks', App. A.3), the set used for the full D1-D5 ablation. No question counts or context lengths are reported for any reused dataset. LongMemEval-Oracle tasks are concatenated into one stream, and the MemoryAgentBench Selective Forgetting subset is used only to cross-validate D1 trends.
+metrics:
+- Token-level F1 (Porter stemming)
+- Insertion latency
+- Retrieval latency
+- F1-per-second (cost-effectiveness)
+- F1 degradation across rounds (R1 to R5)
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'Neuromem is an evaluation testbed and streaming protocol, not a new dataset. It re-serializes LoCoMo, LongMemEval (Oracle subset) and MemoryAgentBench (Selective Forgetting subset) into an interleaved insert/retrieve stream and scores 5 rounds at 20% intervals. Full ablations cover LoCoMo only. Backbones: pangu-1b and Llama-3.1-8B. As checked on 2026-10-10, the public repo contains only LoCoMo loaders and data, with no LongMemEval or MemoryAgentBench adapters. The repo moved from intellistream/neuromem-bench, which redirects to it.'
+sources:
+  name: 'arXiv 2602.13967 title/abstract: ''We present Neuromem, a scalable testbed...'''
+  release_date: 'arXiv API: 2602.13967v1 published 2026-02-15'
+  venue: 'ICML 2026 virtual-site data (icml.cc/static/virtual/data/icml-2026-orals-posters.json): entry id 61844, decision ''Accept (regular)'', Poster Session 7, paper_url openreview.net/forum?id=mO7DgwFFVe; repo README also states ICML 2026. arXiv comment says only ''Preprint'''
+  memory_types: 'paper §4.1 and App. A.3: LoCoMo and LongMemEval-Oracle multi-session dialogue streams (conversational_longterm); MemoryAgentBench Selective Forgetting subset of sequential fact updates and contradictions (semantic_knowledge_update)'
+  links.paper: arXiv API entry 2602.13967
+  links.code: ICML 2026 virtual-site entry url field = github.com/intellistream/neuromem-bench, which 301-redirects to github.com/RIDE-Lab/neuromem-bench; README cites the arXiv paper and lists first author @KimmoZAG as owner
+  links.data: no separate dataset page; the benchmark reuses LoCoMo, LongMemEval and MemoryAgentBench, and LoCoMo JSON ships in the repo
+  scale.conversations: 'paper App. A.3: ''The LoCoMo dataset is structured around 10 core tasks''; §5 says the full D1-D5 ablation is on LoCoMo'
+  scale.questions: not reported in paper (arXiv v1 HTML checked)
+  scale.avg_context_length: not reported in paper
+  metrics: paper §4.3 (Token-level F1 with Porter stemming, Insertion Latency, Retrieval Latency); Fig. 3 (F1-per-second cost-effectiveness); Table 1 (degradation from R1 to R5)
+  judge_model: paper reports token-level F1 and latency only; no LLM judge (grep of arXiv v1 HTML for 'judge' found nothing)
+  repro_level: 'repo tree checked 2026-10-10: benchmarks/experiment/memory_test_pipeline.py (entry point), scripts/run_tim_locomo.sh, scripts/run_mem0_locomo.sh, benchmarks/evaluation/scripts/locomo_evaluate.sh -> benchmarks/evaluation/analysis/round_analyzer.py (F1 in analysis/utils/indicators.py with PorterStemmer); data at benchmarks/experiment/data/locomo/locomo10_official.json plus scripts/download_locomo10.sh. LoCoMo only.'
+  notes: paper §4.1, §4.3, §5, App. A.3, B.2; repo tree and README checked 2026-10-10
+  scale.notes: paper App. A.3 and §5 intro

@@ -1,0 +1,43 @@
+name: UniEdit
+slug: uniedit
+release_date: 2025-05
+venue: NeurIPS 2025 Datasets and Benchmarks Track
+memory_types:
+- parametric
+links:
+  paper: https://arxiv.org/abs/2505.12345
+  code: https://github.com/qizhou000/UniEdit
+  data: https://huggingface.co/datasets/qizhou/UniEdit
+scale:
+  conversations: null
+  questions: 311142
+  avg_context_length: null
+  notes: 311,142 = total entries (paper Table 6), each with one edit, one generality and one locality sample (933,426 samples in union). Repo script 16_split_train_test_data.py splits each of the 25 domains into the first 2/3 for train and the rest for test; the paper does not report split sizes. Repo test scripts sample 5,000 test entries per run (-dsn 5000).
+metrics:
+- Reliability (Rel.)
+- Generality (Gen.)
+- Locality (Loc.)
+- Average of Rel./Gen./Loc.
+- Per-criterion generality/locality scores (Rep, MH, RR, SER, SA, OA; SS, RS, OS, 1-NF)
+- 'General capability after 1,000 sequential edits: CSQA/MMLU/ANLI accuracy, SQuAD-2 inverse perplexity'
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: This is a knowledge-editing (model-editing) benchmark built from Wikidata across 25 domains. DeepSeek-V3 generated the prompts and GPT-4 generated the domain keywords. Experiments covered GPT2-XL, GPT-J and Llama-3.1-8B with weight-editing editors (FT, ROME, AlphaEdit, T-Patcher) and external-module editors (SERAC, GRACE, IKE). The Hugging Face data (MIT, not gated) is per-domain dict-keyed JSON, about 2.5 GB train and 1.25 GB test. The dataset viewer/size API failed (checked 2026-10-10).
+sources:
+  name: 'arXiv API title: ''UniEdit: A Unified Knowledge Editing Benchmark for Large Language Models'''
+  release_date: 'arXiv API: 2505.12345v1 published 2025-05-18 (latest v3 updated 2025-11-11)'
+  venue: arXiv comment 'NeurIPS 2025 Track on Datasets and Benchmarks'; PDF v3 footer; proceedings.neurips.cc abstract page lists 'Datasets and Benchmarks Track'; README bibtex NEURIPS2025_6cc6c2be
+  memory_types: 'paper §3 problem definition and §5.1: editors modify LLM parameters (FT, ROME, AlphaEdit, T-Patcher) or add modules; evaluates whether post-edit weights recall edited knowledge (reliability/generality/locality)'
+  links.paper: arXiv API id 2505.12345; README badge links arxiv.org/abs/2505.12345
+  links.code: 'paper p.1 footnote 1 and arXiv comment: github.com/qizhou000/UniEdit'
+  links.data: 'paper p.1 footnote 1 and arXiv comment: huggingface.co/datasets/qizhou/UniEdit; HF API shows public, gated=false, train/ and test/ JSON files for 25 domains'
+  scale.questions: paper §4.2 ('311K entries') and Appendix C.1 Table 6 (Edit/Generality/Locality = 311,142 each; union 933,426)
+  scale.conversations: 'not applicable: single-turn cloze/QA editing samples, no conversations'
+  scale.avg_context_length: not reported in paper or README
+  scale.notes: repo uniedit_construction/preprocess_pipeline/16_split_train_test_data.py (train_data_propo = 2/3); scripts/editor_train_test/*/test_*.sh use -dsn 5000
+  metrics: paper §3 (Reliability/Generality/Locality), Table 2 (Rel./Gen./Loc./Average), Fig. 5 (per-criterion), Appendix D.1 Evaluation (top-5 token recall for gen/loc, top-1 for judgment queries), Appendix D.3 Table 9 (CSQA/MMLU/ANLI accuracy, SQuAD-2 inverse PPL)
+  judge_model: 'paper Appendix D.1: scoring is token-level accuracy / top-k token recall from model logits; DeepSeek-V3 and GPT-4 used only for data generation, not judging'
+  repro_level: repo tree has test_editor.py, train_editor.py, evaluation/llm_editor_eval.py, dataset/llm.py (UniEdit loader) and scripts/editor_train_test/{ft,rome,alphaedit,serac,tp,grace,ike,woe}/test_*.sh; data downloadable from HF (checked 2026-10-10)
+  notes: 'HF API tree sizes (test 1,252.8 MB, train 2,510.4 MB); datasets-server /size returned failed config-size; HF card license: mit'

@@ -1,0 +1,40 @@
+name: DMV-Bench
+slug: dmv-bench
+release_date: 2026-06
+venue: EMNLP 2026
+memory_types:
+- episodic
+- multimodal
+links:
+  paper: https://arxiv.org/abs/2606.27499
+  code: https://github.com/yyyujintang/DMV-Bench
+  data: https://huggingface.co/datasets/yyyujintang/DMV-Bench-Images
+scale:
+  conversations: null
+  questions: 35410
+  avg_context_length: 22–≈1,250 steps
+  notes: questions = recall probes on Gemini 2.5 Flash summed over the J=5/10/15 cells and the Monte Carlo J=50 pilot (2,762+5,003+25,196+2,449). Qwen2.5-VL-7B gives 15,361. Probes come from each back-end's own browsing of a 1,000-product catalogue, so there is no fixed set of chains. arXiv v1 reported 46,265/18,588. Sessions run 22–28 steps.
+metrics:
+- Task success rate (TSR; exact match on the product URL)
+- TSR stratified by recall reach r
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'An interactive benchmark: running it requires the local Next.js storefront (env/frontend) plus the agent harness. Probes and trajectories are generated at run time from each VLM back-end''s browsing, so probe counts vary and no probe file is released. The 1,000 cued and 1,000 base catalogue images are an ungated Apache-2.0 Hugging Face dataset. The paper also proposes DualMem, and its external baselines are ''-lite'' re-implementations. Probe counts in arXiv v2 differ from v1. Scoring is by URL match, with no LLM judge.'
+sources:
+  name: 'arXiv title and repo README: ''DMV-Bench: Diagnosing Long-Horizon Multimodal Agents'' Visual Memory with Incidental Cue Injection'''
+  release_date: 'arXiv API: 2606.27499v1 published 2026-06-25 (v2 updated 2026-08-31)'
+  venue: 'arXiv API comment on v2: ''Accepted to EMNLP 2026 Main Conference'''
+  memory_types: 'paper §3.2 (arXiv v2 HTML): the agent must recall, at recall reach r, cued products seen in earlier shopping sessions (episodic). The cues exist only in product-image pixels under the L2-leakage contract (multimodal).'
+  links.paper: arXiv API entry 2606.27499
+  links.code: 'arXiv abstract footnote ''Code: https://github.com/yyyujintang/DMV-Bench''; gh api confirms repo yyyujintang/DMV-Bench (Apache-2.0)'
+  links.data: repo README 'Catalogue images' section links HF dataset yyyujintang/DMV-Bench-Images; HF API shows it is public, not gated, with 1,000 with_cue/ + 1,000 base/ PNGs (checked 2026-10-10)
+  scale.questions: 'paper Table 1 (arXiv v2 HTML): # Tasks ''35,410 / 15,361'' recall-probe tasks on Gemini 2.5 Flash / Qwen2.5-VL-7B; matches the sum of the Table 2 n_r values. v1 Table 1 reported 46,265 / 18,588.'
+  scale.avg_context_length: 'paper Table 1 (arXiv v2), Length/task column for DMV-Bench: ''22– ≈1,250 steps''. §3.2: sessions are 22–28 steps.'
+  scale.conversations: 'null: no fixed dialogue or chain set is released. Chains are generated per seed and back-end (Table 10 #chains for Gemini: 25/10/22/5 across J=5/10/15/MC50).'
+  scale.notes: paper Tables 1–3 and §5 (arXiv v2), v1 Table 1
+  metrics: paper §3.4 Eq. 1 (task success rate, exact URL match) and Appendix G per-reach TSR tables; repo dualmem/metrics_f2.py computes SR overall and per reach
+  judge_model: paper v2 §3.4 uses deterministic URL match. v1 §3.4 says this is 'rather than an LLM judge'. A VLM-as-judge appears only in catalogue image filtering (§3.1), not in evaluation.
+  repro_level: repo tree (checked 2026-10-10) has scripts/run_dmvbench_f2.py (runs the IC-task evaluation and writes f2_summary.csv/f2_per_probe.csv) and dualmem/metrics_f2.py (TSR aggregation). Data comes from the repo's data/vismem_diag_v2/*.json plus the public HF images via scripts/download_images.py.
+  notes: repo README (Getting started, Data products) and paper Appendix E; v1 vs v2 probe-count comparison from arXiv HTML

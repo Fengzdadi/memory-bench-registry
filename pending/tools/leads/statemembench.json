@@ -1,0 +1,27 @@
+{
+ "name": "StateMemBench",
+ "slug": "statemembench",
+ "leads": {
+  "registry_key": "arxiv:2608.19652",
+  "tier": "P2",
+  "arxiv": "2608.19652 (arXiv API: v1 2026-08-20; title: Can Agent Memory Systems Track Evolving State?)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "Can Agent Memory Systems Track Evolving State?",
+    "paper_url": "https://arxiv.org/pdf/2608.19652",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "conversational_longterm",
+    "semantic_knowledge_update"
+   ],
+   "extra_tags": [],
+   "kind_reason": "Introduces StateMemBench: 234 multi-session scenarios (190 short, 44 long; 322 probes) built from symbolic state-operation programs rendered as dialogue. Closed-pool grading separates current-state from superseded-state answers. Some research scenarios involve several collaborators, but the core tar"
+  }
+ }
+}

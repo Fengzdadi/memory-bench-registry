@@ -1,0 +1,14 @@
+{
+ "name": "ChainSWE",
+ "slug": "chainswe",
+ "leads": {
+  "registry_key": "arxiv:2607.02606",
+  "tier": "P0",
+  "arxiv": "2607.02606 (arXiv API: v1 ?; title: None)",
+  "phase1_verified_types": {
+   "coding_cross_session": "Sec. 4.3, Seq+Mem mode: 'The agent enters bug k+1 with the transcript from bug k, including intermediate observations and dead ends.' The HF card describes 100 time-ordered chains (304 bug-fix tasks)."
+  },
+  "paper_hint": "https://arxiv.org/abs/2607.02606",
+  "code_hint": "https://huggingface.co/datasets/C-lister/ChainSWE"
+ }
+}

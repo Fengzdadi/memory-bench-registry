@@ -1,0 +1,38 @@
+name: DialSim
+slug: dialsim
+release_date: 2024-06
+venue: ICLR 2026 Workshop MemAgents
+memory_types:
+- conversational_longterm
+- multi_agent_group
+- episodic
+links:
+  paper: https://arxiv.org/abs/2406.13144
+  code: https://github.com/jiho283/DialSim
+  data: https://drive.google.com/drive/folders/1MhPlUFWuchVZ5E1NQDWfbT7_RW7ozbuk
+scale:
+  conversations: 3
+  questions: null
+  avg_context_length: 352k tokens
+  notes: 'conversations = 3 long multi-party dialogues, one per TV show (5 consecutive seasons each of Friends, The Big Bang Theory, The Office). Each one is split into dialogue sessions (scenes): 788 / 805 / 2,347 (paper Table 2). Dialogue length per show is 335,439 / 367,636 / 352,914 tokens (Table 2), about 352k on average (Table 1), with an average of 3.4 speakers. The paper gives no total question count. Table 2 only reports average question candidates per session: 1366.1 / 1306.8 / 497.9. These split into fan-quiz questions (192.9 / 26.7 / 42.7) and TKG questions (1173.2 / 1280.1 / 455.1), or into answerable (1215.0 / 1239.7 / 410.9) and unanswerable (151.1 / 67.2 / 86.9). In one simulation run, at most one question is sampled per session (Algorithm 1). Sessions with fewer than 2 characters are skipped. In the sample, 30% of questions come from fan quizzes and 20% are unanswerable (App. G.1.1). The main results (Table 3) use Friends. The Big Bang Theory and The Office results are in Tables 11 and 12. The data is released in two versions: v1.0 matches the paper, and v1.1 adds unanswerable multi-hop questions (repo README). An adversarial name-swapped version also exists.'
+metrics:
+- accuracy (correct answers / total questions; mean and std over 3 runs)
+judge_model: GPT-4o mini
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'The QA dataset behind the simulator is called LongDialQA. In it, the agent plays the main character (Ross / Sheldon / Michael) and must answer questions that other characters ask at random points in a session, using only past dialogue. If it lacks the information, it must answer "(E) I don''t know". Character names are anonymized, and an adversarial version swaps names. Questions come in three formats: template multiple-choice, natural-language multiple-choice, and open-ended. The paper''s main experiments use multiple-choice. Versions v1 to v5 were titled "A Real-Time Simulator ..." and also tested a response time limit. v6 (2025-09-26) drops the real-time framing. The abstract''s "over 1,300 sessions" and "352,000 tokens" are per-show averages; Table 2 gives exact per-show counts. The data is two zip files (dialsim_v1.0.zip, dialsim_v1.1.zip) in a public Google Drive folder. simulator.py loads .pickle files from ./data/. The repo has no LICENSE file (GitHub API license: null). Dialogue scripts come from Kaggle and fan quizzes from FunTrivia; the licence for them is not stated. On OpenReview, earlier submissions were withdrawn from ICLR 2025 and rejected from the ICLR 2026 main conference, and an ACL ARR Dec 2024 submission exists. Only the ICLR 2026 MemAgents workshop poster is an accepted venue.'
+sources:
+  name: 'arXiv abs page title ''DialSim: A Dialogue Simulator for Evaluating Long-Term Multi-Party Dialogue Understanding of Conversational Agents''; repo README ''# DialSim'''
+  release_date: 'arXiv abs page submission history: v1 Wed, 19 Jun 2024 (arXiv API export endpoint returned HTTP 429 on 2026-10-10, so the abs page was used)'
+  venue: 'OpenReview search: note jysCqv1y8O venue ''ICLR 2026 Workshop MemAgents'' (venueid ICLR.cc/2026/Workshop/MemAgent); iclr.cc/virtual/2026/10021244 lists it as a poster at the ICLR 2026 Workshop on Memory for LLM-Based Agentic Systems (MemAgents). Same search: O0FcS21JVY = ICLR 2026 main ''Rejected_Submission''; W1x77vRucB = ICLR 2025 withdrawn. arXiv abs page shows no journal-ref'
+  memory_types: 'paper v6: long-term dialogue spanning ~352k tokens and 788-2,347 sessions (conversational_longterm); multi-party dialogue with an average of 3.4 speakers (Table 1) (multi_agent_group); Fig. 1 ''long-term event recall question'' and date-anchored fan-quiz questions such as ''How did Rachel buy her new boots on September 22, 1994?'' (§3.1.2) (episodic)'
+  links.paper: arXiv 2406.13144
+  links.code: arXiv v1 abstract says code is on GitHub; project page dialsim.github.io links github.com/jiho283/Simulator, which 301-redirects to jiho283/DialSim (repo description 'Official repository of DialSim')
+  links.data: repo README 'Dataset' section and the project page 'Data' link both point to this Google Drive folder; the public folder listing shows dialsim_v1.0.zip and dialsim_v1.1.zip (checked 2026-10-10)
+  scale.conversations: 'paper v6 §3.1 / Table 2: three TV-show scripts (Friends, The Big Bang Theory, The Office), each one long dialogue D={S1..SN} with 788 / 805 / 2,347 sessions'
+  scale.questions: 'null: paper Table 2 reports only average question candidates per session (1366.1 / 1306.8 / 497.9), with no total integer count; one question is asked per session per run (Algorithm 1)'
+  scale.avg_context_length: 'paper v6 Table 1: LongDialQA Dialogue Length ''352k'' tokens; Table 2: 335,439 / 367,636 / 352,914 tokens per show'
+  metrics: 'paper v6 Table 3 caption: ''reported the accuracy and standard deviations'' over three runs; Algorithm 1 returns CorrectAnswers/TotalQuestions'
+  judge_model: 'paper v6 Appendix G.1: for natural-language multiple-choice and open-ended answers that are not an exact match, scoring compares the response with the gold answer using GPT-4o mini. Repo post_processing/process_answer.py gpt_judge uses model=''gpt-4o-mini''. Template multiple-choice uses rule-based scoring (README)'
+  repro_level: repo tree has simulator.py (runs the simulation and computes score/calibrated_score via post_processing/process_answer.py judge_eq), prompt/gpt_as_a_judge_*.txt and scripts/script_1.sh, with README run commands; the data zip files are in a public Google Drive folder (listing checked 2026-10-10, not downloaded)

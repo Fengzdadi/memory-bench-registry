@@ -1,0 +1,29 @@
+{
+ "name": "SuperMemory-VQA",
+ "slug": "supermemory-vqa",
+ "leads": {
+  "registry_key": "arxiv:2606.00825",
+  "tier": "P2",
+  "arxiv": "2606.00825 (arXiv API: v1 2026-05-30; title: SuperMemory-VQA: An Egocentric Visual Question-Answering Benchmark for Long-Horizon Memory)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "SuperMemory-VQA: An Egocentric Visual Question-Answering Benchmark for Long-Horizon Memory",
+    "paper_url": "https://arxiv.org/abs/2606.00825",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "episodic"
+   ],
+   "extra_tags": [
+    "multimodal",
+    "egocentric_video"
+   ],
+   "kind_reason": "Egocentric VQA dataset (52.9 hours of AI-glasses video, 4,853 QA pairs) for long-horizon personal memory: object and location, intent, scene, timeline and conversation recall, with an 'unanswerable' option on each question."
+  }
+ }
+}

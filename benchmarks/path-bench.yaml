@@ -1,0 +1,41 @@
+name: PATH-Bench
+slug: path-bench
+release_date: 2026-08
+venue: arXiv preprint
+memory_types:
+- procedural_workflow
+links:
+  paper: https://arxiv.org/abs/2608.01149
+  code: null
+  data: null
+scale:
+  conversations: null
+  questions: 120
+  avg_context_length: 100 intervening tasks per sequence (plus 5-task warm-up and repeated probes)
+  notes: 'questions = tasks per source pool: 120 BigCodeBench-v0.1.4 tasks and 120 WildToolBench scenarios (480 turns), 240 in total. Main runs: 50 sampled sequences per dataset x history condition (positive/negative-dominant), 5 runs each; probes reinserted every 6-12 intervening tasks. Path-transition study uses 30 matched sequences; SEU uses a 20-sequence subset.'
+metrics:
+- Average Performance (AP)
+- Forward Transfer (FWT)
+- Backward Transfer (BWT)
+- Forgetting (FGT)
+judge_model: null
+repro_level: paper_only
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'No official code or data release found as of 2026-10-10: the paper links none, and GitHub and Hugging Face searches returned nothing. Tasks are headroom-filtered subsets of BigCodeBench-v0.1.4 and WildToolBench. Task relations come from a one-shot ICL gain matrix voted on by DeepSeek-V4-Flash, GPT-5.4-mini and GLM-5.0. All evaluated agents use DeepSeek-V4-Flash. FWT/BWT/FGT come from repeated probe tasks rather than full re-evaluation. The paper also proposes the SEU harness.'
+sources:
+  name: 'arXiv API title: ''PATH-Bench: Path-Dependent Evaluation of Lifelong Agents'''
+  release_date: 'arXiv API: 2608.01149v1 published 2026-08-02 (only v1 exists)'
+  venue: arXiv API entry has no journal_ref/comment; abs page shows no Comments/Journal-ref; paper names no venue (checked 2026-10-10)
+  memory_types: 'paper §3.3 (arXiv v1 HTML): ''Only the intervening tasks update the agent''s external learning state''; FWT/BWT/FGT read from probe trajectory over a task stream; §4 agents are RAG, agentic-memory (AWM workflows, Clin rules) and skill agents reusing experience from earlier code/tool-use tasks'
+  links.paper: arXiv abs page 2608.01149
+  links.code: 'null: no code link in paper HTML, PDF (no /URI annotations) or abs page; GitHub searches (''PATH-Bench'', ''Selective Experience Use'', arXiv id code search) and first-author account checks found no official repo (2026-10-10)'
+  links.data: 'null: HF API /api/arxiv/2608.01149/repos returns no datasets/models/spaces; HF papers API reports paper not found (2026-10-10)'
+  scale.questions: 'paper §3.2 ''we sample D=120 tasks from each benchmark''; Appendix E: 120-task BigCodeBench-v0.1.4 subset, 120 WildToolBench scenarios with 480 turns'
+  scale.conversations: 'null: benchmark has no conversations; evaluation units are sampled task sequences (50 per dataset and condition, §4), described in scale.notes'
+  scale.avg_context_length: 'paper §4: warm-up of five tasks, ''sample an intervening queue of 100 tasks'', probe intervals of 6-12 intervening tasks'
+  scale.notes: paper §3.2, §4, §4.2 (30 matched sequences), §4.3 (20 sequences), Appendix E
+  metrics: 'paper §3.3 Evaluation Metrics (AP, FWT, BWT, FGT); Table 1. Per-task scores: BigCodeBench completion, WildToolBench proportion of completed subtasks (§3.2)'
+  judge_model: 'null: paper scores BigCodeBench by task completion and WildToolBench by proportion of completed subtasks; no LLM judge described. DeepSeek-V4-Flash in SEU filters memory, not a judge'
+  repro_level: 'paper_only: paper read in full; no official code or data release located via paper, arXiv abs, GitHub or Hugging Face (checked 2026-10-10)'
+  notes: paper §3.2, §4, Appendix B, Appendix E; repository/dataset searches on 2026-10-10

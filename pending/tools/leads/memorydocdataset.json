@@ -1,0 +1,29 @@
+{
+ "name": "MemoryDocDataSet",
+ "slug": "memorydocdataset",
+ "leads": {
+  "registry_key": "arxiv:2606.04442",
+  "tier": "P2",
+  "arxiv": "2606.04442 (arXiv API: v1 2026-06-03; title: MemoryDocDataSet: A Benchmark for Joint Conversational Memory and Long Document Reasoning)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "MemoryDocDataSet: A Benchmark for Joint Conversational Memory and Long Document Reasoning",
+    "paper_url": "https://arxiv.org/abs/2606.04442",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "conversational_longterm",
+    "multi_agent_group"
+   ],
+   "extra_tags": [
+    "long_document_reasoning"
+   ],
+   "kind_reason": "Synthetic benchmark of 50 micro-worlds and 1,000 QA pairs that combines multi-session, multi-party professional conversations (3-5 personas) with 20K-50K-token legal documents. Most questions are 'Hybrid': find the right document via conversation memory, then answer from it. The paper says the datas"
+  }
+ }
+}

@@ -1,0 +1,14 @@
+{
+ "name": "ServeLearnBench",
+ "slug": "servelearnbench",
+ "leads": {
+  "registry_key": "arxiv:2610.07792",
+  "tier": "P0",
+  "arxiv": "2610.07792 (arXiv API: v1 ?; title: None)",
+  "phase1_verified_types": {
+   "procedural_workflow": "Sec 3.1 (arXiv HTML): \"Serving and test tasks cover the same behavioral components ... using disjoint task instances\"; tests \"transfer to new instances under the same active policy rather than memorization\"; harnesses include SkillOpt, Continual Harness, Prime"
+  },
+  "paper_hint": "https://arxiv.org/abs/2610.07792",
+  "code_hint": "https://github.com/Infini-AI-Lab/ServeLearnBench"
+ }
+}

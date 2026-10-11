@@ -1,0 +1,29 @@
+{
+ "name": "TReMu",
+ "slug": "tremu",
+ "leads": {
+  "registry_key": "arxiv:2502.01630",
+  "tier": "P2",
+  "arxiv": "2502.01630 (arXiv API: v1 2025-02-03; title: TReMu: Towards Neuro-Symbolic Temporal Reasoning for LLM-Agents with Memory in Multi-Session Dialogues)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Framework & Methods",
+    "name": "TReMu: Towards Neuro-Symbolic Temporal Reasoning for LLM-Agents with Memory in Multi-Session Dialogues",
+    "paper_url": "https://arxiv.org/pdf/2502.01630",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "conversational_longterm",
+    "episodic"
+   ],
+   "extra_tags": [
+    "temporal_reasoning"
+   ],
+   "kind_reason": "The paper contributes both a framework and a new temporal-reasoning benchmark: 600 multiple-choice QAs (112 unanswerable) built by augmenting LoCoMo multi-session dialogues. The paper only says the data 'will be released', gives no URL, and a GitHub search found no repo."
+  }
+ }
+}

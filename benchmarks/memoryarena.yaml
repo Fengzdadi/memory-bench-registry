@@ -1,0 +1,44 @@
+name: MemoryArena
+slug: memoryarena
+release_date: 2026-02
+venue: ICML 2026
+memory_types:
+- episodic
+- procedural_workflow
+- personalization
+links:
+  paper: https://arxiv.org/abs/2602.16313
+  code: https://github.com/ZexueHe/MemoryArena
+  data: https://huggingface.co/datasets/ZexueHe/memoryarena
+scale:
+  conversations: 701
+  questions: 4850
+  avg_context_length: '>40k tokens per task trace (~57 action steps; avg 14.1k-122.4k tokens by environment)'
+  notes: conversations = 701 multi-session tasks (150 Bundled Web Shopping, 270 Group Travel, 221 Progressive Web Search, 40 Math, 20 Physics), memory reset per task; questions = 4,850 interdependent subtasks/sessions. Both match the HF test split (counted on 2026-10-10). arXiv v1 listed 766 tasks (256 search tasks).
+metrics:
+- Task Success Rate (SR)
+- Task Progress Score (PS)
+- soft Progress Score (sPS, Group Travel Planning)
+- SR@k (success rate at subtask depth k)
+- Latency (sec.)
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: arXiv v1 reported 766 tasks (256 Progressive Web Search); v2 and the HF release contain 701 (221). HF data is CC-BY-4.0 and ungated; the repo has no licence file and is labelled a preview. Shopping also needs ai-hyz/MemoryArena-product-db; web search needs BrowseComp-Plus and Joanna690/websearch-embeddings. The paper names no judge model; repo scoring uses LLM judges (GPT-4o default for shopping, GPT-4.1 for search, GPT-5-mini for math/physics). Also appeared at the KnowFM @ ACL 2026 workshop.
+sources:
+  name: 'arXiv title / repo README: ''MemoryArena: Benchmarking Agent Memory in Interdependent Multi-Session Agentic Tasks'''
+  release_date: 'arXiv API: 2602.16313v1 published 2026-02-18'
+  venue: 'arXiv comment ''ICML 2026''; OpenReview note JHYmxqS9Jv venue ''ICML 2026 regular'', venueid ICML.cc/2026/Conference (bibtex: Forty-third International Conference on Machine Learning)'
+  memory_types: 'paper §1/§3: later sessions require recalling earlier purchases, plans, search results and lemmas (episodic); §2: evaluates whether agents ''absorb experiences, acquire new skills, distill reusable knowledge'' and apply them to later subtasks, ReasoningBank included (procedural_workflow); §3.1 Group Travel is preference-constrained planning needing recall of ''previous activities and traveler preferences'' (personalization)'
+  links.paper: arXiv abs page 2602.16313
+  links.code: repo README cites arXiv 2602.16313; project page memoryarena.github.io (linked in paper abstract) links github.com/ZexueHe/MemoryArena
+  links.data: 'project page and repo setup_*.md link huggingface.co/datasets/ZexueHe/memoryarena; HF API: public, not gated, 5 configs'
+  scale.conversations: paper v2 Table 1 (701 tasks) and Table 2 (150/270/221/40/20); HF datasets-server num_rows 701
+  scale.questions: paper v2 §5 and App. C.1 ('4,850 subtasks'); recounted from HF jsonl questions lists = 4,850 on 2026-10-10
+  scale.avg_context_length: paper §1 ('average of 57 action steps', traces 'more than 40k tokens'); Table 2 avg task trace length 41.5k/40.6k/122.4k/18.1k/14.1k
+  scale.notes: arXiv v1 HTML Table 1 (766) and Table 2 / §3.1 (256 Progressive Web Search tasks) vs v2 (701 / 221)
+  metrics: paper v2 §4.2 (PS, sPS Eq. 6, SR), §4.4 (SR@k, Figure 3), §4.5 Table 4 (latency, sec.)
+  judge_model: 'null: paper v2 names no judge model; repo uses LLM judges (compute_reward.py default gpt-4o; configs/web_search_configs/search_task.json judge_model gpt-4.1; formal_reasoning configs env judge gpt-5-mini), not confirmed by the paper as the reported setup'
+  repro_level: repo tree has run_shopping.py, run_travel.py, run_search.py, run_math.py plus env/env_systems/web_shopping_env/compute_reward.py, env/env_systems/travel_planner_env/eval.py, env/env_systems/formal_reasoning_env/eval.py, env/env_systems/web_search_env/evaluate_with_openai.py; data downloadable from HF ZexueHe/memoryarena (checked 2026-10-10)
+  notes: arXiv v1 vs v2 HTML; HF dataset card licence CC-BY-4.0; GitHub API license null; README 'preview version'; setup_web_shopping.md and setup_web_search_env.md for auxiliary HF datasets (all public, checked 2026-10-10); OpenReview JI6lVgLPjp venue 'KnowFM @ ACL 2026'

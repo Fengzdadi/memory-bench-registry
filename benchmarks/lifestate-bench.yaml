@@ -1,0 +1,44 @@
+name: LifeState-Bench
+slug: lifestate-bench
+release_date: 2025-03
+venue: ACL 2026
+memory_types:
+- episodic
+- parametric
+- multi_agent_group
+- semantic_knowledge_update
+links:
+  paper: https://arxiv.org/abs/2503.23514
+  code: null
+  data: null
+scale:
+  conversations: null
+  questions: 311
+  avg_context_length: ~91-125 words, ~28.9-66.1 dialogue turns per episode (Synth-Hamlet)
+  notes: 'questions = 196 (Hamlet) + 115 (synthetic ''Midnight Diner'') per Table 3 captions. Episodes: Hamlet E1-E5, synthetic E1-E7 (Fig. 3). Each episode has per-role questions on self-awareness, factual episode memory and relationship shift. Table 1 lists 1.3K / 202 ''samples'' (undefined, not equal to question counts). conversations left null: no dialogue count reported.'
+metrics:
+- 'Accuracy (LLM-judge score vs. reference answer, %) per state dimension: Self-awareness, Factual Memory, Relation Shift'
+- Overall ACC
+- Standard deviation (Std) per dimension
+- Episode-wise average score (Fig. 3)
+judge_model: DeepSeek ("DeepSeek evaluator", cited as DeepSeek-V2)
+repro_level: paper_only
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'No official code or data release found: no link in arXiv v1/v2 or the ACL PDF, no ACL Anthology attachments, no GitHub or Hugging Face match (checked 2026-10-10). Hamlet uses anonymized character names, but the authors report data leakage. The synthetic ''Midnight Diner'' script was generated with Claude 3.5 Sonnet. The judge scale is given as 1-100 in §5.2 but 1-10 in the ACL appendix. The ACL version adds appendices (data format, judge prompt) that are absent from arXiv v2.'
+sources:
+  name: arXiv v1/v2 HTML body and Table 1 use 'LifeState-Bench'; arXiv API abstract spells it 'LIFESTATE-BENCH'; ACL Anthology abstract spells it 'LifeState-BENCH'
+  release_date: 'arXiv API: 2503.23514v1 published 2025-03-30 (v2 2026-04-13)'
+  venue: 'ACL Anthology 2026.acl-long.1659: Proceedings of the 64th Annual Meeting of the ACL (Volume 1: Long Papers), July 2026, pp. 35846-35858'
+  memory_types: 'paper §3.1 and §4.2: per-episode fact questions on Factual Episode Memory Retrieve (episodic) and Relationship Shift (tracking evolving relationships = state update). §5.1 compares parametric (GRACE knowledge editing, LoRA) with non-parametric (direct/summary concatenation) methods under one protocol (parametric). Table 1: 6.6-7 agents per multi-character interaction (multi_agent_group)'
+  links.paper: arXiv abs page 2503.23514
+  links.code: 'null: no repo link in arXiv v1/v2 HTML or ACL PDF; GitHub repo/code search for ''LifeState'' and ''2503.23514'' found no author repo (2026-10-10)'
+  links.data: 'null: HF dataset search ''lifestate'' empty; HF arxiv/2503.23514/repos API returns no datasets; no Anthology data attachment (2026-10-10)'
+  scale.questions: 'paper Table 3 captions: ''Hamlet Dataset (Total 196 Questions)'', ''Synthetic Dataset (Total 115 Questions)'' (arXiv v1/v2, ACL PDF p.7)'
+  scale.conversations: 'null: paper reports no count of dialogues; Fig. 3 shows Hamlet E1-E5 and synthetic E1-E7 episodes; Table 1 ''# Samples'' 1.3K/202 undefined'
+  scale.avg_context_length: 'paper §4.1 ''Dialogue length averaging 91-125 words, with 28.9-66 dialogue turns''; Table 1 Avg Length 125.5/91.9, # Turns 66.1/28.9 (Hamlet/Synth)'
+  scale.notes: Table 1, Table 3, Figure 3 of arXiv v2 HTML and ACL PDF
+  metrics: paper Table 3 (Avg/Std per Self-awareness, Factual Memory, Relation Shift; ACC) and Fig. 3 episode-wise average score
+  judge_model: paper §5.2 'using the DeepSeek evaluator (DeepSeek-AI et al., 2024)', where the reference is DeepSeek-V2 (arXiv 2405.04434); ACL Appendix B, Table 5 judge prompt
+  repro_level: paper checked; no official repo or downloadable data found via arXiv, ACL Anthology, GitHub and Hugging Face searches (checked 2026-10-10)
+  notes: ACL Anthology PDF Appendix A/B (Midnight Diner, 1-10 judge scale) vs §5.2 (1-100); arXiv v2 HTML has no appendix; §4.4 data-leakage remark

@@ -1,0 +1,28 @@
+{
+ "name": "MemoReason",
+ "slug": "memoreason",
+ "leads": {
+  "registry_key": "arxiv:2609.35312",
+  "tier": "P2",
+  "arxiv": "2609.35312 (arXiv API: v1 2026-09-28; title: MemoReason: Evaluating the Effect of Parametric Memory on Contextual Reasoning in LLMs)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "MemoReason: Evaluating the Effect of Parametric Memory on Contextual Reasoning in LLMs",
+    "paper_url": "https://arxiv.org/pdf/2609.35312",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "parametric"
+   ],
+   "extra_tags": [
+    "memorization_bias"
+   ],
+   "kind_reason": "The paper introduces a human-curated benchmark: 100 documents x 12 QA = 1,200 factual tasks, each with 10 fictitious variants. It is built to measure how parametric memory (facts memorized in weights) affects contextual reasoning. Data is on HF at zineddine/MemoReason."
+  }
+ }
+}

@@ -1,0 +1,14 @@
+{
+ "name": "UniEdit",
+ "slug": "uniedit",
+ "leads": {
+  "registry_key": "arxiv:2505.12345",
+  "tier": "P0",
+  "arxiv": "2505.12345 (arXiv API: v1 ?; title: None)",
+  "phase1_verified_types": {
+   "parametric": "Paper Sec. 5.1: 'We evaluate various types of editors, spanning methods that modify model parameters or use external modules: Fine-Tuning (FT), ROME, AlphaEdit, SERAC, T-Patcher, and GRACE'. Table 2 reports Rel./Gen./Loc."
+  },
+  "paper_hint": "https://arxiv.org/abs/2505.12345",
+  "code_hint": "https://github.com/qizhou000/UniEdit"
+ }
+}

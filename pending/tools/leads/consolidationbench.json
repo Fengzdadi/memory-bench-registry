@@ -1,0 +1,33 @@
+{
+ "name": "ConsolidationBench",
+ "slug": "consolidationbench",
+ "leads": {
+  "registry_key": "arxiv:2609.33013",
+  "tier": "P0",
+  "arxiv": "2609.33013 (arXiv API: v1 2026-09-26; title: The Epistemics of Agent Memory: Measuring, and Governing, the Consolidation Decision in Long-Horizon LLM Agents)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "The Epistemics of Agent Memory: Measuring, and Governing, the Consolidation Decision in Long-Horizon LLM Agents",
+    "paper_url": "https://arxiv.org/pdf/2609.33013",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "procedural_workflow"
+   ],
+   "extra_tags": [
+    "memory_consolidation",
+    "memory_governance"
+   ],
+   "kind_reason": "Four-phase research paper whose Phase 3 introduces ConsolidationBench, a procedurally generated, oracle-by-construction benchmark scoring consolidation policies on retention, compression and reuse (transfer to novel composite tasks). Caveats: the paper does not clearly say whether an LLM executes ta"
+  },
+  "phase1_verified_types": {
+   "procedural_workflow": "Sec. 4.2: clusters include \"recurring parametric sub-tasks (which warrant skills)\"; axis \"Reuse (transfer to novel composite tasks)\"; Sec. 5.4: reuse \"credits skill- and rule-artifact transfer\"."
+  },
+  "paper_hint": "https://arxiv.org/abs/2609.33013"
+ }
+}

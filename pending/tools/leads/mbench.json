@@ -1,0 +1,27 @@
+{
+ "name": "MBench",
+ "slug": "mbench",
+ "leads": {
+  "registry_key": "arxiv:2606.00793",
+  "tier": "P2",
+  "arxiv": "2606.00793 (arXiv API: v1 2026-05-30; title: MBench: A Comprehensive Benchmark on Memory Capability for Video World Models)",
+  "community_list_entries": [
+   {
+    "source": "teleai",
+    "section": "📏 Benchmarks / 🎬 Multimodal Benchmarks / 🗓️ 2026",
+    "name": "MBench: A Comprehensive Benchmark on Memory Capability for Video World Models",
+    "paper_url": "https://arxiv.org/abs/2606.00793",
+    "code_url": "https://github.com/study-overflow/MBench",
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [],
+   "extra_tags": [
+    "multimodal",
+    "video_world_model_consistency"
+   ],
+   "kind_reason": "A benchmark explicitly for the 'memory capability' of video world models: entity, environment and causal consistency over long horizons in generated video. It is a memory benchmark, but the subject is video generation models rather than LLM agents, and none of the 8 types apply."
+  }
+ }
+}

@@ -1,0 +1,15 @@
+{
+ "name": "EvoAgentBench",
+ "slug": "evoagentbench",
+ "leads": {
+  "registry_key": "arxiv:2607.05202",
+  "tier": "P0",
+  "arxiv": "2607.05202 (arXiv API: v1 ?; title: None)",
+  "phase1_verified_types": {
+   "procedural_workflow": "Sec 3: \"An Ability is ... a reusable operation such as a search strategy, debugging procedure, or validation workflow\"; primary metric is average transfer gain on test tasks vs no-evolution baseline.",
+   "coding_cross_session": "Sec. 3.2.5: \"every test task must share at least one edge-eligible Ability with a training task in its own community\"; Sec. 4.1: SWE-Bench Verified \"uses hidden repository test suites and resolve rate\"."
+  },
+  "paper_hint": "https://arxiv.org/abs/2607.05202",
+  "code_hint": "https://huggingface.co/datasets/EverMind-AI/EvoAgentBench"
+ }
+}

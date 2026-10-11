@@ -1,0 +1,28 @@
+{
+ "name": "PrecisionMemBench",
+ "slug": "precisionmembench",
+ "leads": {
+  "registry_key": "arxiv:2605.11325",
+  "tier": "P2",
+  "arxiv": "2605.11325 (arXiv API: v1 2026-05-11; title: Structured Belief State and the First Precision-Aware Benchmark for LLM Memory Retrieval)",
+  "community_list_entries": [
+   {
+    "source": "tsinghua",
+    "section": "Benchmark",
+    "name": "PrecisionMemBench",
+    "paper_url": "https://arxiv.org/abs/2605.11325",
+    "code_url": "https://github.com/tenurehq/precisionMemBench",
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "semantic_knowledge_update"
+   ],
+   "extra_tags": [
+    "retrieval_precision"
+   ],
+   "kind_reason": "89-case benchmark of memory retrieval precision (active, structural incl. supersession, empty, and in-session topic-drift cases), released alongside the Tenure system."
+  }
+ }
+}

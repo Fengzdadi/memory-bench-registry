@@ -1,0 +1,46 @@
+name: AndroidIntent
+slug: androidintent
+release_date: 2026-01
+venue: ACL 2026
+memory_types:
+- personalization
+links:
+  paper: https://arxiv.org/abs/2601.09636
+  code: https://github.com/iLearn-Lab/ACL26-PersonalAlign
+  data: https://www.kaggle.com/datasets/qinglongyang/fingertip-20k
+scale:
+  conversations: 91
+  questions: 990
+  avg_context_length: 200 records per user over 60 days
+  notes: 91 = users whose long-term FingerTip20K records form the histories (first 80% chronologically is history). 990 = 775 preference episodes (vague instructions, 7,915 step-level GUI actions) + 215 routine (proactive) episodes; another 100 negative states are used for false-alarm scoring. The repo files (counted 2026-10-10) cover 82 users (preference) and 52 users (routine).
+metrics:
+- Type Accuracy (Type)
+- Step-wise Success Rate (SSR)
+- Cumulative Successful Rate (CSR)
+- Semantic similarity (embedding cosine + edit distance)
+- LLM-as-Judgment intent alignment
+- Precision
+- Recall
+- False-Alarm rate
+- F1-score
+judge_model: DeepSeek-V3
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'The repo ships annotation files only. Screenshots and raw records must be downloaded from FingerTip 20K on Kaggle (CC BY 4.0, ~47 GB). The repo has no licence file. Its scripts do not include the DeepSeek-V3 judge scoring. The proactive scripts point to ./dataset/ instead of ./data/. Counted 2026-10-10: samples/total.csv holds 20,000 records from 83 users, while the paper says 91 users. arXiv v1 called the CSR metric CER. The repo was rebuilt after data loss.'
+sources:
+  name: paper abstract and §4 (arXiv 2601.09636v2); benchmark is named AndroidIntent, the task is PersonalAlign
+  release_date: 'arXiv API: 2601.09636v1 published 2026-01-14'
+  venue: 'arXiv comment ''Accepted to ACL26 Main''; ACL Anthology 2026.acl-long.1669 (Proceedings of the 64th Annual Meeting of the ACL, Vol. 1: Long Papers, July 2026)'
+  memory_types: 'paper §3 and §6: agents use long-term user records to fill in omitted user preferences in vague instructions and to predict user routines for proactive suggestions'
+  links.paper: arXiv API entry 2601.09636
+  links.code: paper v2 header links github.com/iLearn-Lab/ACL26-PersonalAlign (v1 linked JiuTian-VL/PersonalAlign, which now redirects there); README says it is the official repository
+  links.data: 'official README: ''download the Fingertip 20k from Kaggle'' (kaggle.com/datasets/qinglongyang/fingertip-20k, API shows CC BY 4.0, 47.3 GB); AndroidIntent annotations themselves are in the repo''s data/ folder'
+  scale.conversations: 'paper §4: ''built upon 91 users'' 2 months of Android interaction records from Fingertip20K''; Table 2 ''91users/60days/200records'''
+  scale.questions: 'paper Table 2 Episode ''775+215''; §4.3 lists 775 preference interactions (7,915 GUI actions) and 215 routine interactions; §6.1 adds 100 negative states. Repo files checked: personal_samples.json has 775 rows, personal_execution.json has 7,915 steps, proactive_samples.json has 215 rows, proactive_false_samples.json has 100 rows'
+  scale.avg_context_length: 'paper Table 2 History Records column: ''91users/60days/200records'''
+  scale.notes: paper §3 (80/20 history/executing split), §4.3, §6.1, Table 2; repo data files counted 2026-10-10
+  metrics: 'paper §6.1 Metrics: Type, SSR, CSR for execution; Semantic (cosine + edit distance), LLM-as-Judgment, Precision, Recall, False-Alarm, F1-score for proactive (Tables 3-6)'
+  judge_model: 'paper §6.1: ''LLM-as-Judgment to evaluate intent alignment, where DeepSeek-V3 is employed to mitigate self-bias'''
+  repro_level: repo tree (checked 2026-10-10) has scripts/execution/eval_{qwen3vl,uitars,owl,api}.sh -> src/eval_execution/evaluation_*.py + calculate_api.py; scripts/proactive/eval_proactive.sh + calculate.sh -> src/eval_proactive/{evaluation,calculate}_proactive.py; scripts/HIM_agent/*.sh; annotations in data/; screenshots on Kaggle (dataset API returned 200 with file listing)
+  notes: repo README (data-loss apology, Kaggle instruction), GitHub API license=null, scripts/proactive/eval_proactive.sh paths, src/eval_execution/utils.py comment 'we change the name from CER to CSR', samples/total.csv counted 2026-10-10

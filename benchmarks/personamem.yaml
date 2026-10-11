@@ -1,0 +1,41 @@
+name: PersonaMem
+slug: personamem
+release_date: 2025-04
+venue: COLM 2025
+memory_types:
+- personalization
+- conversational_longterm
+- semantic_knowledge_update
+links:
+  paper: https://arxiv.org/abs/2504.14225
+  code: https://github.com/bowen-upenn/PersonaMem
+  data: https://huggingface.co/datasets/bowen-upenn/PersonaMem-v1
+scale:
+  conversations: 60
+  questions: 2727
+  avg_context_length: ~128k tokens (20 sessions)
+  notes: '128k split (the paper''s main 15-model evaluation), counted in HF questions_128k.csv on 2026-10-10: 2,727 questions over 60 shared contexts (20 personas x 3). Other splits: 32k (589 questions, 37 contexts, 10 sessions) and 1M (2,674 questions, 31 contexts, 60 sessions). The paper reports ~6k queries and over 180 histories across all versions.'
+metrics:
+- Accuracy (4-option multiple choice, discriminative setting; overall, per query type, and by session/token distance to the most recent preference mention)
+- Accuracy in generative setting (option chosen by length-normalized log-likelihood, open-weight models, 32k split)
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: Questions are first-person in-situ queries of 7 types, each answered by choosing 1 of 4 options. RAG and Mem0 baselines were run on the 32k split. The HF dataset was renamed to bowen-upenn/PersonaMem-v1, and the old URL redirects there. PersonaMem-v2 (arXiv 2512.06688) and v3 (arXiv 2608.21381) are separate, later benchmarks. The released files hold 128 shared contexts in total, against the paper's "over 180 interaction histories". The question_type labels differ between splits. Data and code are MIT-licensed. The evaluation scripts call proprietary model APIs.
+sources:
+  name: paper title/abstract ('we introduce the PersonaMem benchmark'); repo README
+  release_date: 'arXiv API: 2504.14225v1 published 2025-04-19T08:16:10Z'
+  venue: arXiv comment 'The 2025 Conference on Language Modeling (COLM)'; OpenReview note 6ox8XZGOqP venue 'COLM 2025' (venueid colmweb.org/COLM/2025/Conference); repo description '[COLM 2025]'
+  memory_types: 'paper §2 (7 query types: recall user-shared facts, acknowledge latest preferences, track full preference evolution, revisit reasons for updates, preference-aligned recommendations, generalize to new scenarios) over multi-session histories of up to 60 sessions; Table 2 lists max 3 knowledge updates and multi-session reasoning'
+  links.paper: arXiv API entry 2504.14225
+  links.code: 'paper abstract: ''Code and data are available at github.com/bowen-upenn/PersonaMem''; gh api repos/bowen-upenn/PersonaMem'
+  links.data: 'repo README links huggingface.co/datasets/bowen-upenn/PersonaMem; that URL returns HTTP 307 to /datasets/bowen-upenn/PersonaMem-v1 (HF API: public, not gated, MIT, files questions_{32k,128k,1M}.csv + shared_contexts_*.jsonl)'
+  scale.conversations: counted 60 distinct shared_context_id values in HF questions_128k.csv on 2026-10-10 (the paper itself says '20 personas, with over 180 interaction histories', §2 Benchmark data statistics)
+  scale.questions: counted 2,727 rows/unique question_id in HF questions_128k.csv on 2026-10-10; the paper (§2) gives 'around 6k' in-situ queries across all versions (5,990 counted across the 3 splits)
+  scale.avg_context_length: 'paper §2: ''Each interaction history contains 10, 20, or 60 sessions ... approximately 32k, 128k, and 1M tokens''; main evaluation on 128k-token contexts (§4.2); counted mean context_length_in_tokens for 128k split = 117,878'
+  scale.notes: HF questions_{32k,128k,1M}.csv counted 2026-10-10; paper §2 and §4.2
+  metrics: paper §4.1 (discriminative 4-choice selection; generative log-prob selection), §4.2–4.5, Figures 3–6 report accuracy
+  judge_model: 'paper §4.1 (v1 and v2): ''No LLM judges are involved in the evaluation process.'''
+  repro_level: repo tree has inference.py and inference_standalone_openai.py (--step evaluate), scripts/inference_*.sh (e.g. scripts/inference_gpt_4o.sh reads data/questions_128k.csv + shared_contexts_128k.jsonl), summarize_results.py computes accuracy; data downloadable from HF (checked 2026-10-10)
+  notes: HF dataset card and API (rename to PersonaMem-v1, v2/v3 citations, MIT); repo README; counts from HF CSVs on 2026-10-10

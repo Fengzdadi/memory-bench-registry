@@ -1,0 +1,46 @@
+{
+ "name": "EmbodiedMemory-Bench (EMem-Bench)",
+ "slug": "embodiedmemory-bench",
+ "leads": {
+  "registry_key": "arxiv:2609.28236",
+  "tier": "P1",
+  "arxiv": "2609.28236 (arXiv API: v1 2026-09-23; title: EmbodiedMemory-Bench: Benchmarking Embodied Memory for Long-Horizon Embodied Tasks)",
+  "community_list_entries": [
+   {
+    "source": "zwq2018_fork_branch",
+    "section": "Benchmarks (branch add/embodiedmemory-bench, not on main)",
+    "name": "EmbodiedMemory-Bench",
+    "paper_url": "https://arxiv.org/abs/2609.28236",
+    "code_url": "https://github.com/ZJU-OmniAI/Embodied-Omni/tree/main/embodied_memory",
+    "data_url": "https://huggingface.co/datasets/lzLiang/EmbodiedMemoryBench"
+   },
+   {
+    "source": "teleai",
+    "section": "📏 Benchmarks / 🎮 Dynamic Benchmarks & Simulation Environments / 🗓️ 2026",
+    "name": "EmbodiedMemory-Bench: Benchmarking Embodied Memory for Long-Horizon Embodied Tasks",
+    "paper_url": "https://arxiv.org/abs/2609.28236",
+    "code_url": "https://github.com/ZJU-OmniAI/Embodied-Omni/tree/main/embodied_memory",
+    "data_url": "https://huggingface.co/datasets/lzLiang/EmbodiedMemoryBench"
+   },
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "EmbodiedMemory-Bench: Benchmarking Embodied Memory for Long-Horizon Embodied Tasks",
+    "paper_url": "https://arxiv.org/pdf/2609.28236",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "episodic",
+    "semantic_knowledge_update"
+   ],
+   "extra_tags": [
+    "embodied",
+    "multimodal"
+   ],
+   "kind_reason": "2,554 interactive AI2-THOR episodes in four families (passive observation, dynamic tracking, interaction failure, experience generalization); agents build/update memory from interaction history then act on a later task. 'Experience generalization' transfers a regularity learned within the same episo"
+  }
+ }
+}

@@ -1,0 +1,40 @@
+name: KUP (Knowledge Update Playground)
+slug: kup
+release_date: 2025-04
+venue: Findings of ACL 2025
+memory_types:
+- parametric
+links:
+  paper: https://arxiv.org/abs/2504.12523
+  code: https://github.com/Aochong-Li/KnowledgeUpdatePlayground
+  data: https://huggingface.co/datasets/aochongoliverli/KUP
+scale:
+  conversations: null
+  questions: 6260
+  avg_context_length: null
+  notes: '6,260 test questions (paper Intro): 2x1K direct-probing MCQs (Update vs. Distractors; Update vs. Old), 4.2K free-form QA (1.1K trigger/impact, 3.1K event details), 60 indirect-probing questions. Built on 1,000 entities/updates with 5 evidence articles each (HF: 5,000 rows); evidence corpus 3.3M tokens, 55.7M with auxiliary articles (Table 1). Not conversational.'
+metrics:
+- Direct-probing MCQ accuracy (Update vs. Distractors; Update vs. Old, with % old fact chosen)
+- Free-form QA accuracy (LLM-judged; Trigger & Impact, Event Details)
+- Indirect-probing entailment rate (% responses entailing updated / old knowledge / N/A)
+judge_model: GPT-4o-mini
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'Models are continually pre-trained on the update corpus, then probed (RAG baselines also reported); updates were generated against Llama-3.1-8B/Mistral-7B prior knowledge. HF data (Apache-2.0, ungated) holds only the 5,000 evidence articles; eval questions sit in the repo''s non-default `prod` branch (indirect-probing CSV: 64 rows vs 60 in paper, counted on 2026-10-10); MCQs must be regenerated via kupeval/generate_mcq_questions.py. Scripts hard-code the authors'' cluster paths; code judge default is GPT-4o vs GPT-4o-mini in paper.'
+sources:
+  name: 'paper abstract (arXiv 2504.12523) and repo README title: ''Knowledge Update Playground (KUP)'''
+  release_date: 'arXiv API: 2504.12523v1 published 2025-04-16'
+  venue: 'ACL Anthology 2025.findings-acl.1326: Findings of the Association for Computational Linguistics: ACL 2025, July 2025, pp. 25853-25874 (arXiv has no journal_ref)'
+  memory_types: 'paper Intro/Sec.4: updates are learned via continued pre-training (CPT) / memory conditioned training that change model weights, then probed directly and indirectly; RAG (k=5) only appears as a baseline in Tables 5 and 7'
+  links.paper: arXiv API entry 2504.12523
+  links.code: paper footnote 'Codebase and dataset at:' links github.com/Aochong-Li/KnowledgeUpdatePlayground; repo opened via gh api 2026-10-10
+  links.data: repo README badge and paper footnote link huggingface.co/datasets/aochongoliverli/KUP; HF API shows public, not gated, data/train-00000-of-00001.parquet (5,000 rows, 1,000 unique entities)
+  scale.questions: 'paper Intro: ''we release a test set of 6260 questions''; Sec.4.1: two MCQ tests of 1K each, 4.2K free-form questions, 60 manually curated indirect-probing questions'
+  scale.conversations: 'null: benchmark has no conversations; data unit is an entity-level knowledge update (1,000) with 5 evidence articles each'
+  scale.avg_context_length: 'null: paper reports only corpus totals (Table 1: evidence documents 3.3M tokens, total 55.7M tokens with Llama-3.1-8B tokenizer), no per-instance context length'
+  scale.notes: paper Intro, Sec.2.2, Sec.4.1, Table 1; HF datasets-server statistics (5,000 rows, 1,000 entities x 5)
+  metrics: paper Table 5 (MCQ accuracy, old-fact % in parentheses), Table 6 (free-form accuracy), Table 7 (percentage of model answer entailment); perplexity/ROUGE-1 and MMLU appear only in analysis/appendix
+  judge_model: 'paper Sec.4.1.1: ''We use GPT-4o-mini as our LLM judge for evaluation''; paper names no judge for indirect probing (repo kupeval/indirect_probing.py generate_report defaults to model=''gpt-4o'')'
+  repro_level: repo (checked 2026-10-10) has eval entry points kupeval/qa.py, kupeval/temporal_mcq.py, kupeval/freeform_qa/freeform_qa.py + eval.py, kupeval/indirect_probing.py with wrappers in kupeval/scripts/*.sh; eval data on prod branch dataset/ (direct_probing_freeformqa/questions/*.pickle, indirect_probing/questions/indirect_question_new.csv) plus HF parquet; MCQs via kupeval/generate_mcq_questions.py
+  notes: HF dataset card; gh api branches (main default, prod has 'upload evaluation dataset' commit 2025-08-01); indirect CSV row count by csv parsing on 2026-10-10; eval.py default model='gpt-4o'

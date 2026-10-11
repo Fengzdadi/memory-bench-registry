@@ -1,0 +1,43 @@
+name: InMind
+slug: inmind
+release_date: 2026-07
+venue: arXiv preprint
+memory_types:
+- personalization
+- conversational_longterm
+links:
+  paper: https://arxiv.org/abs/2607.24368
+  code: https://github.com/imlrz/InMind
+  data: null
+scale:
+  conversations: 1
+  questions: 125
+  avg_context_length: 47 sessions / 486 turns (fixed LME-s background trace, plus 2 injected turns per task)
+  notes: questions = 125 tasks. Each task has a direct (naive) query and an indirect query, so 250 queries in total, and the primary metrics are averaged over 125. conversations = 1 shared, fixed LongMemEval-s background trace. Each task's memory turn is appended to session 9 and followed by 38 more sessions. Token length is not reported. The tasks were filtered down from 1,000 generated candidates.
+metrics:
+- Naive recall (%)
+- Target Recall (%), an answer-blind binary judge
+- Application (%), an end-to-end binary judge
+- Answer-only accuracy (%), a diagnostic (Table 4)
+- Percentage-point gaps (Recall-Naive, App.-Recall, App.-Naive)
+judge_model: GPT-5-mini
+repro_level: data_public
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: The 125 tasks (benchmark/dataset/inmind.jsonl) and the fixed LongMemEval-s background trace (instance 0bc8ad93, MIT) are in the GitHub repo, which had no licence for the InMind tasks as of 2026-10-10. The repo scripts only build timelines and judge payloads and validate files; they make no model or judge calls, and baseline adapters and per-task results are still unreleased. The paper says 113 tasks are source-grounded, but the dataset card attaches a source URL to only 77. GPT-5-mini is both the answer model and the judge.
+sources:
+  name: 'arXiv 2607.24368 title ''Keep It InMind: Benchmarking the Implicit-Association Blind Spot in Agent Memory''; repo README'
+  release_date: 'arXiv API: 2607.24368v1 published 2026-07-27'
+  venue: arXiv API entry has no journal_ref or comments; repo CITATION.cff and README BibTeX give 'arXiv preprint arXiv:2607.24368'
+  memory_types: 'paper §3 and repo benchmark/README.md: the system must apply a synthetic personal user fact (e.g. an allergy or immigration status) to a later indirect query. The fact is injected into a 47-session LongMemEval-s chat history and must survive 38 later sessions (paper §3.4, Appendix 16).'
+  links.paper: arXiv abs page 2607.24368
+  links.code: linked from the paper HTML header ('GitHub Repository' -> https://github.com/imlrz/InMind) and from the project site keep-it-inmind.github.io
+  links.data: 'no separate dataset page: the data is in the repo at benchmark/dataset/inmind.jsonl, and a Hugging Face search for ''inmind'' returned no datasets (checked 2026-10-10)'
+  scale.conversations: 'paper §3.4 / Appendix 16: every task uses ''the same fixed 47-session LME-s trace''; repo evaluation/background/manifest.json'
+  scale.questions: paper abstract and §3.3 ('125-task evaluation set'); repo inmind.jsonl has 125 lines (counted 2026-10-10)
+  scale.avg_context_length: 'repo evaluation/background/manifest.json (turns: 486, sessions: 47); paper Appendix 16'
+  scale.notes: paper §3.2 to §3.3 (1,000 candidates, 300 after similarity filtering, 113 + 12 = 125 tasks); repo evaluation/README.md (injection protocol)
+  metrics: paper Table 1 (Naive, Target Recall, Application, Δ columns), Table 4 (answer-only accuracy), §3.4
+  judge_model: 'paper §4.1 and Appendix 15.1 Table 6: ''Judge model: GPT-5-mini ... returns a binary JSON score''; expert audit of the judge in Appendix 14.2'
+  repro_level: 'repo tree checked 2026-10-10. Data is public: benchmark/dataset/inmind.jsonl (125 records) and evaluation/background/lme_s_background.jsonl. The scripts evaluation/scripts/build_timeline.py, build_judge_payloads.py (''Materialize judge messages without making API calls''), validate_submission.py and validate_release.py prepare and validate inputs, but none of them runs a memory system or the judge, or computes scores. The README roadmap leaves ''Baseline adapters'' unchecked.'
+  notes: repo benchmark/dataset/README.md (provenance coverage 77/12/36; 'License information will be added before the formal archival release'); repo README release roadmap; paper §7 Limitations (GPT-5-mini is both answerer and judge)

@@ -1,0 +1,30 @@
+{
+ "name": "SubtleMemory",
+ "slug": "subtlememory",
+ "leads": {
+  "registry_key": "arxiv:2606.05761",
+  "tier": "P2",
+  "arxiv": "2606.05761 (arXiv API: v1 2026-06-04; title: SubtleMemory: A Benchmark for Fine-Grained Relational Memory Discrimination in Long-Horizon AI Agents)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "SubtleMemory: A Benchmark for Fine-Grained Relational Memory Discrimination in Long-Horizon AI Agents",
+    "paper_url": "https://arxiv.org/abs/2606.05761",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "conversational_longterm",
+    "semantic_knowledge_update",
+    "personalization"
+   ],
+   "extra_tags": [
+    "relational_memory"
+   ],
+   "kind_reason": "Benchmark of 1,522 instances over 10 long user-agent histories with relation-controlled memory variants (complementary, nuanced, contradictory). It covers user-related and non-user-related queries and evaluates memory systems and Claw-style agents. Accepted at EMNLP 2026 Findings."
+  }
+ }
+}

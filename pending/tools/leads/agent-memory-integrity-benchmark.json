@@ -1,0 +1,27 @@
+{
+ "name": "Agent-Memory Integrity Benchmark",
+ "slug": "agent-memory-integrity-benchmark",
+ "leads": {
+  "registry_key": "name:agentmemoryintegritybenchmark",
+  "tier": "P2",
+  "community_list_entries": [
+   {
+    "source": "teleai",
+    "section": "📏 Benchmarks / 💬 Plain-Text Benchmarks / 🗓️ 2026",
+    "name": "Agent-Memory Integrity Benchmark",
+    "paper_url": null,
+    "code_url": "https://github.com/DanceNitra/agent-memory-integrity",
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "semantic_knowledge_update"
+   ],
+   "extra_tags": [
+    "memory_integrity"
+   ],
+   "kind_reason": "Open cross-system harness, now archived and moved to DanceNitra/ramr/integrity. It tests memory integrity under updates: value-obscuring revert after a correction, echo resurrection of a retired value, and an erasure self-check. Small n; its own methodology calls it 'Directional, not a leaderboard'."
+  }
+ }
+}

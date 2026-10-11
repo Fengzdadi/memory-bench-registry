@@ -1,0 +1,41 @@
+name: FlashAdventure
+slug: flashadventure
+release_date: 2025-09
+venue: EMNLP 2025
+memory_types:
+- episodic
+- multimodal
+links:
+  paper: https://arxiv.org/abs/2509.01052
+  code: https://github.com/ahnjaewoo/FlashAdventure
+  data: null
+scale:
+  conversations: null
+  questions: 34
+  avg_context_length: ~1,142 steps (human average per full story arc; agents capped at 1,000 steps)
+  notes: questions = 34 games (full story-arc tasks), not QA items. Per §3.4, 27 games have discrete milestones (avg 6.7, range 4-12) and 7 simulation games use a normalized HUD score. Appendix A.5 instead lists 28 discrete and 6 continuous, with Crimson Room at 14 milestones. Each agent gets one run of up to 1,000 steps per game. The judge validation set has 300 samples.
+metrics:
+- Success Rate (%)
+- Milestone Completion Rate (%) (normalized HUD score for simulation games)
+- '# Steps (capped at 1,000)'
+judge_model: Claude-3.7-Sonnet computer-use (claude-3-7-sonnet-20250219), used as CUA-as-a-Judge
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: This is an interactive GUI-game benchmark with no dataset files. The 34 Flash games are not redistributed and must be installed through the Flashpoint Archive. Copyright stays with the publishers, and use is limited to non-commercial research. The repo (MIT) provides milestone prompts, per-game CUA-as-a-Judge scripts and agent baselines. Runs need a local main display plus Anthropic/OpenAI API keys, and the Docker setup was still marked 'to be updated' on 2026-10-10. Memory is scored only indirectly, through milestones. No human demonstrations are released.
+sources:
+  name: 'arXiv API title ''FlashAdventure: A Benchmark for GUI Agents Solving Full Story Arcs in Diverse Adventure Games''; repo README heading'
+  release_date: 'arXiv API: 2509.01052v1 published 2025-09-01T01:33:16Z (v2 updated 2025-10-15)'
+  venue: arXiv comment 'EMNLP 2025 Main'. ACL Anthology 2025.emnlp-main.1192 (Proceedings of EMNLP 2025, November 2025, Suzhou, pp. 23354-23384). The repo README says 'accepted at EMNLP 2025 (Main Track)'.
+  memory_types: 'episodic: the benchmark targets the ''observation-behavior gap'', recalling clues observed much earlier in the same gameplay trajectory and acting on them later (abstract, §1, §3.3, App. A.6.1 with an average gap of 251.1 steps). It is scored via milestone completion. multimodal: agents observe only RGB screenshots (§3.1 POMDP), so the clues to remember are visual. Not embodied: the agent controls a desktop GUI via mouse and keyboard, and the Limitations section notes narrative progression ''does not directly depend on character movements''. Not procedural_workflow: there is no cross-game reuse, and runs are single per game (App. B.1).'
+  links.paper: arXiv API id 2509.01052. The ACL Anthology page is https://aclanthology.org/2025.emnlp-main.1192/
+  links.code: The project page ahnjaewoo.github.io/flashadventure (linked in the arXiv comment) links github.com/ahnjaewoo/FlashAdventure. The repo is owned by first author Jaewoo Ahn, and its description reads 'Code for our EMNLP 2025 Main paper'.
+  links.data: 'null: no dataset page exists. The project page lists no dataset link, and Hugging Face API searches for ''flashadventure'' and author ''ahnjaewoo'' returned []. The games come from Flashpoint Archive (paper §3.2, repo README step 3). The milestone definitions are in the repo at evaluator/milestone_prompts.json (34 keys).'
+  scale.conversations: 'null: game benchmark with no conversations'
+  scale.questions: Paper §3/§3.2 says 'comprising 34 diverse Flash-based classic adventure games', and Table 2 is computed 'across all 34 video games'. The repo evaluator/evaluate_game.py AVAILABLE_EVALS has 34 entries.
+  scale.avg_context_length: 'Paper §3.3: participants ''completed full story arcs with an average of 1,142 steps''. §5.2 sets ''the maximum number of action steps per agent to 1,000''.'
+  scale.notes: Paper §3.4 (27 discrete-milestone and 7 simulation games), App. A.5 per-game milestone list, §5.2 and App. B.1 ('all experiments were conducted as single runs'), §3.5 (300 judge-validation samples)
+  metrics: 'Paper §3.4 ''Evaluation metrics'': Success Rate, Milestone Completion Rate, Steps. Table 2 columns are Success (%), Milestone (%) and # Steps.'
+  judge_model: 'Paper §3.5: CUA-as-a-Judge is ''implemented using Claude-3.7-Sonnet computer-use''. App. B.1 gives claude-3-7-sonnet-20250219. Validated on 300 samples: 94.00% accuracy, Spearman 0.9912, Pearson 0.9999. The repo evaluator/judge/computer_use/main.py defaults to model claude-3-7-sonnet-20250219.'
+  repro_level: Checked 2026-10-10. The repo has evaluator/evaluate_game.py (entry point), evaluator/run.bash, evaluator/eval_game/eval_*.py (34 per-game judges) and evaluator/milestone_prompts.json. Agent runners are game_agent/coast/run.bash and game_agent/{cradle,claude_computer_use,gpt_operator,UI-Tars}/run.bash. The games are obtainable via flashpointarchive.org (HTTP 200).
+  notes: Paper Ethics Statement (copyright, non-commercial use, no redistribution). Repo README (Flashpoint download, Docker 'to be updated', main-display requirement, .env API keys), gh api license MIT, and repo tree (no human logs or trajectories), all checked 2026-10-10.

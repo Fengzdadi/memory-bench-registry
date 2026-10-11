@@ -1,0 +1,45 @@
+{
+ "name": "KnowMe-Bench",
+ "slug": "knowme-bench",
+ "leads": {
+  "registry_key": "arxiv:2601.04745",
+  "tier": "P1",
+  "arxiv": "2601.04745 (arXiv API: v1 2026-01-08; title: KnowMe-Bench: Benchmarking Person Understanding for Lifelong Digital Companions)",
+  "community_list_entries": [
+   {
+    "source": "tsinghua",
+    "section": "Benchmark",
+    "name": "KnowMe-Bench",
+    "paper_url": "https://arxiv.org/abs/2601.04745",
+    "code_url": "https://github.com/QuantaAlpha/KnowMeBench",
+    "data_url": null
+   },
+   {
+    "source": "iaar",
+    "section": "Resources / Benchmarks and Tasks / Personalized Task Evaluation",
+    "name": "KnowMe-Bench",
+    "paper_url": "https://arxiv.org/abs/2601.04745",
+    "code_url": null,
+    "data_url": null
+   },
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "KnowMe-Bench: Benchmarking Person Understanding for Lifelong Digital Companions",
+    "paper_url": "https://arxiv.org/pdf/2601.04745",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "personalization",
+    "episodic"
+   ],
+   "extra_tags": [
+    "narrative_person_understanding"
+   ],
+   "kind_reason": "Benchmark built from long-form autobiographical narratives reconstructed into time-anchored streams, with evidence-linked questions on factual recall, subjective state attribution and principle-level reasoning about a person."
+  }
+ }
+}

@@ -1,0 +1,43 @@
+name: LoCoMo
+slug: locomo
+release_date: 2024-02
+venue: ACL 2024
+memory_types:
+- conversational_longterm
+- episodic
+links:
+  paper: https://arxiv.org/abs/2402.17753
+  code: https://github.com/snap-research/locomo
+  data: null
+scale:
+  conversations: 10
+  questions: 1986
+  avg_context_length: ~16K tokens per conversation (16,618.1 avg.); ~600 turns (588.2 avg.), up to 32 sessions (27.2 avg.)
+  notes: 'Numbers are for the ACL 2024 version and the released data/locomo10.json. conversations = 10 two-speaker very long-term dialogues. questions = 1,986 QA items (single-hop 841, multi-hop 282, temporal 321, open-domain 96, adversarial 446). A registry recount of locomo10.json gives the same 10 conversations, 1,986 QA, 27.2 sessions and 588.2 turns on average. Other annotations: event summarization (35.8 ground-truth events per conversation on average) and multimodal dialogue generation (91.2 images per conversation on average). The only arXiv version (v1) describes an earlier, larger set: 50 conversations, ~300 turns and ~9K tokens on average, up to 35 sessions, 7,512 QA. The repo README says the current release is a 10-conversation subset of those 50, and the repo ships only the 10-conversation file. Separately, 50 automatically generated conversations without human filtering were used only as MiniGPT-5 training data.'
+metrics:
+- 'QA answer F1 (partial-match F1 after normalization; per category: single-hop, multi-hop, temporal, open-domain, adversarial, and overall)'
+- Recall@k (retrieval accuracy of RAG models against annotated evidence turns)
+- 'Event summarization: ROUGE-1/ROUGE-2/ROUGE-L'
+- 'Event summarization: FactScore precision/recall/F1'
+- 'Multimodal dialogue generation: MM-Relevance'
+- 'Multimodal dialogue generation: BLEU-1/BLEU-2 and ROUGE-L'
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'The arXiv paper exists only as v1 (2024-02-27) and describes 50 conversations and 7,512 QA. The ACL 2024 version (https://aclanthology.org/2024.acl-long.747/) and the public data describe 10 conversations and 1,986 QA, so cite the ACL version for numbers that match the released data. Data is in the repo at data/locomo10.json under CC BY-NC 4.0, so non-commercial use only. Images are not released; the data has only image URLs, BLIP captions and search queries. The observation and session_summary fields were generated with gpt-3.5-turbo and serve as RAG databases. The official scripts cover only the QA task. The README lists event-summarization evaluation and MiniGPT-5 multimodal dialogue generation as ''Coming soon!''. In locomo10.json the numeric QA category IDs do not follow the order in which the paper lists the categories. Matched by count against ACL Table 5: 1=multi-hop (282), 2=temporal (321), 3=open-domain (96), 4=single-hop (841), 5=adversarial (446). The Hugging Face repo adymaharana/locomo, under the first author''s account, holds only a README with no data files. Repo last pushed 2024-08-13.'
+sources:
+  name: Paper title/abstract ('we collect LOCOMO') and repo README ('We release LoCoMo')
+  release_date: 'arXiv abs page 2402.17753: only [v1] Tue, 27 Feb 2024 18:42:31 UTC; the arXiv API returned HTTP 429, so the date was read from the abs page'
+  venue: 'ACL Anthology 2024.acl-long.747: Proceedings of the 62nd Annual Meeting of the ACL (Volume 1: Long Papers), August 2024, pp. 13851-13870; repo README title says ''ACL 2024 Paper'''
+  memory_types: 'ACL paper §4: QA over very long multi-session dialogues (single/multi-hop, temporal reasoning) -> conversational_longterm. §4.2: event summarization of temporally/causally linked life events within a designated timeframe, plus temporal-reasoning QA -> episodic. Dialogues have only two speakers, so not multi_agent_group. There is no knowledge-update or preference-tailoring evaluation.'
+  links.paper: arXiv abs page https://arxiv.org/abs/2402.17753, which is also linked from the project page index.html
+  links.code: 'ACL paper footnote 1: ''Code and data are at https://snap-research.github.io/locomo''. That project page links https://github.com/snap-research/LoCoMo, and gh api repos/snap-research/locomo resolves it'
+  links.data: 'null: no separate official dataset page. The project page''s data link points to https://github.com/snap-research/locomo/tree/main/data, inside the code repo. HF adymaharana/locomo contains only README.md and .gitattributes'
+  scale.conversations: 'ACL paper Table 5 (''Total # conversations 10'') and abstract/§1 (''a dataset of 10 very long-term dialogues''); confirmed by len(data/locomo10.json) == 10'
+  scale.questions: 'ACL paper Table 5 ''Total # questions 1,986''; confirmed by counting qa entries in data/locomo10.json (1,986)'
+  scale.avg_context_length: ACL paper abstract ('approx. 600 turns and 16K tokens on avg., over up to 32 sessions'), Table 1 (588.2 turns, 27.2 sessions, 16,618.1 tokens per conversation) and Table 5
+  metrics: 'ACL paper PDF (aclanthology.org/2024.acl-long.747.pdf, re-read 2026-10-10): §4.1 (F1 partial match; R@k for RAG retrieval) and Tables 2-3 (F1, R@k); §4.2 and Table 4 (ROUGE-1/2/L, FactScore P/R/F1); §4.3 (''MMRelevance (Feng et al., 2022), in addition to other NLG metrics''), Figure 4B/4C (MM-Relevance, BLEU-1), and appendix Table 7 on p. 13869 (MiniGPT-5 training variants, columns ''BLEU-1/2'', ''Rouge-L'', ''MM-R''). Appendix C.2 also lists BertScore among the metric packages, but no table or figure reports it. The repo''s task_eval/evaluation.py implements F1/EM/ROUGE-L/BERTScore'
+  judge_model: 'null: no LLM judge stated. QA is scored with token-level F1 (paper §4.1; repo task_eval/evaluation.py). Event summarization uses the FactScore package (Min et al., 2023; C.2 footnote 14), and the paper does not name the LLM behind it'
+  repro_level: 'Repo tree checked 2026-10-10: data/locomo10.json (2.8 MB, downloaded and parsed) plus QA evaluation entry points scripts/evaluate_gpts.sh, evaluate_claude.sh, evaluate_gemini.sh, evaluate_hf_llm.sh and evaluate_rag_gpts.sh. Each calls task_eval/evaluate_qa.py --data-file ./data/locomo10.json, which computes F1 via task_eval/evaluation.py'
+  notes: Repo LICENSE.txt (CC BY-NC 4.0) and paper Appendix B.2; README Notes 1-3 and 'Coming soon!' sections; arXiv HTML v1 Table 5 (50 conversations / 7,512 QA); HF API for adymaharana/locomo; gh api commits (last commit 2024-08-13)

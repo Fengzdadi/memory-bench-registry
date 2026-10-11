@@ -1,0 +1,36 @@
+{
+ "name": "OmniMemEval",
+ "slug": "omnimemeval",
+ "leads": {
+  "registry_key": "name:omnimemeval",
+  "tier": "P0",
+  "community_list_entries": [
+   {
+    "source": "teleai",
+    "section": "📏 Benchmarks / 💬 Plain-Text Benchmarks / 🗓️ 2026",
+    "name": "OmniMemEval",
+    "paper_url": null,
+    "code_url": "https://github.com/MemTensor/OmniMemEval",
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "conversational_longterm",
+    "personalization",
+    "semantic_knowledge_update",
+    "procedural_workflow",
+    "coding_cross_session"
+   ],
+   "extra_tags": [
+    "memory_hallucination"
+   ],
+   "kind_reason": "MemTensor evaluation framework with two tracks. The User Memory track runs LoCoMo, LongMemEval, BEAM, PersonaMem v2 and HaluMem via add()/search(). The Agent Memory track runs EvoAgentBench domains (BrowseCompPlus, OmniMath, SWE-Bench, LiveCodeBench, GDPVal) with a memory-plugin train-then-test life"
+  },
+  "phase1_verified_types": {
+   "procedural_workflow": "docs/agent_memory/README.md: \"Run train split ... Back up domain memory. Restore the domain backup before every test run. Run test split\"",
+   "coding_cross_session": "docs/agent_memory/README.md, memory_train_backup_test: 'Clear memory. Run train split... Back up domain memory. Restore the domain backup before every test run. Run test split'. The software_engineering domain is SWE-Bench, 101 train / 26 test."
+  },
+  "code_hint": "https://github.com/MemTensor/OmniMemEval"
+ }
+}

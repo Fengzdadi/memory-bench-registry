@@ -1,0 +1,46 @@
+name: MERIT
+slug: merit
+release_date: 2026-07
+venue: arXiv preprint
+memory_types:
+- episodic
+- semantic_knowledge_update
+- personalization
+links:
+  paper: https://arxiv.org/abs/2609.05441
+  code: https://github.com/smshweta/merit-bench
+  data: null
+scale:
+  conversations: null
+  questions: null
+  avg_context_length: 4–6 episodes per arc
+  notes: 'Tasks are generated procedurally from seeds, so there is no fixed item count. Each (domain x tier x memory condition) cell has 10 arcs x 5 episodes, with a dependent ratio of 0.5. There are 3 domains and 3 difficulty tiers. 23,440 scored episodes in total: a 9,940-episode pilot (starter and real generations) plus a 13,500-episode 3-model full grid. D1 also has a corruption sweep.'
+metrics:
+- Task Success Rate (TSR), split dependent/independent
+- Memory Utilization Rate (MUR)
+- Ignore Rate (1 - MUR)
+- Stale-Memory Harm (SMH)
+- Metered tokens and dollar cost per episode
+- Cost-Adjusted Marginal Utility (CAMU)
+- Break-even task value
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: A benchmark generator and harness, not a static dataset. Tasks come from seeded code (merit/), and full results and traces are committed under runs/. There is no Hugging Face dataset. Code is MIT-licensed. The repo README still gives $44.82 total cost, while arXiv v1 gives a corrected $42.57. Commits from Sept 2026 add failure-anatomy and counterfactual-ordering analyses that are not in arXiv v1. Memory corruption is framed as staleness robustness, not as attacks. The answer key of the MUR audit sample is withheld.
+sources:
+  name: 'arXiv abstract: ''MERIT (Memory Evaluation for Realistic Instrumented Tasks)''; repo README title'
+  release_date: 'arXiv API: 2609.05441v1 published 2026-07-26T07:42:00Z (only version; abs page lists v1 Sun 26 Jul 2026). The ID prefix 2609 does not match the July date, but the API date is used'
+  venue: arXiv abs page has no journal-ref or comments; README citation is @misc; no peer-reviewed venue found
+  memory_types: 'paper §3.2–3.4: facts planted in earlier episodes and needed in later probe episodes (episodic); hard tier = updated-fact probes that need the latest value (semantic_knowledge_update); D3 personal assistant uses standing user room/time preferences (merit/d3.py T_room ''my usual room'') (personalization)'
+  links.paper: arXiv API id 2609.05441
+  links.code: 'paper title-page footnote: ''Code, traces, and preregistration: https://github.com/smshweta/merit-bench''; gh api repos/smshweta/merit-bench (MIT, created 2026-07-08, pushed 2026-09-15)'
+  links.data: 'HF API: no datasets for author smshweta or search ''merit-bench''; data and traces live in the repo''s runs/ directory'
+  scale.avg_context_length: 'paper §3.2: ''Episodes are grouped into arcs of 4–6 episodes sharing entities''; §4 uses 5 episodes per arc'
+  scale.notes: paper §4 Experimental Setup and abstract (9,940 + 13,500 = 23,440 scored episodes; 10 arcs x 5 episodes per cell)
+  scale.conversations: 'null: the paper reports no fixed total of arcs or dialogues; arcs are generated per cell (10 per domain x tier x condition)'
+  scale.questions: 'null: the paper reports no fixed probe or question count, only scored-episode totals across conditions and models'
+  metrics: paper §3.5 Metrics (TSR, MUR, Ignore Rate, SMH, Cost & CAMU, break-even task value)
+  judge_model: 'paper §3.5: success uses a programmatic end-state check and MUR uses a string-containment value tracer validated by one human annotator (kappa 0.63); no LLM judge'
+  repro_level: 'repo tree (checked 2026-10-10): scripts/run_pilot.py (runner that scores every episode), scripts/run_phaseb.sh, scripts/run_phasec_api.sh, scripts/analyze.py, scripts/analyze_phasec.py; deterministic task generation in merit/domains.py, merit/arcs.py, merit/d2.py, merit/d3.py; released results/traces in runs/; REPRODUCE.md lists the commands'
+  notes: 'README (''Study complete: 23,440 scored episodes, $44.82'') vs paper/main.tex and arXiv v1 ($42.57); commit 2026-07-26 corrected the cost; commits 2026-09-15 add analyze_failures.py and run_position_intervention.py; runs/ARTIFACT_README.md (MUR answer key withheld)'

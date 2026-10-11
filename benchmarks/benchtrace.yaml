@@ -1,0 +1,48 @@
+name: BenchTrace
+slug: benchtrace
+release_date: 2026-05
+venue: arXiv preprint
+memory_types:
+- procedural_workflow
+- embodied
+links:
+  paper: https://arxiv.org/abs/2605.29225
+  code: https://github.com/Alab-NII/BenchTrace
+  data: https://huggingface.co/datasets/huangjh16/BenchTrace
+scale:
+  conversations: 1821
+  questions: 4391
+  avg_context_length: 6–107 steps per episode (per-task avg 6.0–106.8 steps)
+  notes: 'Conversations are 1,821 annotated episode snapshots (agent trajectories, not dialogues): Jericho 242, AlfWorld 451, BabyAI 446, ScienceWorld 275, Bundled Web Shopping 316, Group Travel Planning 91. Questions are 4,391 Reflection Evaluation items. Evolution Evaluation adds 3,564 test cases (proximity Types 1/2/3, distance d=1/5/10). The paper reports no token lengths.'
+metrics:
+- Detection Accuracy
+- Localization Similarity (Jaccard)
+- Localization Recall (Jaccard)
+- Diagnosis Mode Accuracy
+- Diagnosis Token F1
+- Diagnosis LLM-Judge score
+- End-to-end reflection pass rate (funnel)
+- Score (normalized task progress; win rate for BabyAI)
+- Failure Avoidance Rate (FAR)
+- Failure Repeat Count (FRC, appendix)
+judge_model: Claude Sonnet 4.6
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: The README and HF card BibTeX cite "Proceedings of ACL 2026" under a different title. No ACL Anthology entry was found (checked 2026-10-10), and arXiv lists no venue. As of 2026-10-10, the evolution scripts import src/ modules (environment wrappers, openai_helpers) that are not in the repo, and the requirements.txt the README cites is also absent. The reflection scripts are self-contained. Scripts expect the HF data under final_dataset/<task>/. Jericho game ROMs are not distributed. Annotations are CC-BY-4.0, and the repo has no licence.
+sources:
+  name: 'arXiv API title: ''BenchTrace: A Benchmark for Testing Reflection Ability and Controlled Evolution in LLM Agents'''
+  release_date: 'arXiv API: 2605.29225v1 published 2026-05-28T01:25:37Z (single version)'
+  venue: arXiv abs page has no comments or journal_ref; paper HTML names no venue; ACL Anthology search and the acl-2026 event page have no BenchTrace entry (checked 2026-10-10). The repo/HF BibTeX 'Proceedings of ACL' is unverified
+  memory_types: 'Paper §3.3.2 Evolution Evaluation: the agent receives evolution snapshots (signal snapshot s0 with failure f0 plus noise snapshots), then is run on a test snapshot truncated before failure fd. FAR measures whether past failure experience is reused, including Type 3 where s0 comes from a different subtask, with memory baselines RAG/ReMem/MemRL/AutoSkill (procedural_workflow). Agents continue acting in ALFWorld (embodied household), BabyAI (grid navigation), ScienceWorld and Jericho envs via env.step in evaluation/evolution/*/run_*.py, scored by progress/FAR (embodied)'
+  links.paper: arXiv 2605.29225
+  links.code: github.com/Alab-NII/BenchTrace (Alab-NII = Aizawa lab, NII; linked from the HF dataset card, which the README links back to)
+  links.data: 'Repo README links huggingface.co/datasets/huangjh16/BenchTrace; HF API: public, not gated, cc-by-4.0, 111 files (per-task all.json, snapshots.json, evolution_evaluation.json); jericho/all.json download resolved HTTP 200 (9.7 MB)'
+  scale.conversations: 'Paper §3.4 / Table 1 and abstract: 1,821 annotated snapshots (episodes); HF card per-task episode table totals 1,821'
+  scale.questions: 'Paper §3.4: ''The evaluation suite totals 4,391 reflection items and 3,564 evolution test cases''; Table 1 per-task Refl. items'
+  scale.avg_context_length: 'Paper §3.4: ''episode lengths from 6 to 107 steps''; Table 1 Avg. steps 95.8/44.2/106.8/82.9/6.0/6.5'
+  scale.notes: Paper Table 1 (arXiv v1 HTML §3.4); HF dataset card Tasks & sizes table
+  metrics: Paper §3.3.1 (Accuracy; Jaccard-based Similarity/Recall; Mode Accuracy, Token F1, LLM-Judge), Fig. 2 funnel/end-to-end pass, §3.3.2 and §4.2.2 (Score, FAR), Appendix E.1 Table 11 (FRC)
+  judge_model: 'Paper Table 2 caption: ''LLM-Judge uses Claude Sonnet 4.6 as the judge''; repo evaluation/reflection/jericho/llm_judge.py default --judge_model claude-sonnet-4-6'
+  repro_level: Repo tree (checked 2026-10-10) has evaluation/reflection/<task>/run_reflect_task.py + score_reflect_task.py + llm_judge.py (self-contained) and evaluation/evolution/<task>/run_*.py + evaluation/evolution/score_evol_eval.py (these import src/ modules absent from the repo); data publicly downloadable from HF
+  notes: Repo README and HF card BibTeX; repo tree lacks src/ and requirements.txt; repo API license null; HF card license cc-by-4.0; README note on Jericho ROMs

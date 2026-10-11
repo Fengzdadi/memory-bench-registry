@@ -1,0 +1,29 @@
+{
+ "name": "MemToC",
+ "slug": "memtoc",
+ "leads": {
+  "registry_key": "arxiv:2608.26295",
+  "tier": "P2",
+  "arxiv": "2608.26295 (arXiv API: v1 2026-08-26; title: MemToC: Benchmarking Memory-Tool Conflict Resolution in Large Language Models)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "MemToC: Benchmarking Memory-Tool Conflict Resolution in Large Language Models",
+    "paper_url": "https://arxiv.org/pdf/2608.26295",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "parametric"
+   ],
+   "extra_tags": [
+    "knowledge_conflict",
+    "tool_use"
+   ],
+   "kind_reason": "Controlled benchmark: 6,504 episodes from 542 factual questions for arbitration between a model's parametric memory (model-specific elicited closed-book answers) and executable-tool returns of known correctness. Also tests SFT/DPO. It is a knowledge-conflict style benchmark framed explicitly as para"
+  }
+ }
+}

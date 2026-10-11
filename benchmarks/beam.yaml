@@ -1,0 +1,43 @@
+name: BEAM
+slug: beam
+release_date: 2025-10
+venue: ICLR 2026
+memory_types:
+- conversational_longterm
+- semantic_knowledge_update
+- episodic
+- personalization
+links:
+  paper: https://arxiv.org/abs/2510.27246
+  code: https://github.com/mohammadtavakoli78/BEAM
+  data: https://huggingface.co/datasets/Mohammadta/BEAM
+scale:
+  conversations: 100
+  questions: 2000
+  avg_context_length: 128K / 500K / 1M / 10M tokens (four length tiers)
+  notes: '100 conversations = 20 (128K) + 35 (500K) + 35 (1M) + 10 (10M); 2,000 probing questions = 20 per conversation (2 for each of 10 memory abilities); counted in repo chats/*/probing_questions.json on 2026-10-10. Average turns per chat: 107 / 416 / 842 / 7,757 (paper Table 3).'
+metrics:
+- Nugget-based rubric score (LLM judge rates each nugget 0 / 0.5 / 1, averaged per ability; 9 abilities)
+- Kendall tau-b (event ordering, over LLM-aligned event sequences)
+- Average score across the 10 memory abilities
+judge_model: GPT-4.1-mini
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: The paper labels the shortest tier both 128K and 100K. HF dataset 'Mohammadta/BEAM' holds the 128K/500K/1M tiers (90 chats). The 10M tier is a separate dataset (Mohammadta/BEAM-10M). Data is CC BY-SA 4.0 and not gated; code is MIT. The paper does not name its judge model; the repo's evaluation code uses gpt-4.1-mini. The README gives the answer-generation script as src/model_inference/, but it is at src/answer_probing_questions/. The paper also proposes the LIGHT memory method.
+sources:
+  name: paper title/abstract and repo README ('we construct BEAM, a new benchmark')
+  release_date: 'arXiv API: 2510.27246v1 published 2025-10-31 (v2 updated 2026-02-21)'
+  venue: ICLR 2026 virtual site poster page https://iclr.cc/virtual/2026/poster/10006595 (OpenReview id y59hf5lrMn); repo description '[ICLR 2026]'
+  memory_types: 'paper §2.2 / README: ten abilities incl. knowledge update and contradiction resolution (semantic_knowledge_update), event ordering and temporal reasoning (episodic), preference following (personalization), multi-session reasoning over long user-assistant chats (conversational_longterm)'
+  links.paper: arXiv abs page 2510.27246
+  links.code: repo README links the paper and is authored by first author M. Tavakoli; HF dataset card points to the same paper
+  links.data: 'README Hugging Face links: Mohammadta/BEAM (128K/500K/1M splits, parquet, not gated) and Mohammadta/BEAM-10M (10M split); checked via HF API 2026-10-10'
+  scale.conversations: paper abstract ('100 conversations'); README split counts 20/35/35/10; repo chats/ directories counted 2026-10-10
+  scale.questions: paper abstract ('2,000 validated questions') and §2.4 (20 per conversation); summed repo probing_questions.json files = 2000 on 2026-10-10
+  scale.avg_context_length: paper §1 ('ranging from 100K to 10M tokens'), Table 3 / README tiers 128K, 500K, 1M, 10M
+  scale.notes: paper Table 3 (Appendix B.1) average turns per tier; repo file counts
+  metrics: 'paper §2.4 (arXiv v2 HTML): nugget evaluation by LLM judge (0/0.5/1), Kendall tau-b for event ordering; Table 1 reports per-ability scores plus Average'
+  judge_model: paper §2.4 says only 'an LLM judge (Listing 20)' without naming it; official repo src/evaluation/run_evaluation.py passes gpt_llm, defined in src/llm.py as model_name='gpt-4.1-mini'
+  repro_level: repo tree has src/evaluation/run_evaluation.py (LLM-judge scoring), src/evaluation/compute_metrics.py, src/answer_probing_questions/answer_generation.sh and the data in chats/ plus ungated HF parquet (checked 2026-10-10)
+  notes: HF API dataset metadata (license, splits, gated=false); repo README license section; repo tree vs README paths; paper Table 1 and §3 (LIGHT)

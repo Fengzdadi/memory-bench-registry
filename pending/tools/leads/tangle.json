@@ -1,0 +1,30 @@
+{
+ "name": "TANGLE",
+ "slug": "tangle",
+ "leads": {
+  "registry_key": "arxiv:2608.13921",
+  "tier": "P2",
+  "arxiv": "2608.13921 (arXiv API: v1 2026-08-14; title: When Personal Memory Has No Single Answer: Evaluating LLM Agents under Irreducible Conflict)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "When Personal Memory Has No Single Answer: Evaluating LLM Agents under Irreducible Conflict",
+    "paper_url": "https://arxiv.org/pdf/2608.13921",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "personalization",
+    "conversational_longterm",
+    "semantic_knowledge_update"
+   ],
+   "extra_tags": [
+    "memory_conflict_calibration"
+   ],
+   "kind_reason": "Introduces TANGLE, a benchmark of 541 instances across 40 personas for irreducible personal-memory conflicts (context-partitioned, behavior-oscillation and source-contradiction). It has an oracle track and a pipeline track that extracts memory from multi-session dialogues (about 64.5 sessions per pe"
+  }
+ }
+}

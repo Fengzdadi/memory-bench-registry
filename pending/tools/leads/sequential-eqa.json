@@ -1,0 +1,29 @@
+{
+ "name": "Sequential EQA",
+ "slug": "sequential-eqa",
+ "leads": {
+  "registry_key": "arxiv:2607.21571",
+  "tier": "P2",
+  "arxiv": "2607.21571 (arXiv API: v1 2026-07-23; title: Beyond Episodic Evaluation: Memory Architectural Bottlenecks in Sequential Embodied Question Answering)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "Beyond Episodic Evaluation: Memory Architectural Bottlenecks in Sequential Embodied Question Answering",
+    "paper_url": "https://arxiv.org/pdf/2607.21571",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "episodic"
+   ],
+   "extra_tags": [
+    "embodied",
+    "multimodal"
+   ],
+   "kind_reason": "An evaluation protocol that turns existing EQA benchmarks (e.g. OpenEQA) into sequential multi-query runs in one scene, with memory carried across queries, plus an analysis of four memory architectures. It creates no new raw data, and the release of the sequence splits is promised but not confirmed."
+  }
+ }
+}

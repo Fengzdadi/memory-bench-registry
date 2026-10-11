@@ -1,0 +1,43 @@
+name: MemEye
+slug: memeye
+release_date: 2026-05
+venue: arXiv preprint
+memory_types:
+- conversational_longterm
+- multimodal
+- semantic_knowledge_update
+links:
+  paper: https://arxiv.org/abs/2605.15128
+  code: https://github.com/MinghoKwok/MemEye
+  data: https://huggingface.co/datasets/MemEyeBench/MemEye
+scale:
+  conversations: 8
+  questions: 371
+  avg_context_length: null
+  notes: conversations = 8 life-scenario tasks, each one multi-session image-grounded dialogue (the paper concatenates 'conversations from different tasks'). Totals are 221 sessions, 848 dialogue rounds and 438 images (Table 3). questions = 371, each in a mirrored MCQ and open-ended form. 60 are Y3 state-revision items. HF also has concat_* files for the cross-topic scaling ablation. A recount of the HF JSON on 2026-10-10 matches.
+metrics:
+- Multiple-choice exact-match accuracy (EM), averaged over four answer rotations
+- Open-ended LLM-as-a-Judge score (normalized semantic correctness in [0,1]; primary metric)
+- BLEU-1 (auxiliary lexical metric for open-ended answers, Appendix D.1)
+- Caption-Proof gain (Score_V - Score_T, native-image vs dense-caption memory; diagnostic)
+judge_model: GPT-5.2
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'Data is on Hugging Face MemEyeBench/MemEye: ungated, with an Apache-2.0 card. Images come from third-party or generated sources (Pitt Image Ads, Alley Oop comics, Japan Open Driving Dataset, StyleGAN faces, GPT-5.2/DALL-E). The HF card''s per-task image counts (e.g. Cartoon 119, Social Chat 67) differ from paper Table 3 (87, 43). The dialogue JSONs, counted on 2026-10-10, match the paper''s 438 referenced images. Text-only methods use GPT-5.2 dense captions. The Generative Agents baseline needs MemEngine, which is not bundled. Running and judging need paid APIs.'
+sources:
+  name: 'arXiv title ''MemEye: A Visual-Centric Evaluation Framework for Multimodal Agent Memory''; repo README and HF card name the benchmark MemEye'
+  release_date: 'arXiv API: 2605.15128v1 published 2026-05-14T17:37:52Z (only version)'
+  venue: 'arXiv API has no journal_ref (comment: ''46 pages, 15 figures''). Repo README cites it as @misc arXiv, the HF card''s booktitle is ''arXiv preprint arXiv:2605.15128'', and the project page and a web search found no venue (2026-10-10)'
+  memory_types: 'Paper §3/Table 1: questions over long multi-session image-grounded dialogues -> conversational_longterm. Images are the decisive evidence, and VLM memory methods process native images -> multimodal. The Y3 ''Evolutionary Synthesis'' level (60 questions, Table 5) covers ''reasoning under updates, conflicts, or overrides'' and evolving visual-state tracking (§4.5) -> semantic_knowledge_update'
+  links.paper: arXiv abs page https://arxiv.org/abs/2605.15128
+  links.code: Paper (arXiv HTML) and HF card 'Official Code' link https://github.com/MinghoKwok/MemEye. gh api shows the repo is not a fork, Apache-2.0, created 2026-04-15, last pushed 2026-05-17
+  links.data: 'Repo README ''Download Data'' section and badge point to https://huggingface.co/datasets/MemEyeBench/MemEye. HF API: gated=false, private=false, 530 files (data/dialog/*.json, data/image/*)'
+  scale.conversations: Paper Table 3 (8 tasks; 221 sessions total) and §4.5, which concatenates 'conversations from different tasks'. Each HF task JSON holds one multi_session_dialogues history (recounted 2026-10-10)
+  scale.questions: 'Paper §3.1: ''The benchmark contains 371 questions across 221 sessions, 848 dialogue rounds, and 438 images''; Table 3 total 371; Table 5 (Y1 113, Y2 198, Y3 60). A recount of the 8 HF MCQ JSONs on 2026-10-10 gives 371 QAs, 221 sessions, 848 rounds and 438 unique referenced images'
+  scale.avg_context_length: 'null: the paper reports no average token or turn length per conversation, only totals (848 rounds / 221 sessions). §C notes a 128k-token context limit for full-context baselines'
+  metrics: Paper §4.1 (EM averaged over four answer rotations for MCQ; LLM-as-a-Judge as the primary open-ended metric; BLEU-1 auxiliary, Appendix D.1, Tables 16-19); §4.4 (Caption-Proof gain Δ=Score_V−Score_T). The repo's benchmark/evaluator.py also implements F1/BERTScore, which the paper's tables do not report
+  judge_model: 'Paper Appendix C.1: ''LLM-as-a-Judge scoring is enabled with gpt-5.2''. §4.1 reports human agreement of κ=0.94 on 72 predictions. Repo score_locked_llm_judge.py defaults to --judge-model gpt-5.2'
+  repro_level: 'Repo tree checked 2026-10-10: run_benchmark.py (main entry), run_matrix.py, score_locked_llm_judge.py, benchmark/evaluator.py, benchmark/llm_judge.txt, config/methods/*.yaml for the 13 methods, register_external_data.py. Data is downloadable from HF (8 MCQ + 8 open JSONs downloaded and parsed)'
+  notes: HF dataset card (license, per-task image table), paper §3.1 image provenance and Table 3, repo THIRD_PARTY_LICENSES.md and README (Gen. Agents requires MemEngine, not bundled), paper §4.1 (text methods use GPT-5.2 dense captions)
+  scale.notes: Paper Tables 3 and 5; HF file listing (concat_brand_social, concat_cartoon_card, concat_health_home, concat_multiscene_outdoor, concat_quad_a/b); local recount of HF JSONs

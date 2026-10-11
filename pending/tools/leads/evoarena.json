@@ -1,0 +1,36 @@
+{
+ "name": "EvoArena",
+ "slug": "evoarena",
+ "leads": {
+  "registry_key": "arxiv:2606.13681",
+  "tier": "P0",
+  "arxiv": "2606.13681 (arXiv API: v1 2026-06-11; title: EvoArena: Tracking Memory Evolution for Robust LLM Agents in Dynamic Environments)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Framework & Methods",
+    "name": "EvoArena: Tracking Memory Evolution for Robust LLM Agents in Dynamic Environments",
+    "paper_url": "https://arxiv.org/pdf/2606.13681",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "procedural_workflow",
+    "coding_cross_session",
+    "semantic_knowledge_update",
+    "personalization"
+   ],
+   "extra_tags": [
+    "dynamic_environment"
+   ],
+   "kind_reason": "Benchmark suite (released alongside the EvoMem method) with three subsets. Terminal-Bench-Evo: 352 versioned terminal tasks in 5-version chains, each run as its own episode, with memory carried forward. SWE-Chain-Evo: 50 chains / 493 milestone steps on real repositories, scored by tests. PersonaMem-"
+  },
+  "phase1_verified_types": {
+   "procedural_workflow": "App.F.1: \"Earlier tasks in the same chain provide internal evidence for synthesizing reusable procedural memory\"; Sec.5.2: \"EvoMem improves Terminal-Bench-Evo by 2.4%, SWE-Chain-Evo by 0.5%\"."
+  },
+  "paper_hint": "https://arxiv.org/abs/2606.13681",
+  "code_hint": "https://github.com/Aiden0526/EvoArena"
+ }
+}

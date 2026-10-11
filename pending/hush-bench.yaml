@@ -1,0 +1,47 @@
+name: HUSH-Bench
+slug: hush-bench
+release_date: 2026-06
+venue: arXiv preprint
+memory_types:
+- memory_security
+- personalization
+- conversational_longterm
+links:
+  paper: https://arxiv.org/abs/2606.06055
+  code: null
+  data: null
+scale:
+  conversations: 10
+  questions: 2400
+  avg_context_length: null
+  notes: '2,400 single-turn benign probe cases. That is 10 personas x 4 probe families x 60. The 10 personas come from 10 LoCoMo source dialogues augmented with assistant-user histories. Primary matrix: 4 generators x 5 memory conditions = 48,000 scored responses. Controls use 600, 2,400 or 40 cases per model. The invitation contrast uses 200 pairs per generator. History length is not reported.'
+metrics:
+- Unsolicited History Integration Score (UIS, 0-100, higher is worse)
+- Exact-target exposure rate (marked disclosure reaches generator)
+- Target uptake / invitation effect (Delta Uptake)
+- Helpfulness
+- Over-scope severity and binary over-scope rate
+- Formal use (appropriate-use controls)
+- 'Secondary dimensions: relationship-maintenance agreement, affective intensity, assistant centrality'
+- Judge-human agreement (92.1% within 0.10)
+judge_model: GPT-5.4 (primary judge); Claude-Opus-4.6 as second-judge robustness check
+repro_level: paper_only
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'arXiv v1 (2026-06-04) was titled "When Should Memory Stay Silent..." and called the benchmark RBI-Eval (Relevant-But-Inappropriate Evaluation), scored with a separation score. v2 (2026-08-03) renamed it HUSH-Bench and introduced UIS. The paper says data, retrieval outputs and protocols will be released upon acceptance. No official repo or dataset was found when checked on 2026-10-10. The benchmark tests one conservative memory-use policy and is English and text-only. Memory systems tested: Mem0, A-Mem, MemU.'
+sources:
+  name: arXiv v2 title/abstract (2606.06055v2)
+  release_date: 'arXiv API: 2606.06055v1 published 2026-06-04T11:54:51Z; v2 updated 2026-08-03'
+  venue: arXiv API and abs page show no journal_ref or comments; paper v2 §1 and App. G say release 'upon acceptance' (not yet accepted)
+  memory_types: 'paper v2 §3 / App. A: benign probes over multi-session assistant-user histories (LoCoMo-derived) with one marked sensitive disclosure. Measures unwarranted use of sensitive history (privacy/contextual-integrity boundary) versus appropriate personalization controls (neutral relevant memory, non-sensitive preference).'
+  links.paper: arXiv abs 2606.06055
+  links.code: 'null: paper contains no code link and says release upon acceptance. GitHub repo/code search for ''HUSH-Bench'' and ''RBI-Eval'' and first-author account xlx777 (Hefei Univ. of Technology) show no benchmark repo (checked 2026-10-10).'
+  links.data: 'null: Hugging Face dataset search for ''hush'' and ''rbi-eval'' returned no matching dataset; paper App. G says data will be released upon acceptance'
+  scale.conversations: 'paper v2 Table 6 (App. A.1): 10 source dialogues and 10 personas'
+  scale.questions: 'paper v2 §3.2 and Table 6: 2,400 probe cases (60 per persona-family cell)'
+  scale.avg_context_length: 'null: no history length statistic reported in paper v1/v2'
+  scale.notes: paper v2 §3.2, §4.1, Table 3, Table 4, App. C.2
+  metrics: paper v2 §3.1 Eq. 1-3, §3.3, Tables 2-5, App. A.2 Table 7, App. B.4, App. C.2
+  judge_model: 'paper v2 §3.3 and App. B.3: GPT-5.4 primary condition-blind judge. Claude-Opus-4.6 re-scores the 48,000-response primary matrix (App. D.1).'
+  repro_level: paper checked. No public code or data found on GitHub or Hugging Face (checked 2026-10-10). Paper states release upon acceptance.
+  notes: arXiv HTML v1 (RBI-Eval title/abstract) vs v2 (HUSH-Bench); v2 App. C.1 for Mem0/A-Mem/MemU

@@ -1,0 +1,29 @@
+{
+ "name": "REALTALK",
+ "slug": "realtalk",
+ "leads": {
+  "registry_key": "arxiv:2502.13270",
+  "tier": "P2",
+  "arxiv": "2502.13270 (arXiv API: v1 2025-02-18; title: REALTALK: A 21-Day Real-World Dataset for Long-Term Conversation)",
+  "community_list_entries": [
+   {
+    "source": "tsinghua",
+    "section": "Benchmark",
+    "name": "RealTalk",
+    "paper_url": "https://arxiv.org/abs/2502.13270",
+    "code_url": "https://github.com/danny911kr/REALTALK",
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "conversational_longterm",
+    "episodic"
+   ],
+   "extra_tags": [
+    "persona_simulation"
+   ],
+   "kind_reason": "A 21-day real messaging-app dialogue corpus: 10 two-person conversations among 10 participants. It has a memory-probing task (728 QAs: 302 multi-hop, 321 temporal, 111 commonsense; judge gpt-4o-mini) and a persona-simulation task. Fine-tuning appears only as a persona-simulation baseline, not as a p"
+  }
+ }
+}

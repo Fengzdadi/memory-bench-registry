@@ -1,0 +1,29 @@
+{
+ "name": "Neuromem",
+ "slug": "neuromem",
+ "leads": {
+  "registry_key": "arxiv:2602.13967",
+  "tier": "P2",
+  "arxiv": "2602.13967 (arXiv API: v1 2026-02-15; title: Neuromem: A Granular Decomposition of the Streaming Lifecycle in External Memory for LLMs)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Framework & Methods",
+    "name": "Neuromem: A Granular Decomposition of the Streaming Lifecycle in External Memory for LLMs",
+    "paper_url": "https://arxiv.org/pdf/2602.13967.pdf",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "conversational_longterm",
+    "semantic_knowledge_update"
+   ],
+   "extra_tags": [
+    "streaming_memory_lifecycle"
+   ],
+   "kind_reason": "Presented as a benchmarking testbed for external memory modules under a new streaming interleaved insertion/retrieval protocol. It decomposes the memory lifecycle into 5 dimensions. No new data: it reuses LoCoMo, LongMemEvalOracle, and the MemoryAgentBench Selective Forgetting subset (evolving or co"
+  }
+ }
+}

@@ -1,0 +1,31 @@
+{
+ "name": "RECON",
+ "slug": "recon",
+ "leads": {
+  "registry_key": "arxiv:2607.16716",
+  "tier": "P2",
+  "arxiv": "2607.16716 (arXiv API: v1 2026-07-18; title: RECON: Benchmarking Agent Memory for Compositional Reasoning over Long Contexts)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "RECON: Benchmarking Agent Memory for Compositional Reasoning over Long Contexts",
+    "paper_url": "https://arxiv.org/pdf/2607.16716",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "semantic_knowledge_update",
+    "episodic"
+   ],
+   "extra_tags": [
+    "long_context_single_input",
+    "multi_hop_qa",
+    "counterfactual_reasoning"
+   ],
+   "kind_reason": "A benchmark of 24 case files (50-100K tokens, ~800 timestamped log entries over 30 days) with 1,604 questions (1,414 after a contamination filter). Its six tasks cover multi-hop evidence chains, cascading invalidations, source conflicts, counterfactuals, temporal constraints and temporal fact retrie"
+  }
+ }
+}

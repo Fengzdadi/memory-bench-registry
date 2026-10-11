@@ -1,0 +1,39 @@
+name: FinEvolveBench
+slug: finevolvebench
+release_date: 2026-06
+venue: arXiv preprint
+memory_types:
+- procedural_workflow
+links:
+  paper: https://arxiv.org/abs/2606.06960
+  code: https://github.com/DavidDeng01/FinEvolveBench
+  data: https://drive.google.com/drive/folders/1yrMyIbikrnUwX-0LlQf3ABhXB2ZdW9P9
+scale:
+  conversations: null
+  questions: null
+  avg_context_length: null
+  notes: Not a QA/dialogue set. Main evaluation is a chronological replay of 300 prediction trading days (2025-01-02 to 2026-03-31) over 31 Shenwan first-level industry indices, scored at 10/20/40-day horizons. 126,878 news articles in v4 (177,324 in v1-v3), averaging 143.85 per day. The paper reports Cold-Start and Exploitation periods separately. The public Drive release covers January 2026 only.
+metrics:
+- tsIC (time-series information coefficient)
+- csIC (cross-sectional information coefficient)
+- Avg. Gain over the no-experience Pipe baseline
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'arXiv v1 (2026-06-05) was titled "Tree-of-Experience..." and also proposed a ToE method; v2 onward is the benchmark paper. The article count changed from 177,324 (v1-v3, unfiltered) to 126,878 (v4, filtered). The repo has one commit (2026-08-12) and no licence file. Data released: January 2026 preview only. The full 300-day dataset, announced for September 2026, was absent when counted on 2026-10-10. The released pipeline disables experience operations. News is Chinese-language.'
+sources:
+  name: 'arXiv API title (v2-v4) and repo README heading: ''FinEvolveBench'''
+  release_date: 'arXiv API: 2606.06960 published 2026-06-05T06:39:16Z (v1); v1 abstract already introduces FinEvolveBench'
+  venue: 'arXiv abs page v1-v4: no journal_ref or comments; v4 Reproducibility Statement says the full package will be released ''upon acceptance''; repo README cites it as arXiv preprint'
+  memory_types: paper v4 §3.2 (agent updates experience from delayed feedback, and it is used on later tasks), App. A.3/A.5 (experience stores empty at start; append/update over the chronological replay), §4.1-4.2 (scored by whether Mem0/MemRL/Reflexion/ExpeL/ReasoningBank experience beats no-experience Pipe)
+  links.paper: arXiv 2606.06960 (v1-v4)
+  links.code: repo README links arXiv 2606.06960 and cites the paper's authors; GitHub owner profile name 'zihao deng' matches co-author/arXiv submitter Zihao Deng (paper text has no repo link)
+  links.data: Google Drive folder linked from the official README 'Data' badge; opened 2026-10-10, contains 'News Courps' and 'Technical Data' subfolders
+  scale.notes: paper v4 Table 2 and §3.1 (300 trading days, 31 industries, 126,878 articles, 143.85/day, horizons 10/20/40); v2 abstract/Table 2 (177,324 articles); App. A.4 (Cold-Start/Exploitation)
+  scale.questions: 'null: paper reports evaluation days x industries x horizons, not a question count'
+  scale.avg_context_length: 'null: paper reports only average news per day (143.85) and a 32,768-token model context window, not an input context length'
+  metrics: paper v4 §4.1 and Table 3 (tsIC, csIC, Avg. Gain over Pipe); App. A.4 definitions; tools/tEval/README.md (Pearson-based IC)
+  judge_model: 'null: metrics are correlation-based IC computed against market returns; an LLM is used only for news metadata annotation, not as an evaluation judge'
+  repro_level: repo tree has tools/tEval/cli.py and tools/tEval/calc_correlation.py (IC evaluation) plus pipeline.py (prediction workflow); Drive folder downloadable with January 2026 preview files (checked 2026-10-10)
+  notes: arXiv abs pages v1-v4 (titles/abstracts), repo commit history (single commit 2026-08-12), README 'Data release status' box, Drive subfolder listings

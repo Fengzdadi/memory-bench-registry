@@ -1,0 +1,29 @@
+{
+ "name": "MEMENTO",
+ "slug": "memento",
+ "leads": {
+  "registry_key": "arxiv:2505.16348",
+  "tier": "P2",
+  "arxiv": "2505.16348 (arXiv API: v1 2025-05-22; title: Embodied Agents Meet Personalization: Investigating Challenges and Solutions Through the Lens of Memory Utilization)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "EMBODIED AGENTS MEET PERSONALIZATION: INVESTIGATING CHALLENGES AND SOLUTIONS THROUGH THE LENS OF MEMORY UTILIZATION",
+    "paper_url": "https://arxiv.org/pdf/2505.16348",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "personalization",
+    "episodic"
+   ],
+   "extra_tags": [
+    "embodied"
+   ],
+   "kind_reason": "A two-stage embodied evaluation framework built on Habitat/PARTNR. In the memory-acquisition stage the agent completes episodes; in the utilization stage it gets underspecified instructions with single- and joint-memory tasks. It tests recall of personal object semantics and user behavioral routines"
+  }
+ }
+}

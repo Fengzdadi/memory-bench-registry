@@ -1,0 +1,43 @@
+name: IDUnlearn-Bench
+slug: idunlearn-bench
+release_date: 2026-09
+venue: arXiv preprint
+memory_types:
+- parametric
+- memory_security
+- multimodal
+links:
+  paper: https://arxiv.org/abs/2609.33481
+  code: https://github.com/CyberChangAn/IDUnlearn-Bench
+  data: https://huggingface.co/datasets/CyberChangAn/IDUnlearn-Bench
+scale:
+  conversations: null
+  questions: 4860
+  avg_context_length: null
+  notes: '4,860 evaluation-only VQA probes (81 per individual) over 60 synthetic individuals, in 4 task families / 9 subtasks (AA 2,520; IA 1,320; IB 480; IR 540). There is also a separate 10,050-QA supervision set used to inject the profiles by LoRA fine-tuning, plus 1,442 images. Splits are by identity: Forget-1 and Forget-5, with the remaining identities as the retain set. These are single probes, not conversations.'
+metrics:
+- Forget residual (normalized answer-containment accuracy, %, per task family AA/IA/IB/IR)
+- Retain utility (normalized answer-containment accuracy, %, per task family)
+- IB+ binding recovery rate
+- Any-path recovery
+judge_model: null
+repro_level: data_public
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'Benchmark for unlearning individual identities from VLMs. Synthetic profiles are fine-tuned into the weights with LoRA, then unlearned. It builds on the authors'' MultiPriv data. The repo and the HF dataset (Apache-2.0, not gated) contain only data: per-person images, bench_VQA.json and finetune_VQA.json. They include no fine-tuning, unlearning or scoring code. Counted on 2026-10-10, the release matches the paper: 4,860 probes, 10,050 supervision QAs and 1,442 images. The release uses 12 fine-grained task labels rather than the paper''s 9 subtask names.'
+sources:
+  name: 'arXiv abstract and repo README: ''we propose IDUnlearn-Bench'''
+  release_date: 'arXiv API: 2609.33481v1 published 2026-09-27'
+  venue: arXiv API entry has no journal_ref or comment; repo README BibTeX cites 'arXiv preprint arXiv:2609.33481'; the paper names no venue
+  memory_types: 'paper §4.1/Table 8: profiles are injected into the weights by LoRA fine-tuning on a 10,050-QA supervision set, then unlearned (parametric). Forgetting a person''s identity and PII, i.e. privacy leakage and whether deletion takes effect, is the evaluated objective (memory_security). Probes include face, fingerprint and document images the VLM must process: 2,820 single-image and 480 two-image probes (multimodal)'
+  links.paper: arXiv API id 2609.33481
+  links.code: github.com/CyberChangAn/IDUnlearn-Bench. Its README links arXiv 2609.33481. The same account hosts MultiPriv-PII, which the MultiPriv paper (arXiv 2511.16940, same first author Xiongtao Sun) gives as its official repo, and that README lists the IDUnlearn-Bench GitHub link under the authors' papers. The IDUnlearn paper itself contains no code link
+  links.data: 'HF API datasets/CyberChangAn/IDUnlearn-Bench: gated=false, apache-2.0, tagged arxiv:2609.33481, 1,625 files mirroring the GitHub dataset/ folder (checked 2026-10-10)'
+  scale.questions: 'paper §3.2/Table 5: ''4,860 evaluation-only probes across nine subtasks''; recounted 2026-10-10 from 60 dataset/person_*/bench_VQA.json files = 4,860 (81 each)'
+  scale.conversations: 'null: no dialogues; the unit is 60 synthetic individuals (paper §3.1)'
+  scale.avg_context_length: 'null: single-turn VQA probes; no long context is involved'
+  scale.notes: paper Table 5 (per-family counts, 10,050 supervision QAs, 1,442 images) and §4.1 (Forget-1/Forget-5 identity splits); finetune_VQA.json total recounted = 10,050
+  metrics: paper §4.1 and Table 2 headers 'Forget residual ↓' / 'Retain utility ↑' (normalized answer-containment accuracy %); §10.1 IB+ binding recovery rate; §4.3.1 any-path recovery
+  judge_model: paper scores by normalized reference-answer substring containment; no LLM judge is used (GPT-4o is only cited)
+  repro_level: 'repo tree (checked 2026-10-10): LICENSE, README.md and dataset/person_1..60 with 1,442 PNGs, bench_VQA.json, finetune_VQA.json and person_XX.json. No .py/.sh/.ipynb or other evaluation entry point. The data is downloadable from GitHub and HF'
+  notes: repo README, HF API metadata and local recount of the released JSON files on 2026-10-10

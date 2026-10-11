@@ -1,0 +1,43 @@
+name: GroupMemBench
+slug: groupmembench
+release_date: 2026-05
+venue: arXiv preprint
+memory_types:
+- multi_agent_group
+- conversational_longterm
+- semantic_knowledge_update
+- personalization
+- episodic
+links:
+  paper: https://arxiv.org/abs/2605.14498
+  code: https://github.com/UCSB-NLP-Chang/GroupMemBench
+  data: https://huggingface.co/datasets/kimperyang/GroupMemBench
+scale:
+  conversations: 4
+  questions: 745
+  avg_context_length: ~2.7M tokens per dialogue (paper Table 1 'Avg. Length'); 30,000 messages per domain
+  notes: 'conversations = 4 domain corpora (Finance, Technology, Healthcare, Manufacturing). Each corpus is a multi-channel group conversation of 30,000 messages spread over 6-10 project channels (33 channels in total; 120K turns in total per Table 1). Memory stores are built per domain (App. H). questions = 745, the question set released in the repo. This total is the sum of the README count table, and line counts of questions/*/*.jsonl confirm it. By domain: Finance 214, Technology 213, Healthcare 145, Manufacturing 173. By type: multi_hop 182, knowledge_update 107, temporal 162, user_implicit 49, term_ambiguity 106, abstention 139. The paper states no total question count. The Fig. 5 caption gives 185 non-abstention questions per domain, which matches the repo''s Finance and Technology counts. Per the README, the Finance and Technology questions are solvability-filtered, while Healthcare and Manufacturing ship the unfiltered generated set. Registry arithmetic on the abstention accuracies in paper Tables 9-10 implies 19 and 33 abstention questions for Healthcare and Manufacturing. The repo has 34 and 48. So the paper''s evaluation set may differ slightly from the release (inferred, not stated by the authors).'
+metrics:
+- Accuracy (%) judged by an LLM against gold answers, per question category (Multi-Hop, Knowledge Update, Term Ambiguity, User-Implicit, Temporal, Abstention) and averaged
+- Ingestion cost (USD) of LLM + embedding calls during memory construction
+- Storage footprint (GB) of each baseline's per-domain store
+- Retrieval recall and P(correct | gold retrieved) (failure analysis)
+judge_model: GPT-5
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: The conversations are synthetic enterprise group-chat logs generated with GPT-5. Every question is bound to an asking user (asking_user_id). The official repo ships only two RAG baselines, BM25 and text-embedding-3-large, both using a gpt-5 QA agent and a gpt-5 judge. The agent memory systems in paper Table 2 (Mem0, MemGPT, A-Mem, HippoRAG, Hindsight, GraphRAG) are not included. Running the evaluation needs OpenAI or Azure OpenAI API keys (.env). In the paper, memory ingestion uses gpt-4o-mini. The judge's max_tokens is 2048 in the paper (App. I) but 256 in the repo's eval_lib.py. The GitHub repo has no LICENSE file and the HF dataset card declares no licence; the arXiv paper is CC BY 4.0. The HF dataset card links its companion code repo as KimperYang/GroupMemBench, which returns 404; the paper links UCSB-NLP-Chang/GroupMemBench. The HF card lists '~22,000' messages for Healthcare and Manufacturing. However, the HF files have the same byte sizes as the repo files, and the repo files contain 30,000 messages each, matching paper Table 6. The HF dataset holds only the conversation data; the question sets are in the GitHub repo.
+sources:
+  name: 'arXiv abs title ''GroupMemBench: Benchmarking LLM Agent Memory in Multi-Party Conversations''; repo README heading'
+  release_date: 'arXiv abs page submission history: [v1] Thu, 14 May 2026 07:38:29 UTC; v2 16 May 2026. The export.arxiv.org API returned HTTP 429 on 2026-10-10, so the abs page was used instead.'
+  venue: The arXiv abs page has no journal-ref and no comments. The repo README and the HF card name no venue. An OpenReview search for 'GroupMemBench' returned only other ICLR 2027 submissions that use the benchmark, not this paper. Recorded as arXiv preprint.
+  memory_types: 'Paper abstract, section 3.1 and section 3.3.2, plus the repo README question types. multi_agent_group: multi-party group conversations with multiple users and channels. conversational_longterm: QA over long-running chat histories of 30K messages per domain. semantic_knowledge_update: the knowledge_update category, where a later message overrides an earlier claim. personalization: user_implicit queries cast in the first person and resolved through the asker''s long-term profile, plus Table 1 ''User-Cond. Q.'' (the gold answer depends on the asking user''s identity and role). episodic: the temporal category, which asks for dates of specific events in the log (e.g. ''On what date was X instructed...'').'
+  links.paper: arXiv:2605.14498
+  links.code: '''Code'' hyperlink in the arXiv HTML (v2) under the abstract points to https://github.com/UCSB-NLP-Chang/GroupMemBench; repo opened via gh api (created 2026-05-14)'
+  links.data: '''Dataset'' hyperlink in the arXiv HTML (v2) points to https://huggingface.co/datasets/kimperyang/GroupMemBench. The HF API shows the dataset is public and not gated, with 4 data/final/<Domain>/*.json files.'
+  scale.conversations: Paper section 3.2 (four domains) and Appendix F Table 6 (30,000 messages per domain; 7/6/10/10 projects, one channel per project). Repo data/final has 4 domain JSON files, each with 30,000 messages (counted 2026-10-10).
+  scale.questions: Repo README 'Counts (per domain x type)' table, summing to 745. Confirmed with wc -l on questions/*/*.jsonl (745 lines).
+  scale.avg_context_length: 'Paper Table 1: GroupMemBench Avg. Length 2.7M (defined as average tokens per dialogue), # Turns 120K. Appendix F Table 6: 30,000 total messages per domain.'
+  metrics: 'Paper section 4.1 ''Evaluation Metrics'': (1) accuracy judged by GPT-5, per category and averaged; (2) efficiency: ingestion cost (USD) and storage footprint (GB). Section 4.4 and Fig. 5/6: retrieval recall vs accuracy, P(correct | gold retrieved).'
+  judge_model: 'Paper section 4.1 and Appendix I: the judge is GPT-5 served via Azure OpenAI (deployment gpt-5, temperature 1.0). The repo''s run_eval.sh scripts default to JUDGE_MODEL=gpt-5.'
+  repro_level: Repo tree (checked 2026-10-10) contains run_eval.sh as the top-level QA + summarize entry point, plus baselines/bm25/{run_eval.sh,eval_benchmark.py}, baselines/text_embedding_3_large/{run_eval.sh,eval_benchmark.py}, baselines/rag_common/eval_lib.py (agent + judge loop) and task_synthesis/summarize_typed_eval.py. Data is in data/final/ and questions/ in the repo and is mirrored on HF.

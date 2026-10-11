@@ -1,0 +1,47 @@
+name: StoryBench
+slug: storybench
+release_date: 2025-06
+venue: arXiv preprint
+memory_types:
+- episodic
+links:
+  paper: https://arxiv.org/abs/2506.13356
+  code: null
+  data: null
+scale:
+  conversations: null
+  questions: 86
+  avg_context_length: null
+  notes: 86 = choice nodes (decision points) in one branching story graph that also has 311 scene nodes, transcribed from the game The Invisible Guardian, prologue to Chapter 5. There are two modes, Immediate Feedback and Self Recovery. Each model gets 10 trials per mode. Self Recovery is split into an original phase and an improved phase of 5 trials each. The paper reports '80+ branching story paths'.
+metrics:
+- Overall Accuracy
+- First-Try Accuracy
+- Longest Consecutive Correct Sequence
+- Easy Accuracy / Hard Accuracy
+- Retry Count
+- Max Error per Choice
+- Thresholded Error Count (ErrorCount>=9)
+- Success Count
+- Runtime Cost
+- Token Consumption
+judge_model: null
+repro_level: paper_only
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'As of 2026-10-10, no official code or data release has been found. The paper links neither, and searches of GitHub and Hugging Face found nothing from the authors. The dataset is transcribed from the commercial game The Invisible Guardian. The paper evaluates Doubao-1.5-pro, GPT-4o, Claude 3.5 Sonnet and DeepSeek-R1. In Self Recovery mode the correct answer is revealed after 9 failed attempts at the same choice. The name collides with unrelated benchmarks: YER-hub/StoryBench (text-to-image, NLPCC 2025) and google/storybench (video).'
+sources:
+  name: arXiv 2506.13356 title and HTML §3 'StoryBench'
+  release_date: 'arXiv API: 2506.13356v1 published 2025-06-16 (only version)'
+  venue: 'arXiv API has no journal_ref (comment: ''13pages, 8 figures, 4 tables''); Semantic Scholar lists venue arXiv.org only; DBLP key journals/corr/abs-2506-13356'
+  memory_types: 'paper §3.2/§4.1: decisions require recalling events/facts introduced earlier turns in an interactive-fiction trajectory; evaluated by choice correctness (episodic recall over a narrative event sequence)'
+  links.paper: arXiv abs page 2506.13356
+  links.code: 'null: paper HTML/PDF contain no code/data URL; GitHub search (StoryBench, 2506.13356, author accounts incl. mawz12) found no official repo; YER-hub/StoryBench is an unrelated T2I benchmark'
+  links.data: 'null: no dataset link in paper; Hugging Face dataset search for ''storybench'' returns only unrelated Omni-StoryBench entries'
+  scale.questions: 'paper §4.1/§4.3 (arXiv v1 HTML): ''Choice nodes (86 entries)'', alongside 311 scene nodes'
+  scale.conversations: 'null: dataset is a single story graph; paper reports no conversation/episode count beyond ''80+ branching story paths'' (§1)'
+  scale.avg_context_length: 'null: paper gives no average context length; only per-run Token Consumption in Tables 2-4 and a 5,000-token per-turn cap (§5.1)'
+  metrics: paper §3.4 and Tables 2-4
+  judge_model: 'null: correctness determined by the annotated story graph (correct option selection); no LLM judge used'
+  repro_level: paper checked 2026-10-10; no official public code or data found on GitHub/Hugging Face
+  notes: paper §4.3, §5.1, §6; GitHub repos YER-hub/StoryBench and google/storybench checked 2026-10-10
+  scale.notes: paper §4.1, §4.3, §5.1

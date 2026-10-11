@@ -1,0 +1,14 @@
+{
+ "name": "AhaBench",
+ "slug": "ahabench",
+ "leads": {
+  "registry_key": "arxiv:2609.05435",
+  "tier": "P0",
+  "arxiv": "2609.05435 (arXiv API: v1 ?; title: None)",
+  "phase1_verified_types": {
+   "procedural_workflow": "Sec 3.1: \"The learning opportunity is the questioning strategy demonstrated by a solved episode\"; Sec 4 'Procedure gap' quantifies \"dependence on procedural teaching\"; endpoint gain compares post-curriculum vs cold on same targets."
+  },
+  "paper_hint": "https://arxiv.org/abs/2609.05435",
+  "code_hint": "https://github.com/Marco-Cheng/AhaBench"
+ }
+}

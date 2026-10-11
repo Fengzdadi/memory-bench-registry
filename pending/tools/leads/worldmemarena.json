@@ -1,0 +1,32 @@
+{
+ "name": "WorldMemArena",
+ "slug": "worldmemarena",
+ "leads": {
+  "registry_key": "arxiv:2605.29341",
+  "tier": "P2",
+  "arxiv": "2605.29341 (arXiv API: v1 2026-05-28; title: WorldMemArena: Evaluating Multimodal Agent Memory Through Action-World Interaction)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "WorldMemArena: Evaluating Multimodal Agent Memory Through Action-World Interaction",
+    "paper_url": "https://arxiv.org/abs/2605.29341",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "episodic",
+    "semantic_knowledge_update",
+    "personalization",
+    "conversational_longterm"
+   ],
+   "extra_tags": [
+    "multimodal",
+    "embodied_gui_agent"
+   ],
+   "kind_reason": "Benchmark of multi-session multimodal tasks (400 per the abstract, 461 per the HTML body) in two regimes: Lifelong Evolution and Agentic Execution (GUI/embodied). It has stage-level annotations for memory writing, maintenance, retrieval and use. The Test-Time Learning questions only ask whether a sk"
+  }
+ }
+}

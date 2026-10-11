@@ -1,0 +1,14 @@
+{
+ "name": "WikiDYK",
+ "slug": "wikidyk",
+ "leads": {
+  "registry_key": "arxiv:2505.12306",
+  "tier": "P0",
+  "arxiv": "2505.12306 (arXiv API: v1 ?; title: None)",
+  "phase1_verified_types": {
+   "parametric": "Sec.4: \"we focus on comparing approaches that can internalize new knowledge into model parameters\"; Fig.1: \"We inject the knowledge ... via continued pre-training\" then evaluate injected model."
+  },
+  "paper_hint": "https://arxiv.org/abs/2505.12306",
+  "code_hint": "https://github.com/zhang-yu-wei/WikiDYK"
+ }
+}

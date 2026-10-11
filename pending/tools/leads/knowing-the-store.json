@@ -1,0 +1,28 @@
+{
+ "name": "Knowing the Store",
+ "slug": "knowing-the-store",
+ "leads": {
+  "registry_key": "arxiv:2610.04794",
+  "tier": "P2",
+  "arxiv": "2610.04794 (arXiv API: v1 2026-10-03; title: Knowing the Store: What a Memory Backend Must Write Down Before an Agent Can Read It)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "Knowing the Store: What a Memory Backend Must Write Down Before an Agent Can Read It",
+    "paper_url": "https://arxiv.org/pdf/2610.04794",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "semantic_knowledge_update"
+   ],
+   "extra_tags": [
+    "metamemory"
+   ],
+   "kind_reason": "Releases a scored question set (148 questions, each asked against 3 store versions; code and data on GitHub) for metamemory monitoring. The task is to judge from a value-free store summary whether non-active records (superseded, retracted or expired) must be suppressed. Stores and personas come from"
+  }
+ }
+}

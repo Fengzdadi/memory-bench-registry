@@ -1,0 +1,28 @@
+{
+ "name": "MIST",
+ "slug": "mist",
+ "leads": {
+  "registry_key": "arxiv:2606.10949",
+  "tier": "P2",
+  "arxiv": "2606.10949 (arXiv API: v1 2026-06-09; title: Recalling Too Well: Sycophancy Evaluation and Mitigation in Memory-Augmented Models)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "Recalling Too Well: Sycophancy Evaluation and Mitigation in Memory-Augmented Models",
+    "paper_url": "https://arxiv.org/pdf/2606.10949",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "conversational_longterm"
+   ],
+   "extra_tags": [
+    "memory_sycophancy"
+   ],
+   "kind_reason": "Introduces MIST: synthetic multi-turn, multi-session conversations in which users express misconceptions (science and moral subsets). It measures whether memory systems amplify sycophancy, and also proposes mitigations. Data and code are promised on publication; no URL was found."
+  }
+ }
+}

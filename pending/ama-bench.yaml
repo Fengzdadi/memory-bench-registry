@@ -1,0 +1,40 @@
+name: AMA-Bench
+slug: ama-bench
+release_date: 2026-02
+venue: ICML 2026
+memory_types:
+- episodic
+- semantic_knowledge_update
+links:
+  paper: https://arxiv.org/abs/2602.22769
+  code: https://github.com/AMA-Bench/AMA-Bench
+  data: https://huggingface.co/datasets/AMA-bench/AMA-bench
+scale:
+  conversations: 208
+  questions: 2496
+  avg_context_length: ~57.5K tokens (57,506 avg; 73.29 turns) per trajectory
+  notes: 208 = real-world agent trajectories from 6 domains (Spider 2.0 Text2SQL, GAIA tool QA, WebArena, games, ALFWorld, SWE-bench). 2,496 = their open-ended QA, 12 per trajectory (Recall 839, Causal Inference 596, State Updating 647, State Abstraction 414). A separate synthetic subset has 1,200 QA over BabyAI/TextWorld trajectories in 8K-128K token bins (240 per bin). The maximum trajectory length is 996,826 tokens.
+metrics:
+- Accuracy (LLM-as-judge)
+- F1-score (token-level)
+judge_model: Qwen3-32B
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'Published at ICML 2026 (PMLR v306). The README also reports an oral at the ICLR 2026 Memory Agent workshop. The Hugging Face release (MIT, ungated) contains only the real-world open-ended subset: 208 trajectories x 12 QA, counted on 2026-10-10. The synthetic BabyAI/TextWorld subset (1,200 QA) is not released as data; only its generation scripts are. run.py accepts an ''mcq'' subset that is missing from the release. Paper Table 8 lists 209 selected trajectories, but Table 9 and the release have 208. The README warns that the default Qwen3-32B judge is lenient.'
+sources:
+  name: 'arXiv title / repo README: ''AMA-Bench (Agent Memory with Any length)'''
+  release_date: 'arXiv API: 2602.22769v1 published 2026-02-26T08:59:31Z (current v4 2026-05-27)'
+  venue: PMLR page proceedings.mlr.press/v306/zhao26bs.html (Proceedings of the 43rd ICML, 2026, pp. 162781-162809); ICML 2026 virtual poster icml.cc/virtual/2026/poster/65112; repo README news says accepted to ICML 2026. arXiv record has no journal_ref
+  memory_types: 'paper Table 2 / Sec. 3.2: Recall + Causal Inference (memory retrieval over trajectory events) -> episodic; State Updating (''tracking updates to states, including explicit observations and hidden states'') -> semantic_knowledge_update; State Abstraction. Evaluation is offline open-ended QA over text trajectories, with no environment interaction or cross-task skill reuse.'
+  links.paper: arXiv abs page; project page ama-bench.github.io links https://arxiv.org/abs/2602.22769
+  links.code: project page and HF card link github.com/AMA-Bench/AMA-Hub, which GitHub API resolves to AMA-Bench/AMA-Bench (MIT, README cites arXiv 2602.22769)
+  links.data: 'repo README ''Official dataset'' link; HF API: AMA-bench/AMA-bench is public, not gated, with file test/open_end_qa_set.jsonl (50,451,919 bytes, download link returns 200)'
+  scale.conversations: 'paper Table 9 (arXiv v4 HTML, App. A.1): TOTAL 208 samples; HF datasets-server reports 208 rows in the test split'
+  scale.questions: 'paper Sec. 3.3.1 / Sec. 6.1 / Table 9: 2,496 QA pairs in the real-world subset; HF stats show qa_pairs = 12 per row x 208'
+  scale.avg_context_length: 'paper Table 9: overall Avg. Turns 73.29, Avg. Tokens 57,506, Max 996,826; Table 1 lists the average length as 57K'
+  scale.notes: paper Table 9 per-domain counts; Sec. 6.1 synthetic subset 1,200 QA, 5 length bins with 240 samples per interval; App. A.2 says BabyAI has 50 trajectories
+  metrics: paper Sec. 6.1 'We report both Accuracy and F1-score'; Accuracy is the fraction judged correct by the LLM judge; repo utils/evaluation_metrics.py implements token-level F1
+  judge_model: paper Sec. 6.1 and App. C.1 'We use Qwen3 32B as the primary evaluator' (v1 and v4); repo configs/llm_judge.yaml model Qwen/Qwen3-32B
+  repro_level: repo tree has scripts/run.sh, scripts/run_api.sh, src/run.py (generation + LLM-as-judge), src/evaluate.py and scripts/evaluate.sh; data is public on HF (checked 2026-10-10)
+  notes: PMLR page; repo README news; HF siblings list (only test/open_end_qa_set.jsonl); src/run.py subset choices mcq/openend; paper Table 8 vs Table 9

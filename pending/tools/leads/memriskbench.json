@@ -1,0 +1,29 @@
+{
+ "name": "MemRiskBench",
+ "slug": "memriskbench",
+ "leads": {
+  "registry_key": "arxiv:2609.14976",
+  "tier": "P2",
+  "arxiv": "2609.14976 (arXiv API: v1 2026-09-14; title: MemRiskBench: Trace-Aware Risk-Preserving Evaluation for Long-Horizon LLM Agents)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "MemRiskBench: Trace-Aware Risk-Preserving Evaluation for Long-Horizon LLM Agents",
+    "paper_url": "https://arxiv.org/pdf/2609.14976",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "semantic_knowledge_update"
+   ],
+   "extra_tags": [
+    "memory_security",
+    "constraint_persistence"
+   ],
+   "kind_reason": "120-episode scripted benchmark with deterministic trace checks for memory risks: R1 stale memory, R2 conflicting memory, R3 cross-scope/user leakage, R4 revoked memory reuse, R5 constraint decay; episodes, scoring code and traces released on GitHub."
+  }
+ }
+}

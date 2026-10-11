@@ -1,0 +1,29 @@
+{
+ "name": "EvolMem",
+ "slug": "evolmem",
+ "leads": {
+  "registry_key": "arxiv:2601.03543",
+  "tier": "P2",
+  "arxiv": "2601.03543 (arXiv API: v1 2026-01-07; title: EvolMem: A Cognitive-Driven Benchmark for Multi-Session Dialogue Memory)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "EvolMem: A Cognitive-Driven Benchmark for Multi-Session Dialogue Memory",
+    "paper_url": "https://arxiv.org/pdf/2601.03543",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "conversational_longterm"
+   ],
+   "extra_tags": [
+    "non_declarative_memory",
+    "instruction_habituation"
+   ],
+   "kind_reason": "Multi-session dialogue memory benchmark (1,600 dialogues, ~6.8 sessions each) covering declarative (retrieval, summarization, isolation, inference, reproduction) and non-declarative (learning, habituation) abilities. Its 'Learning' ability (operational-rule internalization, ARC-style) is borderline "
+  }
+ }
+}

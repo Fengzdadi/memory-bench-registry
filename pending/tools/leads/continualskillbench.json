@@ -1,0 +1,14 @@
+{
+ "name": "ContinualSkillBench",
+ "slug": "continualskillbench",
+ "leads": {
+  "registry_key": "arxiv:2608.03874",
+  "tier": "P0",
+  "arxiv": "2608.03874 (arXiv API: v1 ?; title: None)",
+  "phase1_verified_types": {
+   "procedural_workflow": "Sec 3: \"After completing each subtask, the agent receives feedback and may create or modify skills ... the updated repository is then available for subsequent tasks.\" Sequential compared against Independent baselines."
+  },
+  "paper_hint": "https://arxiv.org/abs/2608.03874",
+  "code_hint": "https://github.com/gtynnn060110-hash/continual-skill-bench-final"
+ }
+}

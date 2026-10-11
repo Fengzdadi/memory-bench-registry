@@ -1,0 +1,14 @@
+{
+ "name": "EvaLearn",
+ "slug": "evalearn",
+ "leads": {
+  "registry_key": "arxiv:2506.02672",
+  "tier": "P0",
+  "arxiv": "2506.02672 (arXiv API: v1 ?; title: None)",
+  "phase1_verified_types": {
+   "procedural_workflow": "Repo README Overview: 'EvaLearn requires models to solve problems sequentially, allowing them to leverage experience from previous solutions.' Paper compares feedback/demonstration learning with a zero-shot baseline."
+  },
+  "paper_hint": "https://arxiv.org/abs/2506.02672",
+  "code_hint": "https://github.com/ByteDance-Seed/EvaLearn"
+ }
+}

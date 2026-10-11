@@ -1,0 +1,14 @@
+{
+ "name": "OmniGameArena",
+ "slug": "omnigamearena",
+ "leads": {
+  "registry_key": "arxiv:2606.09826",
+  "tier": "P0",
+  "arxiv": "2606.09826 (arXiv API: v1 ?; title: None)",
+  "phase1_verified_types": {
+   "procedural_workflow": "Abstract: IDC exposes \"how the score evolves across reflection rounds, and how the learned skill behaves on held-out task variants\". Sec. 5.3.2 and Table 5 report gains on held-out variants."
+  },
+  "paper_hint": "https://arxiv.org/abs/2606.09826",
+  "code_hint": "https://github.com/mxlin043/OmniGameArena"
+ }
+}

@@ -1,0 +1,28 @@
+{
+ "name": "MEMAUDIT",
+ "slug": "memaudit",
+ "leads": {
+  "registry_key": "arxiv:2605.02199",
+  "tier": "P2",
+  "arxiv": "2605.02199 (arXiv API: v1 2026-05-04; title: MEMAUDIT: An Exact Package-Oracle Evaluation Protocol for Budgeted Long-Term LLM Memory Writing)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "MEMAUDIT: An Exact Package-Oracle Evaluation Protocol for Budgeted Long-Term LLM Memory Writing",
+    "paper_url": "https://arxiv.org/abs/2605.02199",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "semantic_knowledge_update"
+   ],
+   "extra_tags": [
+    "memory_writing_budget"
+   ],
+   "kind_reason": "Evaluation protocol and reusable artifact (package generators, certified solvers, natural packages, external-system scorers) for budgeted memory writing. It includes update-chain and validity-state (supersession and deletion) stress tests."
+  }
+ }
+}

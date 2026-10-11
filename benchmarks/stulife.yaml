@@ -1,0 +1,43 @@
+name: StuLife
+slug: stulife
+release_date: 2025-08
+venue: arXiv preprint
+memory_types:
+- episodic
+- procedural_workflow
+links:
+  paper: https://arxiv.org/abs/2508.19005
+  code: https://github.com/ECNU-ICALK/ELL-StuLife
+  data: https://huggingface.co/datasets/ecnu-icalk/ELL-StuLife
+scale:
+  conversations: null
+  questions: 1284
+  avg_context_length: 5,792 tokens (avg per task; max 10,368)
+  notes: '1,284 task instances, run in order as one simulated academic year. They cover 10 scenarios in 3 modules: In-Class 486, Daily Campus 638, Examination 160. Of these, 554 tasks need long-term memory and 628 need self-motivation. The paper gives no conversation count. Daily Campus subtotals do not match: 637 in the v1 table and 638 in the v6 text, while the v6 sub-scenario counts add up to 639.'
+metrics:
+- 'StuGPA (composite out of 100: exam 50, class 30, campus daily life 20)'
+- Long-Term Retention Rate (LTRR)
+- Proactive Initiative Score (PIS)
+- Success Rate (In-Class / Daily Campus / Exam / Total)
+- AvgTurn
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: In the main protocol each task is shown as an isolated instance with no history in context. Memory carries over only through the persistent environment state or the agent's own memory or skill mechanism. Grading is rule-based. arXiv has v1 to v6; later versions add more models plus RFT, AWM, Reflexion and memory-augmented baselines. Neither the GitHub repo nor the HF dataset declares a licence. As counted on 2026-10-10, the HF copy of tasks.json (25,149,864 bytes) is a different size from the GitHub copy (24,976,666 bytes).
+sources:
+  name: arXiv 2508.19005 abstract and repo README ('We also introduce StuLife, a benchmark dataset for ELL')
+  release_date: 'arXiv API: 2508.19005v1 published 2025-08-26T13:04:28Z'
+  venue: 'arXiv abs page: no comments or journal_ref (v1 to v6, latest 2026-01-26). Project website cites it as ''arXiv preprint arXiv:2508.19005''. Web search found no OpenReview, ACL or AAAI listing.'
+  memory_types: 'episodic: LTRR = ''success rate on tasks requiring knowledge from the past'' (knowledge presented over a week earlier), and midterm/final exams test retention of in-class content (arXiv v6 §4). procedural_workflow: the benchmark requires agents to ''abstract experiences into reusable skills and transfer them'' (§4.3); Table 4 (AWM raises StuGPA from 16.03 to 17.81) and the Table 5 Skill-Augmented setting evaluate accumulated workflow/skill memory over the task stream. Not tagged semantic_knowledge_update: dynamic rule evolution is future work only (§4.4).'
+  links.paper: arXiv abs 2508.19005
+  links.code: Repo README title matches the paper and links the arXiv PDF; the project website https://ecnu-icalk.github.io/ELL-StuLife/ links 'View Code' to this repo
+  links.data: 'Repo README ''Huggingface'' link. HF API: ecnu-icalk/ELL-StuLife exists, private=false, gated=false, and lists task_data/tasks.json plus background files (checked 2026-10-10).'
+  scale.questions: 'arXiv v6 Table 1 total row #Num 1284 and §4.1 ''1,284 task instances across 10 interconnected scenarios''; repo README ''comprehensive dataset of 1284 tasks'''
+  scale.conversations: 'null: the paper reports one continuous task stream (a simulated academic year), not a conversation count'
+  scale.avg_context_length: 'arXiv v6 (and v1) Table 1 total row: #Avg Len 5792, #Max Len 10368; the caption says these count tokens'
+  scale.notes: 'arXiv v6 Table 1 (module/sub-scenario counts, #LTM 554, #Self-Motivation 628); arXiv v1 Table 1 Daily Campus subtotal 637'
+  metrics: arXiv v6 §4 metric definitions and Tables 3-5 (StuGPA, LTRR, PIS, In-Class/Daily Campus/Exam/Total success, AvgTurn); the same metrics are computed in Stulife/calculate_stulife_metrics.py
+  judge_model: 'null: grading compares the final environment state with ground truth, and email tasks use strict verbatim string match (arXiv v6). Repo task.py dispatches rule-based _evaluate_* functions. LLMs (DeepSeek-R1) are used only for data construction.'
+  repro_level: 'Repo tree (checked 2026-10-10): Stulife/src/run_experiment.py with task_data/config/run_local_test.yaml runs CampusTask (Stulife/src/tasks/instance/campus_life_bench/task.py); Stulife/calculate_stulife_metrics.py computes StuGPA/LTRR/PIS; data is at task_data/tasks.json in the repo and on HF'
+  notes: arXiv v6 §5 (isolated-instance protocol, RFT/AWM/Reflexion, memory-augmented baselines); gh api repo license=null; HF API tree size for task_data/tasks.json vs GitHub tree blob size

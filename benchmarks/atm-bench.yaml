@@ -1,0 +1,47 @@
+name: ATM-Bench
+slug: atm-bench
+release_date: 2026-03
+venue: arXiv preprint
+memory_types:
+- personalization
+- episodic
+- multimodal
+- semantic_knowledge_update
+links:
+  paper: https://arxiv.org/abs/2603.01990
+  code: https://github.com/JingbiaoMei/ATM-Bench
+  data: https://huggingface.co/datasets/Jingbiao/ATM-Bench
+scale:
+  conversations: null
+  questions: 1038
+  avg_context_length: 2.25M tokens
+  notes: 'questions = 1,038 QA pairs reported in the paper (Table 6: 1,013 ATM-Bench + 25 ATM-Bench-Hard); the released Hard split has 31. No dialogues: a single personal memory corpus of 6,741 emails, 3,759 images and 533 videos (~12k items, Table 1). 2.25M tokens = whole corpus accessible to the agent, with each media item counted as 300 tokens. NIAH pools (25/50/100/200) exist for Hard.'
+metrics:
+- QS (Question Type Score, overall accuracy)
+- Exact Match (Number questions)
+- Jaccard similarity (List-recall questions)
+- LLM-judge accuracy (Open-ended questions)
+- Recall@10
+- Joint@10 (QS x Recall@10)
+- Memory encoding time T_enc (hours)
+judge_model: GPT-5-mini
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'Paper v1 reports 1,038 QAs (1,013 ATM-Bench + 25 ATM-Bench-Hard). The Hugging Face release, counted on 2026-10-10, has 1,013 + 31 Hard questions and 6,742 emails (paper: 6,741), and the README says Hard results on the release set may differ from the preprint. Data is CC BY-NC 4.0 (non-commercial research only); code is MIT. It is one real user''s ~4-year personal corpus. Scoring open-ended answers needs an OpenAI judge (gpt-5-mini).'
+sources:
+  name: 'arXiv abstract and repo README title: ''ATM-Bench: Long-Term Personalized Referential Memory QA'''
+  release_date: 'arXiv API: 2603.01990v1 published 2026-03-02 (only version)'
+  venue: arXiv API comment 'Preprint', no journal_ref; repo README and HF card cite it as 'arXiv preprint arXiv:2603.01990'; project page atmbench.github.io names no venue; web search found no venue listing
+  memory_types: 'paper §3.2/Table 1: Personalized Referential Reasoning (personalization); event-grounded QA over ~4 yrs of personal photos/videos/emails with temporal/location grounding (episodic); raw images and videos are given to the answerer, §5.1 (multimodal); Memory Update Over Time with conflicting evidence, §3.2, Fig. 1(B), App. F.1 (semantic_knowledge_update; no separate MUT score is reported)'
+  links.paper: arXiv abs page 2603.01990
+  links.code: 'repo linked in the arXiv abstract (''Code available at: https://github.com/JingbiaoMei/ATM-Bench''); github.com/atmbench/atmbench.github.io from a community list is the project-page repo, not the code'
+  links.data: linked from the repo README; HF API shows Jingbiao/ATM-Bench is public and not gated, cc-by-nc-4.0, 8,597 files
+  scale.conversations: 'null: no dialogues; the benchmark uses one personal memory corpus (paper Table 2: 6,741 emails, 3,759 images, 533 videos)'
+  scale.questions: 'paper §1 contributions: ''1038 question-answer pairs''; Table 6 qtype counts 514+360+139=1,013 (ATM-Bench) + 6+12+7=25 (Hard). The HF release has 1,013 + 31, counted from atm-bench.json and atm-bench-hard.json on 2026-10-10'
+  scale.avg_context_length: paper Table 1, ATM-Bench row, Context column '2.25M' (tokens accessible to the agent; media counted as 300 tokens each)
+  metrics: paper §3.4 (QS = EM / Jaccard / LLM-Judge by answer type, Recall@k, Joint@k) and §5.1/Table 3 (QS, R@10, Joint@10, N/R/O accuracy, T_enc)
+  judge_model: 'paper §5.1: ''By default, we use GPT-5-mini as the LLM-based judge for open-ended answers''; App. E.1 compares against GLM-4.7 as a second judge'
+  repro_level: repo tree (checked 2026-10-10) has memqa/utils/evaluator/evaluate_qa.py (QS/EM with the gpt-5-mini judge), memqa/utils/evaluator/evaluate_retrieval/{comprehensive_eval.py,joint_accuracy.py}, scripts/QA_Agent/common_eval.sh, scripts/QA_Agent/MMRAG/run.sh (runs ATM-Bench and Hard end to end) and scripts/download_data.sh, which pulls the public HF data
+  notes: HF dataset card and README (licence, split sizes, release-set caveat); paper App. A.4 (CC-BY-NC 4.0 data, MIT code); email count from the downloaded emails.json (6,742 entries)
+  scale.notes: paper Tables 1, 2 and 6; HF card for the NIAH files and the 31-question Hard split

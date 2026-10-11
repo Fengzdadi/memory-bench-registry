@@ -1,0 +1,39 @@
+name: CodeUpdateArena
+slug: codeupdatearena
+release_date: 2024-07
+venue: arXiv preprint
+memory_types:
+- parametric
+links:
+  paper: https://arxiv.org/abs/2407.06249
+  code: https://github.com/leo-liuzy/CodeUpdateArena
+  data: https://huggingface.co/datasets/leo-liuzy/CodeUpdateArena
+scale:
+  conversations: null
+  questions: 670
+  avg_context_length: null
+  notes: 670 = program synthesis (PS) examples, the single HF test split (670 rows counted 2026-10-10), covering 161 synthetic API updates to 54 functions in 7 Python packages, with at least 3 PS examples per update. Specificity uses 82 HumanEval instances across 25 random single edits. Table 2 gives only component lengths (docstring 129.0, solution 174.1 tokens) and no total prompt length.
+metrics:
+- 'UPass@k (efficacy: pass@k counting only solutions that pass with the updated API and fail with the old API; @1, @5)'
+- 'SPass@k (specificity: performance change on a HumanEval sample after editing; @1, @5)'
+- Pass@k with updated API (@1, @5)
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: A knowledge-editing benchmark for code. Each instance pairs a fictitious, executable Python API update with program synthesis tasks. The goal is to inject the update into model weights (LoRA fine-tuning) so the tasks are solved without the update docs at inference. Prepending the docs is only an in-context baseline. Evaluation is single-edit, scored by running unit tests. GPT-4 generated the data. arXiv v3 (Apr 2025) still says 'Under Review'. OpenReview lists the ICLR 2025 submission as rejected. MIT licence, ungated.
+sources:
+  name: 'arXiv title ''CodeUpdateArena: Benchmarking Knowledge Editing on API Updates''; repo README title'
+  release_date: 'arXiv API: 2407.06249v1 published 2024-07-08 (v2 2025-02-11, v3 2025-04-03)'
+  venue: 'arXiv API comment ''Under Review'', no journal_ref; OpenReview: ICLR.cc/2025/Conference/Rejected_Submission (ecRyUAPshY) and an ACL ARR Feb 2025 submission (muEO1uYQ7k) with no acceptance; no ACL Anthology entry found; README cites it as @misc arXiv (checked 2026-10-10)'
+  memory_types: 'Abstract/README: the goal is to update an LLM about an API update and solve tasks ''without providing documentation of the update at inference time''. Approaches are FT(U), FT(PS) and FT(U+PS) with LoRA (paper §6.1, README), so knowledge is edited in the weights. Prepend is the in-context baseline.'
+  links.paper: arXiv abs 2407.06249 (linked from repo README)
+  links.code: 'github.com/leo-liuzy/CodeUpdateArena: README lists the paper authors and links arXiv 2407.06249'
+  links.data: 'README ''Benchmark Access'': load_dataset(''leo-liuzy/CodeUpdateArena''). HF API: public, not gated, MIT, file arena-ungrouped.jsonl (test split)'
+  scale.questions: 'Paper Table 1 (§5): 54 functions, 161 updates, 670 PS examples, matching the abstract. The HF arena-ungrouped.jsonl has 670 rows with 161 unique update_id (counted 2026-10-10)'
+  scale.notes: Paper Table 1, Table 2, §6.1 (82 HumanEval instances across 25 random single edits)
+  scale.avg_context_length: 'null: the paper reports only per-component token averages (Table 2), not an overall context/prompt length'
+  metrics: Paper §3 (pass@k with n=5, k in {1,2,5}; UPass@k; SPass@k) and Table 4 column headers 'UPass (Efficacy)', 'SPass (Specificity)', 'Pass with updated API' at @1/@5
+  judge_model: 'null: correctness comes from executing unit tests (§3, Appendix D). GPT-4 is used only to generate data and as a prepend-baseline model, never as a judge'
+  repro_level: Repo has scripts/prepend.sh, base.sh, ft_u.sh, ft_ps.sh, ft_ups.sh, specificity.sh and rand_ft.sh. These call src/test_beds/test_bed.py and src/test_beds/ft_test_bed.py (usage=eval/exec), with pass@k in src/utils/eval.py. Data is in repo data/arena-ungrouped.jsonl (22,355,873 bytes, same size as the HF file). Checked 2026-10-10.
+  notes: arXiv API/abs page, OpenReview API, repo LICENSE (MIT), HF dataset API (gated=false)

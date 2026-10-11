@@ -1,0 +1,43 @@
+name: REALTALK
+slug: realtalk
+release_date: 2025-02
+venue: arXiv preprint
+memory_types:
+- conversational_longterm
+- episodic
+links:
+  paper: https://arxiv.org/abs/2502.13270
+  code: https://github.com/danny911kr/REALTALK
+  data: null
+scale:
+  conversations: 10
+  questions: 728
+  avg_context_length: ~17,109.8 tokens (~894.4 turns, ~21.9 sessions) per conversation
+  notes: 10 real two-person messaging-app chats over 16-21 days (10 participants, each in 2 chats). 728 memory-probing QAs. The paper gives 302 multi-hop, 321 temporal and 111 commonsense, which sums to 734. The released JSON has 301/319/108 (=728), counted on 2026-10-10. Also includes 600 annotated speaker events and a persona-simulation task.
+metrics:
+- Partial (exact) match F1
+- LLM Accuracy (gpt-4o-mini judge)
+- ROUGE (persona simulation)
+- BERTScore (persona simulation)
+- EI-attribute accuracy / absolute difference (persona simulation)
+judge_model: gpt-4o-mini
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: Successor to LoCoMo by the same authors, with real human chats instead of LLM-generated ones. The memory-probing evaluation is evaluate_memory.py, which needs an OpenAI API key. The persona-simulation code is marked 'Coming soon' in the README. The GitHub repo declares no licence, though the arXiv paper is CC BY 4.0. Images are shared in the chats, but the paper captions them with BLIP for memory probing, so the evaluated models see only text. The paper's category counts disagree with the released data (see scale.notes).
+sources:
+  name: 'arXiv API title ''REALTALK: A 21-Day Real-World Dataset for Long-Term Conversation''; repo README'
+  release_date: 'arXiv API: 2502.13270v1 published 2025-02-18'
+  venue: 'arXiv API shows no journal_ref (comment: ''20 pages, 7 figures''); repo README bibtex says ''arXiv preprint arXiv:2502.13270''; ISI publication page lists arXiv preprint; no ACL Anthology/OpenReview listing found via web search'
+  memory_types: 'paper §6.2: memory probing over 21-day multi-session real chats with multi-hop and temporal-reasoning questions about past events. Images are BLIP-captioned (App. D.2), so multimodal is not assigned'
+  links.paper: arXiv 2502.13270
+  links.code: paper footnote and arXiv abs link to github.com/danny911kr/REALTALK (authors' repo)
+  links.data: data are in the repo (data/*.json, data/raw/*.xlsx, images); no separate official HF dataset found (HF 'realtalk' search hits are unrelated datasets)
+  scale.conversations: 'paper §1/§3.1: 10 unique conversations among 10 participants; repo has 10 data/Chat_*.json files'
+  scale.questions: 'paper §6.2 and App. A.3: ''728 questions''; verified by counting qa entries in the 10 repo JSON files (728) on 2026-10-10'
+  scale.avg_context_length: 'paper Table 1, RealTalk row: 894.4 turns, 21.9 sessions, 17,109.8 tokens per conversation'
+  scale.notes: paper App. A.3 / Table 6 category counts vs category counts from the repo JSON (categories 1/2/3 = multi-hop/temporal/commonsense, matched to Table 6 per chat)
+  metrics: 'paper §6.2.1 and Table 3: partial exact match F1 + LLM-based accuracy. §6.1.1: EI attribute accuracy/absolute difference, ROUGE, BERTScore for persona simulation'
+  judge_model: 'paper §6.2.1: ''gpt-4o-mini determines whether the predicted answer matches the ground truth''; repo evaluate_memory.py default --evaluate_model gpt-4o-mini'
+  repro_level: repo tree has evaluate_memory.py + eval_memory/qa_tool.py (QA generation, lexical F1, GPT score) and data/Chat_*.json with qa fields (checked 2026-10-10)
+  notes: repo README (persona simulation 'Coming soon'; OPENAI_API_KEY); gh api repos/danny911kr/REALTALK license=null; arXiv HTML shows License CC BY 4.0; paper App. D.2 BLIP captions

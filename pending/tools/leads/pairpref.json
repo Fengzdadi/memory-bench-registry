@@ -1,0 +1,28 @@
+{
+ "name": "PairPref",
+ "slug": "pairpref",
+ "leads": {
+  "registry_key": "arxiv:2609.34526",
+  "tier": "P2",
+  "arxiv": "2609.34526 (arXiv API: v1 2026-09-28; title: PairPref: When Should Memory Guide the Answer? A Benchmark for Contextual Preference Use)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "PairPref: When Should Memory Guide the Answer? A Benchmark for Contextual Preference Use",
+    "paper_url": "https://arxiv.org/pdf/2609.34526",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "personalization"
+   ],
+   "extra_tags": [
+    "preference_applicability"
+   ],
+   "kind_reason": "Benchmark of 1,227 situation pairs (45 preferences, 8 situation categories) testing whether a retrieved user-preference memory should be applied; preferences come as a 16-item memory list, with no multi-session history. No code/data URL given in paper."
+  }
+ }
+}

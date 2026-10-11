@@ -1,0 +1,41 @@
+name: Stateful SWE-bench
+slug: stateful-swe-bench
+release_date: 2025-10
+venue: ICML 2026
+memory_types:
+- coding_cross_session
+- personalization
+links:
+  paper: https://arxiv.org/abs/2510.21903
+  code: https://github.com/OpenHands/ToM-SWE
+  data: https://huggingface.co/datasets/cmu-lti/stateful
+scale:
+  conversations: 15
+  questions: 500
+  avg_context_length: null
+  notes: questions = 500 SWE-bench Verified task instances (HF test split, 500 rows). conversations = 15 developer profiles, each with a history of 20 prior agent-user sessions per the paper. The released tarballs hold 19-20 sessions per profile, 296 in total (counted 2026-10-10). Each task allows at most 100 interaction turns. The cost analysis uses a 100-instance subsample.
+metrics:
+- Task resolved rate (% of instances passing SWE-bench unit tests)
+- User simulator satisfaction score (1-5, profile-conditioned LLM user simulator)
+- F+H rate (% failed-to-resolve but high-satisfaction cases)
+judge_model: GPT-5
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'The benchmark comes from the TOM-SWE paper. It pairs 500 SWE-bench Verified issues (via cmu-lti/interactive-swe) with 15 profiles assigned at random (seed 42, 27-46 instances per profile). The 453 original developer sessions are not released. The runner is in the first author''s OpenHands fork (branch feature/tom-codeact-agent), not in OpenHands/ToM-SWE, which was archived when checked. The paper text gives two headline pairs: 59.7%/18.1% and 57.4%/13.5%. No dataset licence is stated.'
+sources:
+  name: paper §4 'Stateful SWE Benchmark' and §1 ('Stateful SWE benchmark', 'stateful SWE-bench'); HF card titles it 'Stateful SWE Dataset'
+  release_date: 'arXiv API: 2510.21903v1 published 2025-10-24 (v2 2026-01-29)'
+  venue: 'OpenReview note HeLa76rJuD: venue ''ICML 2026 regular'', venueid ICML.cc/2026/Conference, bibtex booktitle ''Forty-third International Conference on Machine Learning''. The ICLR 2026 submission A4koL4Zqam is listed as Rejected_Submission. arXiv has no journal_ref.'
+  memory_types: 'paper §4: agents get previous conversation histories with the same user profile and must derive user preferences from past interactions (20 sessions per developer). The profile-conditioned simulator scores user-preference alignment (A.8.2), giving coding_cross_session plus personalization.'
+  links.paper: arXiv abs page 2510.21903
+  links.code: 'github.com/OpenHands/ToM-SWE: README titled ''TOM-SWE: User Mental Modeling For Software Engineering Agents'' with the paper''s author list; it contains stateful_swe/ benchmark tools (archived=true per gh api, 2026-10-10). The paper itself links no repo.'
+  links.data: 'HF API cmu-lti/stateful: public, not gated; data/test-00000-of-00001.parquet plus users_tar/*.tar.gz (15 profiles). It is built by stateful_swe/huggingface_dataset_builder.py in the official repo.'
+  scale.conversations: 'paper §4 ''Profile Collection'': 15 developer profiles, 20 sessions each. HF datasets-server shows 15 unique user_profile_id values.'
+  scale.questions: 'paper §4 and §5.1: 500 instances from SWE-bench Verified. HF datasets-server num_rows=500 (test split). dataset_info.json num_instances=500.'
+  scale.avg_context_length: 'null: neither the paper nor the dataset card reports an average history or context length (only a cap of 100 interaction turns per task, §5.1)'
+  metrics: paper §5.1 'Evaluation Benchmarks' (task resolved rate, user simulator satisfaction), Table 1 (satisfaction), Table 2 (F+H rate), A.8.2 (five 1-5 dimensions)
+  judge_model: 'paper A.8.2: satisfaction scores come from profile-conditioned user simulators powered by GPT-5. §5.1: both benchmarks use GPT-5-powered simulated users.'
+  repro_level: 'Data public on HF cmu-lti/stateful. The evaluation entry points are in the first author''s OpenHands fork, XuhuiZhou/OpenHands branch feature/tom-codeact-agent (linked from the ToM-SWE README install command): evaluation/benchmarks/swe_bench/run_infer_interact.py (stateful mode loads users_tar), scripts/run_interact_local_stateful.sh / run_interact_remote_tom_stateful.sh (dataset cmu-lti/stateful), scripts/eval_infer.sh, and eval_user_satisfaction.py. Checked 2026-10-10.'
+  notes: 'paper Reproducibility statement (raw sessions not released); HF card (seed 42, licence follows interactive-swe); HF statistics (27-46 per profile); gh api archived=true; v1/v2 text: the abstract and §5.2/§1 give different numbers'
+  scale.notes: 'tar listings of all 15 users_tar archives on 2026-10-10: 11 profiles have 20 cleaned_sessions files and 4 have 19'

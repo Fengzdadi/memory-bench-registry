@@ -1,0 +1,42 @@
+name: MemUse
+slug: memuse
+release_date: 2026-08
+venue: EMNLP 2026
+memory_types:
+- conversational_longterm
+- personalization
+links:
+  paper: https://arxiv.org/abs/2608.24189
+  code: https://github.com/ryuichi-sumida/memuse
+  data: https://huggingface.co/datasets/RuiSumida/memuse
+scale:
+  conversations: 72
+  questions: 316
+  avg_context_length: ~306 turns
+  notes: 72 = user-cued memory moments (benchmark instances), each with the user's full prior-session history; 316 = decomposed fact questions (avg 4.4/instance). Paper ablations use 73 instances. Release adds 72 negatives, plus a corpus of 1,872 sessions (40 users) and a users config. A count on 2026-10-10 gave ~300 prior turns per instance.
+metrics:
+- Natural Integration rate (%, primary; binary LLM judgment of the natural reply)
+- Direct QA accuracy (%, per fact question)
+- Reference rate (%, fact appears in natural reply)
+- Association with user satisfaction (Spearman rho, linear mixed models)
+judge_model: GPT-5.4-nano
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: Benchmark is mined from a real 4-month AI diary-companion deployment. Data is CC BY-NC 4.0 (non-commercial) and pseudonymized; paper numbers were computed before pseudonymization. The paper's cross-model and ablation results use 73 instances, while the release has 72. Repo eval schema 1.2 (2026-10) changed the Natural Integration judge inputs, so scores from schema 1.1 or earlier are not comparable. It also corrected the Mem0 and Letta NI values reported in arXiv v1 (58.3 and 56.9). The negatives split was added for the release and is not in the paper.
+sources:
+  name: arXiv 2608.24189 title; repo README
+  release_date: 'arXiv API: 2608.24189v1 published 2026-08-25'
+  venue: arXiv comment 'Accepted to EMNLP 2026 (Main Conference)'; repo README badge + bibtex (Proceedings of EMNLP 2026)
+  memory_types: 'paper §5 and the README: user-cued recall of the user''s own personal details from earlier sessions of a multi-month diary chat; replies are judged on whether they naturally integrate those details'
+  links.paper: arXiv API entry 2608.24189
+  links.code: URL given in the arXiv abstract (github.com/ryuichi-sumida/memuse); opened via gh api
+  links.data: repo README links huggingface.co/datasets/RuiSumida/memuse; HF API shows a public, ungated dataset with data/instances.test.jsonl, negatives.test.jsonl, sessions.train.jsonl and users.jsonl
+  scale.conversations: paper §5.2 '62 re-provisions + 10 probes = 72 instances'; Table 6 (73 detected, 72 released); 72 rows counted in instances.test.jsonl on 2026-10-10
+  scale.questions: paper §5.2 '316 total, avg. 4.4 per instance'; 316 sub_questions counted in released data on 2026-10-10
+  scale.avg_context_length: 'repo README Quickstart: prior sessions ''mean ≈ 306 turns'' (not stated in the paper); a count of the released data gave 300.5 prior-session turns per instance'
+  scale.notes: README 'What's inside' table; paper Appendix E.1 'N=73 vs. released N=72'
+  metrics: 'paper §5.2 (three metrics: Natural Integration, Direct QA, Reference; Table 3) and §6.1 (satisfaction correlations, LMM); repo eval/metadata.json'
+  judge_model: 'paper §5.2 and Appendix A.5: judging uses GPT-5.4-nano at temperature 0; repo eval/metadata.json judge.model = gpt-5.4-nano'
+  repro_level: repo has eval/run_judge.py, eval/run_judge_negatives.py, eval/prompts/*, baselines/run_fullcontext.py, run_mem0.py, run_letta.py, and the data files data/instances.test.jsonl and data/negatives.test.jsonl; HF dataset is ungated (checked 2026-10-10)
+  notes: repo README (Negatives results notes, Privacy & license), eval/README.md (schema 1.2 reproducibility notes), DATA_LICENSE.md, commit 2026-10-06

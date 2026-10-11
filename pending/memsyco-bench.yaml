@@ -1,0 +1,42 @@
+name: MemSyco-Bench
+slug: memsyco-bench
+release_date: 2026-07
+venue: NeurIPS 2026 Workshop PALM
+memory_types:
+- personalization
+- semantic_knowledge_update
+links:
+  paper: https://arxiv.org/abs/2607.01071
+  code: https://github.com/XMUDeepLIT/MemSyco-Bench
+  data: https://huggingface.co/datasets/MemSyco-Bench/MemSyco-Bench
+scale:
+  conversations: 1550
+  questions: 1550
+  avg_context_length: ~10 turns per dialogue
+  notes: '1,550 samples, each with its own simulated dialogue and one final question: Objective Fact Judgment 300, Contextual Scope Control 300, Memory-Evidence Conflict 300, Valid Memory Selection 350, Personalized Memory Use 300 (data schema v1.2). The paper gives no counts. Paper Table 4 reports ~1.1K average Full Dialog input tokens (cl100k_base). Released dialogues have 4–15 messages (counted 2026-10-10).'
+metrics:
+- Generation Accuracy (Acc)
+- Sycophancy Rate (SycRate)
+- Correct Memory Use
+- Outdated Memory Use
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'Benchmark for memory-induced sycophancy: whether agents give retrieved user-preference memory the right weight. Sample counts come from the repo data card and manifest, not the paper. The paper uses LLM-as-a-judge rubrics but does not name the judge model. The repo default is JUDGE_MODEL=deepseek-v4-flash. Instances were generated with GPT-5.5. Objective Fact Judgment items derive from TruthfulQA and keep its license terms. Data is MIT-licensed and ungated on Hugging Face; checksums match manifest.json (checked 2026-10-10).'
+sources:
+  name: 'arXiv title ''MemSyco-Bench: Benchmarking Sycophancy in Agent Memory''; repo README'
+  release_date: 'arXiv API: 2607.01071v1 published 2026-07-01T15:30:33Z'
+  venue: repo README News '[2026-09] accepted by NeurIPS 2026 Workshop PALM'; confirmed on neurips.cc/virtual/2026/workshop/137634 (PALM schedule lists the paper with OpenReview forum oqjwjGciMC); arXiv entry has no journal_ref
+  memory_types: 'paper §3.2 task taxonomy and data/README.md memory policies: Personalized Memory Use (''use'') and Valid Memory Selection (''update'', current vs outdated preference) mean personalization and preference updates; Memory-Evidence Conflict (''defer_to_evidence'') covers memory-evidence conflicts. Dialogues are ~10 turns and single-history, so conversational_longterm was not assigned.'
+  links.paper: arXiv abs page 2607.01071
+  links.code: paper Appendix A.1 and arXiv abstract link https://github.com/XMUDeepLIT/MemSyco-Bench
+  links.data: repo README News links https://huggingface.co/datasets/MemSyco-Bench/MemSyco-Bench; HF API shows gated=false, license MIT, 5 JSONL configs
+  scale.conversations: repo data/README.md and data/manifest.json total_samples 1550, one dialogue per row; 1,550 rows downloaded from HF and counted on 2026-10-10
+  scale.questions: repo data/manifest.json per-task samples 300/300/300/350/300 = 1,550; README 'Provides 1,550 final samples'
+  scale.avg_context_length: 'paper §3.3 / Appendix B.3: ''We keep each dialogue around 10 turns'''
+  scale.notes: data/manifest.json; paper Table 4 (Full Dialog average input tokens 1,138.3 for Qwen3-8B, 1,135.3 for DeepSeek-V4-Flash); message counts computed from HF JSONL files
+  metrics: paper §3.4 and Appendix D (Generation Accuracy, Sycophancy Rate, Correct Memory Use, Outdated Memory Use); Tables 1/3
+  judge_model: Paper §3.4, Appendix D and Figs 14–18 describe LLM-as-a-judge rubrics but name no judge model for the main evaluation. DeepSeek-Flash is named only for the preliminary retrieval-success study (Appendix F.2). Repo .env.example defaults to JUDGE_MODEL=deepseek-v4-flash, which is not stated as the paper's judge, so the field is null.
+  repro_level: repo tree has scripts/run_benchmark.sh and evaluation/run_task.py dispatching evaluation/task_*.py with --judge-model; data/*.jsonl in repo and on HF (sha256 match data/manifest.json) (checked 2026-10-10)
+  notes: repo data/README.md (license, TruthfulQA derivation); paper Appendix B (GPT-5.5 used in construction); .env.example

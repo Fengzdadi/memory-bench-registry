@@ -1,0 +1,28 @@
+{
+ "name": "MemProbe",
+ "slug": "memprobe-2",
+ "leads": {
+  "registry_key": "arxiv:2609.30558",
+  "tier": "P2",
+  "arxiv": "2609.30558 (arXiv API: v1 2026-09-24; title: Probing Stability-Plasticity Tradeoffs in Agent Memory through Cognitive Experimental Paradigms)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "Probing Stability-Plasticity Tradeoffs in Agent Memory through Cognitive Experimental Paradigms",
+    "paper_url": "https://arxiv.org/pdf/2609.30558",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "conversational_longterm",
+    "semantic_knowledge_update",
+    "personalization"
+   ],
+   "extra_tags": [],
+   "kind_reason": "Cognitive-paradigm diagnostic suite (interference, misinformation, consolidation, reconsolidation): 56 multi-session dialogue episodes (1,246 sessions, 224 probes) over evolving facts in personal/lifestyle preferences, work, and agentic tool-state domains; evaluates six incremental memory systems. C"
+  }
+ }
+}

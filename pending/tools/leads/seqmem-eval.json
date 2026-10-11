@@ -1,0 +1,14 @@
+{
+ "name": "SeqMem-Eval",
+ "slug": "seqmem-eval",
+ "leads": {
+  "registry_key": "arxiv:2605.15384",
+  "tier": "P0",
+  "arxiv": "2605.15384 (arXiv API: v1 ?; title: None)",
+  "phase1_verified_types": {
+   "procedural_workflow": "Sec. 3.3: \"we measure hold-out generalization on a fixed set of unseen tasks under different memory states\". Sec. 3.1 says the memory holds workflows and reflections. Table 6 fixes the sequential and hold-out splits."
+  },
+  "paper_hint": "https://arxiv.org/abs/2605.15384",
+  "code_hint": "https://github.com/ShenGroup/SeqMem-Eval"
+ }
+}

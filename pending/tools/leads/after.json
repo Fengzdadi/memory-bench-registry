@@ -1,0 +1,14 @@
+{
+ "name": "AFTER",
+ "slug": "after",
+ "leads": {
+  "registry_key": "arxiv:2606.23127",
+  "tier": "P0",
+  "arxiv": "2606.23127 (arXiv API: v1 ?; title: None)",
+  "phase1_verified_types": {
+   "procedural_workflow": "Abstract: 'controlled evaluation settings for local improvement, cross-task transfer, cross-role transfer' (plus cross-model). Sec 3.2: Evolution 'Collect–Diagnose–Revise–Promote cycle'. App. D.1: the test split checks 'genuine generalization'."
+  },
+  "paper_hint": "https://arxiv.org/abs/2606.23127",
+  "code_hint": "https://huggingface.co/datasets/DavydenkoGr/AFTER"
+ }
+}

@@ -1,0 +1,43 @@
+name: AToKe
+slug: atoke
+release_date: 2023-12
+venue: AAAI 2024
+memory_types:
+- parametric
+links:
+  paper: https://arxiv.org/abs/2312.05497
+  code: https://github.com/Arvid-pku/ATOKE
+  data: null
+scale:
+  conversations: null
+  questions: 8820
+  avg_context_length: null
+  notes: '8,820 is the number of temporal fact chains (edit cases) the paper gives as the final size of each of the three datasets: AToKe-SE (single edit), AToKe-ME (multiple edits) and AToKe-EE (extending edit). Each case has several cloze/QA probes: CES, CES-P, CRS, HES and HRS. The benchmark has no dialogue or context, so the conversation and context-length fields do not apply.'
+metrics:
+- CES (Current Explicit time question Score, accuracy)
+- CES-P (Current Explicit time Paraphrase question Score)
+- CRS (Current Relative time question Score)
+- HES (Historical Explicit time question Score)
+- HRS (Historical Relative time question Score)
+- HES* (HES over all historical facts after all multiple edits, AToKe-ME)
+judge_model: null
+repro_level: data_public
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'Knowledge-editing benchmark: edits are written into the weights of GPT-J (6B) with CFT, MEND, ROME and MEMIT. The repo has no licence file and contains only the three JSON datasets; the README''s METO section is empty, and no editing or evaluation code is released. Counted on 2026-10-10: AToKe-SE and AToKe-EE have 8,819 cases each. AToKe-ME has 8,820 cases, including case_id 2771 with no edits, and 18,644 edits in total. The release has 9 relations; the paper states 13.'
+sources:
+  name: 'arXiv abstract and paper section ''ATOKE: Assessment of Temporal Knowledge Editing'' (benchmark ATOKE / AToKe)'
+  release_date: 'arXiv API: 2312.05497 published 2023-12-09T07:51:56Z (v1); abs page history v1 Sat 9 Dec 2023'
+  venue: arXiv comment 'AAAI 2024'; AAAI OJS page ojs.aaai.org/index.php/AAAI/article/view/29912 (Vol. 38 No. 17, AAAI-24 Technical Tracks 17, DOI 10.1609/aaai.v38i17.29912); repo description '[AAAI 2024]'
+  memory_types: 'paper ''Current Status on TKE'': ''All of the above model editing methods make changes to the parameters of the model'' (CFT, MEND, ROME, MEMIT on GPT-J); the evaluation checks whether new and historical facts remain in the weights after editing'
+  links.paper: arXiv API entry 2312.05497
+  links.code: paper footnote 1 'https://github.com/Arvid-pku/ATOKE'; repo README links the arXiv paper
+  links.data: data is hosted in the repo under datasets/; no separate dataset page found in the paper or README
+  scale.questions: 'paper ''Dataset Summary - Data statistics'' (arXiv v3 PDF p.4): ''the number of our temporal chains is reduced to 8,820, which is the final number of the three datasets''; release files counted on 2026-10-10: SE 8,819, ME 8,820, EE 8,819'
+  scale.conversations: not applicable; no dialogue data (cloze/QA probes on edited model)
+  scale.avg_context_length: not reported; inputs are single cloze prompts or questions
+  scale.notes: paper Table 1 and section 'Construction of Three Datasets'; repo README data format
+  metrics: paper section 'Evaluation Metrics' (arXiv v3 PDF p.4) and Tables 2-3
+  judge_model: paper reports accuracy of the edited model's answers (CES/CRS/HES/HRS); gpt-3.5-turbo is used only to generate the question templates, which were then filtered manually; no LLM judge
+  repro_level: repo tree (checked 2026-10-10) holds only README.md and datasets/AToKe-SE.json, AToKe-ME.json, AToKe-EE.json; files downloaded and parsed; no evaluation script
+  notes: repo license field null; README METO section empty; relation and case counts from parsing the released JSON files on 2026-10-10; paper 'Data statistics' says 13 relations

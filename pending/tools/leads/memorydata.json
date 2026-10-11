@@ -1,0 +1,46 @@
+{
+ "name": "MemoryData",
+ "slug": "memorydata",
+ "leads": {
+  "registry_key": "arxiv:2606.24775",
+  "tier": "P1",
+  "arxiv": "2606.24775 (arXiv API: v1 2026-06-23; title: Are We Ready For An Agent-Native Memory System?)",
+  "community_list_entries": [
+   {
+    "source": "teleai",
+    "section": "📏 Benchmarks / 💬 Plain-Text Benchmarks / 🗓️ 2026",
+    "name": "Are We Ready For An Agent-Native Memory System?",
+    "paper_url": "https://arxiv.org/abs/2606.24775",
+    "code_url": "https://github.com/OpenDataBox/MemoryData",
+    "data_url": null
+   },
+   {
+    "source": "iaar",
+    "section": "Paper List / Survey",
+    "name": "Are We Ready For An Agent-Native Memory System?",
+    "paper_url": "https://arxiv.org/pdf/2606.24775v1",
+    "code_url": null,
+    "data_url": null
+   },
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "Are We Ready For An Agent-Native Memory System?",
+    "paper_url": "https://arxiv.org/pdf/2606.24775v1",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "conversational_longterm",
+    "semantic_knowledge_update"
+   ],
+   "extra_tags": [
+    "long_context_single_input",
+    "memory_system_cost_analysis"
+   ],
+   "kind_reason": "A systematic evaluation study whose repo is 'A Unified Memory Benchmark Suite for Memory-Augmented Agents'. It runs 22 method presets on existing datasets (LoCoMo, LongMemEval/MemoryAgentBench, MemBench, LongBench, DB-Bench) and contributes no new dataset. DB-Bench tests procedural DB state executio"
+  }
+ }
+}

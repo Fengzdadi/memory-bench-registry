@@ -1,0 +1,45 @@
+name: Insecure Coding Preferences in Long-Term Memory (MemSecurity)
+slug: insecure-coding-preferences-in-long-term-memory
+release_date: 2026-07
+venue: ISSTA 2026
+memory_types:
+- coding_cross_session
+- memory_security
+links:
+  paper: https://arxiv.org/abs/2607.17619
+  code: https://github.com/yuc-chen/MemSecurity
+  data: null
+scale:
+  conversations: null
+  questions: 194
+  avg_context_length: null
+  notes: 'questions = 194 code prompts (100 SALLM Python + 94 CWEval JS/C++/C/Go), each paired with one insecure-preference memory prompt. Each prompt gets 3 completions in separate sessions (582 outputs per system per condition). Subsets: 17/14 paraphrased prompts (RQ3.2) and 29/28 mitigation prompts (RQ4). There are no multi-turn dialogues, and context length is not reported.'
+metrics:
+- Pass@k (k=1,2,3)
+- Vul@k (k=1,2,3)
+- Warning rate (WR)
+- Memory reference rate (MRR)
+- CWE-type coverage
+- Memory update (overwrite) success rate
+- Safety-filter detection rate and detection time
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: This is an empirical-study artifact, not a standalone benchmark. It builds insecure 'Please remember that I prefer...' memory prompts on top of SALLM and CWEval, and it evaluates commercial assistants with memory switched on. The paper's artifact link (anonymous.4open.science/r/MemSecurity-0B32) returned HTTP 410 on 2026-10-10. The first author's GitHub repo, last pushed 2026-01-30, holds only the SALLM/Python part with ChatGPT and Gemini outputs. It has no CWEval memory prompts, no Qwen or Grok results and no licence file.
+sources:
+  name: Paper title (arXiv 2607.17619). The artifact is cited as 'MemSecurity' in the paper reference list (Yuchen Chen et al. 2025) and is also the repo name.
+  release_date: 'arXiv API: 2607.17619v1 published 2026-07-20T07:15:35Z'
+  venue: 'arXiv comment: ''Accepted to the 35th ACM SIGSOFT International Symposium on Software Testing and Analysis (ISSTA 2026)''. The title and authors appear in the ISSTA 2026 Research Papers list on conf.researchr.org/track/issta-2026/issta-2026-research-papers (checked 2026-10-10).'
+  memory_types: '§1/§4/§5.3 (arXiv v1 HTML): insecure coding preferences are stored as long-term memory and retrieved in later, independent sessions, with three generations per task in separate sessions, so coding_cross_session. §4 threat model, RQ3.1 overwrite resistance and RQ4 memory-level safety filtering cover risky entries stored in memory and protection of the memory store, so memory_security.'
+  links.paper: arXiv abs page 2607.17619
+  links.code: The paper's Data Availability section cites https://anonymous.4open.science/r/MemSecurity-0B32, whose API returned HTTP 410 'repository_expired' on 2026-10-10. github.com/yuc-chen/MemSecurity is owned by 'CHEN YUCHEN' (first author Yuchen Chen), has a README titled with the paper title and uses the same repo name, MemSecurity.
+  links.data: 'No separate dataset page: a Hugging Face search for ''MemSecurity'' returned nothing, and the data ships in the repo at data/dataset.csv.'
+  scale.questions: '§5.2 and RQ1.1 Design (arXiv v1 HTML): ''for each of the 100 and 94 code prompts in the SALLM and CWEval dataset'' (100 + 94 = 194). Also ''582 outputs per system per condition''.'
+  scale.conversations: 'Not applicable: each memory entry is injected and code is generated in separate single-prompt sessions, so the paper reports no dialogue count.'
+  scale.avg_context_length: Not reported in the paper.
+  metrics: §5.4 (Pass@k, Vul@k with n=3, k∈{1,2,3}, WR, MRR), RQ1.2 (CWE-type coverage), RQ3.1 Table 4 (update success rate), RQ4 (detection rate and detection time)
+  judge_model: Null because there is no LLM judge. Functional correctness and security come from unit tests (§5.3), and WR/MRR are manually annotated by the first two authors with Cohen's kappa (§5.4, RQ2.1). GPT-4o and Gemini-2.5 Flash appear only as mitigation safety filters (RQ4), and DeepSeek-R1 only for pattern extraction and paraphrasing.
+  repro_level: 'Repo tree checked 2026-10-10: code/run.py (Docker-based unit/security tests via code/dockers/*), code/analyze_results.py (Pass@k/Vul@k), code/LLM_API_generation.py, code/Auto_Chat/, and data/dataset.csv (100 rows with memory_prompt, PPU_memory_prompt and CU_memory_prompt). These cover the SALLM/Python part only.'
+  notes: arXiv v1 HTML §5.2/§5.3/Data Availability; repo README, tree and commits (8174a29, 2026-01-30); anonymous.4open.science API response checked 2026-10-10
+  scale.notes: RQ1.1, RQ3.2 and RQ4 Design sections (arXiv v1 HTML); repo data/dataset.csv row count

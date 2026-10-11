@@ -1,0 +1,44 @@
+name: MemTrapBench
+slug: memtrapbench
+release_date: 2026-08
+venue: arXiv preprint
+memory_types:
+- conversational_longterm
+- procedural_workflow
+- memory_security
+links:
+  paper: https://arxiv.org/abs/2608.20202
+  code: https://github.com/zjunlp/MemTrapBench
+  data: null
+scale:
+  conversations: 1050
+  questions: 1050
+  avg_context_length: 18–40 turns
+  notes: '1,050 instances, each one multi-turn dialogue history plus one final query: 350 Cognitive Bias, 350 Task Boundary, 200 Safety, 150 Trauma. The repo files hold 1,050 items (counted 2026-10-10), with a mean history of about 29.5 turns (~18.4K characters). Ablations use subsets, and the AdaptiveMem experiments sample 200 instances.'
+metrics:
+- Correctness (LLM-judged, 0-5 rubric, reported as %)
+- Format / explicit instruction compliance (%)
+- Relevance (%)
+- Efficiency (%)
+- Average score (%) and drop vs. no-memory baseline
+judge_model: GPT-5.2 (primary judge; Claude-Sonnet-4.6 used only to check judge consistency)
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'arXiv v1 is marked ''Work in progress''. Repo files map to the paper''s scenarios as follows: Cognitive Bias = Inertia_150 + number_game_200, Task Boundary = hallucination_150 + unclear_200, Trauma = hurt_150, Safety = poison_200. Retrieved-memory outputs from the evaluated frameworks (LightMem, MemOS, SimpleMem, EverMemOS) are not released, so users must supply them. Judging needs a paid API (default GPT-5.2 via OpenRouter). The repo has no licence file (checked 2026-10-10). The paper says it is related to, but distinct from, MemSyco-Bench.'
+sources:
+  name: 'arXiv API title ''MemTrapBench: Benchmarking Cognitive Traps in LLM Memory Use'' (2608.20202)'
+  release_date: 'arXiv API: 2608.20202v1 published 2026-08-20'
+  venue: 'arXiv API: no journal_ref, comment ''Work in progress''; repo README BibTeX cites ''arXiv preprint arXiv:2608.20202'''
+  memory_types: 'paper §2.2 (arXiv v1 HTML): 18–40-turn dialogues plant prior strategies/feedback/rules that are reused on a new final task (Cognitive Bias, Task Boundary, Trauma = reasoning fixation from earlier task strategies); evaluated with conversational memory frameworks LightMem/MemOS/SimpleMem/EverMemOS (§3.1); Safety subset plants false premises (repo file memtrapbench/safety/poison_200.json with poisoned_fact/poison_type fields)'
+  links.paper: arXiv abs page 2608.20202
+  links.code: 'paper footnote 1: ''Data and code will be available at https://github.com/zjunlp/MemTrapBench''; repo by zjunlp (authors'' lab)'
+  links.data: data shipped in repo under memtrapbench/; HF API dataset search for 'MemTrap' returned no results (checked 2026-10-10)
+  scale.conversations: 'paper §2.2: ''MemTrapBench contains 1,050 instances'' (each instance = one dialogue history + final query); repo JSON files total 1,050 items (counted 2026-10-10)'
+  scale.questions: 'paper §2.2: 350 Cognitive Bias, 350 Task Boundary, 200 Safety, 150 Trauma = 1,050 final queries'
+  scale.avg_context_length: 'paper §2.2: ''producing dialogues of 18–40 turns''; mean ~29.5 history_turns computed from repo JSON on 2026-10-10'
+  scale.notes: paper §2.2, §3.3–3.6; repo memtrapbench/*.json counts
+  metrics: paper §2.3 (correctness, format, relevance, efficiency) and Tables 1, 3-5; Appendix C 0-5 rubrics
+  judge_model: 'paper §2.3: ''We use GPT-5.2 as the primary LLM judge and evaluate judge consistency using Claude Sonnet 4.6''; Table 5; repo eval_common.py JUDGE_MODEL = ''gpt-5.2'''
+  repro_level: repo tree has runners/eval/eval_benchmark.py, eval_no_memory.py, eval_with_memory.py, eval_retrieved_memory.py, runners/extract/summarize_judge_scores.py, judge prompts in eval/, and data memtrapbench/*.json (6 files downloaded and parsed, 1,050 items; checked 2026-10-10)
+  notes: repo README + DATASET_CONFIGS in runners/eval/eval_common.py; gh api repos/zjunlp/MemTrapBench license=null; arXiv comment field; paper §1/§4 on MemSyco-Bench

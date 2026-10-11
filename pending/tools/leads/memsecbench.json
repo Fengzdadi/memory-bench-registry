@@ -1,0 +1,27 @@
+{
+ "name": "MemSecBench",
+ "slug": "memsecbench",
+ "leads": {
+  "registry_key": "arxiv:2607.27080",
+  "tier": "P2",
+  "arxiv": "2607.27080 (arXiv API: v1 2026-07-29; title: MemSecBench: Tracking Agent Memory Poisoning from Persistence to Consequence and Repair)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "MemSecBench: Tracking Agent Memory Poisoning from Persistence to Consequence and Repair",
+    "paper_url": "https://arxiv.org/pdf/2607.27080",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [],
+   "extra_tags": [
+    "memory_security",
+    "memory_forgetting_repair"
+   ],
+   "kind_reason": "A lifecycle security benchmark for memory poisoning: 310 cases with a Write-Execute-Forget protocol across 24 configurations (OpenClaw and Hermes harnesses; Native, Mem0, Mem0-Graph and A-MEM backends). The harnesses are general personal agents, not coding agents, and 'Code and Science' is only one "
+  }
+ }
+}

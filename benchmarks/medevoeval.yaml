@@ -1,0 +1,47 @@
+name: MedEvoEval
+slug: medevoeval
+release_date: 2026-06
+venue: NeurIPS 2026 (Evaluations & Datasets Track)
+memory_types:
+- procedural_workflow
+links:
+  paper: https://arxiv.org/abs/2606.28900
+  code: null
+  data: null
+scale:
+  conversations: null
+  questions: 700
+  avg_context_length: null
+  notes: '700 = processed Chinese MedQA-derived simulated outpatient cases (each run as one interactive episode and scored once). Splits: 500 longitudinal-stream cases (ten 50-case stages; conditions E0-E3), 100 held-out transfer cases (H0/H3), 100 cross-sectional cases (80-case model-comparison subset). A 100-episode MDT study is also reported. The artifact reportedly adds 3,103 trajectories and 3,386 step samples.'
+metrics:
+- Outcome score S = 0.5*diagnostic quality + 0.3*evidence consistency + 0.2*management quality
+- Strict diagnostic accuracy
+- Pass rate (S >= 0.7)
+- Utility U (0.6*S minus turn, test and invalid-test cost terms)
+- Interaction turns
+- Examinations requested
+- Invalid-test rate
+- Learning gain (LG, late minus early stage mean)
+- External/held-out transfer (ET = H3 - H0)
+- Backward transfer (BWT)
+judge_model: null
+repro_level: paper_only
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: Chinese-language, MedQA-derived cases. The paper describes a released artifact (src/medevoeval runner, configs, scoring and analysis scripts, MedEvoEval-MedQA-700 data), but the paper, arXiv page and NeurIPS page give no repo or dataset URL. No public copy was found when checked on 2026-10-10, and the author's GitHub profile lists the code as "TODO". Memory consists of IF-THEN/IF-AVOID rule cards written by the manager and retrieved top-K. The paper does not name the manager (judge) LLM for each study.
+sources:
+  name: 'arXiv 2606.28900 title: ''MedEvoEval: Evaluating Continual Evolution of Doctor Agents through Simulated Clinical Episodes'''
+  release_date: 'arXiv API: 2606.28900v1 published 2026-06-27 (only v1 listed on abs page)'
+  venue: 'neurips.cc/virtual/2026/poster/139548 and neurips-2026-orals-posters.json entry id 139548: decision ''Accept (poster)'', sourceurl openreview.net/group?id=NeurIPS.cc/2026/Evaluations_and_Datasets_Track (checked 2026-10-10); arXiv comment field has no journal_ref'
+  memory_types: 'arXiv v1 HTML Sec 3.4: the manager writes ''IF ... THEN'' / ''IF ... AVOID'' cards and ACTION rule cards that the doctor retrieves top-K on later episodes; Sec 5.3/Table 3 judge memory by task performance over a 500-case stream (E0 0.246 -> E3 0.430) and held-out transfer (H0 0.338 -> H3 0.413), plus BWT retention'
+  links.paper: arXiv abs page 2606.28900
+  links.code: 'null: the paper HTML/PDF has no external repo link (only arXiv URIs in the PDF annotations); gh repo/code search for ''medevoeval'' found only third-party lists; the author''s GitHub (huihuihenqiang, Hui Zhang, BIT) profile README says ''代码：TODO'' and ''项目仓库：TODO''; OpenReview forum Ja5320z9Vi was blocked by a verification challenge (checked 2026-10-10)'
+  links.data: 'null: Hugging Face dataset/model/space search for ''medevoeval'' returned nothing relevant (checked 2026-10-10)'
+  scale.questions: arXiv v1 abstract ('700 processed episodes'); Sec 3.5 (corpus 'Chinese MedEvoEval-MedQA-700' split 500 stream / 100 held-out / 100 cross-sectional; 80-case model-comparison subset)
+  scale.conversations: 'null: cases are interactive episodes generated at run time; the count is recorded under questions (one scored diagnosis output per case)'
+  scale.avg_context_length: 'null: the paper reports no token counts; mean turns (4.46-7.98 in Table 2, 5.38-6.81 in Table 3) depend on the agent, with a budget of T_max=10'
+  scale.notes: Sec 3.5, Sec 5.1-5.3, Appendix A Table 4 (3,103 trajectories; 3,386 step samples)
+  metrics: Sec 4 (S, strict accuracy, pass rate, utility U, ET, BWT, Wilcoxon/McNemar/bootstrap CIs); Appendix C.1-C.4 (sub-scores, turns T, tests E, invalid-test rate R, learning gain LG)
+  judge_model: 'null: scoring is done by an LLM ''manager'' (''manager-side judging'', ''automatic judging''), but Appendix D.1 only says Qwen-Turbo, Qwen3.5-122B-A10B, GLM-5 and Kimi-K2.5 serve as ''doctor, consultant, patient, or manager models depending on the study'' and never names the manager model; Appendix E reports a single-physician audit of 100 outputs (diagnosis kappa 0.892)'
+  repro_level: 'paper_only: paper checked; no public repo or dataset download found on GitHub, Hugging Face or the author''s GitHub profile (code marked TODO); OpenReview supplement not accessible (checked 2026-10-10)'
+  notes: arXiv v1 HTML Sec 3.4, 3.5, Appendix A, D.1; author GitHub profile README (huihuihenqiang/huihuihenqiang.github.io)

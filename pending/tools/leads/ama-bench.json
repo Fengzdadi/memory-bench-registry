@@ -1,0 +1,29 @@
+{
+ "name": "AMA-Bench",
+ "slug": "ama-bench",
+ "leads": {
+  "registry_key": "arxiv:2602.22769",
+  "tier": "P2",
+  "arxiv": "2602.22769 (arXiv API: v1 2026-02-26; title: AMA-Bench: Evaluating Long-Horizon Memory for Agentic Applications)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Framework & Methods",
+    "name": "AMA-Bench: Evaluating Long-Horizon Memory for Agentic Applications",
+    "paper_url": "https://arxiv.org/pdf/2602.22769.pdf",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "episodic",
+    "semantic_knowledge_update"
+   ],
+   "extra_tags": [
+    "agent_trajectory"
+   ],
+   "kind_reason": "QA over long agent-environment trajectories: 208 real trajectories with 2,496 QA from ALFWorld, BALROG, WebArena, SWE-bench via OpenHands, GAIA and Spider 2.0, plus synthetic TextWorld/BabyAI with 1,200 QA. Categories are Recall, Causal Inference, State Updating, and State Abstraction. Judge is Qwen"
+  }
+ }
+}

@@ -1,0 +1,44 @@
+name: MemTrack
+slug: memtrack
+release_date: 2025-10
+venue: NeurIPS 2025 Workshop on Scaling Environments for Agents (SEA)
+memory_types:
+- semantic_knowledge_update
+- episodic
+links:
+  paper: https://arxiv.org/abs/2510.01353
+  code: null
+  data: https://drive.google.com/file/d/1ymMXmOIhCUcwC1WKOW8kioZgeYyrt-qe/view?usp=sharing
+scale:
+  conversations: 47
+  questions: null
+  avg_context_length: 4.01K tokens (mean event-timeline tokens; max 11.1K)
+  notes: 47 = benchmark instances, each a platform-interleaved timeline (Slack, Linear, Git/Gitea) of 39.9 events on average (max 115). Questions are asked one after another, averaging 3.2 per instance (max 5). The paper does not state a total question count. There is a single evaluation set with no other splits.
+metrics:
+- Correctness (LLM-judge score per question, averaged per instance)
+- Efficiency (exp(-(|TC|-TC_min)/TC_min), TC_min=10)
+- Redundancy (fraction of redundant tool calls, LLM-judged)
+- Tool calls per instance (mean/max)
+- Tool-call cross-platform entropy H(TC)
+- Tool-call success rate (appendix)
+judge_model: GPT-4o
+repro_level: data_public
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: By Patronus AI. The data is a single Google Drive zip (Memtrak.zip, 294,337 bytes) linked from the paper. Its download endpoint returned HTTP 200 on 2026-10-10, but the archive contents were not inspected. No official code repo was found on GitHub, on Hugging Face, or on the Patronus blog. Running the benchmark needs a dockerized environment with Slack, Linear and Gitea servers. The paper evaluates GPT-5 and Gemini-2.5-Pro, each with no memory, Mem0 or Zep, averaged over 5 runs.
+sources:
+  name: 'arXiv 2510.01353 title: ''MEMTRACK: Evaluating Long-Term Memory and State Tracking in Multi-Platform Dynamic Agent Environments'''
+  release_date: 'arXiv API: 2510.01353v1 published 2025-10-01T18:34:03Z (only version)'
+  venue: arXiv comment 'Accepted to NeurIPS 2025 SEA Workshop'. The NeurIPS virtual page neurips.cc/virtual/2025/124523 lists a poster at the Workshop on Scaling Environments for Agents (NeurIPS 2025). No journal_ref.
+  memory_types: 'Abstract: tests long-term memory and state tracking over timelines with noisy, conflicting, cross-referring information, covering acquisition, selection and conflict resolution (semantic_knowledge_update). Questions are event-grounded and temporal over a chronological event timeline (paper §3, Table 2 example) (episodic). Questions are asked sequentially within one instance, so the benchmark is not cross-session coding.'
+  links.paper: arXiv abs page 2510.01353
+  links.code: No repo is linked in the paper, the arXiv page, the HF paper page (no githubRepo), the NeurIPS virtual page or the Patronus blog. The patronus-ai GitHub org has no MemTrack repo (checked 2026-10-10).
+  links.data: 'Paper footnote 1 (arXiv v1 HTML): ''Memtrack Dataset'' Google Drive link. The Drive page title is ''Memtrak.zip''.'
+  scale.conversations: 'Paper §3: ''Memtrack dataset includes 47 instances'' (arXiv v1 HTML)'
+  scale.questions: Paper Table 1 gives only the per-instance question count (mean 3.2, max 5). No total is reported, so the field is null.
+  scale.avg_context_length: Paper Table 1 'Event Tokens' mean 4.01K, max 11.1K. Per-Instance Event Count mean 39.9, max 115.
+  scale.notes: Paper §3 and Table 1 (arXiv v1 HTML)
+  metrics: Paper §4.2 Evaluation Measures (Correctness, Efficiency, Redundancy). Table 3 (TC mean/max, H(TC)). Appendix Table 5 (tool-call success rates).
+  judge_model: 'Paper §4.2: ''Using a LLM-judge Judge(q,a,a*) (gpt-4o), we output a Correctness score''. The model used for the Redundancy judge is not named.'
+  repro_level: Drive download endpoint (drive.usercontent.google.com, id 1ymMXmOIhCUcwC1WKOW8kioZgeYyrt-qe) returned HTTP 200 with content-disposition Memtrak.zip and content-length 294337 (checked 2026-10-10). No official repo or evaluation script was found.
+  notes: Paper affiliation, §4.1, Table 3, Appendix B.6. Drive headers and GitHub/HF searches on 2026-10-10. Patronus blog patronus.ai/blog/memtrack has no code link.

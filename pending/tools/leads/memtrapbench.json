@@ -1,0 +1,29 @@
+{
+ "name": "MemTrapBench",
+ "slug": "memtrapbench",
+ "leads": {
+  "registry_key": "arxiv:2608.20202",
+  "tier": "P2",
+  "arxiv": "2608.20202 (arXiv API: v1 2026-08-20; title: MemTrapBench: Benchmarking Cognitive Traps in LLM Memory Use)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "MemTrapBench: Benchmarking Cognitive Traps in LLM Memory Use",
+    "paper_url": "https://arxiv.org/pdf/2608.20202",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "procedural_workflow"
+   ],
+   "extra_tags": [
+    "memory_interference",
+    "memory_security"
+   ],
+   "kind_reason": "Introduces MemTrapBench with 1,050 instances (Cognitive Bias 350, Task Boundary 350, Safety 200, Trauma 150). Multi-turn dialogues of 18–40 turns plant a prior strategy, rule, feedback or belief, and the benchmark measures how that retrieved memory degrades performance on the current task. Belief Di"
+  }
+ }
+}

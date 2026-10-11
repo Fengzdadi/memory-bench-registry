@@ -1,0 +1,45 @@
+name: MetaKernelBench
+slug: metakernelbench
+release_date: 2026-10
+venue: arXiv preprint
+memory_types:
+- procedural_workflow
+- coding_cross_session
+links:
+  paper: https://arxiv.org/abs/2610.05014
+  code: https://github.com/YIGE24/MetaKernelBench
+  data: null
+scale:
+  conversations: null
+  questions: 74
+  avg_context_length: null
+  notes: 74 fused-subgraph GPU-kernel problems in six families. Each is posed as a CuTe DSL variant and a TIRx variant, giving 148 variants. With 6 models x 2 transfer directions, the paper reports 888 paired solo-vs-skill-conditioned comparisons. There are no conversations, and no context length is reported.
+metrics:
+- Correctness (pass rate P)
+- Speedup vs eager reference (passing-only geometric mean GM, capped at 100x)
+- 'R(2): 2x-or-better pass rate'
+- Paired runtime ratio rho_i
+- Paired lift (delta GM)
+- Help rate T (rho >= 5/4)
+- Harm rate H (rho <= 4/5)
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'The repo ships 32 of the 74 problems. The other 42 come from nvidia/SOL-ExecBench, whose NVIDIA Evaluation Dataset License forbids redistribution, so users must build them locally with metakernelbench/sol_execbench.py. Running the benchmark needs a Modal account with B200 GPUs and model-provider API keys. The CLI defaults to 3 replicates, while the paper uses single attempts (README: --n-replicates 1). The paper''s LLM annotators (unnamed) appear only in the skill and failure analyses, not in the main scoring. Code is Apache-2.0.'
+sources:
+  name: 'arXiv API title / repo README heading: ''MetaKernelBench: Measuring GPU Kernel Knowledge Transfer Beyond Code'''
+  release_date: 'arXiv API: 2610.05014v1 published 2026-10-04'
+  venue: 'arXiv API has no journal_ref; comment only gives the project page; README BibTeX: journal = arXiv preprint arXiv:2610.05014'
+  memory_types: 'Abstract and §2.2: the agent distills a natural-language skill during a solo attempt in one DSL, and that skill is the only extra input to a fresh, separate attempt in the other DSL. The evaluation is paired lift from this retained experience (procedural memory carried across separate coding-agent sessions).'
+  links.paper: arXiv API entry 2610.05014
+  links.code: Repo README links arXiv 2610.05014 and lists the paper authors; the project page yige24.github.io/MetaKernelBench links github.com/YIGE24/MetaKernelBench
+  links.data: No separate official dataset page. Problems are in the repo's problems/ folder; the 42 SOL-ExecBench-derived ones are assembled from third-party HF nvidia/SOL-ExecBench (not gated, license 'other').
+  scale.questions: 'Abstract and §2.3: 74 problems in six families (Figure 2). Appendix B: 888 comparisons pooled over models and directions.'
+  scale.conversations: 'Not applicable: the benchmark has kernel-optimization tasks, not conversations'
+  scale.avg_context_length: Paper reports no token or context length; budgets are 40 min wall-clock and 10 feedback submissions per attempt (§3.2)
+  metrics: 'Paper §3.3 (Table 2: P, GM, R(2); Eq. 2: paired ratio; Eq. 3: paired lift, help rate T, harm rate H); Appendix A.3 for the correctness check'
+  judge_model: Main scoring is done by a GPU grader (correctness against a float64 reference, plus runtime). The paper's 'LLM annotators' (§4.3, §4.4, Appendix C) label skills and failure causes for analysis only, and the paper never names the model.
+  repro_level: Repo tree (checked 2026-10-10) has entry points metakernelbench/cli.py, run.sh, metakernelbench/protocol.py and metakernelbench/judge.py (Modal B200 grader), plus template/grader.py. The data is 32 problems in problems/ plus metakernelbench/sol_execbench.py, which downloads the public HF nvidia/SOL-ExecBench parquet files (L1/L2/Quant).
+  notes: Repo README sections 'Problem set' and 'Run'; cli.py --n-replicates default=3; GitHub API license apache-2.0
+  scale.notes: Paper §2.1, §2.3, Appendix B, Appendix C.2 (148 comparisons per model)

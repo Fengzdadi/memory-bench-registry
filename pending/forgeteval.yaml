@@ -1,0 +1,44 @@
+name: ForgetEval
+slug: forgeteval
+release_date: 2026-06
+venue: arXiv preprint
+memory_types:
+- semantic_knowledge_update
+- memory_security
+links:
+  paper: https://arxiv.org/abs/2606.15903
+  code: https://github.com/deeplethe/lethe
+  data: null
+scale:
+  conversations: null
+  questions: 385
+  avg_context_length: null
+  notes: 385 = adversarial layer ForgetEval-Adv (132 hand-crafted + 253 DeepSeek-V3-drafted, oracle-validated; 10 attack categories). This is the main surface for the 13-configuration comparison. Each case is one final recall query after scripted mutations. There is also a 1000-case templated suite (5 families x 200, seed=42, 4 distractors per case) and a 77-case external-authored subset (Appendix R). No conversations are involved.
+metrics:
+- 'Pass rate (deterministic substring match on top-10 recall: must_contain present, must_not_contain absent), per family / per attack category / overall'
+- 95% Wilson confidence intervals
+- Paired McNemar test
+- N/A-excluded vs strict-denominator pass rate (N/A for unsupported primitives)
+- Latency per case (ms)
+- Cost per 385-case run (USD, LLM-hook configurations)
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: The cases ship as Python code in the repo (generate.py, adversarial.py, adversarial_generated.py), with no separate data files. A count on 2026-10-10 found 132 + 253 = 385 adversarial cases, matching Table 2, but run.py's help text still says 64. The repo was not found to contain the 77-case external subset, the IAA/audit files, or the LLM-hook runner. The repo's paper.pdf is an earlier 23-page version under a different title. The author also develops Lethe, one of the evaluated systems. HF dbaysal/ForgetEval is an unrelated code dataset. The licence is MIT.
+sources:
+  name: arXiv abstract 2606.15903 ('We expose the trade-off via ForgetEval'); repo README and docs/forgeteval.md
+  release_date: 'arXiv API: 2606.15903v1 published 2026-06-14T16:32:15Z (v2 2026-06-16)'
+  venue: The arXiv API has no journal_ref; the comment reads only '25 pages including appendices' plus the repo link. No venue appears in the repo README (bibtex is @misc) or in a web search (checked 2026-10-10)
+  memory_types: 'paper §3.1 and docs/forgeteval.md §2: supersession and drift test whether an external store''s updated fact overrides the old one (semantic_knowledge_update). Purge (GDPR Art. 17 identifier deletion), decay/release and amnesia test whether deletion/forgetting requests on stored memory take effect (memory_security). The stores are external (SQLite/vector/KG), not model weights'
+  links.paper: arXiv abs page 2606.15903
+  links.code: 'arXiv comment: ''Code, benchmark, and adapters released under MIT at https://github.com/deeplethe/lethe''; gh api repos/deeplethe/lethe (MIT, last push 2026-06-16)'
+  links.data: No official separate dataset page. The cases are embedded in repo bench/forgeteval/*.py. HF search 'forgeteval' only returns dbaysal/ForgetEval (150 coding tasks, different author, not affiliated)
+  scale.questions: 'paper abstract and §3.3 / Table 2 (arXiv v2 HTML): 385-case adversarial layer = 132 hand-crafted + 253 LLM-drafted. Repo count (2026-10-10): 132 adv ids in adversarial.py + 253 in adversarial_generated.py; per-category counts 36/39/38/40/37/40/40/38/38/39 match Table 2'
+  scale.notes: paper §3.2 ('At seed=42 with 4 distractors per case the suite is 1000 cases'), §3.3, Appendix R (77-case external-authored subset from 4 contributors); repo generate.py generate(n_per_family)
+  scale.conversations: 'null: cases are fact-inscription/mutation/query scripts, not conversations (paper §3.1 case anatomy)'
+  scale.avg_context_length: 'null: the paper reports no average context length (each case is a few setup facts + 4 distractors, §3.2)'
+  metrics: paper §3.1 (pass iff must_contain ⊆ top-10 blob and must_not_contain ∩ blob = ∅), Table 1 and Table 2 (pass counts, 95% Wilson CI, wall/case), §5.3 McNemar test, §Limitations strict-denominator totals, abstract ($0.17 per 385-case run)
+  judge_model: 'null: paper §3.1 says ''No LLM judge'' in the evaluation loop. Qwen-2.5-72B is used only for data admission (§3.3), DeepSeek-V3 and Claude Opus 4.7 only for cross-family admission validation (Appendix F), and DeepSeek-V3 drafted the 253 expansion cases'
+  repro_level: 'repo has bench/forgeteval/run.py (--suite template --scale 200 / --suite adversarial; adapters lethe|mem0|langmem|mempalace|cognee|amem in bench/forgeteval/adapter.py). The cases ship in bench/forgeteval/generate.py, adversarial.py and adversarial_generated.py. README: ''Reproduce: py bench/forgeteval/run.py --adapter ... --suite {template,adversarial}'' (checked 2026-10-10)'
+  notes: 'repo tree and file contents via gh api (2026-10-10); run.py argparse help text; README ''Paper'' section links paper/paper.pdf titled ''ForgetEval: Benchmarking the Forgetting Axis of Agent Memory Systems'' (23 pages); paper Appendix R / Appendix E (data/manual_review_v04.json listed as ''supplementary materials''); docs/forgeteval_adversarial.md §7 (lethe-paper/scripts/run_adversarial_with_llm.py)'

@@ -1,0 +1,51 @@
+name: OpenUnlearning
+slug: openunlearning
+release_date: 2025-06
+venue: NeurIPS 2025 Datasets and Benchmarks Track
+memory_types:
+- parametric
+- memory_security
+links:
+  paper: https://arxiv.org/abs/2506.12618
+  code: https://github.com/locuslab/open-unlearning
+  data: https://huggingface.co/open-unlearning
+scale:
+  conversations: null
+  questions: 400
+  avg_context_length: null
+  notes: '400 = TOFU forget10 QA examples used for meta-evaluation and method benchmarking (full TOFU: 200 authors x 20 QA). Meta-eval testbed: 60 pool models (30 positive, 30 negative) for faithfulness, ~400 unlearned models for robustness, 12 metrics; 8 methods benchmarked with 10 metrics. HF org listed 474 models (counted 2026-10-10).'
+metrics:
+- Faithfulness (AUC-ROC between positive/negative model pools)
+- Robustness to relearning (R)
+- Robustness to quantization (Q)
+- Harmonic-mean aggregates (Robustness, Overall)
+- Extraction Strength
+- Exact Memorization
+- Truth Ratio
+- Probability / Paraphrased Probability
+- ROUGE / Paraphrased ROUGE / Jailbreak ROUGE
+- MIA (LOSS, ZLib, MinK, MinK++)
+- Memorization / Privacy / Utility scores (harmonic means)
+- Model Utility
+- Forget Fluency (gibberish classifier)
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: Framework re-implementing TOFU, MUSE and WMDP (13 methods, 16 metrics); its new contribution is a meta-evaluation benchmark of unlearning metrics on TOFU forget10 with Llama-3.2-1B. arXiv v1 (2025-06) is a preprint; v2 (2025-11) is the NeurIPS 2025 D&B version. The repo tree (main and neurips_2025 branches) has no file dedicated to the faithfulness/robustness aggregation; src/eval.py computes per-model metrics. WMDP corpora come from a password-protected external zip. Repo supersedes locuslab/tofu; MIT licence.
+sources:
+  name: paper title (arXiv 2506.12618) and repo README
+  release_date: 'arXiv API: 2506.12618v1 published 2025-06-14'
+  venue: arXiv v2 PDF p.1 footer '39th Conference on Neural Information Processing Systems (NeurIPS 2025) Track on Datasets and Benchmarks'; NeurIPS proceedings page (papers.neurips.cc, Datasets_and_Benchmarks_Track, hash 3e4a38f2...); repo description '[NeurIPS D&B '25]'; v1 PDF marked 'Preprint'
+  memory_types: 'paper §1/§4/App. C.3: evaluates removal of forget-set knowledge from model weights (memorization metrics) -> parametric; privacy metrics (MIA, PrivLeak) and stress tests (relearning, quantization, jailbreak ROUGE) check whether forgetting took effect and whether forgotten data leaks -> memory_security'
+  links.paper: arXiv abs page 2506.12618; README arXiv badge
+  links.code: 'paper footnote 1 ''Code: github.com/locuslab/open-unlearning''; gh api repos/locuslab/open-unlearning'
+  links.data: paper footnote 1 'Models huggingface.co/open-unlearning'; HF API lists 474 models (398 unlearn_*, 30 pos_*, 30 neg_*, 16 tofu_*) and datasets open-unlearning/eval, open-unlearning/idk (public, not gated), checked 2026-10-10
+  scale.questions: 'paper §4 (arXiv v2): ''forget10 unlearning task (forgetting 10% of TOFU) comprising 400 examples'''
+  scale.notes: paper §4.1 (30 models per pool), App. E.1 (60 models total), §4.2.1 ('roughly 400 diverse models'), §5 (8 methods, 10 metrics), App. C.1 (TOFU 200 authors x 20 QA); HF API model count 2026-10-10
+  scale.avg_context_length: not reported in paper or repo
+  scale.conversations: not a dialogue benchmark; no conversation count
+  metrics: paper Table 2 (Faithfulness, Robustness Quant./Relearn, Agg. over 12 metrics), Eqs. 1-4, Table 3 and App. F.1 (Memorization/Privacy/Utility scores, MU, fluency)
+  judge_model: no LLM judge; LLMs (gpt-4-1106-preview, Llama 3.1 405B, gemini-2.0-flash-exp) used only for data generation (App. C.2 fn.3, App. E.1); fluency uses a gibberish classifier
+  repro_level: repo tree has src/eval.py with configs/experiment/eval/{tofu,muse,wmdp}/default.yaml, scripts/tofu_unlearn.sh and scripts/muse_unlearn.sh (unlearn+eval); data on HF locuslab/TOFU (public, MIT, forget10.json etc.) and open-unlearning/eval via setup_data.py (checked 2026-10-10)
+  notes: arXiv v1/v2 PDFs; repo README; branch list (main, neurips_2025, gh-pages, tofu_deprecated) and tree diff; setup_data.py (WMDP zip from cais-wmdp S3 with password)

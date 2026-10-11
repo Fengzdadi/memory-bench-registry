@@ -1,0 +1,14 @@
+{
+ "name": "BELA",
+ "slug": "bela",
+ "leads": {
+  "registry_key": "arxiv:2511.22130",
+  "tier": "P0",
+  "arxiv": "2511.22130 (arXiv API: v1 ?; title: None)",
+  "phase1_verified_types": {
+   "procedural_workflow": "Intro: agents should \"refine their strategy from inferring the shared uncertainty structure in observed tasks\"; Sec 4.1 tracks regret across episodes and reports \"no models exhibit episode-over-episode improvements\""
+  },
+  "paper_hint": "https://arxiv.org/abs/2511.22130",
+  "code_hint": "https://github.com/namkoong-lab/interactive-benchmark"
+ }
+}

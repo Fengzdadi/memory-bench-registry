@@ -1,0 +1,50 @@
+{
+ "name": "MemoryBench",
+ "slug": "memorybench",
+ "leads": {
+  "registry_key": "arxiv:2510.17281",
+  "tier": "P0",
+  "arxiv": "2510.17281 (arXiv API: v1 2025-10-20; title: MemoryBench: A Benchmark for Memory and Continual Learning in LLM Systems)",
+  "community_list_entries": [
+   {
+    "source": "teleai",
+    "section": "📏 Benchmarks / 🎮 Dynamic Benchmarks & Simulation Environments / 🗓️ 2025",
+    "name": "MemoryBench: A Benchmark for Memory and Continual Learning in LLM Systems",
+    "paper_url": "https://arxiv.org/abs/2510.17281",
+    "code_url": "https://github.com/LittleDinoC/MemoryBench",
+    "data_url": "https://huggingface.co/datasets/THUIR/MemoryBench"
+   },
+   {
+    "source": "iaar",
+    "section": "Resources / Benchmarks and Tasks / Memory Mechanism Evaluation",
+    "name": "MemoryBench",
+    "paper_url": "https://arxiv.org/pdf/2510.17281",
+    "code_url": null,
+    "data_url": null
+   },
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "MemoryBench: A Benchmark for Memory and Continual Learning in LLM Systems",
+    "paper_url": "https://arxiv.org/abs/2510.17281",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "procedural_workflow",
+    "conversational_longterm"
+   ],
+   "extra_tags": [
+    "continual_learning_from_feedback"
+   ],
+   "kind_reason": "Benchmark plus user-feedback simulation framework over 11 datasets (incl. LoCoMo, DialSim, legal, academic, writing) testing whether LLM systems learn from accumulated service-time feedback (4:1 train/test split). Parametric only partial: an SFT (LoRA) baseline appears in Appendix A.3.9 for action f"
+  },
+  "phase1_verified_types": {
+   "procedural_workflow": "Sec.2.1: \"procedural memory focuses on non-factual knowledge related to the execution of tasks\"; Sec.3.2: train/test split \"with ratio 4:1\"; A.3.3: \"training dialogues are first loaded into the memory\"."
+  },
+  "paper_hint": "https://arxiv.org/abs/2510.17281",
+  "code_hint": "https://github.com/THUIR/MemoryBench"
+ }
+}

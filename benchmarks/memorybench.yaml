@@ -1,0 +1,47 @@
+name: MemoryBench
+slug: memorybench
+release_date: 2025-10
+venue: ICML 2026
+memory_types:
+- procedural_workflow
+- conversational_longterm
+links:
+  paper: https://arxiv.org/abs/2510.17281
+  code: https://github.com/THUIR/MemoryBench
+  data: https://huggingface.co/datasets/THUIR/MemoryBench
+scale:
+  conversations: null
+  questions: 4063
+  avg_context_length: 34 to 383,054 tokens (per-dataset avg. input, Qwen3-8B tokenizer)
+  notes: 'questions = task cases in released THUIR/MemoryBench (28 subsets from 11 source datasets; 3,244 train / 819 test, 4:1), counted 2026-10-10. Paper Table 8 domain samples sum to 3,891 (WritingBench-C.D. 250 vs 422 released). MemoryBench-Full: 17,975 rows (14,378/3,597); paper Table 3 lists 20,075 source cases ("20k" in Table 1).'
+metrics:
+- Min-max normalized average score
+- Z-score
+- F1 (LoCoMo)
+- Accuracy (DialSim; exact match + LLM verification)
+- Rouge-L (LexEval)
+- METEOR (WritingPrompts)
+- LLM-as-Judge scores (HelloBench, WritingBench, NF-Cats, LimitGen-Syn)
+- LLM-merged 1-10 score (JuDGE, IdeaBench, SciTechNews)
+- Memory Time / Predict Time (efficiency)
+judge_model: 'DeepSeek-V3 (WritingBench subsets: WritingBench-Critic-Model-Qwen-7B)'
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: Hugging Face data is public, ungated, MIT. The repo/HF config "JRE-L" corresponds to the paper's SciTechNews subset (same Rouge-L/BERTScore/CLI/FKGL/DCRS metrics). The LLM judge changed from gpt-4o-mini (arXiv v1) to DeepSeek-V3 (v7/PMLR). A repo branch "llm-as-judge" (2026-09-07) replaces native metrics with one llm_judge_score. The README says full paper-reproduction code lives in LittleDinoC/MemoryBench-code; the paper's default user simulator is Qwen3-32B, while the repo upgraded it to Mistral-Small-3.2-24B (2025-12-05).
+sources:
+  name: 'arXiv title and repo README: ''MemoryBench: A Benchmark for Memory and Continual Learning in LLM Systems'''
+  release_date: 'arXiv API: 2510.17281v1 published 2025-10-20 (latest v7 2026-06-03)'
+  venue: 'PMLR v306 page proceedings.mlr.press/v306/ai26e.html: Proceedings of the 43rd ICML, PMLR 306:1341-1383, 2026; repo README badge ''ICML 2026 Spotlight''; arXiv has no journal_ref'
+  memory_types: 'paper §1/§2.1: feedback logs from earlier training cases form procedural memory (''non-factual knowledge related to the execution of tasks''), evaluated on held-out test cases (§3.2, 4:1 split); A.1.1: LoCoMo and DialSim subsets require answering from long multi-session dialogue corpora'
+  links.paper: arXiv abs 2510.17281
+  links.code: 'arXiv abstract ''Code: https://github.com/THUIR/MemoryBench'' and paper footnote 1; LittleDinoC/MemoryBench redirects to THUIR/MemoryBench (gh api)'
+  links.data: 'arXiv abstract ''Data: https://huggingface.co/datasets/THUIR/MemoryBench'' (also Data-Full: THUIR/MemoryBench-Full); HF API: not gated, not private, MIT'
+  scale.questions: 'HF datasets-server /size for THUIR/MemoryBench: 4,063 rows over 28 configs (train 3,244, test 819), checked 2026-10-10; paper Table 8 (v7) domain samples 1,478/1,201/1,212'
+  scale.conversations: 'null: the benchmark unit is task cases; LoCoMo (10 dialogues) and DialSim (3 TV-show scripts) serve only as corpora, and the paper reports no conversation count for the benchmark'
+  scale.avg_context_length: 'paper Table 3 (arXiv v7 HTML), Avg. Text Length Input column, tokens counted with the Qwen3-8B tokenizer (A.1): WritingPrompts 34 to DialSim-theoffice 383,054'
+  scale.notes: paper Tables 1, 3, 8 (v7); HF datasets-server row counts for THUIR/MemoryBench and THUIR/MemoryBench-Full (17,975 rows; train 14,378, test 3,597)
+  metrics: paper §2.2, §3.2 'Evaluation Metrics', Table 3 Test Metrics column, A.1.1-A.1.2 (metric integration prompts), Fig. 4/Table 19 (time consumption)
+  judge_model: 'arXiv v7 HTML A.1 and PMLR PDF: ''WritingBench-Critic-Model-Qwen-7B for WritingBench, and DeepSeek-V3 for the other datasets''; arXiv v1 HTML says gpt-4o-mini for the other datasets'
+  repro_level: repo tree (checked 2026-10-10) has memorybench.py (evaluate/summary_results), src/evaluate.py, src/off-policy.py, src/on-policy.py, src/stepwise_off-policy.py, src/train_performance.py, run_scripts/off-policy.py; src/dataset/utils.py loads THUIR/MemoryBench via datasets.load_dataset; HF data files present and ungated
+  notes: repo README News section and configs/datasets/each.json (JRE-L metrics); arXiv v1 vs v7 HTML A.1; paper §3.2 (Qwen-32B simulator)

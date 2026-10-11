@@ -1,0 +1,49 @@
+name: AMB (Agent Memory Benchmark)
+slug: amb
+release_date: 2026-03
+venue: null
+memory_types:
+- conversational_longterm
+- personalization
+- episodic
+- semantic_knowledge_update
+- coding_cross_session
+links:
+  paper: null
+  code: https://github.com/vectorize-io/agent-memory-benchmark
+  data: https://huggingface.co/datasets/vectorize-io/sde-bench
+scale:
+  conversations: null
+  questions: null
+  avg_context_length: null
+  notes: 'AMB reports no overall total; it bundles 7 datasets. Queries per split (repo data/*/stats.json.gz, counted 2026-10-10): LoCoMo locomo10 1,540 (10 conversations); LongMemEval s 500; BEAM 100k/500k/1m/10m 400/700/700/200; PersonaMem 32k/128k/1M 589/2,727/2,674; LifeBench en 2,003 (10 users); PrecisionMemBench 77 cases; sde-bench boltons 61 tasks.'
+metrics:
+- 'Accuracy: binary LLM-judge correctness against gold answers (LoCoMo, LongMemEval, LifeBench)'
+- BEAM rubric-nugget score (0/0.5/1 per nugget, averaged; a query counts as correct at >= 0.5)
+- Multiple-choice accuracy (PersonaMem)
+- Pass rate on must/must-not memory-ID assertions, plus mean precision, mean recall and active passes (PrecisionMemBench, no LLM)
+- Solve rate (repro, existing and hidden tests all pass under pytest) and corrections (test-feedback retries, cap 5), plus cost in USD and wall time (sde-bench)
+- Ingestion time
+- Average retrieval time (ms)
+- Average context tokens
+judge_model: Gemini 2.5 Flash-Lite (gemini-2.5-flash-lite)
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: There is no paper. AMB is documented only by its repo README and Vectorize's blog manifesto (2026-03-23). Vectorize also develops Hindsight, which leads the AMB leaderboard. Six of the seven datasets repackage third-party benchmarks (LoCoMo without adversarial QA, LongMemEval-S, BEAM, LifeBench, PersonaMem, PrecisionMemBench); only sde-bench is original. The v1 blog also listed MemBench and MemSim, which were absent from the repo on 2026-10-10. Current code defaults BEAM's judge to gemini-3.5-flash. The repo has no LICENSE file; sde-bench is MIT.
+sources:
+  name: 'Repo README title ''AMB — Agent Memory Benchmark''; Vectorize blog ''Agent Memory Benchmark: A Manifesto'' (hindsight.vectorize.io/blog/2026/03/23/agent-memory-benchmark) uses ''Agent Memory Benchmark (AMB)'''
+  release_date: 'No paper. Taken from the first public release: the blog manifesto is dated ''March 23, 2026'' (by Nicolò Boschi), and the repo''s ''initial commit'' is dated 2026-03-23T10:14:01Z (gh api commits, 47 commits in total)'
+  venue: 'null: no paper exists. The arXiv API title search for ''Agent Memory Benchmark'' (2026-10-10) returned only the unrelated ATANT v1.1 paper. The repo README and blog name no venue; the blog links only the separate Hindsight paper (arXiv 2512.12818)'
+  memory_types: 'Repo src/memory_bench/dataset/*.py and data/*/categories.json.gz. conversational_longterm: LoCoMo, LongMemEval-S and BEAM multi-session chats. personalization: PersonaMem preference tracking, BEAM preference_following, LifeBench nondeclarative (habits/preferences). semantic_knowledge_update: LongMemEval knowledge-update, BEAM knowledge_update/contradiction_resolution, LifeBench temporal-updating, sde-bench conversation-amended (''only the amended rule is correct''). episodic: BEAM event_ordering/temporal_reasoning, LoCoMo temporal, and LifeBench''s year-long daily-life log. coding_cross_session: sde-bench, where the decision was ''made in a past developer chat and never written into the repo'' or sits in git history (sde-bench README; sdebench.py)'
+  links.paper: 'null: no AMB paper found on arXiv or the web; only the blog manifesto and the repo README describe it'
+  links.code: 'gh api repos/vectorize-io/agent-memory-benchmark: Vectorize org, description ''Agent Memory Benchmark''. The blog manifesto links it as the evaluation harness, and the README points to the live leaderboard agentmemorybenchmark.ai'
+  links.data: 'HF API api/datasets/vectorize-io/sde-bench: exists, gated=false, MIT, files tasks.jsonl + decoys.jsonl. It is linked from the sde-bench README, the canonical dataset repo github.com/vectorize-io/sde-bench, which AMB mounts as the submodule sdebench/datasets. The other six datasets ship in the AMB repo under data/ (upstream links in data/*/info.json.gz)'
+  scale.conversations: 'null: AMB reports no overall count; per-dataset counts are in scale.notes'
+  scale.questions: 'null: AMB reports no overall count. Per-split query counts come from repo data/<dataset>/<split>/stats.json.gz (checked 2026-10-10) and sde-bench MANIFEST.json n_tasks=61'
+  scale.avg_context_length: 'null: no single figure reported. Context size varies by split, e.g. the BEAM catalog description gives ''100K–10M tokens'', and stats.json.gz avg_tokens_per_doc ranges from 42 (PrecisionMemBench) to ~11M (BEAM 10m)'
+  scale.notes: Repo data/*/stats.json.gz and categories.json.gz (downloaded 2026-10-10); locomo.py _SKIP_CATEGORIES = {5} (adversarial excluded); sde-bench MANIFEST.json
+  metrics: Repo README ('accuracy... tracks speed and token cost'; PrecisionMemBench 'fraction of cases whose returned belief-ID set satisfies every assertion'); runner.py (accuracy, ingestion_time_ms, avg_retrieve_time_ms, avg_context_tokens; MCQ scoring; score >= 0.5); beam.py score_result (rubric nuggets 0/0.5/1); precisionmembench.py summary_metrics (mean_precision, mean_recall, active_passes); sde-bench README ('solved iff all three layers are green', primary metric 'corrections', cap 5); sdebench output meta (solved, interventions, cost_usd, wall_s). The blog manifesto lists Accuracy, Speed, Cost and Usability
+  judge_model: Repo src/memory_bench/judge.py (GeminiJudge) + llm/__init__.py (OMB_JUDGE_LLM default 'gemini') + llm/gemini.py (default model 'gemini-2.5-flash-lite'). Published outputs (locomo, longmemeval, personamem, lifebench, beam *.json.gz) all record judge_llm 'gemini:gemini-2.5-flash-lite' and answer_llm 'gemini:gemini-3.1-pro-preview'. The current beam.py default_judge_llm is gemini-3.5-flash. sde-bench and PrecisionMemBench use no judge
+  repro_level: Repo tree checked 2026-10-10. Entry point is `uv run amb run --dataset <d> --split/--domain <s> --memory <provider> [--mode rag|retrieval|coding]` (pyproject amb = memory_bench.cli:app; src/memory_bench/cli.py run -> runner.py, judge.py, modes/rag.py, modes/retrieval.py, modes/coding.py; sdebench/harness/run.py). Data is present as data/<dataset>/<split>/{documents,queries}.json.gz for all 7 datasets, and loaders also auto-download from upstream. sde-bench comes from a public submodule and an ungated HF dataset. Runs need GEMINI_API_KEY; sde-bench needs Docker and a boltons clone
+  notes: Blog manifesto 'Datasets in AMB v1' table (LoComo, LongMemEval, LifeBench, MemBench, MemSim, PersonaMem) vs the repo catalog.json (beam, lifebench, locomo, longmemeval, personamem, precisionmembench, sdebench); gh api license null for the AMB repo; sde-bench LICENSE MIT; beam.py default_judge_llm

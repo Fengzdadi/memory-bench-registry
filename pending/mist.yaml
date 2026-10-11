@@ -1,0 +1,42 @@
+name: MIST
+slug: mist
+release_date: 2026-06
+venue: arXiv preprint
+memory_types:
+- conversational_longterm
+- personalization
+links:
+  paper: https://arxiv.org/abs/2606.10949
+  code: null
+  data: null
+scale:
+  conversations: 598
+  questions: 598
+  avg_context_length: 8 turns per conversation (~41 words/turn MIST-Science, ~37 words/turn MIST-Moral)
+  notes: 598 = MIST-Science (198 GPQA Diamond + 200 MMLU Medical) + MIST-Moral (200 Moral Stories), the sum of paper Table 1. Each sample has one synthetic chat history (up to 4 turns per speaker) and one multiple-choice question. Five chat regimes each produce their own histories; incorrect-helpful is the main one. 19 MMLU Medical items are excluded from the sycophancy denominator.
+metrics:
+- Strict sycophancy rate (share of zero-shot-correct answers that switch to the biased option)
+- Accuracy
+- Correct-answer abandonment rate
+- Correction rate (sycophancy metric reversed, Correct-Supportive regime)
+judge_model: null
+repro_level: paper_only
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'The name expands to "Memory Influence on Sycophancy Tests". Data and code are not public: the paper (v2 App. C) says the datasets and codebase will be released on publication, and none were found as of 2026-10-10. Mem0, MemOS and Zep were run through their hosted enterprise APIs in March 2026, so the numbers may not reproduce. v2 (2026-08-24) replaces v1''s turn and word statistics with a Prolific realism study and adds MMLU-leakage handling. This benchmark is separate from MemSyco-Bench and PersistBench.'
+sources:
+  name: 'arXiv v2 HTML Section 1: ''Memory Influence on Sycophancy Tests (MIST)'''
+  release_date: 'arXiv API: 2606.10949v1 published 2026-06-09 (v2 updated 2026-08-24)'
+  venue: arXiv API comment 'Under submission; preprint'; no journal_ref; no venue in paper
+  memory_types: 'Paper Sections 2-3 (arXiv v2): synthetic chat histories with user misconceptions are ingested into memory systems (Mem0, MemOS, Zep). The evaluation then tests in a later session whether stored user-specific beliefs sway answers. This is a multi-session setting with personalization to user beliefs.'
+  links.paper: arXiv abs page 2606.10949
+  links.code: 'null: paper (v2 App. C) promises the codebase on publication. Nothing found on 2026-10-10 in GitHub search, the writer GitHub org, or author account axelmagn.'
+  links.data: 'null: no dataset release found on 2026-10-10 on Hugging Face (Writer org, searches for MIST and sycophancy); paper links only third-party LoCoMo-MC10'
+  scale.conversations: 'Paper Table 1 (arXiv v2 Section 3.1): 198 + 200 + 200 samples, with one simulated conversation per sample'
+  scale.questions: 'Paper Table 1 (arXiv v2 Section 3.1): 198 GPQA Diamond + 200 MMLU Medical + 200 Moral Stories'
+  scale.avg_context_length: 'arXiv v1 Table 2: avg 8.00 turns, 40.77 (Science) / 36.67 (Moral) words per turn; v2 Section 3.1: ''up to 4 turns per speaker'''
+  scale.notes: Paper Table 1; Section 4.1 (chat regimes); Appendix C (MMLU Medical leakage, 19/200 items)
+  metrics: Paper Section 3.2, Eqs. 1-2 (sycophancy, abandonment, accuracy); Section 4.1 (correction rate); Tables 3, 4 and 6
+  judge_model: 'null: answers are multiple-choice and parsed from <answer> XML tags (v2 App. G). The paper says it avoids an LLM judge.'
+  repro_level: 'paper_only: no official repo or dataset is public (checked 2026-10-10). The paper says the release comes on publication.'
+  notes: arXiv v2 Appendix C (Reproducibility, leakage); arXiv API v1/v2 dates; web search shows MemSyco-Bench is arXiv 2607.01071 by other authors (XMUDeepLIT)

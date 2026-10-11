@@ -1,0 +1,28 @@
+{
+ "name": "MemCalib",
+ "slug": "memcalib",
+ "leads": {
+  "registry_key": "arxiv:2609.24259",
+  "tier": "P2",
+  "arxiv": "2609.24259 (arXiv API: v1 2026-09-21; title: MemCalib: Benchmarking and Optimizing Memory Use in LLM Agents)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "MemCalib: Benchmarking and Optimizing Memory Use in LLM Agents",
+    "paper_url": "https://arxiv.org/pdf/2609.24259",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "personalization"
+   ],
+   "extra_tags": [
+    "memory_use_calibration"
+   ],
+   "kind_reason": "Introduces MemCalib benchmark (plus MemCalib-RL method): queries paired with user-specific memory blocks (facts, preferences, constraints, past events) whose atoms carry target influence levels (Ignore/Bound/Control) across health, general assistance and coding domains; LLM judge scores over/under-u"
+  }
+ }
+}

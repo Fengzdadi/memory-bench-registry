@@ -1,0 +1,43 @@
+name: GDPevo
+slug: gdpevo
+release_date: 2026-08
+venue: arXiv preprint
+memory_types:
+- procedural_workflow
+links:
+  paper: https://arxiv.org/abs/2608.03764
+  code: https://github.com/Prism-Shadow/GDPevo
+  data: null
+scale:
+  conversations: null
+  questions: 240
+  avg_context_length: null
+  notes: 'questions = 240 business tasks in 24 task groups (V1: 120 tasks/12 groups in CRM, ERP and finance; V2 adds 120 tasks/12 groups in healthcare, legal and data work). Each group has 5 training tasks for evolution and 5 held-out test tasks; accuracy is scored on the 120 test tasks, 3 runs each. There are no conversations. The repo has 120 train and 120 test task directories (counted on 2026-10-10).'
+metrics:
+- Accuracy (macro-averaged rubric score on held-out test tasks, mean of 3 runs)
+- Standard deviation across task groups
+- Lift (pp) over base
+- Cost (USD per task)
+- Rounds (agent turns)
+- Tokens
+- Tool calls per test
+- Skill-generation (evolve) cost
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'The benchmark evaluates agent self-evolution. Agents distil a SKILL.md from 5 training tasks and reuse it on 5 held-out test tasks under four supervision modes: base, fewshot, self and reflect-3. The paper evaluates Codex/GPT-5.5 and Claude Code with Opus-4.8, GLM-5.2 and DeepSeek-V4-Pro-Preview. A full run is agent-orchestrated: Codex drives Dockerised environments by following README prompts, so there is no single CLI command. The data is in the GitHub repo (Apache-2.0); task_group_022 uses a Git LFS SQLite file. Paper results use V2 (240 tasks).'
+sources:
+  name: 'arXiv API title ''GDPevo: Evaluating Agent Self-Evolution on Real Business Tasks''; repo README title'
+  release_date: 'arXiv API: 2608.03764v1 published 2026-08-04 (only version listed)'
+  venue: arXiv API entry has no journal_ref/comment; paper title block and full HTML text name no venue; repo README cites it as @misc arXiv eprint 2608.03764
+  memory_types: 'procedural_workflow: §4.1 ''Evolution method'' says the evolution state is ''a portable SKILL.md artifact'' distilled from 5 training tasks per group and loaded for 5 held-out test tasks. Per the abstract, rule hybridization recombines training-task rules in test tasks ''so that test-time gains are attributable''. No dialogue, personalization or multimodal recall is tested.'
+  links.paper: https://arxiv.org/abs/2608.03764 (arXiv API entry and repo README badge)
+  links.code: 'The paper abstract says ''We publicly release the pipeline, benchmark, and full evaluation results at https://github.com/Prism-Shadow/GDPevo''. gh api repos/Prism-Shadow/GDPevo was opened 2026-10-10: public, Apache-2.0.'
+  links.data: 'null: the data is hosted in the GitHub repo under data/task_groups/. A Hugging Face API search for ''GDPevo'' and author Prism-Shadow returned [] on 2026-10-10.'
+  scale.conversations: 'null: the benchmark is task-based, with 24 task groups of 5 train + 5 test tasks (§4.1 ''Dataset''). It has no conversations.'
+  scale.questions: 'Paper §4.1 ''Dataset'': ''All experiments use the full GDPevo benchmark of 240 tasks in 24 task groups''; Table 2 caption ''240 tasks across 24 stateful task groups''; abstract (V1 120 tasks/12 groups, V2 240/24); repo data/README.md and DATA_BOARD.md (240 tasks, 24 groups); repo tree has 120 train_tasks/NNN and 120 test_tasks/NNN directories.'
+  scale.avg_context_length: 'null: the paper reports no average context length. Table 3 gives only per-attempt rounds and tokens, e.g. GPT-5.5 base 14.96 rounds.'
+  metrics: 'Paper §4.1 ''Metrics'': the deterministic rubric score, mean over three runs, ''Each run records token consumption, agent turns, and monetary cost''. Table 3 columns: ACC ± STD | Lift (pp) | USD/task | Rounds | Tokens (k). Table 4 reports skill-generation cost and Appendix F.1 tool calls per test. The repo README leaderboard reports acc, std, rounds, tool calls, cost change and lift.'
+  judge_model: 'null: §4.1 ''Metrics'' says ''every task is scored by a deterministic, rule-based grader rather than an LLM judge''. An unnamed LLM only translates rubric points into code-based test cases, and reflect feedback comes from the rule-based grader. A Codex/GPT-5.5 evaluation agent orchestrates runs but ''does not assign semantic scores itself''.'
+  repro_level: 'official_script: checked 2026-10-10. The repo tree has 240 per-task deterministic graders data/task_groups/task_group_NNN/{train,test}_tasks/NNN/eval/eval.sh (which calls evaluate.py/evaluator.py/eval.py) with reference answers output/answer.json. The evaluation entry-point workspaces evaluation/eval_workspace/{codex,claude_code,claude_code_glm_5_2,claude_code_deepseek_v4_pro}/README.md + guides/ are agent-driven: Codex orchestrates Docker runs from env/Dockerfile and setup.sh. The data is in the repo under data/task_groups/ (24 groups).'

@@ -1,0 +1,29 @@
+{
+ "name": "MemEye",
+ "slug": "memeye",
+ "leads": {
+  "registry_key": "arxiv:2605.15128",
+  "tier": "P2",
+  "arxiv": "2605.15128 (arXiv API: v1 2026-05-14; title: MemEye: A Visual-Centric Evaluation Framework for Multimodal Agent Memory)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Survey",
+    "name": "MemEye: A Visual-Centric Evaluation Framework for Multimodal Agent Memory",
+    "paper_url": "https://arxiv.org/abs/2605.15128",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "conversational_longterm",
+    "semantic_knowledge_update"
+   ],
+   "extra_tags": [
+    "multimodal"
+   ],
+   "kind_reason": "Main contribution is a new visual-centric benchmark (8 life-scenario tasks) for long-term multimodal agent memory. The paper describes images spread across multi-session conversations, plus state-revision questions. It evaluates 13 memory methods across 4 VLM backbones."
+  }
+ }
+}

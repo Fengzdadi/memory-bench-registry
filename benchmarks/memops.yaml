@@ -1,0 +1,46 @@
+name: MemOps
+slug: memops
+release_date: 2026-07
+venue: arXiv preprint
+memory_types:
+- conversational_longterm
+- semantic_knowledge_update
+- parametric
+- memory_security
+links:
+  paper: https://arxiv.org/abs/2607.12893
+  code: https://github.com/MemTensor/MemOps
+  data: null
+scale:
+  conversations: 403
+  questions: 2006
+  avg_context_length: 60,821 tokens (avg., long-context setting; adjacent setting 2,557 tokens)
+  notes: 403 evidence conversations (3 segments each; 9,672 turns) over 100 topics; 2,006 unique QA pairs, each asked in an adjacent and a long-context (UltraChat-injected) setting = 4,012 evaluation instances. Five operation types, six probe types. Long-context max is 68,309 tokens.
+metrics:
+- Accuracy
+- Operation F1
+- Provenance support
+- Leakage Rate
+- Stale Value Rate
+- Reflect Precision
+judge_model: GPT-4o
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'Data ships inside the GitHub repo (MIT); no separate dataset page. The long-context files total about 178 MB. Counts were taken on 2026-10-10 and match the paper: 403 files, 2,006 QA pairs, 4,012 instances. The repo''s eval script covers long-context, no-context and BM25 RAG variants (vanilla/delete/rewrite). The paper''s Mem0, MemOS and Temp-LoRA baselines are not included. The run and judge steps need an OpenAI-compatible API. The default answer models in the shell launchers differ from those in the paper.'
+sources:
+  name: 'arXiv title ''MemOps: Benchmarking Lifecycle Memory Operations in Long-Horizon Conversations''; repo README title'
+  release_date: 'arXiv API: 2607.12893v1 published 2026-07-14'
+  venue: arXiv API entry has no journal_ref/comment; paper header lists only arXiv 2607.12893v1 [cs.AI]; README BibTeX is @misc arXiv eprint
+  memory_types: 'Paper abstract and Sec. 3: lifecycle memory operations (remember/forget/update/reflect/trajectory) in long multi-session conversations (conversational_longterm, semantic_knowledge_update). Sec. 4.1/Table 3 compare the parametric Temp-LoRA baseline with long-context, RAG and Mem0/MemOS under one protocol (parametric). Forget probes are user-requested deletions scored with Leakage Rate, e.g. repo A02_forget.json, ''remove him from ... anything you have stored about him'' (memory_security).'
+  links.paper: arXiv abs page 2607.12893
+  links.code: Paper header 'Github' link https://github.com/MemTensor/MemOps; README cites arXiv 2607.12893
+  links.data: Paper and README give no separate dataset host; data is in the repo under generated_result/
+  scale.conversations: Paper Table 2 (Sec. 3.4), 'Evidence conversations' = 403. Confirmed as 403 JSON files in repo generated_result/2-evidence_conversation on 2026-10-10.
+  scale.questions: 'Paper Table 2, ''Unique QA pairs'' = 2,006 and ''Evaluation instances (adj. + long)'' = 4,012. Confirmed by counting answer items in the repo: 2,006 adjacent_operation + 2,006 longitudinal_operation.'
+  scale.avg_context_length: 'Paper Table 2 / Sec. 4.1: avg approx. tokens 60,821 (long-context), max 68,309; adjacent 2,557'
+  scale.notes: Paper Table 2 (topics, segments, turns, operation/probe types)
+  metrics: 'Paper Sec. 4.1: accuracy is the primary metric; Operation F1, Provenance support, Leakage Rate, Stale Value Rate and Reflect Precision are the diagnostics (Table 3)'
+  judge_model: 'Paper Sec. 4.1: ''an LLM judge based on GPT-4o compares each model response against the gold operation trace''. The repo''s 5.5-evaluate_operation_metrics.sh also defaults EVAL_JUDGE_MODEL to gpt-4o.'
+  repro_level: Repo tree checked 2026-10-10. Eval entry points are 5-test_operation_metrics.py/.sh and 5.5-evaluate_operation_metrics.py/.sh. Data sits in generated_result/2-evidence_conversation (adjacent) and generated_result/4-inject_evidence_with_distractors (long-context), 403 files each.
+  notes: Repo GitHub API (MIT license) and tree file sizes; grep of 5-test_operation_metrics.py shows only rag_vanilla/rag_delete/rag_rewrite with BM25 plus long-context/no-context models; checked 2026-10-10

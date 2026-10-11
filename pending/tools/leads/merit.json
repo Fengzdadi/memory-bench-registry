@@ -1,0 +1,31 @@
+{
+ "name": "MERIT",
+ "slug": "merit",
+ "leads": {
+  "registry_key": "arxiv:2609.05441",
+  "tier": "P2",
+  "arxiv": "2609.05441 (arXiv API: v1 2026-07-26; title: When Does Memory Help? A Cost-Aware Evaluation of Long-Term Memory in Tool-Using LLM Agents)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "When Does Memory Help? A Cost-Aware Evaluation of Long-Term Memory in Tool-Using LLM Agents",
+    "paper_url": "https://arxiv.org/pdf/2609.05441",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "episodic",
+    "semantic_knowledge_update",
+    "personalization"
+   ],
+   "extra_tags": [
+    "tool_use_agent_memory",
+    "memory_cost_accounting"
+   ],
+   "kind_reason": "Abstract: 'We present MERIT ... a benchmark and harness that measures the marginal utility of memory for task-executing agents'; releases benchmark, harness and traces. Paper's domains require remembering facts/values (refund amounts, config fixes, room/time preferences) from earlier episodes, incl."
+  }
+ }
+}

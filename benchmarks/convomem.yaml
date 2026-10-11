@@ -1,0 +1,42 @@
+name: ConvoMem
+slug: convomem
+release_date: 2025-11
+venue: arXiv preprint
+memory_types:
+- conversational_longterm
+- personalization
+- semantic_knowledge_update
+links:
+  paper: https://arxiv.org/abs/2511.10523
+  code: https://github.com/SalesforceAIResearch/ConvoMem
+  data: https://huggingface.co/datasets/Salesforce/ConvoMem
+scale:
+  conversations: null
+  questions: 75336
+  avg_context_length: 1k-3M tokens (configurable 2-300 conversations)
+  notes: '75,336 = QA pairs over six categories (User Facts 16,733; Assistant Facts 12,745; Changing Facts 18,323; Abstention 14,910; Preferences 5,079; Implicit Connections 7,546). No single conversation count: each test case mixes 80-120-message evidence conversations with filler up to 2-300 conversations; HF card lists 100 personas, 40,000 filler conversations, plus converted LongMemEval/LoCoMo subsets.'
+metrics:
+- Accuracy (LLM-judged)
+- Cost per response (USD)
+- Latency (seconds)
+judge_model: Gemini 2.5 Flash
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: Dataset on Hugging Face is CC BY-NC 4.0 (non-commercial), not gated; code is Apache-2.0. The Scala/Gradle framework calls Gemini/OpenAI APIs, and the ConvoMem evidence files are not in the GitHub repo (download from HF). Paper mentions a judge model without naming it; repo default judgeModel is gemini-2.5-flash. Paper text says ~40% single-message evidence, but Table 2 gives 36,860/75,336 (~49%). README quick-start command does not match build.gradle mainClassName.
+sources:
+  name: 'arXiv title ''Convomem Benchmark: Why Your First 150 Conversations Don''t Need RAG''; repo README title ''ConvoMem Benchmark'''
+  release_date: 'arXiv API: 2511.10523v1 published 2025-11-13 (only version)'
+  venue: arXiv API entry has no journal_ref/comment; paper header says 'A Preprint'; web search found no venue acceptance (checked 2026-10-10)
+  memory_types: 'paper Sec. 2.3.2 Table 2 / README categories: multi-conversation recall of user & assistant facts (conversational_longterm), Preferences category (personalization), Changing Facts category tracking latest value (semantic_knowledge_update)'
+  links.paper: arXiv abs page 2511.10523
+  links.code: paper Sec. 5 'Data and Code Availability' links github.com/SalesforceAIResearch/ConvoMem
+  links.data: paper Sec. 5 links huggingface.co/datasets/Salesforce/ConvoMem; HF API shows public, gated=false, 2,503 files
+  scale.questions: paper Abstract + Sec. 2.3.2 Table 2 (total 75,336); README and HF card agree
+  scale.conversations: 'null: paper reports no fixed conversation count (Table 1 fn. 8 ''Configurable from 2-300 conversations''); HF card lists 40,000 filler conversations and 100 personas'
+  scale.avg_context_length: paper Table 1 (arXiv v1 HTML), ConvoMem row context '1k-3M' tokens, fn. 8 configurable 2-300 conversations; App. A 'full 80-120 message conversations'
+  scale.notes: paper Table 2; App. A (80-120 messages); HF dataset card (100 personas, 40,000 filler conversations, legacy_benchmarks/longmemeval + locomo)
+  metrics: paper Sec. 3.4.1 'measuring accuracy, cost, and latency'; Sec. 3.4.2-3.4.5 report accuracy %, $ per response, latency in seconds
+  judge_model: 'paper App. A.2.4 uses an unnamed ''judge model''; repo src/main/scala/com/salesforce/crmmembench/evaluation/Evaluator.scala ''def judgeModel: LLMModel = Gemini.flash'' (not overridden in runners), Gemini.scala maps flash to ''gemini-2.5-flash''; EvaluationUtils.scala judges every answer RIGHT/WRONG'
+  repro_level: repo tree has evaluation runners src/main/scala/com/salesforce/crmmembench/evaluation/runners/Evaluate*Evidence.scala + Evaluator.scala/MultithreadedEvaluator.scala and Gradle JavaExec eval tasks; data downloadable from public HF dataset (checked 2026-10-10)
+  notes: HF API tags license:cc-by-nc-4.0, gated=false; GitHub API license Apache-2.0; repo .gitignore/tree shows no ConvoMem evidence files; build.gradle mainClassName = GenerateAllTestCases; paper Sec. 2.2 '~40%' vs Table 2

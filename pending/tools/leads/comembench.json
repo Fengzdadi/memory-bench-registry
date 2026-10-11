@@ -1,0 +1,28 @@
+{
+ "name": "CoMemBench",
+ "slug": "comembench",
+ "leads": {
+  "registry_key": "arxiv:2609.32192",
+  "tier": "P2",
+  "arxiv": "2609.32192 (arXiv API: v1 2026-09-26; title: CoMemBench: Benchmarking Collaborative Memory Boundaries across Multi-Agent Workflow Topologies)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "CoMemBench: Benchmarking Collaborative Memory Boundaries across Multi-Agent Workflow Topologies",
+    "paper_url": "https://arxiv.org/pdf/2609.32192",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "multi_agent_group"
+   ],
+   "extra_tags": [
+    "memory_sharing_isolation"
+   ],
+   "kind_reason": "Introduces an execution-grounded benchmark of 800 multi-agent workflows measuring memory sharing vs isolation across workers/topologies. One of four domains is repository code change (SWE-bench Verified), but per paper each memory store is empty at workflow start (workflow-local), so no cross-sessio"
+  }
+ }
+}

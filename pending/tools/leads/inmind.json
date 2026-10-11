@@ -1,0 +1,29 @@
+{
+ "name": "InMind",
+ "slug": "inmind",
+ "leads": {
+  "registry_key": "arxiv:2607.24368",
+  "tier": "P2",
+  "arxiv": "2607.24368 (arXiv API: v1 2026-07-27; title: Keep It InMind: Benchmarking the Implicit-Association Blind Spot in Agent Memory)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "Keep It InMind: Benchmarking the Implicit-Association Blind Spot in Agent Memory",
+    "paper_url": "https://arxiv.org/pdf/2607.24368",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "personalization",
+    "conversational_longterm"
+   ],
+   "extra_tags": [
+    "implicit_association_retrieval"
+   ],
+   "kind_reason": "A benchmark of 125 expert-verified tasks. Each puts a personal constraint (e.g. an allergy or a pending immigration case) into a 47-session LongMemEval-s trace, and a later indirect query needs that fact through a world-knowledge bridge. Paired controls separate storage, knowledge and retrieval fail"
+  }
+ }
+}

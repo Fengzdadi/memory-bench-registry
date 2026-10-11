@@ -1,0 +1,41 @@
+name: EgoStream
+slug: egostream
+release_date: 2026-05
+venue: NeurIPS 2026 (Evaluations and Datasets Track)
+memory_types:
+- episodic
+- multimodal
+links:
+  paper: https://arxiv.org/abs/2605.31557
+  code: null
+  data: null
+scale:
+  conversations: null
+  questions: 2250
+  avg_context_length: null
+  notes: 2,250 human-validated 4-way multiple-choice questions, drawn from Multi-Hop EgoQA (578), Ego4D EM (498), EgoLife (433), EgoTempo (425) and HD-EPIC (316). They expand into 8,528 recall-conditioned evaluations across 7 recall regimes, from instant (0 s) to ultra-long (>8 h). The paper gives no video count or average video length. The project page lists a maximum Answer Validity Window of 45.3 h.
+metrics:
+- Multiple-choice accuracy (4-way; chance 25%), broken down by 7 semantic memory categories and 7 temporal recall regimes, with macro-averages
+- Average processing time per frame (s)
+- Memory budget (tokens) / offloading storage (GB x min)
+judge_model: null
+repro_level: paper_only
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: No public data or code as of 2026-10-10. The project page says "DATA COMING SOON" and lists GitHub as "coming soon". The paper mentions an anonymous GitHub repo but gives no URL. saroo25/Egostream only holds the website source. Questions are built on five existing egocentric datasets (Ego4D, EgoLife, EgoTempo, Multi-Hop EgoQA, HD-EPIC), so the source-video licences apply. Gemini 3.1 and Gemini 2.5 Pro helped build the dataset (rewriting, distractors, labels); scoring uses no LLM. The paper's baselines are KV-cache memory policies on Qwen3-VL.
+sources:
+  name: 'arXiv 2605.31557 title/abstract (''EGOSTREAM'' in title, ''EgoStream'' in body text); NeurIPS 2026 accepted-papers JSON lists ''EgoStream: A Diagnostic Benchmark for Streaming Episodic Memory in Egocentric Vision'''
+  release_date: 'arXiv API: 2605.31557v1 published 2026-05-29T17:20:10Z (v2 2026-06-01)'
+  venue: 'neurips.cc/static/virtual/data/neurips-2026-orals-posters.json entry id 139373: decision ''Accept (poster)'', sourceurl NeurIPS.cc/2026/Evaluations_and_Datasets_Track, OpenReview forum UDecnw8V7B; also the authors'' lab page (coai-iplab.github.io/research/forte2026egostream) lists NeurIPS 2026. The arXiv entry has no journal_ref.'
+  memory_types: 'paper Sec. 3 and abstract: recall of egocentric video evidence over time, with 7 episodic memory categories and recall regimes from instant to ultra-long (episodic); the evaluated streaming MLLMs process the video frames directly at 1 FPS, per App. C.1 (multimodal). Not embodied: the system does not act in an environment.'
+  links.paper: arXiv abs page 2605.31557
+  links.code: null. The project page (saroo25.github.io/Egostream) shows 'GitHub (coming soon)' with no link. The GitHub repo saroo25/Egostream contains only the static site (index.html, styles.css, script.js, server.py, assets), and its README calls it a 'Static landing page'. The paper's 'anonymous GitHub repository' has no URL in the arXiv HTML.
+  links.data: null. The project page says 'DATA COMING SOON - The benchmark data is not publicly released yet'. A Hugging Face search for 'egostream' (checked 2026-10-10) found no dataset from the authors.
+  scale.questions: 'paper Sec. 3.1-3.2 (arXiv v2 HTML): 2,634 initial QA sets became 2,335 after human validation and 2,250 valid questions after filtering; per-source counts in Sec. 3.2; 8,528 recall-conditioned evaluations in Sec. 3.4'
+  scale.conversations: 'null: the paper does not report a number of videos or episodes'
+  scale.avg_context_length: 'null: the paper reports no average video length. The recall regimes in Table 3 run from 0 s to >8 h, and the project page gives a maximum AVW of 45.3 h.'
+  metrics: paper Sec. 3.4 (standard accuracy on the 4-way multiple-choice setup, chance 0.25, broken down by semantic category and recall regime, with average processing time per frame); Table 4 (macro-averages and Proc. time); Table 5 (memory budget in tokens); Sec. 5.1 (storage in GB x min for offloading)
+  judge_model: 'null: scoring is multiple-choice accuracy (Sec. 3.4). Gemini 3.1 and Gemini 2.5 Pro were used only to construct and label the dataset (Sec. 3.1, 3.3, App. A), not to judge answers.'
+  repro_level: 'Checked 2026-10-10: the paper is available. The project page says data and GitHub are ''coming soon''. Repo saroo25/Egostream holds website files only, with no eval scripts or data. No HF dataset was found.'
+  notes: project page saroo25.github.io/Egostream; paper Sec. 3.1 and App. A; repo tree saroo25/Egostream
+  scale.notes: paper Sec. 3.2 (per-source counts), Sec. 3.4 (8,528 evaluations), Table 3 (recall regimes); project page (max AVW 45.3h)

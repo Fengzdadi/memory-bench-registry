@@ -1,0 +1,14 @@
+{
+ "name": "Learn2Play Bench",
+ "slug": "learn2play-bench",
+ "leads": {
+  "registry_key": "arxiv:2610.08215",
+  "tier": "P0",
+  "arxiv": "2610.08215 (arXiv API: v1 ?; title: None)",
+  "phase1_verified_types": {
+   "procedural_workflow": "Sec 4.1 Metrics: \"Learning Gain (LG) and Learning Slope (LS) measure improvement across episodes\"; RQ4: re-shuffled games change \"the visible instance but preserves the underlying rule\"."
+  },
+  "paper_hint": "https://arxiv.org/abs/2610.08215",
+  "code_hint": "https://github.com/liushiliushi/Learn2Play-Bench"
+ }
+}

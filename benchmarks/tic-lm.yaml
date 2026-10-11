@@ -1,0 +1,42 @@
+name: TiC-LM
+slug: tic-lm
+release_date: 2025-04
+venue: ACL 2025
+memory_types:
+- parametric
+links:
+  paper: https://arxiv.org/abs/2504.02107
+  code: https://github.com/apple-aiml-research/ml-tic-lm
+  data: null
+scale:
+  conversations: null
+  questions: null
+  avg_context_length: null
+  notes: 'No dialogue or QA set. Training data is TiC-CC: 114 monthly Common Crawl dumps (May 2013 to Jul 2024), 2.9T tokens in the training shard, of which runs use 220B or 440B. Evals: TiC-CC held-out (capped at 8,192 sequences of 2,048 tokens per month), TiC-CC-Wiki/News, TiC-Wiki (61 months, 10k changed and 10k unchanged), TiC-StackE (at least 500 questions per period), TiC-CodeDocs (16 NumPy and 11 PyTorch releases).'
+metrics:
+- Perplexity (token-level ppl_token, answer-level ppl_answer, proper-noun ppl_noun)
+- Regret vs. Oracle-2024-07
+- In-distribution (ID)
+- Backward transfer
+- Forward transfer
+- DCLM Core average accuracy (static downstream evals)
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'This benchmark tests continual LLM pretraining: knowledge stored in the weights, measured as forgetting and adaptation across monthly data. The repo releases no eval data, only scripts that rebuild it from public sources (DCLM-Pool/Common Crawl, Wikipedia/Wikidata, StackExchange, NumPy/PyTorch docs). The models README says exact val/test sets are unreleased, so results will not match exactly. Oracle checkpoints are downloadable. Licences: code ASCL, data CC-BY-NC-ND, models Apple TOU. The paper links apple/ml-tic-lm, which now redirects to apple-aiml-research/ml-tic-lm.'
+sources:
+  name: 'arXiv API title ''TiC-LM: A Web-Scale Benchmark for Time-Continual LLM Pretraining''; repo README'
+  release_date: 'arXiv API: 2504.02107v1 published 2025-04-02 (latest v3 updated 2025-06-06)'
+  venue: 'ACL Anthology 2025.acl-long.1551: Proceedings of ACL 2025 (Volume 1: Long Papers), July 2025, pp. 32231-32273; repo description says ''ACL Oral 2025'''
+  memory_types: 'Paper Sec. 4.2 and 6: TiC-Wiki separates changed from unchanged factual knowledge, and backward transfer measures forgetting of older months in continually pretrained weights (knowledge held in parameters)'
+  links.paper: arXiv abs page 2504.02107
+  links.code: 'arXiv comment ''Code available at: https://github.com/apple/ml-tic-lm''; gh api shows it redirects to apple-aiml-research/ml-tic-lm (checked 2026-10-10)'
+  links.data: 'No Hugging Face or other dataset page; HF search for tic-lm/ticlm returned nothing; repo README: ''It does not redistribute any original data'''
+  scale.conversations: 'Not applicable: perplexity-based continual-pretraining benchmark with no conversations'
+  scale.questions: 'Not applicable: no fixed QA set is reported. Paper App. B.1 says TiC-Wiki QA exact-match was built but not reported'
+  scale.notes: 'arXiv v3 HTML: Intro/Sec. 3 (''2.9T possible training tokens spread among the 114 timesteps''), App. A (held-out cap 16.7M tokens = 8192 sequences), Sec. 4.2 (61 months x 10k changed/10k unchanged), App. B.2 (>=500 questions per time frame), Sec. 4.4/Table 4 (CodeDocs releases)'
+  metrics: arXiv v3 HTML Sec. 4 'Perplexity metrics' Eqs. 1-3 (ppl_token, ppl_answer, ppl_noun); Sec. 6 'Evaluation metrics' (regret, ID, backward, forward); Sec. 4.5/Table 3 (DCLM Core)
+  judge_model: Paper uses perplexity-based metrics and Core accuracy only; no LLM judge
+  repro_level: Repo tree has evaluation/continual_eval.py (entry point), continual_ppl_eval.py, continual_downstream_eval.py, run_continual_evals.sh, plus eval_configs for TiC-CC/Wiki/StackE/CodeDocs. Data is rebuilt with tic_cc_processing/, tic_wiki_processing/, tic_stackexchange_processing/, tic_codedocs_processing/. The official CC path list at ml-site.cdn-apple.com returned HTTP 200 (checked 2026-10-10)
+  notes: Repo README 'Note on Data' and License section; models/README.md ('we have not released our exact val/test sets')

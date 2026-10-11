@@ -1,0 +1,43 @@
+name: MemoEval (SCM Self-Controlled Memory evaluation dataset)
+slug: scm-dataset
+release_date: 2023-04
+venue: DASFAA 2025
+memory_types:
+- conversational_longterm
+links:
+  paper: https://arxiv.org/abs/2304.13343
+  code: https://github.com/wbbeyourself/SCM4LLMs
+  data: null
+scale:
+  conversations: 18
+  questions: 105
+  avg_context_length: ~23K tokens per dialogue (420k total / 18; max 34k tokens)
+  notes: '18 = long-term dialogue instances (repo: 10 English, 8 Chinese). 105 = annotated probing questions (49 single-turn, 56 multi-turn; repo: 53 En + 52 Zh). The average is derived from Table 1 totals; the max is 200 turns. The summarization splits are 10 books (8M tokens total, max 2M) and 20 VCSum meetings (632k tokens total, Chinese).'
+metrics:
+- Answer Accuracy
+- Memory Retrieval Recall
+- Single-Turn Accuracy
+- Multi-Turn Accuracy
+- Summarization coverage (win rate vs RecursiveSum, human side-by-side)
+- Summarization coherence (win rate vs RecursiveSum, human side-by-side)
+judge_model: null
+repro_level: data_public
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: The arXiv versions leave the dataset unnamed; the DASFAA 2025 version (Springer LNCS 15991) calls it MemoEval. It first appears in arXiv v2 (Feb 2024); v1 only promised a test set. Besides the dialogues (En+Zh, from ShareChat), it has 10 books and 20 VCSum meetings, judged by blind human side-by-side comparison. The data ships in the MIT-licensed GitHub repo. There is no automatic scoring script. The question files also contain SCM model answers.
+sources:
+  name: Name 'MemoEval' appears in the DASFAA 2025 abstract on the BUAA research portal (research.buaa.edu.cn record for DOI 10.1007/978-981-95-4158-4_12). The arXiv v4 abstract and §3.1 call it only 'an annotated dataset'.
+  release_date: 'arXiv API: 2304.13343v1 published 2023-04-26'
+  venue: arXiv comment 'Accepted by DASFAA 2025 main conference'; Crossref DOI 10.1007/978-981-95-4158-4_12 (LNCS, Database Systems for Advanced Applications, pp. 188-203, online 2026-01-02); DBLP key conf/dasfaa/WangLYHWWML25 via Semantic Scholar
+  memory_types: 'arXiv v4 §3.3 / Table 2: probing questions about earlier turns of long-term dialogues (up to 200 turns); the book and meeting summarization tasks fit no listed memory type'
+  links.paper: arXiv abs page 2304.13343
+  links.code: Repo linked in the arXiv abstract; README calls itself the official repository (gh api repos/wbbeyourself/SCM4LLMs)
+  links.data: 'null: no separate dataset page; the data is in the GitHub repo (annotation_data/, data/)'
+  scale.conversations: arXiv v4 Table 1 '#Instances 18' (Dialogue); repo data/dialogue/en.json has 10 entries and zh.json has 8 (counted 2026-10-10)
+  scale.questions: 'arXiv v4 Table 2 caption: 105 probing questions (49 single-turn, 56 multi-turn); repo dialogue_en_questions.json has 53 and dialogue_zh_questions.json has 52, with modes 27+22 single and 26+30 multi (counted 2026-10-10)'
+  scale.avg_context_length: Derived from arXiv v4 Table 1 (Total tokens 420k, Max tokens 34k, 18 instances); repo token_count fields average 23,333 (computed 2026-10-10)
+  scale.notes: 'arXiv v4 Table 1 (Book: 10 instances, 2M max, 8M total; Meeting: 20 instances, 50k max, 632k total); repo data/meeting/meeting_ids.txt lists 20 ids'
+  metrics: arXiv v4 §3.3 'Evaluation Metrics' paragraph and Table 2; summarization win rate vs RecursiveSum judged by human annotators
+  judge_model: 'null: arXiv v4 mentions no LLM judge. Summarization uses blind human side-by-side comparison, and the paper does not say how dialogue answer accuracy was judged. The paywalled DASFAA version was not checked.'
+  repro_level: Repo tree (checked 2026-10-10) has annotation_data/dialogue/*_questions.json, data/dialogue/{en,zh}.json, data/book/*, and data/meeting/vc_summary.json. dialogue_test.py is an interactive Gradio UI; book_summary.py and meeting_summary.py only generate summaries; annotation_scripts/*.py are Flask human-annotation UIs. There is no scoring/evaluation script.
+  notes: arXiv v1 PDF (§1 and Limitations promise a future test set); arXiv v4 §3.1, Table 1, Ethical Considerations; BUAA portal DASFAA abstract; GitHub repo license MIT, README 'Limitations & Risks'

@@ -1,0 +1,30 @@
+{
+ "name": "RefMem-Bench",
+ "slug": "refmem-bench",
+ "leads": {
+  "registry_key": "arxiv:2606.01223",
+  "tier": "P2",
+  "arxiv": "2606.01223 (arXiv API: v1 2026-05-31; title: Connecting the Dots: Benchmarking Reflective Memory in Long-Horizon Dialogue)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "Connecting the Dots: Benchmarking Reflective Memory in Long-Horizon Dialogue",
+    "paper_url": "https://arxiv.org/abs/2606.01223",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "conversational_longterm",
+    "personalization"
+   ],
+   "extra_tags": [
+    "reflective_memory",
+    "multimodal"
+   ],
+   "kind_reason": "Introduces RefMem-Bench: 26,449 QA instances over 35 long-horizon conversational contexts (1K sessions, 71K turns) with some aligned visual evidence. Questions require inferring latent user states and patterns. The paper also proposes the REMIND method. The paper says code will be released, but no U"
+  }
+ }
+}

@@ -1,0 +1,44 @@
+name: WikiBigEdit
+slug: wikibigedit
+release_date: 2025-03
+venue: ICML 2025
+memory_types:
+- parametric
+links:
+  paper: https://arxiv.org/abs/2503.05683
+  code: https://github.com/ExplainableML/WikiBigEdit
+  data: https://huggingface.co/datasets/lukasthede/WikiBigEdit
+scale:
+  conversations: null
+  questions: 502382
+  avg_context_length: null
+  notes: 502,382 = factual-update QA pairs (edits) across 8 Wikidata timesteps T1-T8 (Feb-Jul 2024), about 6.9M tokens in total. Each sample also carries rephrase, persona, locality and (when available) multi-hop probe questions. arXiv v1 reported 506,035 pairs. There are no conversations or long contexts.
+metrics:
+- Update (edit) accuracy
+- Rephrase accuracy (generalization)
+- Personas accuracy (generalization)
+- Multi-hop (mhop) accuracy
+- Locality
+- Retention/forgetting on previous timesteps
+- Retrieval accuracy per hop (RAG analysis)
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: The arXiv v1 is titled "Understanding the Limits of Lifelong Knowledge Editing in LLMs" and reports 506,035 QA pairs. Both v2 and the HF release report 502,382. The QA pairs were generated with GPT-3.5 and GPT-4o-mini. The repo README names the directories benchmark_pipeline/ and editing_experiments/, but in the repo they are WikiBigEdit_Pipeline/ and EasyEdit_Experiments/. The experiments need wandb and the HF data placed in data/wikibigedit. The HF dataset is Apache-2.0; the repo license is listed as NOASSERTION. The benchmark compares knowledge editing (ROME, R-ROME, MEMIT, WISE) with RAG and LoRA continual finetuning.
+sources:
+  name: 'arXiv v2 title ''WikiBigEdit: Understanding the Limits of Lifelong Knowledge Editing in LLMs''; HF dataset card'
+  release_date: 'arXiv API: 2503.05683v1 published 2025-03-07'
+  venue: arXiv API comment 'published at ICML 2025'; PMLR v267 page proceedings.mlr.press/v267/thede25a.html (International Conference on Machine Learning, pp. 59326-59354)
+  memory_types: 'paper §4 / App. C.1: sequential integration of 500K real-world fact updates into model weights via knowledge editing (ROME, R-ROME, MEMIT, WISE) and LoRA continual finetuning, compared with RAG under the same protocol'
+  links.paper: arXiv API entry 2503.05683
+  links.code: arXiv v2 footnote 'Code available at https://github.com/ExplainableML/WikiBigEdit'; repo description calls it the official repository
+  links.data: 'repo EasyEdit_Experiments/README.md links huggingface.co/datasets/lukasthede/WikiBigEdit; HF API: public, not gated, 8 wiki_big_edit_*.json files'
+  scale.questions: arXiv v2 Table 2 total 502,382 ('this version contains 502,382 question-answer pairs across 6.9M tokens', §3.2); HF datasets-server num_rows 502382; v1 Table 2 gives 506,035
+  scale.conversations: 'not applicable: single-question QA edits, no dialogues'
+  scale.avg_context_length: not reported; questions are standalone QA pairs
+  metrics: 'arXiv v2 §4.1 (five evaluation axes: update, rephrase, personas, mhop, locality), App. C.1 (five key metrics plus forgetting), App. C.2 Table 5, §4.3 Figure 6 (retrieval accuracy per hop)'
+  judge_model: no LLM judge described; GPT-3.5/GPT-4o-mini were used only to generate the QA pairs (§3.1 steps 5-6)
+  repro_level: repo tree has EasyEdit_Experiments/run_lifelong_edit.py (Hydra configs in EasyEdit_Experiments/hydra/experiments/*.yaml, e.g. rag_llama2.yaml, wise_llama2.yaml, eval_only_*.yaml); data downloadable from public HF dataset (checked 2026-10-10)
+  notes: arXiv v1 vs v2 Table 2; repo README.md vs repo tree; gh api license NOASSERTION; HF card license apache-2.0
+  scale.notes: arXiv v2 Table 2; HF dataset card field table (update, rephrase, personas, loc, mhop)

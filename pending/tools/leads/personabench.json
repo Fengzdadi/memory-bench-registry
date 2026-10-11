@@ -1,0 +1,33 @@
+{
+ "name": "PersonaBench",
+ "slug": "personabench",
+ "leads": {
+  "registry_key": "url:aclanthology.org/2025.findings-acl.49",
+  "tier": "P2",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Resources / Benchmarks and Tasks / Personalized Task Evaluation",
+    "name": "PersonaBench",
+    "paper_url": "https://aclanthology.org/2025.findings-acl.49.pdf",
+    "code_url": null,
+    "data_url": null
+   },
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "PersonaBench: Evaluating AI Models on Understanding Personal Information through Accessing (Synthetic) Private User Data",
+    "paper_url": "https://aclanthology.org/2025.findings-acl.49.pdf",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "personalization"
+   ],
+   "extra_tags": [],
+   "kind_reason": "PersonaBench (arXiv 2502.20616) is built on synthetic users' private documents (conversation history, user-AI interactions, app usage). It evaluates whether models, mainly RAG pipelines, can extract personal facts, preferences and social connections from that user data."
+  }
+ }
+}

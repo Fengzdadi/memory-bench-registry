@@ -1,0 +1,28 @@
+{
+ "name": "SCM (Self-Controlled Memory) dataset",
+ "slug": "scm-dataset",
+ "leads": {
+  "registry_key": "arxiv:2304.13343",
+  "tier": "P2",
+  "arxiv": "2304.13343 (arXiv API: v1 2023-04-26; title: SCM: Enhancing Large Language Model with Self-Controlled Memory Framework)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Framework & Methods",
+    "name": "Enhancing Large Language Model with Self-Controlled Memory Framework",
+    "paper_url": "https://arxiv.org/pdf/2304.13343",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "conversational_longterm"
+   ],
+   "extra_tags": [
+    "long_document_summarization"
+   ],
+   "kind_reason": "This is mainly a memory-framework (method) paper, but the abstract names an annotated evaluation dataset as a contribution. The dataset covers long-term dialogue, book summarization and meeting summarization, and it is released in the repo (annotation_data/dialogue/dialogue_{en,zh}_questions.json, d"
+  }
+ }
+}

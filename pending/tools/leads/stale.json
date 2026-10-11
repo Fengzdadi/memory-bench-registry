@@ -1,0 +1,28 @@
+{
+ "name": "STALE",
+ "slug": "stale",
+ "leads": {
+  "registry_key": "arxiv:2605.06527",
+  "tier": "P2",
+  "arxiv": "2605.06527 (arXiv API: v1 2026-05-07; title: STALE: Can LLM Agents Know When Their Memories Are No Longer Valid?)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "STALE: Can LLM Agents Know When Their Memories Are No Longer Valid?",
+    "paper_url": "https://arxiv.org/abs/2605.06527",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "semantic_knowledge_update",
+    "conversational_longterm",
+    "personalization"
+   ],
+   "extra_tags": [],
+   "kind_reason": "Benchmark of 400 implicit-conflict scenarios (1,200 queries) embedded in long user-assistant histories (LongMemEval distractor sessions, up to 150K tokens). It tests detecting and acting on outdated user-state memories."
+  }
+ }
+}

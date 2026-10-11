@@ -1,0 +1,42 @@
+name: MemDaily (MemSim)
+slug: memdaily
+release_date: 2024-09
+venue: NeurIPS 2025
+memory_types:
+- personalization
+- conversational_longterm
+links:
+  paper: https://arxiv.org/abs/2409.20163
+  code: https://github.com/nuster1128/MemSim
+  data: null
+scale:
+  conversations: 2954
+  questions: 2954
+  avg_context_length: ~8.8 messages per trajectory, 15.59 tokens per message (MemDaily-vanilla)
+  notes: 2,954 trajectories (user-message sequences), each with one single-choice question; 26,003 messages total, split over 6 question types (Simple, Conditional, Comparative, Aggregative, Post-processing, Noisy). Benchmark variants MemDaily-10/50/100/200 add irrelevant social-media posts so that original messages are 1/η of the history; the paper focuses on vanilla and MemDaily-100.
+metrics:
+- Accuracy
+- Recall@5
+- Response Time
+- Adaptation Time
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: MemDaily is the dataset that the MemSim simulator generates. The released data is in Chinese; the paper shows English translations only as examples. The repo has no licence file. Noise-infused benchmark files (memdaily_0/9/49/99/199.json) come from a Google Drive folder or can be regenerated with benchmark/rawdata/infuse_noise.py. The main experiments use GLM-4-9B, and the NeurIPS version adds Qwen2.5-7B (Appendix F). arXiv has only v1 (2024-09-30).
+sources:
+  name: 'arXiv abstract and repo README: ''MemSim'' simulator generates the ''MemDaily'' dataset/benchmark'
+  release_date: 'arXiv API: 2409.20163v1 published 2024-09-30 (only version)'
+  venue: NeurIPS 2025 proceedings page papers.neurips.cc/.../826aea2253363fe04e8c4991b2a8869e-Abstract-Conference.html (Main Conference Track); arXiv journal_ref empty
+  memory_types: 'paper §3/§5: personal-assistant agent must remember user-specific facts (roles, events, items, places) from timestamped daily-life user messages, histories lengthened to 100x/200x with noise posts'
+  links.paper: arXiv API entry 2409.20163
+  links.code: 'arXiv abstract and paper link https://github.com/nuster1128/MemSim (repo description: official repository)'
+  links.data: data is in the repo (data_generation/final_dataset/memdaily.json); no Hugging Face dataset found (HF API search 'memdaily'/'MemSim' empty, 2026-10-10)
+  scale.conversations: 'paper Table 2 (NeurIPS PDF and arXiv v1): 2,954 trajectories; confirmed by counting the repo''s memdaily.json on 2026-10-10 (2,954 trajectories, 26,003 messages)'
+  scale.questions: 'paper Table 2: 2,954 questions (one per trajectory)'
+  scale.avg_context_length: 'paper Table 2: TPM 15.59 tokens per message; messages per trajectory derived as 26,003/2,954 ≈ 8.8 (not stated in the paper)'
+  scale.notes: paper §5.1 (MemDaily-η definition, variants 10/50/100/200; Appendix E) and repo benchmark/rawdata/infuse_noise.py
+  metrics: 'paper §5.1 Metrics: Accuracy, Recall@5, Response Time, Adaptation Time (Tables 5, 6, 8, 9)'
+  judge_model: 'no LLM judge for the benchmark: accuracy is an exact match of the chosen option against ground_truth (benchmark/TimeFlow.py cal_metrics). GPT-4o is used only to score the quality of generated profiles and messages (§4, Appendix D)'
+  repro_level: repo has benchmark/main.py + Evaluator.py + TimeFlow.py + configs/glm4local.yaml; data in data_generation/final_dataset/memdaily.json and benchmark/rawdata/{memdaily.json,noise_pool.json,infuse_noise.py} (checked 2026-10-10); GitHub API tree and raw files opened 2026-10-10
+  notes: data language seen in the downloaded memdaily.json; paper Appendix says profiles are 'translate[d] into English for better demonstration'; README Google Drive link; repo API license=null

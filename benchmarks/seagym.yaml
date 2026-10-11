@@ -1,0 +1,43 @@
+name: SEAGym
+slug: seagym
+release_date: 2026-06
+venue: arXiv preprint
+memory_types:
+- procedural_workflow
+links:
+  paper: https://arxiv.org/abs/2606.17546
+  code: https://github.com/antropy-research/SEAGym
+  data: null
+scale:
+  conversations: null
+  questions: 55
+  avg_context_length: null
+  notes: 55 = held-out in-domain test tasks (Terminal-Bench 2.0 + HLE text-only Math/Physics). The main split also has 80 train tasks (5 epochs, batch size 20; also replayed for forgetting), 35 frozen update-validation tasks and 80 HLE CS/AI + Engineering OOD transfer tasks. Not a dialogue benchmark. Paper Table 7 lists 80/35/50 for the HLE-only source ablation.
+metrics:
+- Success rate (SR, verifier reward = 1)
+- Mean verifier score (Perf)
+- Update-validation gain (UVG^prev, UVG^base)
+- In-domain gain (IDG)
+- OOD gain (OODG)
+- Replay forgetting (FR)
+- Fix/Forget task churn counts and rates
+- Token usage / tool calls / wall-clock time / cost
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: An evaluation environment (protocol + splits), not a new dataset. It evaluates self-evolving agent harnesses such as the ACE skillbook, the TF-GRPO experience store and AHE harness edits on Terminal-Bench 2.0 + HLE tasks run through Harbor. The repo ships task indexes and split manifests but no task content. Users must provide Harbor task trees for terminal-bench-2 and hle, plus DeepSeek and E2B API keys. The released paper configs, checked 2026-10-10, define only the 80/35/55 train/val/ID-test views; OOD and replay views are not configured. Harbor's HLE verifier uses an LLM judge that the paper does not name.
+sources:
+  name: 'arXiv API title ''SEAGym: An Evaluation Environment for Self-Evolving LLM Agents''; repo README'
+  release_date: 'arXiv API: 2606.17546v1 published 2026-06-16'
+  venue: arXiv API has no journal_ref/comment; paper HTML v1 header shows only arXiv:2606.17546v1 [cs.AI]; repo README citation is @misc arXiv eprint
+  memory_types: paper Sec. 3.1 (harness state includes 'prompts, memories, skills, experience libraries'), Sec. 3.3/4.1 (persistent harness state across train batches, frozen validation, held-out ID/OOD transfer), App. B.2/C.1 (ACE skillbook of procedural reminders, TF-GRPO experience store)
+  links.paper: arXiv API entry 2606.17546
+  links.code: repo README cites arXiv:2606.17546 with same author list and says 'This repository contains the release code for the arXiv paper'; listed in community list; the paper itself does not link the repo
+  links.data: no separate dataset page; paper and repo (docs/data.md) say SEAGym stores task ids/references only, while task content comes from Harbor (Terminal-Bench 2.0, HLE)
+  scale.questions: paper Sec. 4.1 and App. B.3 Table 6 ('80 train tasks, 35 validation tasks, and 55 in-domain test tasks'; 'OOD transfer test size 80 total tasks'); repo runs/paper_reproduction/splits/terminal_hle_seed42_80_35_55.json has train 80 / val 35 / test 55 (counted 2026-10-10)
+  scale.notes: paper Sec. 4.1, Table 6, Table 7, Sec. 4.3 (replay over the 80 train tasks)
+  metrics: paper Sec. 3.5 Eqs. 4-10 (Perf, SR, UVG^prev/base, IDG, OODG, FR; token usage, tool calls, wall-clock, cost), Table 6 (primary metric task success rate), App. D.2 (Fix/Forget churn), Table 2 (rollout/update tokens)
+  judge_model: 'paper Sec. 3.5/3.6: primary scores are verifier rewards r(A,x); LLM-as-judge is mentioned only as an optional offline diagnostic, with no model named. Repo paper configs set no judge model. Harbor''s adapters/hle/README.md (third-party substrate) says HLE tasks are scored by an LLM judge (default o3-mini), but SEAGym does not state which judge it used'
+  repro_level: repo has CLI entry point seagym/cli.py + scripts/seagym.py ('seagym train <config>') and paper configs runs/paper_reproduction/configs/main_{ace,ahe,tf_grpo}_terminal_hle_deepseek.json with split/task-index files. Task data is obtainable via the Harbor registry (terminal-bench 2.0, 89 tasks) and the Harbor HLE adapter over HF cais/hle (gated=auto) (checked 2026-10-10)
+  notes: repo README, runs/paper_reproduction/README.md, .env.example, docs/data.md, paper configs (evaluation_strategy has only id_test 55 and replay disabled), Harbor adapters/hle/README.md

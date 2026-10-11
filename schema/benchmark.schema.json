@@ -1,0 +1,268 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "benchmark.schema.json",
+  "title": "Agent memory benchmark entry",
+  "description": "One file per benchmark in benchmarks/<slug>.yaml. Every non-null field must be traceable to the paper or the official repo/dataset page; record where in `sources`. Unknown values are null, never guesses.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "name",
+    "slug",
+    "release_date",
+    "venue",
+    "memory_types",
+    "links",
+    "scale",
+    "metrics",
+    "judge_model",
+    "repro_level",
+    "repro_checked_at",
+    "run_records",
+    "notes",
+    "sources"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Benchmark name as written by its authors."
+    },
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "description": "Must equal the file name without .yaml."
+    },
+    "release_date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^(19|20)[0-9]{2}-(0[1-9]|1[0-2])$",
+      "description": "YYYY-MM of the paper's first public version (arXiv v1 if any, else the venue publication)."
+    },
+    "venue": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Peer-reviewed venue and year (e.g. 'ACL 2024'), or 'arXiv preprint' if none."
+    },
+    "memory_types": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/memory_type"
+      }
+    },
+    "links": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "paper",
+        "code",
+        "data"
+      ],
+      "properties": {
+        "paper": {
+          "$ref": "#/$defs/url_or_null"
+        },
+        "code": {
+          "$ref": "#/$defs/url_or_null"
+        },
+        "data": {
+          "$ref": "#/$defs/url_or_null"
+        }
+      }
+    },
+    "scale": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "conversations",
+        "questions",
+        "avg_context_length",
+        "notes"
+      ],
+      "description": "As stated in the original paper/repo. Use notes to say what the counts refer to.",
+      "properties": {
+        "conversations": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0,
+          "description": "Number of conversations / interaction histories / episodes, as reported."
+        },
+        "questions": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0,
+          "description": "Number of evaluation questions / probes / tasks, as reported."
+        },
+        "avg_context_length": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Average history/context length verbatim with its unit, e.g. '~115k tokens' or '27 sessions'."
+        },
+        "notes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "metrics": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "judge_model": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "LLM judge used in the original paper; null if the paper uses no LLM judge or names none."
+    },
+    "repro_level": {
+      "enum": [
+        "unverified",
+        "paper_only",
+        "data_public",
+        "official_script",
+        "smoke_tested",
+        "full_run"
+      ],
+      "description": "Highest level actually checked. See docs/fields.md."
+    },
+    "repro_checked_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^20[0-9]{2}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$",
+      "description": "YYYY-MM-DD when repro_level was last checked; null only when unverified."
+    },
+    "run_records": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/run_record"
+      }
+    },
+    "notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "sources": {
+      "type": "object",
+      "description": "Field path (e.g. 'scale.questions', 'links.code') -> where the value was found (paper section/table, README path, dataset card).",
+      "propertyNames": {
+        "enum": [
+          "name",
+          "release_date",
+          "venue",
+          "memory_types",
+          "links.paper",
+          "links.code",
+          "links.data",
+          "scale.conversations",
+          "scale.questions",
+          "scale.avg_context_length",
+          "scale.notes",
+          "metrics",
+          "judge_model",
+          "repro_level",
+          "notes"
+        ]
+      },
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "$defs": {
+    "memory_type": {
+      "enum": [
+        "conversational_longterm",
+        "personalization",
+        "episodic",
+        "semantic_knowledge_update",
+        "procedural_workflow",
+        "coding_cross_session",
+        "parametric",
+        "multi_agent_group",
+        "multimodal",
+        "embodied",
+        "memory_security"
+      ]
+    },
+    "url_or_null": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^https?://\\S+$"
+    },
+    "run_record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "date",
+        "model",
+        "sample_size",
+        "tokens",
+        "cost",
+        "notes"
+      ],
+      "properties": {
+        "date": {
+          "type": "string",
+          "pattern": "^20[0-9]{2}-[0-9]{2}-[0-9]{2}$"
+        },
+        "model": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sample_size": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "tokens": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "cost": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "description": "USD"
+        },
+        "notes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    }
+  }
+}

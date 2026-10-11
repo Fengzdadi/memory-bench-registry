@@ -1,0 +1,44 @@
+name: MBench
+slug: mbench
+release_date: 2026-05
+venue: arXiv preprint
+memory_types:
+- multimodal
+links:
+  paper: https://arxiv.org/abs/2606.00793
+  code: https://github.com/study-overflow/MBench
+  data: https://huggingface.co/datasets/studyOverflow/MBench-Data
+scale:
+  conversations: null
+  questions: 1040
+  avg_context_length: null
+  notes: 'questions = 1,040 video evaluation samples (paper Table 4): MBench-A 547 (human 120, object 100, causal 100, environment 227) and MBench-T 493 (120/100/200/73). The HF card expands MBench-T causal into 391 condition-level items, giving 684 MBench-T items. Source videos run 5 s to 15 min. Rollouts are 25 s (A) or 5 segments of about 5 s (T). There are no conversations.'
+metrics:
+- M-Score (harmonic mean of Memory Reliability and Trigger Coverage), reported per sub-dimension
+- Memory Reliability (mean consistency over triggered samples)
+- Trigger Coverage (fraction of samples that trigger the memory challenge)
+- 'Entity: Human Identity / Human Appearance / Object Texture / Object Geometry consistency'
+- 'Environment: Spatial Epipolar / Spatial Reprojection / Rendering Style / Rendering Lighting consistency'
+- 'Causal: Action Instruction (camera) interaction / Text interaction / Self-Evolution State / Self-Evolution Correctness'
+- 'Trigger-judge vs human agreement: accuracy, precision, recall, F1'
+judge_model: Seed 2.0 (trigger verification); Qwen3-VL-235B-A22B (self-evolution scoring)
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'This benchmark evaluates video world models (video generators), not LLM agents. Here ''memory'' means entity, environment and causal consistency in generated video over long horizons. It has two settings: MBench-A (action-conditioned, 6 models) and MBench-T (text-conditioned, 8 models). The HF dataset is ungated and its card states no licence; the code is MIT. The dataset ships sample metadata, MBench-A source videos and rollouts from 14 models. DA3 camera-pose artifacts are not included. The repo hard-codes no VLM judge.'
+sources:
+  name: arXiv abstract/title 2606.00793; repo README
+  release_date: 'arXiv API: 2606.00793v1 published 2026-05-30T16:17:33Z (v2 2026-06-08)'
+  venue: 'arXiv abs page: no journal_ref; comment is only the project page; repo README cites it as an arXiv article; no venue found'
+  memory_types: 'Paper abstract and §3–4: models must keep entity, environment and causal consistency in generated long videos (video inputs and outputs), so multimodal applies. The evaluated system is a video generator, not an agent acting in an environment.'
+  links.paper: arXiv API entry 2606.00793
+  links.code: Paper HTML links github.com/study-overflow/MBench; the repo README links back to arXiv 2606.00793
+  links.data: Repo README badge links huggingface.co/datasets/studyOverflow/MBench-Data; HF API shows it public and ungated with 11,701 files (checked 2026-10-10)
+  scale.questions: 'Paper Appendix A.1 Table 4: MBench-A 547 + MBench-T 493 = 1,040; Introduction says ''over 1040 standardized evaluation cases''; HF dataset card says MBench-A 547 samples and MBench-T 493 base cases expanding to 684 items'
+  scale.conversations: 'Not applicable: video samples, no dialogues'
+  scale.avg_context_length: No average length reported; §3.1 gives source durations of 5 s to 15 min; §5.1 gives 25 s action rollouts and 5 segments of about 5 s each
+  scale.notes: Paper Table 4; HF dataset card README; HF file listing counted on 2026-10-10 (MBench-T causal has 391 sample dirs)
+  metrics: Paper §4.1 Eqs. 1–3 (Trigger Coverage, Memory Reliability, M-Score); Eqs. 4–17 sub-metrics; Table 2 M-Score per sub-dimension; Appendix C Table 6 trigger-vs-human accuracy/precision/recall/F1
+  judge_model: 'Paper §5.1: ''we apply Seed 2.0 [9]'' for trigger verification; ''We evaluate self-evolution metrics with Qwen3-VL-235B-A22B [5]'''
+  repro_level: Repo has a CLI entry point 'mbench eval' (pyproject [project.scripts] mbench = mbench.cli:main), mbench/metrics/* with 12 metric implementations, and demo/run_demo.sh. Data on HF is ungated (checked 2026-10-10).
+  notes: Repo README and demo/README.md (DA3 artifacts produced externally); HF API cardData has only pretty_name (no licence); HF file listing shows no .npz artifacts; mbench/metrics/vlm_openai.py DEFAULT_MODEL is empty; repo licence MIT

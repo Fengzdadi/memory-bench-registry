@@ -1,0 +1,13 @@
+{
+ "name": "LIFESTATE-BENCH",
+ "slug": "lifestate-bench",
+ "leads": {
+  "registry_key": "arxiv:2503.23514",
+  "tier": "P0",
+  "arxiv": "2503.23514 (arXiv API: v1 ?; title: None)",
+  "phase1_verified_types": {
+   "parametric": "Evaluation section: \"The evaluation methods fall into two broad categories: (i) parametric and (ii) non-parametric\"; parametric = Knowledge Editing-GRACE and LoRA Fine-Tuning on prior episodes."
+  },
+  "paper_hint": "https://arxiv.org/abs/2503.23514"
+ }
+}

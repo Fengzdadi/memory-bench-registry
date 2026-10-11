@@ -1,0 +1,54 @@
+{
+ "name": "ATM-Bench",
+ "slug": "atm-bench",
+ "leads": {
+  "registry_key": "arxiv:2603.01990",
+  "tier": "P1",
+  "arxiv": "2603.01990 (arXiv API: v1 2026-03-02; title: According to Me: Long-Term Personalized Referential Memory QA)",
+  "community_list_entries": [
+   {
+    "source": "teleai",
+    "section": "📏 Benchmarks / 🎬 Multimodal Benchmarks / 🗓️ 2026",
+    "name": "According to Me: Long-Term Personalized Referential Memory QA (ATM-Bench)",
+    "paper_url": "https://arxiv.org/abs/2603.01990",
+    "code_url": "https://github.com/JingbiaoMei/ATM-Bench",
+    "data_url": "https://huggingface.co/datasets/Jingbiao/ATM-Bench"
+   },
+   {
+    "source": "iaar",
+    "section": "Resources / Benchmarks and Tasks / Personalized Task Evaluation",
+    "name": "ATM-Bench",
+    "paper_url": "https://arxiv.org/pdf/2603.01990",
+    "code_url": null,
+    "data_url": null
+   },
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "According to Me: Long-Term Personalized Referential Memory QA",
+    "paper_url": "https://arxiv.org/pdf/2603.01990",
+    "code_url": null,
+    "data_url": null
+   },
+   {
+    "source": "topoteretes",
+    "section": "Benchmarks & evaluation",
+    "name": "ATM-Bench",
+    "paper_url": "https://arxiv.org/abs/2603.01990",
+    "code_url": "https://github.com/atmbench/atmbench.github.io",
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "personalization",
+    "episodic"
+   ],
+   "extra_tags": [
+    "multimodal",
+    "multi_source"
+   ],
+   "kind_reason": "Benchmark for multimodal, multi-source personalized referential memory QA over ~4 years of personal records (images, videos, emails) with human-annotated QA and evidence."
+  }
+ }
+}

@@ -1,0 +1,29 @@
+{
+ "name": "CapMem",
+ "slug": "capmem",
+ "leads": {
+  "registry_key": "arxiv:2609.17688",
+  "tier": "P2",
+  "arxiv": "2609.17688 (arXiv API: v1 2026-09-15; title: CapMem: A Benchmark for Caption-Based Episodic Memory in Egocentric Video)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "CapMem: A Benchmark for Caption-Based Episodic Memory in Egocentric Video",
+    "paper_url": "https://arxiv.org/pdf/2609.17688",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "episodic"
+   ],
+   "extra_tags": [
+    "multimodal",
+    "egocentric_video"
+   ],
+   "kind_reason": "Human-annotated benchmark for episodic memory over egocentric video: 75 videos (33.7 h, mostly Ego4D plus six other egocentric datasets), 1,000 MCQs across 16 scenarios. Paper says annotations released for non-commercial research but gives no URL."
+  }
+ }
+}

@@ -1,0 +1,47 @@
+name: GateMem
+slug: gatemem
+release_date: 2026-06
+venue: arXiv preprint
+memory_types:
+- multi_agent_group
+- memory_security
+- semantic_knowledge_update
+- conversational_longterm
+links:
+  paper: https://arxiv.org/abs/2606.18829
+  code: https://github.com/rzhub/GateMem
+  data: https://huggingface.co/datasets/Ray368/GateMem
+scale:
+  conversations: 91
+  questions: 2218
+  avg_context_length: ~223 turns per episode (avg. 23.5 reference tokens/turn)
+  notes: '91 long-form multi-party episodes (Medical 21, Office 17, Education 30, Household 23) and 2,218 hidden checkpoints: 728 utility, 727 access-control, 763 active-forgetting. Avg. 13.4 principals and 24.4 checkpoints per episode. Repo and HF file line counts match these totals (counted on 2026-10-10).'
+metrics:
+- Effective Utility (U)
+- Access-Control Violation rate (A)
+- Active-Forgetting Failure rate (F)
+- Memory Governance Score (MGS = U*(1-A)*(1-F))
+- Over-refusal rate (OR)
+- Sec/ckpt (wall-clock per checkpoint)
+- Tok/ckpt (LLM tokens per checkpoint)
+judge_model: GPT-4o
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'The release is open-label: the hidden annotation fields (query_type, expected_action, judge_spec, leak_targets) ship with the data, and methods must not use them at inference. The code and data use legacy names: privacy means Access Control and safety means Active Forgetting. The repo is MIT-licensed and the HF dataset is CC-BY-4.0. The paper evaluates 7 baselines on 6 backbones, but the repo''s sweep config covers only 3 (gpt-4o-mini, gpt-5-mini, gemini-2.5-flash-lite). New results go through an HF Space submission and a public leaderboard.'
+sources:
+  name: 'arXiv title ''GateMem: Benchmarking Memory Governance in Multi-Principal Shared-Memory Agents''; repo README'
+  release_date: 'arXiv API: 2606.18829v1 published 2026-06-17'
+  venue: arXiv API shows no journal_ref; comment only '24 pages, 8 figures' plus code/data links; repo CITATION/README bibtex is @misc arXiv; web search found no venue
+  memory_types: 'paper §3.1-3.3: multi-party episodes in which multiple principals write to a shared memory pool (multi_agent_group); access-control leakage and post-deletion recovery checkpoints (memory_security); turns revise earlier facts and utility checks the current in-scope answer (semantic_knowledge_update); ~223-turn long-horizon dialogue episodes (conversational_longterm)'
+  links.paper: arXiv abs page 2606.18829
+  links.code: arXiv comment and paper header link https://github.com/rzhub/GateMem (authors' repo)
+  links.data: arXiv comment links https://huggingface.co/datasets/Ray368/GateMem; HF API shows it public, not gated, with 8 jsonl files (episodes and checkpoints for 4 domains)
+  scale.conversations: paper Table 2 (Ep. total 91) and §3.4; repo bench/data/*/episodes.jsonl line counts 21+17+30+23=91
+  scale.questions: paper Table 2 (# Checkpoints total 2,218; U 728 / A 727 / F 763); repo checkpoints.jsonl line counts 579+547+540+552=2218
+  scale.avg_context_length: 'paper Table 2 ''Total / Avg.'' row: Turns/ep. 223.0, Tokens/turn 23.5'
+  scale.notes: paper Table 2 per-domain rows
+  metrics: paper §3.3 Eq. 10-14 (U, OR, A, F, MGS, Sec/ckpt, Tok/ckpt); Tables 3-4
+  judge_model: paper §4.1 'Primary results are computed from GPT-4o judge labels'; §4.2 judge-human agreement validates GPT-4o labels (max diff 1.04 pp)
+  repro_level: repo tree has bench/scripts/run_eval.py (with --use_llm_judge/--judge_model), bench/scripts/score_predictions.py, scripts/sweep.py, configs/sweeps/paper_matrix.yaml, docs/reproduce_paper.md and data in bench/data/{medical,office,education,household} (checked 2026-10-10)
+  notes: repo README 'Notes on Evaluation' and 'Release Note'; GitHub license MIT; HF cardData license cc-by-4.0; docs/reproduce_paper.md model keys

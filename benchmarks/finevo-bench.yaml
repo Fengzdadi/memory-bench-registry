@@ -1,0 +1,44 @@
+name: FinEvo-Bench
+slug: finevo-bench
+release_date: 2026-08
+venue: arXiv preprint
+memory_types:
+- procedural_workflow
+links:
+  paper: https://arxiv.org/abs/2608.06144
+  code: null
+  data: null
+scale:
+  conversations: null
+  questions: 120
+  avg_context_length: 6.46 input files per task (range 2–11)
+  notes: 'questions = 120 open-ended multi-file tasks (20 business scenes × 6 cases, six financial domains; 775 input files in total). conversations is null because there is no dialogue data: the tasks run as three independently shuffled, globally interleaved 120-task streams, each paired with a state-reset control. avg_context_length counts input files; the paper reports no token length for inputs.'
+metrics:
+- 'Task quality: mean scene-rubric score (0–100)'
+- 'Financial compliance: mean triggered compliance issues per task'
+- 'Self-evolution gain: paired ΔScore and ΔComp. vs. state-reset (non-evolving) control'
+- Early (within-scene ranks 1–3) vs. Late (ranks 4–6) paired score gain and compliance reduction
+- Experience activation count and activated vs. non-activated score gap
+- Per-dimension normalized score-rate gains (5 capability dimensions)
+- Agent-side token cost (execution + reflection, 10^4 tokens/task)
+judge_model: Claude Opus 4.6 (via a Claude Code rubric-scoring agent)
+repro_level: paper_only
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: No official code or data release was found as of 2026-10-10. The paper links no repository or dataset, and Appendix B prints the pipeline code and prompts. This is a different benchmark from FinEvolveBench (arXiv 2606.06960, GitHub DavidDeng01/FinEvolveBench). v2 (2026-10-01) rewrote the abstract and replaced v1's five-scene, 30-task cross-scene diagnostic with full-benchmark scene isolation. The headline results did not change. All evaluated scaffolds use Qwen3.7-Max as the backbone.
+sources:
+  name: 'arXiv 2608.06144 title: ''FinEvo-Bench: A Longitudinal Benchmark for Self-Evolving Agents in Professional Financial Workflows'''
+  release_date: 'arXiv API: 2608.06144 v1 published 2026-08-06T15:14:54Z (v2 updated 2026-10-01)'
+  venue: 'arXiv API: no journal_ref; comment only ''22 pages, 4 figures; includes appendices''; no venue stated in paper; no official repo exists to state one'
+  memory_types: arXiv v2 HTML §3.1 (six cases per scene share one professional procedure, which is 'a basis for transferring experience') and §4.1 (scaffolds distill experience into skills/memory reused on later tasks in an interleaved stream; paired state-reset controls measure the gain)
+  links.paper: arXiv abs page https://arxiv.org/abs/2608.06144
+  links.code: 'null: v1/v2 HTML and PDF link annotations contain no repo link; GitHub search for ''FinEvo'', ''FinEvo-Bench'' and ''DianJin'' plus the aliyun/qwen-dianjin tree found no release (checked 2026-10-10); DavidDeng01/FinEvolveBench belongs to a different paper (arXiv 2606.06960)'
+  links.data: 'null: Hugging Face dataset search (''FinEvo'', ''FinEvo-Bench'', author DianJin) found no FinEvo-Bench dataset; HF paper page for 2608.06144 does not exist (checked 2026-10-10)'
+  scale.questions: 'arXiv v2 abstract and §3.1: 120 tasks = 20 scenes × 6 cases across six financial domains'
+  scale.avg_context_length: 'arXiv v2 §3.1: ''775 input files, averaging 6.46 per task (range: 2–11)'''
+  scale.conversations: 'null: no dialogues; §4.1 Longitudinal Evaluation Protocol describes three shuffled 120-task streams'
+  scale.notes: arXiv v2 §3.1 and §4.1
+  metrics: arXiv v2 §4.1 'Evaluation Metrics' (four metrics plus Early/Late rank gains and experience activation), Tables 3–4, §4.3 Capability Dimensions (Eq. 7–9)
+  judge_model: 'arXiv v2 abstract and §4.1 Implementation Details: ''The Claude Code rubric judge is backed by Claude Opus 4.6'' (ICC(A,1)=0.95 vs. a financial expert)'
+  repro_level: No official repo or dataset found via the paper links, GitHub search and Hugging Face search (checked 2026-10-10); paper checked only
+  notes: arXiv v1 vs v2 HTML comparison (v1 §4.3 five-scene 30-task cross-scene stream; v2 full-benchmark scene isolation with 360 outputs per scaffold); README of DavidDeng01/FinEvolveBench cites arXiv 2606.06960

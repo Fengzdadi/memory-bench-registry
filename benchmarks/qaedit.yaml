@@ -1,0 +1,43 @@
+name: QAEdit
+slug: qaedit
+release_date: 2025-02
+venue: ACL 2025
+memory_types:
+- parametric
+links:
+  paper: https://arxiv.org/abs/2502.11177
+  code: https://github.com/WanliYoung/Revisit-Editing-Evaluation
+  data: https://huggingface.co/datasets/WenDingY/QAEdit
+scale:
+  conversations: null
+  questions: 19249
+  avg_context_length: null
+  notes: '19,249 = QAEdit edit samples (NQ 3,610 + TriviaQA 11,313 + SimpleQA 4,326; ten categories), each with a rephrase and 5 ZsRE locality pairs. Main experiments edit only questions the base model gets wrong: 12,715 (Llama-2-7b-chat), 10,213 (Mistral-7b), 10,467 (Llama-3-8b). Sequential editing uses 1,000 samples per dataset. ZsRE and CounterFact (10,000 each) are also evaluated.'
+metrics:
+- Reliability
+- Generalization
+- Locality
+- LLM-as-a-Judge binary accuracy (WILD)
+- Exact match (WILD-EM)
+- Token-level accuracy under teacher forcing (synthetic evaluation, for comparison)
+judge_model: GPT-4o-mini
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'The benchmark is QAEdit, a model-editing dataset. WILD ("Without Intervention, Live Decoding") is the paper''s evaluation protocol: autoregressive decoding with natural stop tokens instead of teacher forcing. The LLM judge needs an OpenAI API key; without one the repo falls back to exact match. The HF and repo copies of QAEdit.json are the same size (21,042,032 bytes), Apache-2.0, and not gated. WILD was also integrated into EasyEdit (2025-03). The repo additionally ships QAEdit_inter_1k.json, which the README does not describe.'
+sources:
+  name: 'arXiv 2502.11177 abstract: ''we introduce QAEdit, a new benchmark ... and WILD, a task-agnostic evaluation framework'''
+  release_date: 'arXiv API: 2502.11177v1 published 2025-02-16T15:57:55Z'
+  venue: 'arXiv comment ''Accepted to ACL 2025 Main Conference (Camera Ready Version)''; ACL Anthology 2025.acl-long.745 (ACL 2025 Volume 1: Long Papers, July 2025, pp. 15336-15354)'
+  memory_types: 'Paper §2.2/§7: evaluates knowledge editing that updates LLM parameters (FT-M, MEND, ROME, MEMIT, etc.), single and sequential editing; knowledge stored in model weights'
+  links.paper: arXiv API entry 2502.11177
+  links.code: Paper abstract footnote links github.com/WanliYoung/Revisit-Editing-Evaluation; repo description 'Code and data repository for The Mirage of Model Editing'
+  links.data: 'Repo README News (2025-06-02) links huggingface.co/datasets/WenDingY/QAEdit; HF API: public, not gated, apache-2.0, file QAEdit.json'
+  scale.questions: 'Paper §3: ''QAEdit contains 19,249 samples across ten categories'' (Table 10); confirmed by counting HF QAEdit.json on 2026-10-10: 19,249 records (TQA 11,313, SQA 4,326, NQ 3,610)'
+  scale.conversations: 'Not applicable: single QA edit samples, no conversations'
+  scale.avg_context_length: Not reported; samples are short single questions
+  scale.notes: Paper §5.1 (per-model filtered subsets, ZsRE/CounterFact 10,000 each), §7.1 (1,000 sequential edits), Appendix A.1-A.2 (source counts)
+  metrics: Paper §2.2 (reliability, generalization, locality), §4 (WILD; synthetic uses token-level match under teacher forcing), §6.4 (LLM-as-a-Judge primary, EM as lightweight alternative); README Metrics section (rewrite_acc/rephrase_acc/neighborhood_acc)
+  judge_model: Paper §6.4 'LLM-as-a-Judge (using GPT-4o-mini)' and Appendix A.4; repo easyeditor/evaluate/evaluate_utils.py llm_judge uses model='gpt-4o-mini'
+  repro_level: Repo has edit.py (--datatype qaedit, --evaluation_type WILD|synthetic, --api_key for the judge), easyeditor/evaluate/evaluate.py (WILD branch), easyeditor/evaluate/evaluate_utils.py (llm_judge, exact_match_score), and data/QAEdit.json; HF data downloaded and counted (checked 2026-10-10)
+  notes: README Evaluations section (api_key / EM fallback, EasyEdit integration news); GitHub contents API sizes of data/QAEdit.json vs HF file; HF cardData license; repo tree lists data/QAEdit_inter_1k.json

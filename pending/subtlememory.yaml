@@ -1,0 +1,42 @@
+name: SubtleMemory
+slug: subtlememory
+release_date: 2026-06
+venue: Findings of EMNLP 2026
+memory_types:
+- conversational_longterm
+- personalization
+- semantic_knowledge_update
+links:
+  paper: https://arxiv.org/abs/2606.05761
+  code: https://github.com/Yummytanmo/SubtleMemory
+  data: https://huggingface.co/datasets/Yummytanmo/SubtleMemory
+scale:
+  conversations: 10
+  questions: 1522
+  avg_context_length: ~211.6K tokens per history (avg 236.4 memory-bearing sessions)
+  notes: '10 = persona-level long user-agent histories (one per split). 1,522 = evaluation instances (QAs), derived from 1,090 relation-controlled variant sets (361 complementary, 352 nuanced, 377 contradictory). Released data (counted 2026-10-10) has 1,090 records holding 1,522 QAs: 707 user-related and 815 non-user-related. It also has 2,364 sessions in total.'
+metrics:
+- Answer correctness rate (binary LLM-as-judge correctness, reported by relation type/subtype and overall)
+- Memory preservation success rate (P_preserve, diagnostic)
+- Conditional retrieval success rate (P_retrieve, diagnostic)
+judge_model: Gemini 3.1 Pro Preview Thinking
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: Text-only, synthetic data. User-related seeds come from PersonaMem-v2 preference profiles, but this is a separate benchmark. The data is in the repo and on Hugging Face (Apache-2.0, not gated). It is split into persona_0 to persona_9, with bench_instances and history_sessions configs. Evaluation adapts the EverOS pipeline and needs API keys for the answer LLM, the judge LLM and the memory backends. The judge defaults to gemini-3.1-pro-preview-thinking via OpenRouter. The latest arXiv version is v3 (2026-10-05).
+sources:
+  name: 'arXiv title and repo README: ''SubtleMemory: A Benchmark for Fine-Grained Relational Memory Discrimination in Long-Horizon AI Agents'''
+  release_date: 'arXiv API: 2606.05761v1 published 2026-06-04T06:43:11Z'
+  venue: 'arXiv comment ''EMNLP 2026 Findings''; repo README News: ''accepted to EMNLP 2026 Findings'' (2026-08-21); GitHub repo description ''[EMNLP'' 26 Findings]'''
+  memory_types: Paper §2.1–2.4 (arXiv v3 HTML). Memories are embedded in long multi-session user-agent histories (conversational_longterm). User-related queries use preferences built up from PersonaMem-v2 profiles (personalization). Contradictory and temporal/contextual nuanced relations require resolving conflicting, condition-dependent memory variants (semantic_knowledge_update). The Limitations section says it does not cover multimodal memories.
+  links.paper: arXiv API entry 2606.05761
+  links.code: Paper abstract (arXiv v3 HTML) links github.com/Yummytanmo/SubtleMemory; the repo README cites arXiv 2606.05761
+  links.data: 'Paper abstract and repo README ''Data'' section link huggingface.co/datasets/Yummytanmo/SubtleMemory. HF API: public, gated=false, 20 JSON files.'
+  scale.conversations: 'Paper §2.4: 10 persona-level splits, each with one long chronological history. Confirmed against the released data (10 persona folders).'
+  scale.questions: 'Paper §2.4 and abstract: 1,522 evaluation instances. Recounted 2026-10-10 from the HF bench_instances.json files: 1,090 records, 1,522 qas.'
+  scale.avg_context_length: 'Paper §2.4: average of 236.4 memory-bearing sessions and 211.6K session tokens per history. The session count (2,364/10 = 236.4) was recounted from the released history_sessions.json files.'
+  scale.notes: Paper §2.3–2.4. Counts from the released HF data, 2026-10-10.
+  metrics: Paper §2.2 'Answer Correctness' (binary LLM-judge label), Table 1 (correctness rates by relation type), §4 / Fig. 3 diagnostics (P_preserve, P_retrieve)
+  judge_model: 'Paper §3.1: ''Gemini 3.1 Pro Preview Thinking model as the LLM judge'' (Cohen''s kappa 0.963 against 225 human-annotated answers). The repo evaluation/config/datasets/subtlememory.yaml defaults to gemini-3.1-pro-preview-thinking.'
+  repro_level: The repo tree has evaluation/cli.py (main entry, --dataset subtlememory), evaluation/config/datasets/subtlememory.yaml, evaluation/src/evaluators/llm_judge.py and evaluation/validate_run.py. Data is under data/subtlememory/ and on HF (checked 2026-10-10).
+  notes: Paper §2.3 (PersonaMem-v2 seeds), Limitations section; repo README (Data, Install, Acknowledgements); data/README.md; HF cardData license apache-2.0; arXiv API v3 updated 2026-10-05

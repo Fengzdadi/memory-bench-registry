@@ -1,0 +1,29 @@
+{
+ "name": "MemTransfer",
+ "slug": "memtransfer",
+ "leads": {
+  "registry_key": "arxiv:2609.32313",
+  "tier": "P2",
+  "arxiv": "2609.32313 (arXiv API: v1 2026-09-26; title: MemTransfer: Benchmarking Memory Beyond Matched Experience in Embodied Decision-Making)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "MemTransfer: Benchmarking Memory Beyond Matched Experience in Embodied Decision-Making",
+    "paper_url": "https://arxiv.org/pdf/2609.32313",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "episodic"
+   ],
+   "extra_tags": [
+    "embodied",
+    "experience_transfer"
+   ],
+   "kind_reason": "Benchmark of 100 embodied navigation cases (simulated warehouse) comparing six memory representations built from expert demonstrations under changed start pose, blocked routes and history relevance. Per paper, test episodes use the same task cases as demonstrations and memory content is mostly route"
+  }
+ }
+}

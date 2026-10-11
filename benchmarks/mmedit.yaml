@@ -1,0 +1,43 @@
+name: MMEdit
+slug: mmedit
+release_date: 2023-10
+venue: EMNLP 2023
+memory_types:
+- parametric
+- multimodal
+links:
+  paper: https://arxiv.org/abs/2310.08475
+  code: https://github.com/zjunlp/EasyEdit
+  data: https://drive.google.com/drive/folders/1jBdTJxUb9wEeHnvG-RY8dv5_I4QlDpUS
+scale:
+  conversations: null
+  questions: 3093
+  avg_context_length: null
+  notes: '3,093 = E-VQA test (2,093) + E-IC test (1,000) edit samples, summed from paper Table 1; not a total the paper states. Train splits: 6,346 E-VQA, 2,849 E-IC. Both tasks share locality test sets: 4,289 text (NQ) and 5,046 multimodal (OK-VQA). Not dialogue data, so no conversations or context length.'
+metrics:
+- Reliability (Exact Match / token Accuracy)
+- T-Generality (Exact Match / Accuracy)
+- M-Generality
+- T-Locality
+- M-Locality
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: MMEdit is a knowledge-editing benchmark for multimodal LLMs (edits stored in model weights). The paper evaluates BLIP-2 OPT and MiniGPT-4. It has no conversational component. Its code ships inside the general EasyEdit framework, not as a standalone repo. Data is on Google Drive or BaiduNetDisk, not Hugging Face, and the images are a separate download. In multimodal_edit.py the __main__ block runs a ComprehendEdit training call by default, so the MMEdit test_* functions must be uncommented. arXiv v5 adds EM/Acc results for Reliability and T-Generality.
+sources:
+  name: 'arXiv abstract: ''we construct a new benchmark, dubbed MMEdit'''
+  release_date: 'arXiv API: 2310.08475v1 published 2023-10-12'
+  venue: arXiv comment 'EMNLP 2023'; ACL Anthology 2023.emnlp-main.856 (EMNLP 2023 main, December 2023)
+  memory_types: 'paper §3.1: task is updating MLLM parameters θ to θ_e so that f(i_e, x_e; θ_e) = y_e (parametric); edit inputs are image+text pairs (VQAv2/COCO images, Stable Diffusion rephrased images) that the model must process (multimodal)'
+  links.paper: arXiv API entry for 2310.08475
+  links.code: 'arXiv abstract: ''Code and dataset are available in https://github.com/zjunlp/EasyEdit''; repo has examples/MMEdit.md'
+  links.data: EasyEdit examples/MMEdit.md links Google Drive folder 'MMEdit' -> editing-data/{caption,vqa,locality,multimodal_locality}; caption_train_edit.json, caption_eval_edit.json, vqa_train.json, vqa_eval.json listed (checked 2026-10-10)
+  scale.questions: 'paper Table 1 (arXiv v5 HTML): E-VQA Test 2,093, E-IC Test 1,000 (summed)'
+  scale.conversations: 'null: benchmark contains image-text edit samples, not conversations'
+  scale.avg_context_length: 'null: not reported in paper'
+  scale.notes: paper Table 1 (Train/Test/L-Locality/M-Locality columns) and §3.2.2
+  metrics: paper §3.1 (Reliability, T-/M-Locality, T-/M-Generality definitions), §3.5/Table 2 caption (Reliability as Exact Match / Accuracy), Figure 5 (image generality)
+  judge_model: 'null: paper scores with EM/token accuracy and output-equality indicators; ChatGLM used only to generate rephrased questions for data construction (§3.2.3)'
+  repro_level: repo has multimodal_edit.py (test_MEND_/test_SERAC_/test_IKE_ functions for BLIP-2 OPT and MiniGPT-4 on Caption/VQA), easyeditor/evaluate/multimodal_evaluate.py, easyeditor/trainer/MultimodalTrainer.py; data on public Google Drive folder (checked 2026-10-10)
+  notes: repo examples/MMEdit.md; multimodal_edit.py __main__ block; arXiv v5 comment

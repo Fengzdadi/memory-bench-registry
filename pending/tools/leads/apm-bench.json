@@ -1,0 +1,31 @@
+{
+ "name": "APM-Bench",
+ "slug": "apm-bench",
+ "leads": {
+  "registry_key": "arxiv:2609.37559",
+  "tier": "P2",
+  "arxiv": "2609.37559 (arXiv API: v1 2026-09-29; title: APM-Bench: Benchmarking Cross-session Persistent Memory for Egocentric Streaming Video Assistants)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "APM-Bench: Benchmarking Cross-session Persistent Memory for Egocentric Streaming Video Assistants",
+    "paper_url": "https://arxiv.org/pdf/2609.37559",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "episodic",
+    "semantic_knowledge_update"
+   ],
+   "extra_tags": [
+    "multimodal",
+    "streaming_video",
+    "proactive_assistance"
+   ],
+   "kind_reason": "A benchmark of 549 video sessions in 104 multi-session egocentric trajectories, with 2,719 candidates. It tests cross-session persistent memory: episodic recall, entity state tracking, temporal reasoning, proactive response and recognizing missing evidence."
+  }
+ }
+}

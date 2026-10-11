@@ -1,0 +1,14 @@
+{
+ "name": "SkillCraft",
+ "slug": "skillcraft",
+ "leads": {
+  "registry_key": "arxiv:2603.00718",
+  "tier": "P0",
+  "arxiv": "2603.00718 (arXiv API: v1 ?; title: None)",
+  "phase1_verified_types": {
+   "procedural_workflow": "Sec 5.2: 'We implement Cross-Task Mode using a two-phase static transfer approach' (Easy→Hard, Hard→Easy, Hard→Hard). Table 3: 'Base: No skill library. Skill: With skill library.'"
+  },
+  "paper_hint": "https://arxiv.org/abs/2603.00718",
+  "code_hint": "https://github.com/shiqichen17/SkillCraft"
+ }
+}

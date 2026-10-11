@@ -1,0 +1,39 @@
+name: KnowMe-Bench
+slug: knowme-bench
+release_date: 2026-01
+venue: ACL 2026
+memory_types:
+- personalization
+- episodic
+links:
+  paper: https://arxiv.org/abs/2601.04745
+  code: https://github.com/QuantaAlpha/KnowMeBench
+  data: https://huggingface.co/datasets/realty2333/knowMe-Bench
+scale:
+  conversations: 3
+  questions: 2580
+  avg_context_length: 1.15M-1.76M tokens per narrative (4.7M total stated)
+  notes: 'conversations = 3 narrative datasets, not dialogues: D1 My Struggle (1.15M tokens), D2 Neapolitan Novels (1.76M), D3 In Search of Lost Time (1.30M). questions = 2,580 queries over 7 tasks (T1-T7) in 3 levels. Repo files counted on 2026-10-10: 1,010 / 798 / 772 questions per dataset; streams hold 6,644 / 11,995 / 8,423 entries.'
+metrics:
+- LLM-as-a-judge rubric score (0-5 scale) averaged per task (T1-T7) and per level (I Fact & Entity, II Narrative Logic, III Insight)
+- Judge-vs-expert agreement (Cohen's kappa > 0.75) for judge reliability
+judge_model: GPT-4o
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'Inputs are three literary autobiographical narratives (Knausgard, Ferrante, Proust) rebuilt as timestamped text event streams, not dialogues. The paper''s per-dataset token counts sum to about 4.2M, not the stated 4.7M. Licence is inconsistent: the README badge says MIT, the HF card says Apache-2.0, and the repo has no LICENSE file. The HF copy is gated with auto-approval; the GitHub copy is open. run_eval.py only scores answers already merged with references; no inference or memory-system code is released.'
+sources:
+  name: 'arXiv title and repo README: ''KnowMe-Bench: Benchmarking Person Understanding for Lifelong Digital Companions'''
+  release_date: 'arXiv API: 2601.04745v1 published 2026-01-08 (v2 2026-04-19)'
+  venue: ACL Anthology 2026.acl-long.1394 (Proceedings of ACL 2026, Vol. 1 Long Papers, July 2026, pp. 30214-30238); the repo README badge also says ACL 2026 Main; arXiv has no journal_ref
+  memory_types: 'paper §4/Table 2 tasks: T1 context-aware extraction under spatiotemporal constraints, T3 temporal reasoning and T4 event ordering over a time-anchored life narrative (episodic); T6 mind-body and T7 expert psychoanalysis, which infer the person''s motivations and decision principles (personalization)'
+  links.paper: arXiv abs 2601.04745
+  links.code: linked in the arXiv abstract ('Our data is in ... github.com/QuantaAlpha/KnowMeBench') and the README
+  links.data: 'linked from the repo README HF badge; the HF card says it is the official dataset for arXiv 2601.04745 (gated: auto)'
+  scale.conversations: 'paper §5.1: three narrative datasets (D1 My Struggle, D2 Neapolitan Novels, D3 Proust); the repo has KnowmeBench/dataset1-3'
+  scale.questions: 'paper §5.1 (v1 and v2): ''a total of 2,580 evaluation queries''; the repo question files sum to 2,580 (counted 2026-10-10)'
+  scale.avg_context_length: paper §5.1 per-dataset token counts 1.15M / 1.76M / 1.30M and the stated 4.7M total; no average is reported
+  metrics: 'paper §4.4: LLM-as-a-Judge, ''strict rubric constraints (Scale 0-5)'', per-task score is the average of the rubric scores; Metric Reliability paragraph gives kappa > 0.75; Table 2 reports per-task and per-level scores'
+  judge_model: 'paper §4.4: LLM-as-a-Judge protocol ''utilizing GPT-4o''; run_eval.py DEFAULT_JUDGE_MODEL = ''gpt-4o'''
+  repro_level: repo tree has evaluate/run_eval.py and 'evaluate/evaluate prompt.md' (GPT-4o judge scoring) plus KnowmeBench/dataset{1,2,3}/{input,question,answer} JSON (checked 2026-10-10)
+  notes: 'token sum from paper §5.1; licence from the README badge, the HF API cardData and the repo tree (no LICENSE); gating from the HF API ''gated: auto''; ACL bib omits arXiv co-author Chenglong Li'

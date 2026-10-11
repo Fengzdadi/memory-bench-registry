@@ -1,0 +1,43 @@
+name: SkillLearnBench
+slug: skilllearnbench
+release_date: 2026-04
+venue: COLM 2026
+memory_types:
+- procedural_workflow
+links:
+  paper: https://arxiv.org/abs/2604.20087
+  code: https://github.com/cxcscmu/SkillLearnBench
+  data: null
+scale:
+  conversations: null
+  questions: 100
+  avg_context_length: null
+  notes: 100 = verified task instances across 20 skill-dependent tasks (15 sub-domains, 6 categories), 2-6 instances per task. A skill set is generated once per task from the seed instance (instance-1) and tested on all instances, including held-out ones. No dialogues. Context length is not reported; the paper gives solving-token cost instead (e.g., 727K avg tokens for no-skill).
+metrics:
+- Coverage (skill quality, Level 1)
+- Executability (completeness, determinism, consistency, usability)
+- Safety (six risk dimensions)
+- Trajectory alignment (key point recall, execution order, completeness)
+- Skill usage rate
+- Task accuracy (binary verifier pass rate)
+- Solving efficiency (total token consumption)
+judge_model: GPT-5-mini
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 17 of the 20 tasks are adapted from SkillsBench, and 3 are new. The task data (Docker environments, instructions, verifiers and oracle solutions) is stored in the repo's tasks/ folder; there is no separate dataset page. Running the evaluation requires Docker and Anthropic and OpenAI API keys, plus GH_TOKEN for github-repo-analytics. The solving agent is Claude Sonnet 4.6. The repo also ships pre-generated skills for 4 methods x 6 LLMs. MIT licence. 100 task.toml instances counted on 2026-10-10.
+sources:
+  name: 'arXiv API title: ''SkillLearnBench: Benchmarking Continual Learning Methods for Agent Skill Generation on Real-World Tasks''; repo README'
+  release_date: 'arXiv API: 2604.20087v1 published 2026-04-22 (only version)'
+  venue: COLM 2026 virtual site poster page colm.eventhosts.cc/virtual/2026/poster/1764 (same title/authors); repo README 'accepted to COLM 2026' and repo description '[COLM'26]'; OpenReview id ulrZEJrNXA linked (its page sits behind a browser challenge and was not opened); arXiv has no journal_ref
+  memory_types: paper Sec 3.1 'the skill is generated once per task and then tested on all instances'; Sec 3.3 frames skill generation as non-parametric continual learning that consolidates experiences into procedural knowledge; Sec 5.2 / Fig 2(c) seed vs held-out accuracy; Level 3 compares against no-skill baseline
+  links.paper: arXiv abs page 2604.20087
+  links.code: arXiv abstract 'Our data and code are open-source at https://github.com/cxcscmu/SkillLearnBench'
+  links.data: 'no separate dataset page: Hugging Face search for SkillLearnBench returns []; project homepage links only GitHub/OpenReview; data lives in repo tasks/'
+  scale.questions: paper Table 1 / Appendix O Table 17 per-task instance counts sum to 100; repo README '100 verified instances'; repo tree has 100 tasks/*/*/task.toml (counted 2026-10-10)
+  scale.notes: paper Sec 3.1, Table 1, Table 2 (#Tokens column), Appendix K/O
+  metrics: paper Sec 3.2.1-3.2.3 (Level 1 Coverage/Executability/Safety; Level 2 Trajectory alignment, Skill usage rate; Level 3 Task accuracy Eq. 2, Solving efficiency)
+  judge_model: 'paper Sec 4.1 and Appendix L: ''For Level 1 and Level 2 metrics that require an LLM judge, we use GPT-5-mini''; README same'
+  repro_level: repo tree has evaluate_skills.py (root entry point), core/eval_runner.py, evaluation/skill/run_all_eval.py, evaluation/trajectory/run_trajectory_eval.py plus tasks/ with per-instance Dockerfiles, data and tests/test_outputs.py verifiers (checked 2026-10-10)
+  notes: paper Appendix K.1 (17 from SkillsBench + 3 new), Sec 4.1 (solver); repo .env.example, README, LICENSE (MIT), skills/ tree
+  scale.avg_context_length: not reported in the paper; only solving token consumption (Table 2) is given

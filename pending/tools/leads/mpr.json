@@ -1,0 +1,34 @@
+{
+ "name": "MPR",
+ "slug": "mpr",
+ "leads": {
+  "registry_key": "arxiv:2508.13250",
+  "tier": "P0",
+  "arxiv": "2508.13250 (arXiv API: v1 2025-08-18; title: Explicit v.s. Implicit Memory: Exploring Multi-hop Complex Reasoning Over Personalized Information)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Resources / Benchmarks and Tasks / Personalized Task Evaluation",
+    "name": "MPR",
+    "paper_url": "https://arxiv.org/pdf/2508.13250",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "personalization",
+    "parametric"
+   ],
+   "extra_tags": [
+    "multi_hop_qa"
+   ],
+   "kind_reason": "Paper builds a multi-hop personalized reasoning dataset plus a unified evaluation framework (released at nuster1128/MPR) comparing explicit (RAG over textual user statements) and implicit (LoRA fine-tuning) memory; HybridMem method is a secondary contribution."
+  },
+  "phase1_verified_types": {
+   "parametric": "Sec. 1: 'Implicit memory refers to storing users' personalized information within model parameters'. Sec. 3.4.2/5.1: LoRA-based MaskSFT/AskSFT are run against explicit RAG memory, all scored by Exact Match on the same 2-10 hop QA."
+  },
+  "paper_hint": "https://arxiv.org/abs/2508.13250",
+  "code_hint": "https://github.com/nuster1128/MPR"
+ }
+}

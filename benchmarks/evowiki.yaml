@@ -1,0 +1,41 @@
+name: EvoWiki
+slug: evowiki
+release_date: 2024-12
+venue: ACL 2025
+memory_types:
+- semantic_knowledge_update
+- parametric
+links:
+  paper: https://arxiv.org/abs/2412.13582
+  code: https://github.com/wtangdev/EvoWiki
+  data: https://mega.nz/folder/lmEVgZqC#4OpyAY57gBiJFE1I18_fdA
+scale:
+  conversations: null
+  questions: 10264
+  avg_context_length: 4,451.90-5,411.98 per split (Table 2 'Avg. length of context'; unit not stated)
+  notes: '10,264 = sum of Table 2 questions: Stable 3,819, Evolved 3,491, Uncharted 2,954 (single- and multi-hop up to 3 hops; paper gives no total). No conversations. Context length is Table 2''s per-split average and the paper states no unit. RAG uses top-15 256-token chunks from the EvoWiki corpus or a 370K-article Wikipedia corpus.'
+metrics:
+- Exact Match (EM)
+- EM against all answers incl. outdated ones (evolved split, reported in parentheses)
+- Simplified Persuasion Score (probability shift, CL analysis)
+judge_model: null
+repro_level: paper_only
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'Published as ACL 2025 long paper 2025.acl-long.47. Its Table 2 statistics match arXiv v1, and it adds GPT-4o/DeepSeek-V3 results in Appendix A. Checked 2026-10-10: the official repo has only a README (code marked "Coming soon", one commit on 2024-12-18, no licence file). The MEGA dataset folder linked from the README is empty (0 B). The paper designs the benchmark to update automatically, and the stable/evolved/uncharted split depends on the evaluated LLM''s knowledge cut-off date.'
+sources:
+  name: 'arXiv API title ''EvoWiki: Evaluating LLMs on Evolving Knowledge''; repo README heading'
+  release_date: 'arXiv API: 2412.13582v1 published 2024-12-18 (only version)'
+  venue: 'ACL Anthology 2025.acl-long.47 (ACL 2025, Volume 1: Long Papers, July 2025, pp. 948-964, DOI 10.18653/v1/2025.acl-long.47); arXiv entry has no journal_ref'
+  memory_types: 'paper §4.1/§4.3-4.5: closed-book vs RAG over updated Wikipedia corpus, with evolved facts scored on the latest answer vs outdated answers (knowledge update/conflict); CPT and SFT inject new knowledge into weights and are compared with RAG under one protocol (parametric)'
+  links.paper: arXiv abs page 2412.13582
+  links.code: paper footnote 1 (arXiv v1 and ACL PDF) links github.com/wtangdev/EvoWiki
+  links.data: repo README 'You can download the data from the [url]' points to this MEGA folder; opened 2026-10-10, folder 'dataset' shows Total size 0 B / Empty folder (date added 12/17/2024)
+  scale.questions: 'paper Table 2 (arXiv v1 HTML §3.1; identical in ACL PDF): 3,819 + 3,491 + 2,954, summed'
+  scale.conversations: 'null: QA benchmark over Wikidata/Wikipedia facts, no conversations'
+  scale.avg_context_length: 'paper Table 2 ''Avg. length of context'': Stable 5,411.98, Evolved 4,451.90, Uncharted 5,014.30 (no unit given)'
+  scale.notes: paper Table 2 and §3.2 (multi-hop up to three hops); §4.1 retrieval setup (256-token chunks, top-15, 370K Wikipedia articles)
+  metrics: 'paper §4.1: ''Performance is measured with the exact match (EM) metric''; Table 4/5 captions: outdated-answer precision in parentheses; §4.4 simplified Persuasion Score (Figure 4)'
+  judge_model: 'null: scoring is EM only. GPT-4o-mini is used only to refine question wording (§3.2). Human evaluation (Table 3) assesses data quality, not model outputs'
+  repro_level: 'repo tree (gh api git/trees, 2026-10-10) contains only README.md, which says ''Code: Coming soon''. The README''s MEGA dataset folder is empty (0 B). No Hugging Face dataset was found'
+  notes: ACL Anthology page and PDF (Appendix A larger LLMs); GitHub API (one commit 2024-12-18, license null); MEGA folder info panel opened 2026-10-10

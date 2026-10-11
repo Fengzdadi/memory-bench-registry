@@ -1,0 +1,15 @@
+{
+ "name": "EngramBench",
+ "slug": "engrambench",
+ "leads": {
+  "registry_key": "arxiv:2609.39284",
+  "tier": "P0",
+  "arxiv": "2609.39284 (arXiv API: v1 ?; title: None)",
+  "phase1_verified_types": {
+   "procedural_workflow": "Sec 4.3: \"Phase 1: Skill Generation & Freezing. During the learning phase, the harness distills historical trajectories into a reusable Skill Bank\"; Phase 2 runs 13 transfer tasks with the frozen bank.",
+   "coding_cross_session": "Sec. 4.3 Phase 2: agent gets \"the current task's README, a clean workspace scaffold, and the frozen Skill Bank\"; it is \"restricted from ... accessing the raw workspaces, interaction histories, or codebases from the learning phase.\""
+  },
+  "paper_hint": "https://arxiv.org/abs/2609.39284",
+  "code_hint": "https://github.com/Virgil-Tan/EngramBench"
+ }
+}

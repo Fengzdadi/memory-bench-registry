@@ -1,0 +1,13 @@
+{
+ "name": "ForgetBench",
+ "slug": "forgetbench",
+ "leads": {
+  "registry_key": "arxiv:2607.26455",
+  "tier": "P0",
+  "arxiv": "2607.26455 (arXiv API: v1 ?; title: None)",
+  "phase1_verified_types": {
+   "parametric": "Sec 1: \"our work focuses on intrinsic parametric memory, where knowledge is encoded into model parameters and forgetting emerges from ... subsequent model updates.\" Sec 5.1 evaluates MEMIT, WISE, AlphaEdit and UltraEdit sequentially (T=500)."
+  },
+  "paper_hint": "https://arxiv.org/abs/2607.26455"
+ }
+}

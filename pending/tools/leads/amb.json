@@ -1,0 +1,35 @@
+{
+ "name": "AMB (Agent Memory Benchmark)",
+ "slug": "amb",
+ "leads": {
+  "registry_key": "name:agentmemorybenchmark",
+  "tier": "P0",
+  "community_list_entries": [
+   {
+    "source": "teleai",
+    "section": "📏 Benchmarks / 💬 Plain-Text Benchmarks / 🗓️ 2026",
+    "name": "Agent Memory Benchmark (AMB)",
+    "paper_url": null,
+    "code_url": "https://github.com/vectorize-io/agent-memory-benchmark",
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "conversational_longterm",
+    "personalization",
+    "semantic_knowledge_update",
+    "coding_cross_session"
+   ],
+   "extra_tags": [
+    "retrieval_precision"
+   ],
+   "kind_reason": "Open harness and leaderboard (Vectorize) that scores memory providers on accuracy, latency and cost across bundled datasets: BEAM, LifeBench, LoCoMo, LongMemEval, PersonaMem, PrecisionMemBench and sde-bench. sde-bench is a coding-agent memory set and is marked published=False in the loader."
+  },
+  "phase1_verified_types": {
+   "coding_cross_session": "src/memory_bench/dataset/sdebench.py: \"the decision — a past developer chat or a documented git commit\"; sde-bench README: decision \"made in a past developer chat and never written into the repo\"."
+  },
+  "code_hint": "https://github.com/vectorize-io/agent-memory-benchmark",
+  "note": "sde-bench (Vectorize) is one of AMB's datasets and the coding-memory part; cover it within this entry."
+ }
+}

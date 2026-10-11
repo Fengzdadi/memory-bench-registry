@@ -1,0 +1,41 @@
+name: PersonaMem-v2
+slug: personamem-v2
+release_date: 2025-12
+venue: arXiv preprint
+memory_types:
+- personalization
+- conversational_longterm
+- memory_security
+links:
+  paper: https://arxiv.org/abs/2512.06688
+  code: https://github.com/bowen-upenn/PersonaMem-v2
+  data: https://huggingface.co/datasets/bowen-upenn/PersonaMem-v2
+scale:
+  conversations: 195
+  questions: 5000
+  avg_context_length: ~31.6K tokens (32k setting); ~114.5K tokens (128k setting)
+  notes: questions = 5,000 benchmark queries (paper 2.4). conversations = 195 persona chat histories in benchmark/multimodal/benchmark.csv, the split the official run scripts and paper-era frontier evals (Fig. 4) use. The text split has 200 personas (a superset) and was used for trained-model evals (Fig. 6). The paper reports only 1,000 personas overall. Averages are per-query means of the total_tokens columns in the multimodal split.
+metrics:
+- MCQ accuracy (4 options)
+- Open-ended accuracy (LLM-as-judge)
+judge_model: GPT-5-Chat
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'Train/val sizes differ by source. The paper says 18,000/2,000; the HF release, counted 2026-10-10, has 18,549/2,061 (text) and 18,990/2,111 (multimodal). The text and multimodal benchmark CSVs have 5,000 queries each. The multimodal 32k histories hold 183 base64 image messages, but none is tied to a benchmark query: photo-scenario items describe the photos in text. Most official run_*.sh scripts default to --max_items 1000. 128k histories are padded with math/code dialogues. Repo code queries one judge; the paper uses three. Repo has no LICENSE; HF data is CC-BY-4.0. PersonaMem-v3 (arXiv 2608.21381) is a separate paper.'
+sources:
+  name: paper title and repo README (arXiv 2512.06688)
+  release_date: 'arXiv API: 2512.06688v1 published 2025-12-07 (only v1 listed)'
+  venue: arXiv API has no journal_ref; the comment only gives the HF data link; repo/HF README cite it as an arXiv preprint; web search (2026-10-10) found no OpenReview/conference version
+  memory_types: 'arXiv v1 HTML: section 2.2 covers multi-session histories up to 32k/128k (conversational_longterm); implicit user preferences and Figs. 4-5 cover personalization; section 2.3 covers sensitive info and do-not-remember requests, and Fig. 5 reports ''Unlearning'' accuracy (memory_security). semantic_knowledge_update dropped: in both HF benchmark CSVs (counted 2026-10-10) every updated=True row is pref_type ask_to_forget (''Do not remember X in memory''; 1,047 text, 1,027 multimodal). No other row has prev_pref. Fig. 5 shows Dynamic and Unlearning at the identical 35.4 +/- 10.5%, so they are the same items. multimodal not tagged: the 195 multimodal 32k histories contain 183 base64 image_url messages (95 personas), but none is the evidence turn (related_conversation_snippet) of any of the 5,000 queries. The 96 pref_type=multimodal items'' evidence turns are plain-text photo descriptions with no image attached (also checked in one 128k history).'
+  links.paper: arXiv abs page 2512.06688
+  links.code: github.com/bowen-upenn/PersonaMem-v2 (owner = first author; README states 'official repository' of arXiv 2512.06688; HF card links it as the codebase). The lead bowen-upenn/PersonaMem is the v1 (COLM 2025) repo.
+  links.data: 'arXiv comment and paper author block link huggingface.co/datasets/bowen-upenn/PersonaMem-v2; HF API: public, not gated, CC-BY-4.0. bowen-upenn/ImplicitPersona redirects here.'
+  scale.conversations: 'Counted 2026-10-10: unique persona_id / chat_history_32k_link in HF benchmark/multimodal/benchmark.csv = 195. The text benchmark.csv has 200; the 195 are a subset of them. Neither number is in the paper, which gives only 1,000 personas overall (section 2.1). The multimodal split is treated as the main set because the repo README eval section and all run_*.sh scripts (HEAD and paper-era commit 8d4fbef1) use data/benchmark/multimodal/benchmark.csv with --use_multimodal, and run_judges.sh points to results/multimodal/<model> files for the Fig. 4 models. Trained-model inference (verl_custom/scripts/run_qwen3_4b_inference.sh at 8d4fbef1) uses benchmark_text_32k.parquet.'
+  scale.questions: 'Paper section 2.4: ''5,000 Q&A pairs in the benchmarking set''; both HF benchmark CSVs have 5,000 rows (counted 2026-10-10)'
+  scale.avg_context_length: The paper gives only maximums ('up to 32,000 tokens'; 128,000 tokens, section 2.2). Per-query means of total_tokens_in_chat_history_32k/128k in HF benchmark/multimodal/benchmark.csv are 31,629 / 114,503 (counted 2026-10-10). The text split gives 31,556 / 114,641.
+  scale.notes: Local count of the HF benchmark CSVs (2026-10-10); HF column_descriptions.md; repo scripts/inference_scripts/*.sh and verl_custom/scripts/run_qwen3_4b_inference.sh at commit 8d4fbef1
+  metrics: 'Paper section 4.1 and Fig. 4: accuracy under MCQ (four options; random guess shown as a dashed line) and open-ended settings (LLM-as-a-judge), at 32k and 128k'
+  judge_model: 'Paper section 4.1: ''three independent GPT-5-Chat instances score each response''. Also used as reward judges in section 4.2.'
+  repro_level: Repo tree (checked 2026-10-10) has inference.py (MCQ + generative eval, --run_judges), inference_utils.py (judge prompts), and scripts/inference_scripts/run_*.sh per model plus run_judges.sh. Data is downloadable from HF; the benchmark CSVs and the 195 multimodal 32k histories were downloaded and parsed.
+  notes: HF dataset card and datasets-server split sizes; inference_utils.py evaluate_narrow_judge loops range(1); gh API license null; repo README citations; --max_items 1000 appears in 9 of 11 run_*.sh at HEAD (not in gpt5_mini/gpt5_nano), checked 2026-10-10; image-message scan of the 195 multimodal 32k histories against related_conversation_snippet (2026-10-10).

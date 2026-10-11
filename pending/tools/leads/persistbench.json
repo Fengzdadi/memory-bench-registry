@@ -1,0 +1,28 @@
+{
+ "name": "PersistBench",
+ "slug": "persistbench",
+ "leads": {
+  "registry_key": "arxiv:2602.01146",
+  "tier": "P2",
+  "arxiv": "2602.01146 (arXiv API: v1 2026-02-01; title: PersistBench: When Should Long-Term Memories Be Forgotten by LLMs?)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "PersistBench: When Should Long-Term Memories Be Forgotten by LLMs?",
+    "paper_url": "https://arxiv.org/abs/2602.01146",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "personalization"
+   ],
+   "extra_tags": [
+    "memory_safety"
+   ],
+   "kind_reason": "Benchmark measuring safety risks of persistent long-term memories in conversational assistants. It covers cross-domain leakage, memory-induced sycophancy, and (per repo) beneficial memory usage. 18 LLMs were evaluated. An Inspect-native implementation also exists."
+  }
+ }
+}

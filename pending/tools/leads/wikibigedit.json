@@ -1,0 +1,14 @@
+{
+ "name": "WikiBigEdit",
+ "slug": "wikibigedit",
+ "leads": {
+  "registry_key": "arxiv:2503.05683",
+  "tier": "P0",
+  "arxiv": "2503.05683 (arXiv API: v1 ?; title: None)",
+  "phase1_verified_types": {
+   "parametric": "README (ExplainableML/WikiBigEdit): 'over 500K question-answer pairs for knowledge editing'; paper Sec. 4 compares ROME/R-ROME/MEMIT/WISE and LoRA 'trained for 10 epochs on each timestep' against a RAG memory."
+  },
+  "paper_hint": "https://arxiv.org/abs/2503.05683",
+  "code_hint": "https://github.com/ExplainableML/WikiBigEdit"
+ }
+}

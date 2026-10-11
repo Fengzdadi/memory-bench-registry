@@ -1,0 +1,45 @@
+name: PM-Bench
+slug: pm-bench
+release_date: 2026-07
+venue: COLM 2026
+memory_types:
+- semantic_knowledge_update
+links:
+  paper: https://arxiv.org/abs/2607.12385
+  code: https://github.com/genglinliu/PMBench
+  data: null
+scale:
+  conversations: 1
+  questions: 81
+  avg_context_length: 80 steps (10–13 steps per day over 7 days)
+  notes: Main set is one fixed seven-day scenario (data/synthetic_week_v9.json). 81 is the number of scored executable tasks; there are 83 task definitions in all (57 event-based, 26 time-based, 7 cross-day), plus 11 update events, 11 state channels and 74 lures. The released JSON, checked on 2026-10-10, holds 80 steps, 83 tasks, 74 lures and 11 updates.
+metrics:
+- Set-F1 (macro and micro, over prospective action selections)
+- Precision
+- Cross-day hit rate
+- Update hit rate
+- False positives (count)
+- State query counts
+- Monitoring-oriented hit rates (narrative-cued, clock-monitoring-required, hidden-channel-monitoring-required)
+- 'Diagnostic breakdown: hit/on-time, late, miss, false alarm, wrong-content, update violation, dependency violation, exact-set match'
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'Tests prospective memory: carrying out deferred intentions at a future cue or time, including after cancel, override or reschedule updates and when cues sit in hidden state channels that must be queried. Only one deterministic synthetic week (v9) is released, and every reported result uses it. On 2026-10-10 the repo had no licence file. The README points to runs/March_ALL_results_v9/, but the folder is runs/all_results_v9/. The abstract credits 65.1% F1 to a GPT-5.4 agent, but Table 2 gives 65.1 as the optional-heartbeat macro Set-F1 averaged across all 8 models.'
+sources:
+  name: arXiv 2607.12385 title and abstract; repo README heading 'PM-Bench'
+  release_date: 'arXiv API: 2607.12385v1 published 2026-07-14'
+  venue: arXiv comment 'Published as a conference paper at COLM 2026'; OpenReview note U2cY7eWPmb (authors Genglin Liu, Saadia Gabriel) has venue 'COLM 2026', venueid colmweb.org/COLM/2026/Conference
+  memory_types: 'paper §3.1–3.2 and §4.4: deferred intentions must be kept and revised under cancel/override/reschedule updates, with hidden state channels to monitor; Table 2 reports update and cross-day hit rates'
+  links.paper: arXiv abs page 2607.12385
+  links.code: paper footnote 1 'Benchmark repo at https://github.com/genglinliu/PMBench.git'; gh api repos/genglinliu/PMBench (description 'Repo for paper PM-Bench...')
+  links.data: data/synthetic_week_v9.json ships inside the repo; Hugging Face searches for 'PMBench', 'pm-bench' and author genglinliu returned no matching dataset (2026-10-10)
+  scale.conversations: 'paper §4.1 / A.2: every method is evaluated on the same simulated week, one fixed deterministic scenario'
+  scale.questions: paper Table 1 'Scored executable tasks 81' (83 task definitions); a released score.md shows Hit+Late+Miss = 55+1+25 = 81
+  scale.avg_context_length: 'paper Table 1: total steps 80, 10–13 steps per day, 7 days; matches the released JSON (step counts 13/13/10/11/12/10/11)'
+  scale.notes: paper Table 1; counts recomputed from data/synthetic_week_v9.json on 2026-10-10
+  metrics: paper §4.1 'Primary metric' (Set-F1), Table 2 (macro/micro Set-F1, precision, cross-day, update, FP, queries), Figure 4 (monitoring hit rates), Appendix A.4 diagnostic breakdown
+  judge_model: 'paper §4.1 / A.4: scoring is done by a rule-based, replay-based evaluator against ground-truth due sets; no LLM judge'
+  repro_level: repo tree has sim/run_eval.py (unified runner with --score), sim/pm_bench.py (validate/run/run-llm/score subcommands), sim/launch_experiments/run_all_setups.sh and sim/replay_union_votes.py, plus data/synthetic_week_v9.json (checked 2026-10-10)
+  notes: 'gh api: no LICENSE in the tree and license null; the README path differs from the actual runs/all_results_v9/ folder; abstract compared with Table 2/Table 3 (GPT-5.4 HB-opt 79.1)'

@@ -1,0 +1,38 @@
+{
+ "name": "AMemGym",
+ "slug": "amemgym",
+ "leads": {
+  "registry_key": "arxiv:2603.01966",
+  "tier": "P1",
+  "arxiv": "2603.01966 (arXiv API: v1 2026-03-02; title: AMemGym: Interactive Memory Benchmarking for Assistants in Long-Horizon Conversations)",
+  "community_list_entries": [
+   {
+    "source": "teleai",
+    "section": "📏 Benchmarks / 🎮 Dynamic Benchmarks & Simulation Environments / 🗓️ 2026",
+    "name": "AMemGym: Interactive Memory Benchmarking for Assistants in Long-Horizon Conversations",
+    "paper_url": "https://arxiv.org/abs/2603.01966",
+    "code_url": "https://github.com/AGI-Eval-Official/amemgym",
+    "data_url": null
+   },
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "AMemGym: Interactive Memory Benchmarking for Assistants in Long-Horizon Conversations",
+    "paper_url": "https://arxiv.org/pdf/2603.01966",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "conversational_longterm",
+    "personalization",
+    "semantic_knowledge_update"
+   ],
+   "extra_tags": [
+    "interactive_on_policy_evaluation"
+   ],
+   "kind_reason": "Interactive on-policy memory benchmark environment (ICLR 2026) with simulated users across multi-period, multi-session conversations whose latent states evolve; questions re-asked at multiple points."
+  }
+ }
+}

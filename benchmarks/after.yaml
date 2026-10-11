@@ -1,0 +1,40 @@
+name: AFTER
+slug: after
+release_date: 2026-06
+venue: arXiv preprint
+memory_types:
+- procedural_workflow
+links:
+  paper: https://arxiv.org/abs/2606.23127
+  code: https://github.com/DavydenkoGr/AFTER
+  data: https://huggingface.co/datasets/DavydenkoGr/AFTER
+scale:
+  conversations: null
+  questions: 382
+  avg_context_length: null
+  notes: questions = 382 tasks (318 single-skill, 64 multi-skill) across 6 roles and 22 skills. The paper defines 50/25/25 train/validation/test splits per (role, skill) cell and reports results on a 185-task train split. The public release has 129 test-split tasks (de 27, ds 23, genai 22, swe 22, infra 19, pm 16). There are no conversations, and context length is not reported.
+metrics:
+- 'M1: average partial progress (fraction of verifier tests passed per task, averaged over attempts)'
+- 'M2: full-pass rate (fraction of attempts passing all tests; primary metric)'
+- Token usage and dollar cost (Appendix G, auto-agent runs)
+judge_model: null
+repro_level: data_public
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'The public release (Hugging Face dataset plus a co-author''s GitHub mirror, Apache-2.0, not gated) has only 129 tasks, all marked split "test" in tasks/manifest.json (counted 2026-10-10). The paper and README describe 382 tasks with 50/25/25 train/validation/test splits. The paper''s Evolution harness and the train/validation tasks are not released. The repo provides only per-task data generators, reference solutions and pytest verifiers. The paper is titled "Managing Procedural Memory in LLM Agents: Control, Adaptation, and Evaluation".'
+sources:
+  name: 'arXiv abstract and §2: ''We introduce AFTER, a benchmark of 382 realistic enterprise tasks''; HF README title ''AFTER''; arXiv API title: ''Managing Procedural Memory in LLM Agents: Control, Adaptation, and Evaluation'''
+  release_date: 'arXiv API: 2606.23127v1 published 2026-06-22 (only version listed)'
+  venue: arXiv API entry has no journal_ref/comment; HF/GitHub README cites it as @misc arXiv eprint 2606.23127; no venue stated in paper
+  memory_types: 'Abstract + §1: procedural memory, ''a reusable layer of instructions, procedures, and strategies distilled from prior trajectories''; App. B: Collect-Diagnose-Revise-Promote evolution from train-split traces; App. D.1: test split of held-out tasks plus cross-role and cross-model transfer'
+  links.paper: arXiv API id 2606.23127
+  links.code: GitHub DavydenkoGr/AFTER (owner = co-author Grigorii Davydenko, same account as the HF dataset in the paper's footnote 1; README cites arXiv 2606.23127; created 2026-06-19). Not linked in the paper itself; it mirrors the HF dataset contents
+  links.data: 'Paper footnote 1 (§1): https://huggingface.co/datasets/DavydenkoGr/AFTER; HF API: public, not gated, apache-2.0, last modified 2026-06-30'
+  scale.questions: 'Abstract, §2, Table 1 and Table E.1: 382 tasks (56 adapted + 38 author-written + 288 LLM-drafted); §2.1: 318 single-skill + 64 multi-skill tasks'
+  scale.conversations: 'Not applicable: tasks are agentic workplace tasks, not conversations'
+  scale.avg_context_length: Not reported in paper or README
+  scale.notes: App. D.1 (50/25/25 splits), App. I Table I.1 caption ('185-task train split'), tasks/manifest.json in the HF/GitHub release (129 entries, all split=test; counted 2026-10-10)
+  metrics: '§2.3 Eqs. (1)-(2): M1 partial progress, M2 complete task success; §4.1: ''We report M2 as the primary metric''; App. G Table G.1: generated/total tokens and cost in USD'
+  judge_model: 'No LLM judge: correctness is scored by per-task pytest verifiers (§2.2, App. D.2 tests/test_outputs.py); task quality review was done by two human authors (App. E)'
+  repro_level: Opened the HF dataset (API file list plus downloaded README.md and tasks/manifest.json) and the GitHub tree (6089 paths) on 2026-10-10. Data and per-task verifiers tasks/{role}/{task_id}/tests/test_outputs.py are present, but there is no benchmark-level runner or Evolution harness script. The README's 'Evaluation Protocol' tells users to write their own runner.
+  notes: HF/GitHub tasks/manifest.json (129 test tasks) vs paper §2/App. D.1 (382 tasks, 50/25/25 splits); GitHub tree has only README, requirements*.txt, skills/ and tasks/ at the top level

@@ -1,0 +1,47 @@
+name: SWE-ContextBench
+slug: swe-contextbench
+release_date: 2026-02
+venue: arXiv preprint
+memory_types:
+- coding_cross_session
+- procedural_workflow
+links:
+  paper: https://arxiv.org/abs/2602.08316
+  code: https://github.com/jiayuanz3/SWEContextBench
+  data: https://huggingface.co/datasets/jiayuanz3/SWEContextBench
+scale:
+  conversations: null
+  questions: 376
+  avg_context_length: 25,633.7 tokens (avg full past-context trajectory)
+  notes: 'questions = 376 related (evaluated) tasks in paper v3 Table 1; 1,100 experience tasks form the context pool (1,476 total). Lite: 300 experience / 99 related tasks (used for Tables 4-5). conversations null: task-based, no dialogues. Context length = average past trajectory; summaries average 217.1 tokens. HF release has 1,007 experience / 362 related rows.'
+metrics:
+- Resolved rate (%)
+- File / Function / Line correct localization (%)
+- FAIL_TO_PASS pass rate, test-level and task-level (%)
+- PASS_TO_PASS pass rate, test-level and task-level (%)
+- Patch N/A (%)
+- Avg tool calls
+- Avg tokens
+- Runtime per task
+- API cost ($)
+- Retrieval score and matched rate of top-k retrieved contexts (%)
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: arXiv v1 (Feb 2026) covered only the Lite set (300 base / 99 related tasks); v2/v3 expand to 1,100 base / 376 related tasks across 51 repos. The released data (HF, MIT; GitHub repo has no licence file) has 1,007 experience and 362 related rows (357 unique IDs) across 53 repos, counted on 2026-10-10. Only the Lite past-experience trajectory pool (300 JSONL) is released. Scoring is test-based and uses Docker Hub images.
+sources:
+  name: arXiv 2602.08316 title/abstract ('SWE Context Bench'; benchmark named SWE-ContextBench throughout) and repo README
+  release_date: 'arXiv API: 2602.08316v1 published 2026-02-09T06:44:45Z'
+  venue: arXiv abs page v1-v3 has no comments/journal_ref; repo README and HF card cite only the arXiv paper; web search found no venue (checked 2026-10-10)
+  memory_types: 'paper v3 §2.2.2, §3.1: trajectories from 1,100 experience tasks form a context pool; 376 related tasks run ''in a fresh environment'' with retrieval from the pool only, no state carryover; Tables 3-5 measure how reusing prior-task trajectories/summaries (oracle/free, Mem0, OpenViking, LangMem, Supermemory) changes resolution, runtime and cost on later related coding tasks'
+  links.paper: arXiv abs 2602.08316
+  links.code: 'GitHub jiayuanz3/SWEContextBench: owner name ''Jiayuan Zhu'' (first author and arXiv submitter); README links arXiv 2602.08316 (repo not linked in paper text)'
+  links.data: 'HF API jiayuanz3/SWEContextBench: not gated, license mit, tag arxiv:2602.08316; card links the GitHub repo; data/*.parquet (5 files)'
+  scale.questions: 'paper v3 Table 1 and §2.2.5: 1,100 experience tasks + 376 related tasks = 1,476; §2.3 Lite 300/99'
+  scale.avg_context_length: 'paper v3 §3.3: ''full context trajectories average 25,633.7 tokens''; summaries 217.1 tokens'
+  scale.notes: 'HF parquet row counts on 2026-10-10: Experience 1,007; Related 362 (357 unique instance_id); Lite_Experience 300; Related_Lite 99; Relationship 362; README states 1,007/362 across 53 repos'
+  metrics: paper v3 Table 3 (localization %, Resolved %, tool calls, tokens, time, cost), Table 4 (Patch N/A, FAIL_TO_PASS/PASS_TO_PASS test- and task-level, Resolved, time, cost), Table 5 (retrieval score, avg tokens, matched %)
+  judge_model: 'no LLM judge: correctness is test-based (FAIL_TO_PASS / PASS_TO_PASS, §2.2.6); GPT-4o-mini appears only inside the Mem0/LangMem baselines for memory extraction (App. A.2)'
+  repro_level: repo has evaluation.sh (subsets lite|multilingual|verified|full) calling swebench_memory/harness/combine_instances.py and swebench_memory/harness/run_evaluation.py; task cases in cases/ and data on HF; Docker Hub jiayuanz3/swecontextbench lists 358 tags (checked 2026-10-10)
+  notes: arXiv v1 HTML §2.3 (300/99 Lite only) vs v2 abstract / v3 Table 1 (1,100/376); GitHub API license null; repo tree has 'cases/SWEContextBench Lite Past Experience' (300 .jsonl) only

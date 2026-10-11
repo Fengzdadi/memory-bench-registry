@@ -1,0 +1,38 @@
+{
+ "name": "Mem-Gallery",
+ "slug": "mem-gallery",
+ "leads": {
+  "registry_key": "arxiv:2601.03515",
+  "tier": "P2",
+  "arxiv": "2601.03515 (arXiv API: v1 2026-01-07; title: Mem-Gallery: Benchmarking Multimodal Long-Term Conversational Memory for MLLM Agents)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Resources / Benchmarks and Tasks / Long-Term Memory Evaluation",
+    "name": "Mem-Gallery",
+    "paper_url": "https://arxiv.org/pdf/2601.03515",
+    "code_url": null,
+    "data_url": null
+   },
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "Mem-Gallery: Benchmarking Multimodal Long-Term Conversational Memory for MLLM Agents",
+    "paper_url": "https://arxiv.org/pdf/2601.03515",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "conversational_longterm",
+    "semantic_knowledge_update",
+    "episodic"
+   ],
+   "extra_tags": [
+    "multimodal"
+   ],
+   "kind_reason": "Benchmark for multimodal long-term conversational memory (240 multi-session dialogues, 1,003 images, 1,711 QA) with tasks incl. factual retrieval, temporal reasoning, knowledge resolution and conflict detection."
+  }
+ }
+}

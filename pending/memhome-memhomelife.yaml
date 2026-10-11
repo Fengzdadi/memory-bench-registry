@@ -1,0 +1,42 @@
+name: MemHome / MemHomeLife
+slug: memhome-memhomelife
+release_date: 2026-04
+venue: arXiv preprint
+memory_types:
+- personalization
+- semantic_knowledge_update
+- conversational_longterm
+links:
+  paper: https://arxiv.org/abs/2604.10110
+  code: null
+  data: null
+scale:
+  conversations: null
+  questions: 389
+  avg_context_length: '~14.3 interaction turns per MemHomeLife dialogue (MemHome eval samples: ~0.82 history turns)'
+  notes: questions = MemHome held-out eval set (389 of 1,945 samples; 53 No-Memory, 220 Memory Use, 116 Memory State Change; other 80% used for training). MemHome eval samples average 0.82 history turns, 1.43 memories, ~117 devices. MemHomeLife dialogues average 14.3 turns (max 33), 7.2 sessions (max 13), ~11 days; number of dialogues not reported.
+metrics:
+- Token-level F1
+- BLEU-1
+- LLM-as-Judge accuracy (Acc)
+judge_model: null
+repro_level: paper_only
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: Chinese-language smart-home benchmarks from Midea AI Research Center, built from anonymized real user logs. MemHome = single-session samples with candidate memories; MemHomeLife = multi-session dialogues with evolving memory. The abstract says model and data "will be open-sourced soon"; no official repo, Hugging Face dataset or paper-linked release was found (checked 2026-10-10). LLM-as-judge accuracy uses two unnamed judge models plus a third as tie-breaker. Content-level judging is skipped for No-Memory samples. MemHomeLife sample count is not reported.
+sources:
+  name: 'arXiv 2604.10110v1 abstract and Sec. 1/5: authors name the benchmarks MemHome and MemHomeLife'
+  release_date: 'arXiv API: 2604.10110v1 published 2026-04-11 (only version)'
+  venue: arXiv API entry has no journal_ref/comments; PDF/HTML carry no venue line; OpenAlex lists only arXiv locations (checked 2026-10-10)
+  memory_types: 'paper Sec. 3-6: model must add/update/delete entries in an external memory bank (Memory State Change) and rewrite device commands from stored user preferences (Memory Use); MemHomeLife evaluates long-term multi-session interactions with evolving memory (Sec. 1, 5.1-5.2)'
+  links.paper: arXiv abs page https://arxiv.org/abs/2604.10110
+  links.code: 'null: paper (HTML and PDF) contains no repo link; abstract says model and data ''will be open-sourced soon''; GitHub repo/code search for MemHome, MemHomeLife and the arXiv id found no official repo (only an unrelated 2022 KiriokkonDon/MemHome); no Midea-AIRC GitHub org found'
+  links.data: 'null: Hugging Face searches (MemHome, midea, arxiv:2604.10110 filter) and the Midea-AIRC HF org list no MemHome dataset; HF paper page does not exist'
+  scale.conversations: 'null: paper does not report the number of MemHomeLife dialogues; MemHome samples are independent single-session tasks'
+  scale.questions: 'paper Sec. 5.2 and Table 2: 1,945 MemHome samples, 20% (389) held out as evaluation set (53/220/116 by category)'
+  scale.avg_context_length: 'paper Sec. 5.2: MemHomeLife dialogues average 14.3 interaction turns; Table 2: MemHome eval Hist. Turns avg 0.82'
+  scale.notes: paper Sec. 5.2 and Table 2 (arXiv v1 HTML)
+  metrics: 'paper Sec. 6 and Tables 3-6: token-level F1, BLEU-1 (B1), LLM-as-Judge accuracy (Acc); appendix B gives F1/BLEU-1 formulas'
+  judge_model: 'null: paper Sec. 6 uses LLM-as-judge (two independent judge models, a third on disagreement; prompt in appendix C.4) but never names the judge models'
+  repro_level: paper read in full; no official code or data release found on GitHub or Hugging Face (checked 2026-10-10)
+  notes: arXiv v1 abstract, Sec. 5-6, Table 1 (language ZH), affiliations

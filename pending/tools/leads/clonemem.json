@@ -1,0 +1,46 @@
+{
+ "name": "CloneMem",
+ "slug": "clonemem",
+ "leads": {
+  "registry_key": "arxiv:2601.07023",
+  "tier": "P1",
+  "arxiv": "2601.07023 (arXiv API: v1 2026-01-11; title: CloneMem: Benchmarking Long-Term Memory for AI Clones)",
+  "community_list_entries": [
+   {
+    "source": "tsinghua",
+    "section": "Benchmark",
+    "name": "CloneMem",
+    "paper_url": "https://arxiv.org/abs/2601.07023",
+    "code_url": "https://github.com/AvatarMemory/CloneMemBench",
+    "data_url": null
+   },
+   {
+    "source": "iaar",
+    "section": "Resources / Benchmarks and Tasks / Long-Term Memory Evaluation",
+    "name": "CloneMem",
+    "paper_url": "https://arxiv.org/pdf/2601.07023",
+    "code_url": null,
+    "data_url": null
+   },
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "CloneMem: Benchmarking Long-Term Memory for AI Clones",
+    "paper_url": "https://arxiv.org/pdf/2601.07023",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "personalization",
+    "episodic",
+    "semantic_knowledge_update"
+   ],
+   "extra_tags": [
+    "non_conversational_life_traces"
+   ],
+   "kind_reason": "Benchmark for long-term memory of AI clones grounded in non-conversational digital traces (diaries, social posts, emails) over 1-3 years, with tasks tracking evolving personal states."
+  }
+ }
+}

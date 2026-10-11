@@ -1,0 +1,43 @@
+name: RealPref
+slug: realpref
+release_date: 2026-03
+venue: Findings of EMNLP 2026
+memory_types:
+- personalization
+- conversational_longterm
+links:
+  paper: https://arxiv.org/abs/2603.04191
+  code: https://github.com/GG14127/RealPref
+  data: null
+scale:
+  conversations: 100
+  questions: 1300
+  avg_context_length: ~37K tokens (Normal config); configs span 2K-247K tokens
+  notes: conversations = 100 synthetic users, each with one concatenated long-horizon history per context config. questions = 1,300 preference-query pairs (1,000 original + 300 generalized; confirmed by count of repo QA files on 2026-10-10), each posed as MCQ, true/false (T and F variants) and open-ended. 4 preference-expression types; 1,000 shared random sessions pad context.
+metrics:
+- Accuracy (multiple-choice)
+- Accuracy (true-or-false)
+- Preference Awareness score (1-5, LLM judge)
+- Preference Alignment score (1-5, LLM judge)
+- Answer Quality score (1-5, LLM judge)
+judge_model: Claude Sonnet 4
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: Fully synthetic data (GPT-4.1 pipeline seeded from PersonaHub personas). Data and code are in the GitHub repo; no separate dataset page and no licence file as of 2026-10-10. Context length is set via test_data/context_history_index.json (8 configs in repo, 6 used in paper). run_test.sh calls test_multi_pref.py for the generalized-preference experiment, but that file is absent from the repo. arXiv v1 title says 'Realistic Personalization'; v2 renamed it 'Natural Personalization' and added two test models.
+sources:
+  name: 'arXiv abstract and paper title/abstract (2603.04191v2): ''This work proposes RealPref'''
+  release_date: 'arXiv API: 2603.04191v1 published 2026-03-04'
+  venue: 'arXiv API comment field: ''Accepted to EMNLP 2026 Findings'' (not yet listed on ACL Anthology; events/emnlp-2026 returned 404 on 2026-10-10)'
+  memory_types: paper §3 (preference-following over long multi-session user-LLM histories, sessions concatenated up to 247K tokens; queries test use of user-specific preferences)
+  links.paper: arXiv API entry 2603.04191
+  links.code: 'paper v2 abstract footnote: ''Code and data are available at https://github.com/GG14127/RealPref'''
+  links.data: 'null: data ships inside the GitHub repo (test_data/); no Hugging Face dataset found via HF API search ''RealPref'''
+  scale.conversations: paper §3 Dataset Overview (100 synthetic user profiles); repo test_data/user/ has 100 user dirs and context_history_index.json has 100 users per config
+  scale.questions: 'paper §3 Dataset Overview (1300 preference-query pairs: 10 original + 3 generalized per user); counted in repo: 1,000 entries across data_*_qa.json + 300 across data_*_qa_infer.json'
+  scale.avg_context_length: 'paper Table 2 (Normal total 37K; Simple 2K to Extreme 247K); repo README context config mapping (''mix_5_0 -- normal context: 37K token context in average'')'
+  scale.notes: paper §3, §4.1, Table 2; repo test_data/random_conversation.json has 1,000 sessions
+  metrics: 'paper §4.2: accuracy for classification tasks; 1-5 scores on Preference Awareness, Preference Alignment, Answer Quality for open-ended answers'
+  judge_model: 'paper §5.1 Base Models: ''we specify Claude Sonnet 4 as our LLM judge''; repo run_judge.sh uses anthropic/claude-sonnet-4'
+  repro_level: repo tree has test.py, judge.py, run_test.sh, run_judge.sh, utils.py, prompts.py and full test_data/ (checked 2026-10-10)
+  notes: repo contents API (no licence, test_multi_pref.py 404); arXiv v1 vs v2 HTML titles and model lists

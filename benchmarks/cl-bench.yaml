@@ -1,0 +1,46 @@
+name: Continual Learning Bench (CL-Bench)
+slug: cl-bench
+release_date: 2026-06
+venue: NeurIPS 2026
+memory_types:
+- procedural_workflow
+- coding_cross_session
+- semantic_knowledge_update
+links:
+  paper: https://arxiv.org/abs/2606.05661
+  code: https://github.com/pgasawa/continual-learning-bench
+  data: https://huggingface.co/datasets/continual-learning-bench/database-exploration
+scale:
+  conversations: 6
+  questions: 301
+  avg_context_length: on the order of tens of instances per task sequence
+  notes: '6 = task sequences (one default schedule per domain). 301 = total instances, summed from the per-task counts in Tables 2-7: Blind Spectrum Monitoring 90 scans, Codebase Adaptation 19 issues, Cohort Studies 20, Database Exploration 40 questions, Exploitable Poker 120 hands, Sales Prediction 12. The paper text says ''300+''. Each instance has up to 40 steps. The repo also has extra variants and schedules (e.g. a 30-question multi_group variant and a quick_test schedule).'
+metrics:
+- Cumulative per-task reward (stateful)
+- Gain (stateful reward minus same system's stateless reward, per instance and cumulative)
+- Normalized reward (vs. stateless GPT-5.4 ICL reference and task r_max)
+- Normalized gain (fraction of own learning headroom captured)
+- Stability/plasticity decomposition of gain
+- 'Task-specific rewards: mean IoU (BSM), step-efficiency (Codebase), KL-based information gain in bits (Cohort), query-budget efficiency / regret (Database), big blinds per hand (Poker), WAPE skill (Sales)'
+- Rollout cost (USD)
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: A continual-learning benchmark built from six expert-validated agentic task sequences. Memory is scored as the gain of a stateful run over a stateless run, not as recall QA. Running it needs model-provider API keys, Docker (for Codebase Adaptation and Sales Prediction) and `clbench setup`, which fetches the Database Exploration SQLite files from Hugging Face (not gated). Repo v1.0 was released 2026-05-04 under Apache-2.0. A 2026-07-19 commit changed how the leaderboard script normalizes Cohort Studies rewards, so the leaderboard may differ from paper Table 1. The paper did not evaluate parametric methods.
+sources:
+  name: 'arXiv 2606.05661v1 abstract: ''We introduce Continual Learning Bench (CL-Bench)''; repo README title ''Continual Learning Bench'''
+  release_date: 'arXiv API: 2606.05661v1 published 2026-06-04T03:43:28Z (project site news says CL-Bench 1.0 was released 2026-05-04; repo created 2026-04-30)'
+  venue: NeurIPS 2026 virtual site lists it as a Poster (https://neurips.cc/virtual/2026/poster/139270, Thu Dec 10 2026), linking OpenReview forum ajW4TqUrCd. The OpenReview API returned a bot challenge, so it was not opened; the track is not stated. The arXiv API shows no journal_ref/comment. The ICML 2026 page (icml.cc/virtual/2026/75698) is an invited workshop talk, not a paper.
+  memory_types: 'procedural_workflow: §3.1 ''a system that identifies recurring patterns can exploit them in future instances''; §4.2 gain = stateful minus stateless reward over a task stream (opponent strategies, debugging strategies, ACE playbook, Notepad). coding_cross_session: App. A.2, 19 SWE-bench issues (tablib, tenacity), each in a fresh Docker container at the issue''s base commit; an agent recording repo layout and test commands needs fewer steps. semantic_knowledge_update: App. A.4 schema_drift migration after Q20 tests whether the agent notices that previously cached database information no longer applies; §5.1 stability/plasticity analysis. Not parametric: §6 says parametric approaches such as test-time training are not evaluated.'
+  links.paper: arXiv API entry 2606.05661
+  links.code: Paper author block cites the website https://www.continual-learning-bench.com, whose homepage links github.com/pgasawa/continual-learning-bench. Repo (owner = first author P. Asawa) README cites arXiv 2606.05661. gh api checked 2026-10-10.
+  links.data: 'HF API 2026-10-10: continual-learning-bench/database-exploration is public, not gated, with files products.db and products_drifted.db. It is the default repo_id in src/tasks/database_exploration/task.py setup(). It holds only the Database Exploration DBs; data for the other tasks is in the repo data/.'
+  scale.conversations: 'Paper §1/§3.3: six tasks/domains. §3 terminology: a task is a sequence of instances. Table 1 averages across the six benchmark tasks.'
+  scale.questions: Sum of per-task instance counts in Tables 2-7 captions (90+19+20+40+120+12) and App. A.1-A.6. App. B.2 says '300+ instances across six tasks'.
+  scale.avg_context_length: 'Paper §6 Limitations: ''Task sequences are on the order of tens of instances''. Fig. 3 caption: up to 40 steps per instance. No token-length statistics are reported.'
+  scale.notes: Paper App. A, Tables 2-7; repo src/tasks/database_exploration/README.md (multi_group 30 questions) and src/tasks/exploitable_poker/schedules/quick_test.json
+  metrics: Paper §4.1-4.3 (reward, gain, normalized reward/gain), §5.1 and App. C (stability/plasticity), Table 1 (cost), App. A.1-A.6 (task rewards)
+  judge_model: No LLM judge. §3.3 says all tasks require structured outputs for reproducible automated scoring (hidden regression tests, IoU, KL divergence, query counts, chip profit, WAPE).
+  repro_level: 'Repo tree checked 2026-10-10: pyproject [project.scripts] clbench = ''src.cli:main''; src/cli.py implements run/run-all with stateless baseline runs; run_benchmark.py; src/commands/setup.py; per-task scorers (e.g. src/tasks/cohort_studies/scorer.py, src/tasks/sales_prediction/evaluator.py); scripts/analyze_final_results.py aggregates normalized reward/gain. Data is in data/ plus the public HF dataset.'
+  notes: Repo commits (Release 1.0 on 2026-05-04; leaderboard fix on 2026-07-19), LICENSE Apache-2.0, README quickstart, paper §6

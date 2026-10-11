@@ -1,0 +1,42 @@
+name: HalluEditBench
+slug: hallueditbench
+release_date: 2024-10
+venue: ICLR 2025
+memory_types:
+- parametric
+links:
+  paper: https://arxiv.org/abs/2410.16251
+  code: https://github.com/baixianghuang/HalluEditBench
+  data: https://huggingface.co/datasets/llm-editing/HalluEditBench
+scale:
+  conversations: null
+  questions: 6738
+  avg_context_length: null
+  notes: 'questions = verified-hallucination edit cases summed over the three edited LLMs in paper Figure 2 (2,230 + 2,233 + 2,275). The paper text says ''more than 6,000'' (around 2,000 per LLM). Each case also has derived questions: rephrased, yes/no, multiple-choice, reversed, locality, 2- to 6-hop, and up to 10 robustness turns. There are no conversations.'
+metrics:
+- Efficacy Score (%)
+- Generalization Score (%)
+- Portability Score (%)
+- Locality Score (%)
+- Robustness Score (%)
+judge_model: Llama-3.1-8B-Instruct
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'The benchmark tests knowledge editing (FT-L, FT-M, MEMIT, ROME, LoRA, ICE, GRACE) on hallucinations verified separately for each of Llama2-7B, Llama3-8B and Mistral-v0.3-7B, so each data split only fits its own model. Rows counted on 2026-10-10: HF has 6,738 and GitHub has 6,730, with per-model counts that differ from the Figure 2 labels. GitHub also adds Gemma-1.1-2B and GPT-J-6B sets. The paper names no answer judge; the official code uses rule-based matching plus Llama-3.1-8B-Instruct. The HF card says MIT; the GitHub repo has no licence file.'
+sources:
+  name: arXiv 2410.16251 abstract + repo README ('We proposed HalluEditBench')
+  release_date: 'arXiv API: 2410.16251v1 published 2024-10-21 (v3 updated 2025-03-03)'
+  venue: arXiv comment 'ICLR 2025'; ICLR virtual site iclr.cc/virtual/2025/poster/28744 lists it as a 2025 Poster; repo citation is the ICLR 2025 inproceedings entry (OpenReview hmDt068MoZ)
+  memory_types: 'paper §2.3 / Appendix B: evaluates knowledge editing that changes model weights (FT-L, FT-M, MEMIT, ROME, LoRA; plus ICE, GRACE) to correct hallucinated facts'
+  links.paper: arXiv API entry 2410.16251
+  links.code: repo README links the paper; the project site llm-editing.github.io (named in the arXiv comment) links github.com/llm-editing/HalluEditBench, which resolves to baixianghuang/HalluEditBench
+  links.data: 'HF API: llm-editing/HalluEditBench is public and not gated, card cites arXiv 2410.16251 and the paper authors, and holds 78 CSVs under data/questions/hallucination_final (3 models x 26 topics) (checked 2026-10-10)'
+  scale.questions: 'paper Figure 2 (arXiv v3 HTML, stat_v4.png): 2,230 / 2,233 / 2,275 hallucinations for Llama2-7B / Llama3-8B / Mistral-v0.3-7B; sum 6,738 matches the HF CSV row count (2,275 + 2,230 + 2,233) counted 2026-10-10'
+  scale.conversations: 'not applicable: single-question knowledge-editing evaluation, no dialogues'
+  scale.avg_context_length: not reported in the paper; inputs are short single factual questions
+  metrics: 'paper §2.2: Efficacy, Generalization, Portability, Locality, Robustness Scores (%); Locality is the unchanged-response rate and the others are accuracy'
+  judge_model: 'paper (v1-v3) names no judge model. Official code: code/edit_all_method.py and edit_all_method_multi_turn.py default --model_eval=''meta-llama/Meta-Llama-3.1-8B-Instruct'', with the semantic-match prompt in code/hallucination_editor.py, used when rule-based fuzzy matching fails; README says ''a local LLM (e.g., Llama3-8b) as the evaluator''. GPT-4o only generated the questions (Appendix A)'
+  repro_level: repo tree has code/edit_all_method.py, code/edit_all_method_multi_turn.py, code/edit_all_topic.sh, code/edit_all_topic_multi_turn.sh and code/result_table.ipynb, plus data/questions/hallucination_final/*.csv (checked 2026-10-10)
+  notes: 'row counts from downloading all question CSVs from GitHub (main branch) and from HF, 2026-10-10; licence from HF card (license: mit) and GitHub API (license null)'
+  scale.notes: paper §1 (around 2,000 per LLM), §2.1 (12,619 / 13,210 / 14,366 filtered hallucinations), §2.2 question types, Figure 2

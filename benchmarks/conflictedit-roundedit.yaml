@@ -1,0 +1,44 @@
+name: ConflictEdit / RoundEdit
+slug: conflictedit-roundedit
+release_date: 2023-10
+venue: ICLR 2024
+memory_types:
+- parametric
+links:
+  paper: https://arxiv.org/abs/2310.02129
+  code: https://github.com/zjunlp/PitfallsKnowledgeEditing
+  data: null
+scale:
+  conversations: null
+  questions: 2500
+  avg_context_length: null
+  notes: '2,500 = edit instances per split, as stated in the paper (ConflictEdit: Reverse Edit, Composite Edit; RoundEdit: Easy, Hard). GPT2-XL Composite Edit has 2,000. The release also has Coverage Edit (2,500 per model; the paper gives no size). Splits are model-specific (GPT-J, GPT2-XL). These are single-fact edits, not dialogues, so conversations and context length do not apply.'
+metrics:
+- Success Score (Succ)
+- Conflict Score (CS)
+- Conflict Magnitude (CM)
+- Tied Fact Damage (TFD)
+- Distortion (D, JS divergence)
+- Ignore Rate (IR)
+- Failure Rate (FR)
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: Evaluates whether weight-editing methods (FT, MEND, ROME, MEMIT, MEMIT+MLE) on GPT2-XL and GPT-J cause knowledge conflict or distortion. Data comes in separate versions for each model. GPT-4 only generated and paraphrased prompts and does not act as a judge. MEND checkpoints trained on these datasets are on Google Drive. The code builds on MEMIT and the README recommends PyTorch 1.12.1. The repo is MIT-licensed and was last pushed 2024-06-13. File record counts were taken on 2026-10-10.
+sources:
+  name: 'paper Introduction: ''a dataset named ConflictEdit'' and ''the RoundEdit dataset'' (arXiv v5 HTML)'
+  release_date: 'arXiv API: 2310.02129v1 published 2023-10-03'
+  venue: arXiv comment 'ICLR 2024'; ICLR 2024 proceedings page proceedings.iclr.cc/paper_files/paper/2024/hash/56f187f2b3e87da2fb103af6df611970-Abstract-Conference.html; repo description '[ICLR 2024]'
+  memory_types: 'paper Sec. 2: editing factual knowledge stored in LLM parameters (FT/MEND/ROME/MEMIT) and measuring conflict and distortion'
+  links.paper: arXiv API entry 2310.02129
+  links.code: 'paper abstract and Reproducibility Statement: ''Code and data are available at https://github.com/zjunlp/PitfallsKnowledgeEditing'''
+  links.data: data is only in the repo's data/ directory; the paper names no Hugging Face or other dataset page
+  scale.questions: paper App. A.1.1 Step 4 ('2,500 data points each from binary and ternary factual combinations', GPT2-XL 2,000) and App. A.1.2 Step 2 (Easy/Hard 'each comprising 2,500 data points'); confirmed by counting data/GPT-J/*.json and data/GPT2-XL/*.json on 2026-10-10
+  scale.notes: README Dataset Format section; JSON list lengths counted on 2026-10-10 (GPT2-XL composite_edit = 2000, all others = 2500)
+  scale.conversations: not a dialogue benchmark; instances are edit cases
+  scale.avg_context_length: not reported; inputs are short factual prompts
+  metrics: paper Sec. 2.2.2 Eqs. 7-9 (CS, CM, Succ, TFD) and Sec. 2.3.2 Eqs. 11-13 (D, IR, FR); Tables 1-2
+  judge_model: metrics are computed from model output probabilities; GPT-4 is used only to generate and paraphrase prompts (Sec. 2.2.2, App. A.1.1 Step 5, App. A.1.2 Step 3), never as an evaluator
+  repro_level: repo has data/GPT-J and data/GPT2-XL JSON files plus experiments/evaluate_conflictedit.py, experiments/evaluate_roundedit.py, experiments/evaluate_MLE.py and scripts/run_conflictedit.sh, run_roundedit.sh, run_model.sh, run_MLE.sh (checked 2026-10-10)
+  notes: README (MEND Google Drive checkpoints, PyTorch 1.12.1, MEMIT acknowledgement); GitHub API repo metadata (MIT licence, pushed_at 2024-06-13)

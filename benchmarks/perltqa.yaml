@@ -1,0 +1,42 @@
+name: PerLTQA
+slug: perltqa
+release_date: 2024-02
+venue: SIGHAN-10 Workshop (ACL 2024)
+memory_types:
+- personalization
+- episodic
+- conversational_longterm
+links:
+  paper: https://arxiv.org/abs/2402.16288
+  code: https://github.com/Elvin-Yiming-Du/PerLTQA
+  data: null
+scale:
+  conversations: 3409
+  questions: 8593
+  avg_context_length: null
+  notes: 'questions = 8,593 memory-based QA pairs, the full PerLT QA set (paper abstract and Table 2). The paper splits it into train 5,155 / validation 1,719 / test 1,719 (§4.1); the reported experiments use the 1,719-question test set. conversations = 3,409 ''event-related historical dialogs'' between the AI assistant and the characters, plus 25,256 utterances (Table 2). These dialogues are one of four sources in the memory database, so they are not the unit the QA is organized by. The memory database covers 141 character profiles, 1,339 relationship descriptions and 4,501 events, averaging 313 words per event and 43.7 words per utterance. The paper reports no per-question context length, so avg_context_length is null. The paper says the questions cover 30 characters. The released perltqa JSON files (zh, en and en_v2) have 32 character keys and 8,593 QA items in total: profile 357, social_relationship 897, events 4,501 and dialogues 2,838 (counted from the repo files on 2026-10-10).'
+metrics:
+- 'Memory classification: weighted Precision, Recall, F1, Accuracy'
+- 'Memory retrieval: Recall@K (K=1,2,3,5) and average retrieval time'
+- 'Memory synthesis/fusion: MAP of memory anchors (exact match of anchors in answer)'
+- 'Memory synthesis/fusion: Correctness (gpt-3.5-turbo-based evaluation)'
+- 'Memory synthesis/fusion: Coherence (gpt-3.5-turbo-based evaluation)'
+judge_model: gpt-3.5-turbo
+repro_level: data_public
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'There are two versions of the paper. arXiv v1 (2024-02-26) calls the third subtask "Memory Synthesis". The ACL Anthology version (SIGHAN-10, pp. 152-164, Aug 2024, https://aclanthology.org/2024.sighan-1.18/) calls it "Memory Fusion" and describes PerLTQA as a Chinese dataset. The repo ships Dataset/zh (original), Dataset/en and Dataset/en_v2. en_v2 was added on 2025-12-22, and the README says that update fixed inconsistency issues. The paper''s results predate en_v2. The paper says 30 characters, but the released QA files have 32 character keys; the total of 8,593 QA items matches the paper. The paper''s train/val/test split (5,155/1,719/1,719) is not released as split files. The repo has no evaluation pipeline: it contains only dataset loader classes (Dataset/dataset.py) and a BM25/DPR retriever helper with hard-coded local model paths (memory_retrieval/tools/retriever.py). There is no code for classification, MAP or LLM-judge scoring. All memories and QA were generated with gpt-3.5-turbo and then checked by hand, so the content is fictional. Licence: CC BY-NC 4.0, non-commercial research only.'
+sources:
+  name: paper title (arXiv 2402.16288v1) and repo README
+  release_date: 'arXiv abs page: submission history lists only v1, Mon 26 Feb 2024. The PDF stamp reads ''arXiv:2402.16288v1 [cs.CL] 26 Feb 2024''. The export.arxiv.org API returned HTTP 429, so the date was read from the abs page and PDF instead.'
+  venue: 'ACL Anthology 2024.sighan-1.18: Proceedings of the 10th SIGHAN Workshop on Chinese Language Processing (SIGHAN-10), pp. 152-164, August 2024, Bangkok. The volume page lists the event as the 62nd Annual Meeting of the ACL. arXiv shows no journal_ref.'
+  memory_types: 'Paper §1, §3.1 and Table 2. personalization: QA on personal profile and social-relationship facts (''personalized memories''). episodic: QA on dated life events (4,501 events with time, characters and topic). conversational_longterm: QA on dated historical dialogues between the AI assistant and each character (3,409 dialogues; the repo QA files have a ''dialogues'' group of 2,838 questions). Not semantic_knowledge_update, because no fact updates or conflicts are tested.'
+  links.paper: https://arxiv.org/abs/2402.16288 (opened 2026-10-10)
+  links.code: 'arXiv v1 footnote 1: ''Our code and dataset are accessible via https://github.com/Elvin-Yiming-Du/PerLTQA''. The repo README cites the SIGHAN-10 paper. Opened via gh api on 2026-10-10.'
+  links.data: 'null: the data lives in the repo under Dataset/. A Hugging Face search for ''perltqa'' and ''PerLT'', and for the author Elvin-Yiming-Du, returned no dataset.'
+  scale.conversations: 'Paper Table 2 and §3.3: ''# Event-related Historical Dialogs 3,409'' (arXiv v1 and ACL versions are identical).'
+  scale.questions: 'Paper abstract and Table 2: ''# Question Answer Pairs 8,593''. Test split of 1,719 from §4.1. The total was re-counted as 8,593 in the repo''s Dataset/zh/perltqa.json, en/perltqa_en.json and en_v2/perltqa_en_v2.json.'
+  scale.avg_context_length: 'null: the paper reports only average words per event (313), per utterance (43.7), per question (16.7) and per answer (27.4), not a context length per question.'
+  metrics: 'Paper §3.5 and Tables 3-5: P/R/F1/Acc for classification, Recall@K for retrieval, and MAP of memory anchors plus Correctness and Coherency for synthesis.'
+  judge_model: 'Paper §3.5: correctness and coherence are measured ''with gpt-3.5-turbo-based evaluation method (Zhong et al., 2023)''. The Limitations section repeats that LLM-based evaluation was used.'
+  repro_level: 'Repo tree checked on 2026-10-10. The data files are public (Dataset/zh/perltqa.json, perltmem.json; Dataset/en/*; Dataset/en_v2/*) and were fetched and parsed successfully. There is no evaluation entry point: the only code is Dataset/dataset.py (loader) and memory_retrieval/tools/* (retriever helper).'

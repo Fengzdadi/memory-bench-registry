@@ -1,0 +1,43 @@
+name: PAST-Bench
+slug: past-bench
+release_date: 2026-08
+venue: arXiv preprint
+memory_types:
+- procedural_workflow
+- semantic_knowledge_update
+- personalization
+- episodic
+links:
+  paper: https://arxiv.org/abs/2608.04003
+  code: https://github.com/Gen-Verse/PAST-Bench
+  data: null
+scale:
+  conversations: 26
+  questions: 204
+  avg_context_length: null
+  notes: 26 = task-family scenarios (ordered sequences of fresh-session episodes); 204 = episodes across Memory (5/41), Procedural Reuse (8/64), Information Gathering (6/48), Update (7/51). Each family mixes cold, learn, eval-near/far and control episodes. The repo has 211 episode directories with task.yaml; family.yaml episode lists sum to 204 (counted 2026-10-10).
+metrics:
+- Per-episode task score s_e = safety gate x (0.80 completion + 0.20 tool-error robustness)
+- Self-evolution gap Delta (persistence-on minus matched persistence-off score, macro-averaged over families/capabilities)
+- Mechanism-evidence score Mech (mean of write precision, recall accuracy, update correctness, retention horizon, 1 - pollution rate)
+judge_model: MiniMax-M2.7
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'Agent benchmark of cross-session improvement: agents run ordered fresh-session task sequences with persistence on/off; tasks are synthetic, using local mock services (gmail, slack, calendar, CRM, etc.). Running it requires Docker and model API keys; the default judge is MiniMax-M2.7 (config.yaml). The repo bundles third-party agents (Hermes, nanobot, ZeroClaw, Agent Zero) under their own licences; PAST-Bench code is Apache-2.0. The paper also introduces Hermes+, an agent framework. Paper results average 3 runs.'
+sources:
+  name: 'arXiv API title ''PAST-Bench: Benchmarking the Foundations of Recursive Self-Improvement in Personal Agents''; repo README'
+  release_date: 'arXiv API: 2608.04003v1 published 2026-08-04'
+  venue: 'arXiv API shows no journal_ref; comment only ''Code: https://github.com/Gen-Verse/PAST-Bench''; README citation is ''arXiv preprint arXiv:2608.04003'''
+  memory_types: 'Paper abstract/Sec. 1 and repo self-evolve-tasks-v2/: procedural_ability (SOP bootstrap, latent rule induction, failure-to-rule reused on later episodes) -> procedural_workflow; update_ability (fact correction, rule migration, SOP patch, stale-state replacement) -> semantic_knowledge_update; memory_ability SM01/SM02/SM05 preference adoption and constraint retention -> personalization; EP01/EP02 prior case recall and PG* session-history lookup -> episodic'
+  links.paper: arXiv abs page 2608.04003
+  links.code: arXiv comment and paper abstract link github.com/Gen-Verse/PAST-Bench; repo homepage points to arxiv 2608.04003
+  links.data: No Hugging Face or separate dataset link found in the paper or README; task data ships in the repo under self-evolve-tasks-v2/
+  scale.conversations: 'Paper abstract: ''26 scenarios and 204 episodes''; README table: 26 task families'
+  scale.questions: 'Paper abstract and Appendix A.1 Table 7: 204 episodes (Memory 41, Information Gathering 48, Procedural 64, Update 51); repo family.yaml total_episodes sum to 204 (checked 2026-10-10)'
+  scale.avg_context_length: 'null: no average context length reported; paper Table 12 gives per-episode token consumption per framework/model (e.g. Hermes+MiniMax-M2.7 12,615 tokens/episode), and task files cap episodes at 25 turns (Table 15)'
+  metrics: Paper Sec. 3.2/4.1 and Appendix B.1 (Eq. 1 task score), B.2 (self-evolution gap Delta), B.3.2 (Eq. 2 Mech score)
+  judge_model: 'Paper Appendix B.4/E.2: MiniMax-M2.7 at temperature 0 judges open-ended families against rubrics (action-oriented families scored from audit data); judge validated on 48 human-labelled samples; repo config.yaml pins judge to MiniMax-M2.7'
+  repro_level: Repo has CLI entry point past-bench = past_bench.cli:main (pyproject.toml) with 'evolve' subcommand in src/past_bench/cli.py, graders in src/past_bench/graders/, metrics in src/past_bench/metrics/, scripts/run_hermes_plus_mechanisms_full.sh, and task data in self-evolve-tasks-v2/ (26 family.yaml) (checked 2026-10-10)
+  notes: Repo README (requirements, model profiles, third-party components, license), config.yaml, mock_services/ tree; paper Sec. 4 and Sec. 6
+  scale.notes: Paper Table 7; repo tree count of task.yaml (211) vs family.yaml total_episodes (204), counted 2026-10-10

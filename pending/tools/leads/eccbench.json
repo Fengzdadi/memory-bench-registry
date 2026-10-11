@@ -1,0 +1,28 @@
+{
+ "name": "ECCBench",
+ "slug": "eccbench",
+ "leads": {
+  "registry_key": "arxiv:2609.00103",
+  "tier": "P2",
+  "arxiv": "2609.00103 (arXiv API: v1 2026-08-31; title: Good Memory Has ECC: Evaluating the Memory of Vision-Language Models Beyond Accuracy)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "Good Memory Has ECC: Evaluating the Memory of Vision-Language Models Beyond Accuracy",
+    "paper_url": "https://arxiv.org/pdf/2609.00103",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [],
+   "extra_tags": [
+    "multimodal",
+    "long_context_single_input",
+    "memory_efficiency_calibration"
+   ],
+   "kind_reason": "Introduces ECCBench, a benchmark/protocol measuring memory efficiency (FLOPs), compression and calibration in streaming recall. It uses synthetic integer/letter streams and natural video (EPIC-Kitchens-100, SoccerNet), evaluating VLMs and from-scratch backbones (Mamba-2, RetNet, TTT-MLP, ...). Memor"
+  }
+ }
+}

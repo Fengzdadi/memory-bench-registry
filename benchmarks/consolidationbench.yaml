@@ -1,0 +1,43 @@
+name: ConsolidationBench
+slug: consolidationbench
+release_date: 2026-09
+venue: arXiv preprint
+memory_types:
+- procedural_workflow
+- memory_security
+links:
+  paper: https://arxiv.org/abs/2609.33013
+  code: null
+  data: null
+scale:
+  conversations: null
+  questions: null
+  avg_context_length: null
+  notes: The paper reports no instance or question counts. Experience streams are generated procedurally in medium and hard configurations, with raw experience mass 7.3x/9.4x the reference budget. The leaderboard ranks 10 policies (medium). A separate external-validity study used 12 policies and 2,532 answer cells on LoCoMo multi-hop and 2WikiMultiHopQA, which are not part of ConsolidationBench.
+metrics:
+- Retention (oracle-normalized task success, RetN)
+- Compression (token-mass ratio under matched budget)
+- Reuse / Transfer (success on novel composite tasks)
+- Consolidation Quality Score (CQS; original multiplicative CQS0 and graded geometric-mean CQS with epsilon=0.05)
+- 'Governance checks: false rules admitted from poison decoys (G1), rollback recovery (G2), ledger completeness (G3), CQS0 retained (G4)'
+judge_model: null
+repro_level: paper_only
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'ConsolidationBench is Phase 3 of a four-phase research paper. No code, data or generator is released. Section 7 holds the benchmark-generator parameters (cluster-type constants, oracle-computation specifics) under "controlled release": reviewers and collaborators can request them, under terms. The benchmark therefore cannot be regenerated from the paper alone. The paper names no base LLM. The authors report that CQS does not predict real transfer accuracy (pooled Spearman rho = -0.24). The PDF header reads "June 2026"; arXiv v1 is dated 2026-09-26. The paper is licensed CC BY-NC-SA 4.0.'
+sources:
+  name: paper title/abstract and Sec. 4.2 (arXiv 2609.33013v1)
+  release_date: 'arXiv API: 2609.33013v1 published 2026-09-26T23:10:45Z'
+  venue: 'arXiv API and abs page: no journal_ref; comments list only pages/tables and the controlled-release note, no venue (checked 2026-10-10)'
+  memory_types: 'procedural_workflow: paper Sec. 4.2, where cluster types include recurring parametric sub-tasks (skills) and stable invariants (rules), and the Reuse axis is transfer to novel composite tasks. memory_security: Sec. 4.2 has the stream plant near-rule poison decoys. Sec. 5.2 and Table 3 score G1 (false rules admitted from planted poison decoys) and G2 (rollback removing false artifacts), all ''measured on ConsolidationBench''. Sec. 6 says G2 instantiates rollbackability plus verified forgetting (arXiv v1 PDF, re-checked 2026-10-10)'
+  links.paper: arXiv abs page https://arxiv.org/abs/2609.33013
+  links.code: 'null: no repo linked in the paper or on arXiv; GitHub repo/code search for ''ConsolidationBench'' and the author names found no official repo; Sec. 7 says generator details are held under controlled release (checked 2026-10-10)'
+  links.data: 'null: Hugging Face dataset search for ''consolidationbench'' returned nothing; paper releases no data (checked 2026-10-10)'
+  scale.conversations: 'null: paper reports no instance counts (Sec. 4.2-4.3 describe procedural generation only)'
+  scale.questions: 'null: paper reports no question/task counts for the benchmark'
+  scale.avg_context_length: 'null: paper gives only relative budget pressure (7.3x/9.4x reference budget, Sec. 3.1/4.2), not a context length'
+  scale.notes: paper Sec. 4.2, Table 2 (10 policies, medium config), Sec. 5.4 (12-policy, 2,532-cell external study)
+  metrics: paper Sec. 4.2 (Retention, Compression, Reuse, CQS formula), Table 2 columns (Success, RetN, Compression, Transfer, CQS0, CQS), Table 3 (G1-G4)
+  judge_model: 'null: metrics are oracle-normalized against a computable optimum; the paper uses no LLM judge and names no LLM'
+  repro_level: 'paper_only: paper read in full (arXiv v1 PDF); no official code or dataset found on GitHub or Hugging Face; Sec. 7 places generator parameters under controlled release (checked 2026-10-10)'
+  notes: paper Sec. 7 (Reproducibility and Controlled Release), Sec. 5.4, Sec. 9; arXiv abs page license (CC BY-NC-SA 4.0); PDF page 1 header date

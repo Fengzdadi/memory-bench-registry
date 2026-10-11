@@ -1,0 +1,14 @@
+{
+ "name": "KnowEdit",
+ "slug": "knowedit",
+ "leads": {
+  "registry_key": "arxiv:2401.01286",
+  "tier": "P0",
+  "arxiv": "2401.01286 (arXiv API: v1 ?; title: None)",
+  "phase1_verified_types": {
+   "parametric": "Sec.3.4 New Benchmark: KnowEdit: \"six selected datasets for the evaluation of knowledge editing methods ... insertion, modification, and erasure settings\"; metrics edit success, portability, locality, fluency."
+  },
+  "paper_hint": "https://arxiv.org/abs/2401.01286",
+  "code_hint": "https://github.com/zjunlp/EasyEdit"
+ }
+}

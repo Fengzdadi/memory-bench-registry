@@ -1,0 +1,42 @@
+name: TraineeBench
+slug: traineebench
+release_date: 2026-01
+venue: Findings of ACL 2026
+memory_types:
+- procedural_workflow
+links:
+  paper: https://arxiv.org/abs/2601.08173
+  code: https://github.com/KnowledgeXLab/EvoEnv
+  data: null
+scale:
+  conversations: 50
+  questions: 203
+  avg_context_length: null
+  notes: conversations = 50 main evaluation scenarios (paper §3.1, 2-6 tasks each). questions = 203 task instances, counted in repo traineebench_config.json on 2026-10-10 (the paper gives no total). A separate continual-learning set has 50 two-day scenarios (§3.3), with 414 task instances in traineebench_cl_config.json. No context length is reported.
+metrics:
+- Success Rate
+- Checkpoint Score
+- Average Steps
+- Average Tool Calls
+- Day 1 / Day 2 Checkpoint Score and Gain (ΔCS) (continual-learning setting)
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: The paper says Trainee-Bench, while the ACL Anthology and the repo say TraineeBench. EvoEnv is the repo's environment framework. Instances are generated from the released configs and need an LLM API to simulate NPCs (the README uses gpt-4o-mini). Scoring is rule-based except in the Website Monitor evaluator, which uses gpt-4o-mini for 4 yes/no checkpoints. The paper names no judge. The paper reports 181 meta-tasks, but the repo task hub defines 11 task types. The repo has no continual-learning (MUSE) runner and no licence file.
+sources:
+  name: arXiv v1/v2 HTML abstract and §2 use 'Trainee-Bench'; ACL Anthology 2026.findings-acl.1505 abstract and repo docs/TraineeBench.md use 'TraineeBench'
+  release_date: 'arXiv API: 2601.08173v1 published 2026-01-13T03:09:18Z'
+  venue: 'ACL Anthology 2026.findings-acl.1505, Findings of the Association for Computational Linguistics: ACL 2026, July 2026, pp. 30094-30109; the repo description (GitHub API, checked 2026-10-10) also says ''(ACL 2026 Findings)''. The iclr.cc/virtual/2026/10012466 page lists a workshop poster (Lifelong Agents), not a main-track paper'
+  memory_types: 'Paper §3.3 (Continual Learning): 50 two-day scenarios. Insights distilled from Day-1 trajectories and feedback by the MUSE agent guide Day-2 tasks, and Table 6 reports the Day 1 vs Day 2 Checkpoint Score gain'
+  links.paper: arXiv API entry 2601.08173 (v2 is current)
+  links.code: The paper abstract links https://github.com/KnowledgeXLab/EvoEnv; the repo owner is KnowledgeXLab (the authors' lab)
+  links.data: 'Null: no separate dataset page. Hugging Face searches for TraineeBench, Trainee-Bench and EvoEnv returned nothing, and the KnowledgeXLab HF org has no such dataset. The benchmark configs live in the repo'
+  scale.conversations: 'Paper §3.1: ''a benchmark consisting of 50 dynamic scenarios'' with 2-6 task instances each (Algorithm 1). Repo traineebench_config.json has 50 scenarios'
+  scale.questions: 'Counted on 2026-10-10 from repo environments/traineebench/traineebench_config.json: 203 task instances across 50 one-day scenarios (11 task types). traineebench_cl_config.json has 50 two-day scenarios with 414 task instances'
+  scale.avg_context_length: Not reported in the paper or the repo
+  metrics: Paper §3.1 Metrics (SR, CS, Avg. Steps, Avg. Tool Calls; Table 2) and Table 6 (Day 1 / Day 2 Score, ΔCS)
+  judge_model: 'Null: the paper (arXiv v2 HTML) names no LLM judge. §2.4 ''Automated Verification Mechanism'' scores the ratio of checkpoints completed, and the ''MLLM Service'' in §2.5/Fig. 3 is the agent''s backbone, not a judge. In the repo (checked 2026-10-10), only environments/traineebench/schemas/tasks/website_analysis/evaluation.py calls get_config(''gpt-4o-mini''), for 4 of its 5 yes/no checkpoints. The other 10 schemas/tasks/*/evaluation.py files make no LLM calls'
+  repro_level: The repo has run_traineebench.py (runs one scenario/day and calls env.evaluate()), environment.py Environment.evaluate(), and a per-task schemas/tasks/*/evaluation.py. Data is generated with environments/traineebench/gen_bench_from_config.py from traineebench_config.json (needs an NPC LLM API). Checked 2026-10-10
+  notes: 'Repo tree, README, docs/TraineeBench.md and the GitHub API (license: null, last push 2026-01-19); paper §2.2 states ''181 meta-tasks''; repo task_hub.py TASK_HUB lists 11 task names; the 11 schemas/tasks/*/evaluation.py files were grepped on 2026-10-10 (only website_analysis uses an LLM, gpt-4o-mini)'
+  scale.notes: Paper §3.1 and §3.3; repo config files counted on 2026-10-10

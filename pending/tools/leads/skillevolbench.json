@@ -1,0 +1,13 @@
+{
+ "name": "SkillEvolBench",
+ "slug": "skillevolbench",
+ "leads": {
+  "registry_key": "arxiv:2605.24117",
+  "tier": "P0",
+  "arxiv": "2605.24117 (arXiv API: v1 ?; title: None)",
+  "phase1_verified_types": {
+   "procedural_workflow": "Paper protocol: 'Each environment in SkillEvolBench is evaluated as an independent lifelong episode'. Library frozen after acquisition. ESR = 'frozen deployment success on held-out context-shift, adversarial, and composition tasks'."
+  },
+  "paper_hint": "https://arxiv.org/abs/2605.24117"
+ }
+}

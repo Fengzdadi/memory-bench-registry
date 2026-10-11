@@ -1,0 +1,41 @@
+name: Minerva
+slug: minerva
+release_date: 2025-02
+venue: ICML 2025
+memory_types:
+- semantic_knowledge_update
+links:
+  paper: https://arxiv.org/abs/2502.03358
+  code: https://github.com/microsoft/minerva_memory_test
+  data: null
+scale:
+  conversations: null
+  questions: 1110
+  avg_context_length: 4k tokens (fixed; Stateful Processing ~1.5k tokens)
+  notes: 1110 = fixed snapshot of generated test samples across 7 categories / ~21 tasks (paper Table 10). Not dialogue, so conversations is null. Paper also runs length studies up to 16K (Table 7) and 32K tokens (Table 11). The repo snapshot holds 1180 lines (counted 2026-10-10). Because the benchmark is programmable, new samples can be generated.
+metrics:
+- Exact match accuracy
+- ROUGE-L
+- ROUGE-L recall
+- Jaccard similarity
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'Here "memory" means the model''s context window: each sample is one synthetic input, with no persistent memory across sessions. The repo snapshot (resource/minerva_snapshot) has 1180 samples, while the paper reports 1110. The repo adds string_search_gibberish (50 samples) and splits iterate into iterate_first and iterate_last (20 each, against 20 in the paper). The sample run script calls the Azure OpenAI API. The repo is archived. Code is MIT-licensed and the data is CDLA-2.0.'
+sources:
+  name: 'arXiv API title and repo README: ''Minerva: A Programmable Memory Test Benchmark for Language Models'''
+  release_date: 'arXiv API: 2502.03358 published 2025-02-05 (v1); v2 updated 2025-06-09'
+  venue: arXiv comment 'ICML 2025'; PMLR v267 page xia25c (Proceedings of the 42nd ICML, PMLR 267:68258-68276); README bibtex cites OpenReview ib9drlZllP
+  memory_types: 'paper abstract and §3: tasks search, recall, edit, match and compare information in context memory, plus stateful processing that tracks quantity and set state while operating on memory'
+  links.paper: arXiv abs 2502.03358
+  links.code: 'paper Introduction: ''code and data will be available at https://github.com/microsoft/minerva_memory_test''; repo README links the arXiv paper'
+  links.data: no separate dataset page; the data snapshot sits in the repo under resource/minerva_snapshot
+  scale.conversations: the benchmark is not conversational; each test sample is a single context
+  scale.questions: 'paper §3.1 ''fixed snapshot of 1110 randomly generated test samples''; Table 10 ''Total Number of Entries: 1110'''
+  scale.avg_context_length: 'paper §3.1: ''fixed the context length to 4k tokens, except in the Stateful Processing category'' (~1.5k tokens there)'
+  scale.notes: paper Table 10, Table 7, Table 11; line counts of the repo snapshot JSONL files via gh api on 2026-10-10
+  metrics: 'paper §3.1 and Table 10: exact_match, rouge-L, rouge-L_recall, jaccard_similarity; definitions in Appendix C'
+  judge_model: paper scores with automatic metrics only; LLM-as-judge comes up only in related work
+  repro_level: repo tree has src/run_test.py (runs inference and scoring), src/evaluate.py and src/generate_test.py, with data in resource/minerva_snapshot/*.jsonl (checked 2026-10-10)
+  notes: repo metadata (archived, MIT); README licence section (data CDLA-2.0); snapshot line counts compared with paper Table 10

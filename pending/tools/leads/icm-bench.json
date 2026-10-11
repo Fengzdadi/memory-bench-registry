@@ -1,0 +1,29 @@
+{
+ "name": "ICM-Bench",
+ "slug": "icm-bench",
+ "leads": {
+  "registry_key": "arxiv:2609.04438",
+  "tier": "P2",
+  "arxiv": "2609.04438 (arXiv API: v1 2026-09-03; title: ICM-Bench: Person-Level Identity Reasoning in Multimodal Agents with Long-Term Memory)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "ICM-Bench: Person-Level Identity Reasoning in Multimodal Agents with Long-Term Memory",
+    "paper_url": "https://arxiv.org/pdf/2609.04438",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "episodic"
+   ],
+   "extra_tags": [
+    "multimodal",
+    "identity_tracking"
+   ],
+   "kind_reason": "Identity-centric memory benchmark over a chronological stream of 839 synthetic life-album video clips (141 min) with 1,217 questions. Categories are identity recall, cross-episode identity retrieval and long-term identity profile inference, with temporal cutoffs per question."
+  }
+ }
+}

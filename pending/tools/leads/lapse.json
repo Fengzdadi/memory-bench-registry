@@ -1,0 +1,28 @@
+{
+ "name": "LAPSE",
+ "slug": "lapse",
+ "leads": {
+  "registry_key": "arxiv:2609.36457",
+  "tier": "P2",
+  "arxiv": "2609.36457 (arXiv API: v1 2026-09-29; title: Memory Consolidation Flattens the Temporal Shape of User Facts)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "Memory Consolidation Flattens the Temporal Shape of User Facts",
+    "paper_url": "https://arxiv.org/pdf/2609.36457",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "semantic_knowledge_update"
+   ],
+   "extra_tags": [
+    "memory_write_fidelity"
+   ],
+   "kind_reason": "The abstract explicitly introduces LAPSE, a benchmark of matched user statements (128 pairs per configuration). It tests whether memory writers, including mem0, Graphiti and Letta, keep temporal-aspect cues, and whether readers judge if a stored fact still holds. The paper describes a release but gi"
+  }
+ }
+}

@@ -1,0 +1,37 @@
+name: Bad Memory
+slug: bad-memory
+release_date: 2026-07
+venue: arXiv preprint
+memory_types:
+- memory_security
+- coding_cross_session
+links:
+  paper: https://arxiv.org/abs/2607.14611
+  code: https://github.com/ogiorgil/self-modifying-agent-security
+  data: null
+scale:
+  conversations: null
+  questions: null
+  avg_context_length: null
+  notes: 'The benchmark has no conversation or question items. The paper tests 3 adversarial goals under 3 session designs: a single probe, same-attack Probe→Stabilization→Probe chains (3 of them), and different-attack chains (6 ordered pairs). It runs 10 trials per cell on 4 models (Tables 1–5). Workloads are in testbed/workloads/ (Claude Code) and testbed/workloads_codex/ (Codex).'
+metrics:
+- Attack success rate (ASR)
+- Persistence rate
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: The authors do not call this a benchmark. They describe a sandboxed synthetic workspace plus an evaluation framework for Claude Code and Codex. The paper links an anonymized mirror (anonymous.4open.science/r/self-modifying-agent-security-3248). The public GitHub repo, with commits by co-authors, has an identical README and run_trial.py (checked 2026-10-10). The repo has no LICENSE file. Running it needs the Claude Code or Codex CLI and model API access. The repo also holds exploratory workloads (t01–t07) that are not in the paper's tables.
+sources:
+  name: 'arXiv API title ''Bad Memory: Evaluating Prompt Injection Risks from Memory in Agentic Systems''; the paper names no separate benchmark (it calls the setup a ''synthetic workspace'' / ''evaluation framework'', §3.2–3.3)'
+  release_date: 'arXiv API: 2607.14611v1 published 2026-07-16'
+  venue: arXiv API comment 'Preprint', no journal_ref; the paper's artifact link is an anonymized submission repo; no venue found
+  memory_types: 'Paper §3.3–3.5: prompt-injection payloads planted in persistent memory files (CLAUDE.md/AGENTS.md, stack_preferences.md, behaviors.md); ASR and payload persistence measured across Probe→Stabilization→Probe multi-session sequences in Claude Code and Codex. Two of the three goals target coding tasks through coding memory files (memory_security + coding_cross_session).'
+  links.paper: arXiv abs page 2607.14611
+  links.code: Paper Appendix B links anonymous.4open.science/r/self-modifying-agent-security-3248. Its README and testbed/scripts/run_trial.py match github.com/ogiorgil/self-modifying-agent-security byte for byte. That repo's owner is David Alexander (co-author), and its commits include ones by Soham Gadgil (first author). Checked via gh api on 2026-10-10.
+  links.data: No separate dataset page; the workspace templates and workloads are in the repo (testbed/sandbox_template*, testbed/workloads*)
+  scale.notes: Paper §3.5, §4.1–4.3 and captions of Tables 1–5 ('10 trials'; 'a total of six session sequences')
+  metrics: 'Paper §3.3: attack success rate (ASR) and persistence rate'
+  judge_model: 'No LLM judge. Paper Appendix A: success is evaluated from the agent''s generated outputs. The repo''s run_trial.py check_success() uses rule-based string_in_file, string_in_response, and command_in_events regex criteria.'
+  repro_level: GitHub repo tree has testbed/scripts/run_trial.py, run_trial_codex.py, and run_codex_workload_batch.sh, which run the trials and check success. It also has testbed/sandbox_template/, sandbox_template_codex/, workloads/, and workloads_codex/ with manifest.json files (checked 2026-10-10).
+  notes: gh api on the repo (license null; commit history); anonymous.4open.science API listing; paper Appendix B; arXiv v1 is the only version listed by the API

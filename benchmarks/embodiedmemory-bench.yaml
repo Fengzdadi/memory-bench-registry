@@ -1,0 +1,42 @@
+name: EmbodiedMemory-Bench (EMem-Bench)
+slug: embodiedmemory-bench
+release_date: 2026-09
+venue: arXiv preprint
+memory_types:
+- embodied
+- episodic
+- semantic_knowledge_update
+- multimodal
+links:
+  paper: https://arxiv.org/abs/2609.28236
+  code: https://github.com/ZJU-OmniAI/Embodied-Omni/tree/main/embodied_memory
+  data: https://huggingface.co/datasets/lzLiang/EmbodiedMemoryBench
+scale:
+  conversations: 2554
+  questions: 2554
+  avg_context_length: ~72-113 history steps per episode (family means)
+  notes: '2,554 episodes, each = one multimodal interaction history (2.0-4.5 sessions) plus one target task: Passive Observation 1,036, Dynamic Tracking 1,052, Interaction Failure 263, Experience Generalization 203; 1,118 scenes. GPT-5.4-mini full_context averages 41,770 input tokens/episode (800-episode subset, Table 3). Fixed 800-episode subset (200/family) used for analyses; single ''all'' split.'
+metrics:
+- Success Rate (SR), per task family and equal-weighted macro average
+- Error Recurrence Rate (ERR)
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: The code lives in the embodied_memory/ subfolder of the ZJU-OmniAI/Embodied-Omni monorepo (subfolder Apache-2.0; repo root MulanPSL-2.0). The Hugging Face data is ungated, CC BY-NC 4.0, with a single 'all' split and no train/val split. Episode text was later translated to English; the original-language version is at revision 28694bf. Evaluation needs the AI2-THOR 5.0 simulator. The main full_context setting gives a text history plus only the current RGB frame; memory systems ingest historical RGB frames. The paper also introduces the EMem memory system and the EMem-8B policy.
+sources:
+  name: arXiv 2609.28236 title/abstract ('EmbodiedMemory-Bench (EMem-Bench)'); repo README and HF dataset card use the same name
+  release_date: 'arXiv API: 2609.28236v1 published 2026-09-23'
+  venue: arXiv API entry has no journal_ref/comment; paper HTML (v1) and repo README/HF card cite only arXiv:2609.28236 (@misc); no venue found (checked 2026-10-10)
+  memory_types: 'paper §4.2 task families: Passive Observation = recall where an object was seen earlier in the trajectory (episodic); Dynamic Tracking = update the world state after location/state changes (semantic_knowledge_update); history is RGB observations + actions + feedback that memory systems ingest (App. B.2; multimodal); success = executed actions reaching the target state in AI2-THOR/ProcTHOR (embodied). Experience Generalization (203 eps) transfers a placement regularity learned from correction cases within the episode history; not counted as procedural_workflow'
+  links.paper: arXiv abs page 2609.28236
+  links.code: repo README (authors match the paper) links the arXiv paper and HF dataset; the paper's project page (zju-omniai.github.io/EmbodiedMemoryBench -> /Embodied-Omni/EmbodiedMemoryBench/) links github.com/ZJU-OmniAI/Embodied-Omni
+  links.data: 'HF API lzLiang/EmbodiedMemoryBench: public, gated=false, license cc-by-nc-4.0, tagged arxiv:2609.28236; linked from the repo README and project page'
+  scale.conversations: 'paper §4.4: ''EMem-Bench contains 2,554 episodes'' (1,036/1,052/263/203); HF metadata.json episode_count 2554'
+  scale.questions: 'paper §1: each episode has one target task T; HF data/embodied_memory_bench.jsonl has 2,554 rows, one probe per episode (counted 2026-10-10)'
+  scale.avg_context_length: 'paper App. C.4 Table 10: mean history steps 76.5 (Passive), 78.2 (Dynamic), 71.7 (Interaction), 112.5 (Exp. Gen.); sessions 2.0/2.0/2.0/4.5'
+  scale.notes: 'paper §4.4, Table 9, Table 10, Table 3/Table 13 (41,770 tokens), §6.3 (800-episode subset); HF card (''split: all'', no train/validation)'
+  metrics: paper §4.4 'Evaluation metrics' (SR per family + equally weighted mean; ERR Eq. 2) and Table 2 columns SR/ERR; repo metrics.py also implements RAR/AES/MAE, which the paper does not report
+  judge_model: 'null: paper §4.4 says success is decided by the simulator''s target terminal state, and App. C.2 says ERR ''is computed automatically from the bound action trace and frozen probe annotations'' (rule-based); Claude-4.6-Sonnet is only used to generate Experience Generalization episodes (§4.3)'
+  repro_level: repo has the embodied_memory/src/emem_bench/cli.py 'evaluate' subcommand (pyproject script emem-bench) -> evaluation/run.py (per-family SR/ERR, macro_sr) with evaluator.py/metrics.py; data downloadable from HF (manifests/full2554.jsonl + episodes/) (checked 2026-10-10)
+  notes: repo tree + embodied_memory/LICENSE (Apache-2.0) vs GitHub repo license MulanPSL-2.0; HF README/metadata.json (translation, revision 28694bf, CC BY-NC 4.0); pyproject sim extra ai2thor==5.0.0; paper §6.1 (full_context = text history + final visual observation)

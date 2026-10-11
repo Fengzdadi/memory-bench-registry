@@ -1,0 +1,44 @@
+name: agent-memory-bench
+slug: agent-memory-bench
+release_date: 2026-08
+venue: null
+memory_types:
+- coding_cross_session
+- semantic_knowledge_update
+links:
+  paper: null
+  code: https://github.com/GiulioDER/agent-memory-bench
+  data: https://huggingface.co/datasets/Gde05/agent-memory-bench-corpus
+scale:
+  conversations: 196
+  questions: 26
+  avg_context_length: null
+  notes: conversations = 196 session transcripts in corpus/manifest.json and the HF corpus (40 signal incl. 2 smoke, 156 distractors; counted 2026-09-01). questions = 26 tasks in the official-003 grid (73 task-conditions x 5 seeds = 365 cells, 317 admitted). The full suite has 34 executable tasks. Official runs ingest 4,900 documents per condition. No average length is reported.
+metrics:
+- 'task success rate (execution-graded: task checker passes or fails, no partial credit)'
+- paired delta vs claude_md baseline with 95% CI
+- McNemar paired test p-values
+- negative transfer / damage (fails a cell that bare solved)
+- discarded-cell counts per arm
+- 'cost ledger: ingestion and session tokens, wall time, success per million tokens'
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'No paper exists. Documentation is the GitHub README, docs/STATUS.md and the HF dataset card. The benchmark is built by the authors of the `recall` memory product, which competes in it. The official run (official-003, launched 2026-09-01) used deepseek-v4-flash in Claude Code, one seed per cell, and a 4,900-document corpus per condition (196 real plus 4,704 synthetic sessions, generated from a seed and not on HF). Only the read path is measured. Live runs need the Claude Code CLI and API credentials. Licence: Apache-2.0.'
+sources:
+  name: 'GitHub README title ''agent-memory-bench''; HF dataset card ''agent-memory-bench: the experience corpus'''
+  release_date: 'No paper. Date taken from the GitHub API: repo created 2026-08-22T20:55:10Z, first commit d3aef4e on 2026-08-22. HF dataset created 2026-09-01'
+  venue: No paper or venue. The arXiv API search for 'agent-memory-bench' returned nothing, and the HF dataset card citation is a @misc pointing to the GitHub repo
+  memory_types: 'README: evaluates Claude Code on ''real repository tasks whose solutions depend on information from earlier sessions'' (coding_cross_session). The harm conditions superseded (''apply the current fact'') and contradictory (''surface the conflict'') are part of the official-003 grid (semantic_knowledge_update). The tenant-isolation capability track is separate from the official grid, so it is excluded'
+  links.paper: none found (arXiv API search, web search, repo and HF card)
+  links.code: GitHub API repos/GiulioDER/agent-memory-bench (owner GiulioDER, Apache-2.0); linked from the HF dataset card
+  links.data: 'HF API datasets/Gde05/agent-memory-bench-corpus: public, not gated, apache-2.0, lists corpus/sessions/**.jsonl and corpus/distractors/*.jsonl'
+  scale.conversations: 'HF dataset card and corpus/README.md: ''Re-measured 2026-09-01: 40 sessions, 156 distractors, 196 entries in manifest.json''. Re-counted 2026-10-10 from repo corpus/manifest.json: 196 (40 + 156)'
+  scale.questions: 'README Current status table: ''tasks | 26 in the official grid, 34 executable in the suite''. preregistration/026: ''73 task-conditions x 5 seeds x 8 arms = 2,920 sessions'''
+  scale.avg_context_length: not reported. The method page states no average session length or token count
+  scale.notes: preregistration/021 '4,900 (196 real + 4,704 synthetic)' documents per condition; results/official-003-present/environment.json ingest sessions_offered 4900; README 'admitted cells | 317'
+  metrics: README (primary endpoint is artifact execution; 95% interval; negative transfer; tokens and wall time), docs/STATUS.md (delta, 95% CI, McNemar p), site method page (damage, discard counts, success per million tokens)
+  judge_model: 'README: ''The primary endpoint is artifact execution: tests pass or fail. No LLM judge is used.'' HF card: ''There is no LLM judge anywhere in the primary endpoint'''
+  repro_level: repo tree (checked 2026-10-10) has scripts/pilot.py (runs the paired grid), scripts/launch_official.sh, scripts/analyze_pilot.py, scripts/verify_run.py (re-derives published runs), scripts/generate_haystack.py, plus tasks/<id>/checker.py, oracles/ and corpus/. Corpus is public on HF
+  notes: README Disclosure and Scope sections; docs/STATUS.md; preregistration/021 and 026; HF dataset card

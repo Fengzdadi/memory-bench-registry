@@ -1,0 +1,34 @@
+{
+ "name": "AgenticSTS",
+ "slug": "agenticsts",
+ "leads": {
+  "registry_key": "arxiv:2607.02255",
+  "tier": "P0",
+  "arxiv": "2607.02255 (arXiv API: v1 2026-07-02; title: AgenticSTS: A Bounded-Memory Testbed for Long-Horizon LLM Agents)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "AgenticSTS: A Bounded-Memory Testbed for Long-Horizon LLM Agents",
+    "paper_url": "https://arxiv.org/pdf/2607.02255v1",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "procedural_workflow",
+    "episodic"
+   ],
+   "extra_tags": [
+    "game_long_horizon_decision"
+   ],
+   "kind_reason": "A bounded-memory testbed in Slay the Spire 2 with five ablatable memory layers, including L4 episodic postrun summaries and an L5 skill library learned from earlier runs. It releases 298 trajectories, frozen memory/skill snapshots and analysis scripts. Win-rate ablations are small (10 games per cell"
+  },
+  "phase1_verified_types": {
+   "procedural_workflow": "Sec 4.2: \"L5 skill library stores triggered strategic guides distilled from logs\"; Sec 6.3: \"Runs with postrun-active memory attempt A6–A8, while no-postrun streams stop at A2–A4\""
+  },
+  "paper_hint": "https://arxiv.org/abs/2607.02255",
+  "code_hint": "https://github.com/AlayaLab/AgenticSTS"
+ }
+}

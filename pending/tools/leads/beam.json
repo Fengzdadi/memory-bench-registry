@@ -1,0 +1,45 @@
+{
+ "name": "BEAM",
+ "slug": "beam",
+ "leads": {
+  "registry_key": "arxiv:2510.27246",
+  "tier": "P1",
+  "arxiv": "2510.27246 (arXiv API: v1 2025-10-31; title: Beyond a Million Tokens: Benchmarking and Enhancing Long-Term Memory in LLMs)",
+  "community_list_entries": [
+   {
+    "source": "teleai",
+    "section": "📏 Benchmarks / 💬 Plain-Text Benchmarks / 🗓️ 2025",
+    "name": "Beyond a Million Tokens: Benchmarking and Enhancing Long-Term Memory in LLMs",
+    "paper_url": "https://arxiv.org/abs/2510.27246",
+    "code_url": "https://github.com/mohammadtavakoli78/BEAM",
+    "data_url": "https://huggingface.co/datasets/Mohammadta/BEAM"
+   },
+   {
+    "source": "cognee",
+    "section": "BEAM",
+    "name": "BEAM",
+    "paper_url": "https://arxiv.org/abs/2510.27246",
+    "code_url": "https://github.com/mohammadtavakoli78/BEAM",
+    "data_url": "https://huggingface.co/datasets/Mohammadta/BEAM"
+   },
+   {
+    "source": "topoteretes",
+    "section": "Benchmarks & evaluation (prose mention, no link)",
+    "name": "BEAM",
+    "paper_url": null,
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "conversational_longterm",
+    "semantic_knowledge_update",
+    "episodic",
+    "personalization"
+   ],
+   "extra_tags": [],
+   "kind_reason": "Benchmark of 100 long conversations (128K-10M tokens) and 2,000 probing questions over ten memory abilities (incl. knowledge update, contradiction resolution, event ordering, temporal reasoning, preference following); LIGHT method is secondary. Some conversations are on coding topics but it is not a"
+  }
+ }
+}

@@ -1,0 +1,14 @@
+{
+ "name": "AToKe",
+ "slug": "atoke",
+ "leads": {
+  "registry_key": "arxiv:2312.05497",
+  "tier": "P0",
+  "arxiv": "2312.05497 (arXiv API: v1 ?; title: None)",
+  "phase1_verified_types": {
+   "parametric": "Paper, AToKe section: 'AToKe-ME, includes temporal knowledge Multiple Edits'. Methods section: 'All of the above model editing methods make changes to the parameters of the model' (CFT, MEND, ROME, MEMIT)."
+  },
+  "paper_hint": "https://arxiv.org/abs/2312.05497",
+  "code_hint": "https://github.com/Arvid-pku/ATOKE"
+ }
+}

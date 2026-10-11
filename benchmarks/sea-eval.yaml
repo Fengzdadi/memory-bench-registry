@@ -1,0 +1,46 @@
+name: SEA-Eval
+slug: sea-eval
+release_date: 2026-04
+venue: arXiv preprint
+memory_types:
+- procedural_workflow
+links:
+  paper: https://arxiv.org/abs/2604.08988
+  code: https://github.com/LeaperOvO/SEA-Eval
+  data: null
+scale:
+  conversations: 92
+  questions: 32
+  avg_context_length: 5 tasks per sequence
+  notes: 'conversations = 92 task sequences: 32 correlated, 30 orthogonal and 30 implicit-intent (v3 §4.3.4). questions = 32 atomic tasks: 12 Easy, 18 Normal, 2 Hard. Table 1 instead gives 12/18 Easy/Normal sequences for each of Correlated, Orth-Same and Orth-Similar. The experiments use only the Easy sequences. arXiv v1 described a different set: 30 atomic tasks, a 120-task streaming pool, 45 step-changes and 30 preference instances.'
+metrics:
+- Success Rate (SR)
+- Token Consumption (T/TC, mean K tokens per sequence stage)
+- Token change rate (R3 vs R1, A2/A3 vs R1; median per agent)
+- K_eff(Evo)
+- K_eff(Conv)
+- K_trans
+- K_eff(Stab-Id)
+- K_eff(Stab-Sim)
+- K_eff(Ret)
+- Normalized composite score (Median-AVG / Mean-AVG over 8 dimensions)
+judge_model: null
+repro_level: data_public
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'The benchmark runs agent frameworks (GenericAgent, OpenClaw, Hermes, Claude Code, Codex) on live web and OS tasks inside sandboxes. The paper does not describe how task success is checked. The dataset composition changed between arXiv v1 and v2/v3. The official repo''s default branch (master) is empty. Its main branch serves the leaderboard page: 12 task groups × 3 variants with Chinese prompts, the interference mapping and per-agent token/status results. It has no Normal/Hard or implicit-intent tasks, answer keys, evaluation script or licence (checked 2026-10-10). The paper reports no implicit-intent, noisy-condition or K_align results.'
+sources:
+  name: 'arXiv API title of 2604.08988: ''SEA-Eval: A Benchmark for Evaluating Self-Evolving Agents Beyond Episodic Assessment''.'
+  release_date: 'arXiv API: 2604.08988v1 published 2026-04-10T05:49:50Z. v2 is dated 2026-04-14 and v3 2026-05-24.'
+  venue: arXiv API entry has no journal_ref or comment. The abs page lists only v1-v3. A web search (2026-10-10) found only arXiv and alphaXiv listings and no peer-reviewed venue. The v3 ethics statement says the data and code 'will be publicly released upon publication'.
+  memory_types: 'procedural_workflow: v3 §3.1 defines persistent memory across task boundaries (procedural, episodic and declarative). §4.3.2 builds correlated and orthogonal task streams to test whether experience distilled from earlier tasks lowers token cost and keeps success on later repeated or similar tasks, including after interference (§5.2-5.4, Tables 2-4). personalization was not selected: implicit-intent sequences and K_align are defined (§4.2.3, §4.3.4), but the paper reports no results for them. embodied was not selected: the tasks are web and OS ''digital embodiment'', not simulated or physical environments.'
+  links.paper: https://arxiv.org/abs/2604.08988 (abs page and arXiv API opened 2026-10-10).
+  links.code: arXiv v2 HTML intro footnote links https://github.com/LeaperOvO/SEA-Eval. v3 footnote 3 links https://leaperovo.github.io/SEA-Eval/, and gh api repos/LeaperOvO/SEA-Eval/pages shows that site is built from this repo's main branch. The repo owner's GitHub Pages site is lpma.github.io, which fits co-author Lipeng Ma.
+  links.data: 'null: there is no separate dataset page. The project page leaperovo.github.io/SEA-Eval is GitHub Pages built from the same repo. Hugging Face dataset search for ''SEA-Eval'' returned only the unrelated SeaEval/SeaEval_datasets, and the HF papers API has no page for 2604.08988.'
+  scale.conversations: 'v3 §4.3.4 (Dataset Statistics): ''A total of 92 sequences ... 32 correlated sequences, 30 orthogonal sequences and 30 implicit intent sequences''. v2 §4.3.4 says the same.'
+  scale.questions: 'v3 §4.3.4: ''32 atomic tasks—12 Easy, 18 Normal, and 2 Hard''. The abstract-level contributions in v2 and v3 also give 32 atomic tasks.'
+  scale.avg_context_length: 'v3 §4.3.2: ''All sequences are set to length 5''. v2 §4.3.2 instead used length 10 for Easy and 5 for Normal, with Hard tasks run standalone.'
+  scale.notes: v3 Table 1 and §4.3.4. v1 §4.3.3 Dataset Statistics. Repo main branch tasks_data.json (12 groups, variants A/B/C) and the index.html TASKS / INTERFERENCE_TASKS constants, parsed 2026-10-10.
+  metrics: v3 Table 2 (mean K tokens per R1-A3 stage and SR), §5.3 Figs. 4-5 (median token change rates), Table 3 (Stab Id/Stab Sim), §5.4 definitions of K_eff(Evo/Conv/Stab-Id/Stab-Sim/Ret) and K_trans, and Table 4 (Median-AVG/Mean-AVG composite). §4.2 also defines Execution Steps S, N_fix, N_undo, K_SR and K_align, but the experiments report none of them.
+  judge_model: 'null: no LLM judge is described in v1, v2 or v3. The paper does not say how SR is determined; it only claims ''ground-truth verifiability'' (§4.3.4). LLMs appear only as evaluated agent backbones (Claude Opus 4.6; GPT-5.5 for Codex), in v1 variant generation, and in writing assistance.'
+  repro_level: 'data_public: on 2026-10-10 the LeaperOvO/SEA-Eval main branch had tasks_data.json (12 task groups × 3 variants = 36 task prompts) and index.html (the same tasks plus per-agent aaa/abc/orthogonal run results and the INTERFERENCE_TASKS mapping), plus eval_questions.json (6 pilot tasks). The scripts gen.py, generate.py, rebuild.py and build_html.py only build the HTML page; rebuild.py fills seeded random placeholder results. No script runs or scores the evaluation, and the default branch master holds only .idea/ files.'

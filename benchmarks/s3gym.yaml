@@ -1,0 +1,47 @@
+name: S3Gym
+slug: s3gym
+release_date: 2026-08
+venue: arXiv preprint
+memory_types:
+- procedural_workflow
+- parametric
+links:
+  paper: https://arxiv.org/abs/2608.31100
+  code: null
+  data: null
+scale:
+  conversations: null
+  questions: null
+  avg_context_length: null
+  notes: 'Not QA/dialogue-based: 7 text games (Chess, Minesweeper, Nullify, Tetris, Snake, PvZ, Trust Evolution). Per model-game-pathway: 30 permissive exploration episodes, then 3 strict-mode evaluation episodes at each of 11 checkpoints (0,3,...,30); max 5-64 steps/episode; History-ICL input capped at 100,000 tokens. Self-judging analysis: 98 runs, 116,117 transitions. Training study: Qwen3-8B, 20 checkpoints.'
+metrics:
+- Avg. evaluation score over checkpoints
+- Max. evaluation score
+- AUC+ (positive area above initial score)
+- Delta Final (final minus initial score, training study)
+- NABA (normalized above-baseline area)
+- Self-judging event agreement
+- NMAE (normalized mean absolute error of self-judged vs verifier reward)
+- Over-confidence / under-confidence rate
+- Judgment-improvement correlation rho(A,g), rho(-E,g) and tertile gaps
+judge_model: null
+repro_level: paper_only
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'No official code or data found (checked 2026-10-10): paper and project page (self-developing-agents.github.io, a static page also covering Aspire and HarnessDev) give no repo or dataset link, though the paper mentions a "released implementation". Games follow the KORGym paradigm. Main context-level results cover 7 proprietary models (History ICL vs Summary Memory); the parameter-training pathway is a separate auxiliary study on Qwen3-8B. Scores use different scales per game; AUC+ is comparable only within a game.'
+sources:
+  name: 'arXiv API title ''S3Gym: Can LLMs Turn Self-Testing and Self-Judging into Self-Improvement?'' (paper writes S^3Gym)'
+  release_date: 'arXiv API: 2608.31100v1 published 2026-08-31'
+  venue: arXiv API entry has no journal_ref or comments; HF paper page and project page list no venue
+  memory_types: 'paper §4.3-4.5: exploration trajectories consolidated into History ICL or Summary Memory (strategies to retain, mistakes to avoid, next directions) and reused on disjoint-seed stricter evaluation episodes (procedural_workflow); §4.5/§6.1 Parameter Training pathway SFTs Qwen3-8B on exploration experience under the same protocol (parametric)'
+  links.paper: arXiv abs page 2608.31100
+  links.code: 'null: paper (arXiv v1 HTML) and project page link no repo; GitHub org Self-Developing-Agents has only the project-page repo; gh search found no official S3Gym repo (checked 2026-10-10)'
+  links.data: 'null: HF API shows no datasets linked to arxiv:2608.31100 and no S3Gym dataset (checked 2026-10-10)'
+  scale.conversations: 'null: benchmark is episode-based games, no conversations (paper §5.1-5.2)'
+  scale.questions: 'null: no question set; evaluation is 3 strict episodes per checkpoint, 11 checkpoints, 7 games (paper Table 3)'
+  scale.avg_context_length: 'null: paper reports only a History-ICL input limit of 100,000 tokens (Table 3), not an average'
+  scale.notes: paper Table 2 (game configs, max steps), Table 3 (runtime config), §6.1 (Qwen3-8B 20 checkpoints), §6.2 (98 runs, 116,117 transitions)
+  metrics: paper §5.2 Eq. 18-20 (Avg., Max., AUC+), §6.1 (Delta Final), §6.2 Eq. 21-23 (agreement, NMAE, over/under-confidence, rho, tertile gaps, NABA)
+  judge_model: 'null: outcomes scored by executable environment verifiers; ''self-judging'' scores come from the evaluated agent itself and are compared to verifier rewards (paper §4.2, §6.2); no LLM judge'
+  repro_level: paper checked; no official repo or public data found on GitHub, HF, or project page (checked 2026-10-10)
+  notes: project page https://self-developing-agents.github.io/ and its repo tree (index.html, SDA-blog-Final-v9.html); paper §1, §5.2, §6.1, Appendix A.1

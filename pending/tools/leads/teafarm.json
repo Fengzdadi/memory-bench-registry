@@ -1,0 +1,25 @@
+{
+ "name": "TeaFarm (THEANINE)",
+ "slug": "teafarm",
+ "leads": {
+  "registry_key": "url:aclanthology.org/2025.naacl-long.435",
+  "tier": "P2",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Systems & Models",
+    "name": "Towards Lifelong Dialogue Agents via Timeline-based Memory Management",
+    "paper_url": "https://aclanthology.org/2025.naacl-long.435.pdf",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "conversational_longterm"
+   ],
+   "extra_tags": [],
+   "kind_reason": "The main contribution of arXiv 2406.10996 is the THEANINE memory method. The paper also introduces TeaFarm, a counterfactual-driven evaluation pipeline for recalling past sessions in long-term dialogue. It releases the TeaBag data (100 episodes from MSC and Conversation Chronicles, 200 counterfactua"
+  }
+ }
+}

@@ -1,0 +1,43 @@
+name: ContinualSkillBench
+slug: continualskillbench
+release_date: 2026-08
+venue: arXiv preprint
+memory_types:
+- procedural_workflow
+links:
+  paper: https://arxiv.org/abs/2608.03874
+  code: https://github.com/gtynnn060110-hash/continual-skill-bench-final
+  data: null
+scale:
+  conversations: null
+  questions: 500
+  avg_context_length: null
+  notes: 'questions = 500 subtasks: 5 domains (Healthcare, Law, Mathematics, Finance, Office) x 100 ordered subtasks, each domain solved as one sequential stream. There is no conversation unit, so conversations is null. The repo also ships science-100 (100 subtasks, not in the paper) and per-domain independent-trial splits. The paper reports no context-length statistics.'
+metrics:
+- Raw reward (mean score over the 100 subtasks of a domain)
+- Normalized reward (only tasks with valid outputs under both Sequential and Independent)
+- Delta_raw / Delta_norm (Sequential minus Independent gain)
+- 'Per-subtask scoring: exact match, token-level F1, numeric with tolerance, rubric-based LLM judge, programmatic tests'
+- Skill invocation frequency and final skill repository size
+- Generated-skill quality score (format x content, judged by GPT-4.1-mini)
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: The paper version has five domains (Healthcare, Law, Mathematics, Finance, Office), each with 100 ordered subtasks. The repo (a single commit dated 2026-08-04, Apache-2.0) also ships a science-100 domain that is not in the paper, plus independent-trial variants. Rubric-judged subtasks (25-68 per domain) need an LLM judge that the paper does not name. The repo's sequential agents default to claude-sonnet-4-6, and the example configs override it. Tasks are repackaged from third-party benchmarks (e.g. TAT-QA, HealthBench, LegalBench, Harvey), whose own licences apply. Running them needs Docker, and some need internet access.
+sources:
+  name: 'arXiv API title: ''ContinualSkillBench: Can LLM Agents Truly Evolve Their Capabilities?'''
+  release_date: 'arXiv API: 2608.03874v1 published 2026-08-04'
+  venue: arXiv API entry has no journal_ref or comment. The HTML header reads 'arXiv:2608.03874v1 [cs.AI] 04 Aug 2026'. Repo README says citation info 'will be added after release' (checked 2026-10-10)
+  memory_types: 'Paper Sec. 3: after each subtask the agent gets feedback and may create or modify skills, and the updated skill repository carries over to later subtasks. Sec. 4.1.2 compares Sequential with Independent, where history and skill repository are reset before every task. Sec. 4.3 adds an ICL ablation. The tasks are finance/law/health/math/office, not software engineering'
+  links.paper: arXiv API id 2608.03874
+  links.code: 'Paper title footnote: ''Source code: https://github.com/gtynnn060110-hash/continual-skill-bench-final'''
+  links.data: 'null: the paper gives no separate data link, and Hugging Face API dataset searches for ''continual-skill'' and ''ContinualSkillBench'' returned []. Task data ships inside the repo under Continual-Skill-Bench/tasks/'
+  scale.questions: 'arXiv abstract: ''five representative domains, each containing 100 interconnected subtasks'' (5 x 100 = 500). Repo tasks/<domain>-100/environment/tasks_spec.json has 100 entries for each of the 5 paper domains (counted 2026-10-10)'
+  scale.conversations: 'null: the benchmark has no conversation unit. Each of the 5 domains is one sequential stream of 100 subtasks'
+  scale.avg_context_length: 'null: no token or context-length statistics in the paper (arXiv HTML checked)'
+  metrics: Paper Sec. 3.4 (exact match / token F1, numeric tolerance, rubric LLM judge, programmatic tests), Sec. 4.1.2 (raw and normalized reward, Delta_raw / Delta_norm), Sec. 4.4 Fig. 3 (skill invocation frequency, repository size), App. G Table 8 (skill quality via GPT-4.1-mini)
+  judge_model: 'null: Sec. 3.4 says only that open-ended responses are scored ''by an LLM judge using predefined rubric criteria'' and names no model. GPT-4.1-mini (App. G) judges skill quality only. The repo''s src/harbor/agents/installed/codex_seq.py and claude_code_seq.py default judge_model=''claude-sonnet-4-6'', but example configs set others (e.g. openai/gpt-4o in experiments/configs/finance_sequential.yaml), so the model used in the paper cannot be confirmed'
+  repro_level: 'Repo has a Harbor harness (pyproject script ''harbor'' -> harbor.cli.main:app; README: ''harbor jobs start --path Continual-Skill-Bench/tasks/<domain>-100 --agent codex-seq''). It has sequential agents (src/harbor/agents/installed/codex_seq.py, claude_code_seq.py, codex_seq_icl.py) with a per-subtask judge (sequential_subtask_judge.py), and per-domain verifiers (tasks/<domain>-100/tests/test.sh + aggregate_reward.py). Task specs and data are in the repo (checked 2026-10-10)'
+  notes: Repo contents API (tasks/ lists science-100), commits API (single commit 083f14d, 2026-08-04), repo licence apache-2.0, Continual-Skill-Bench/README.md (task sources, LLM-judge and internet notes), tasks_spec.json eval_type counts
+  scale.notes: arXiv abstract + Sec. 4.1.2. Repo tasks/ directory listing and tasks/science-100/README.md

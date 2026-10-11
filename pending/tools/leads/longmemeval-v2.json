@@ -1,0 +1,34 @@
+{
+ "name": "LongMemEval-V2",
+ "slug": "longmemeval-v2",
+ "leads": {
+  "registry_key": "arxiv:2605.12493",
+  "tier": "P0",
+  "arxiv": "2605.12493 (arXiv API: v1 2026-05-12; title: LongMemEval-V2: Evaluating Long-Term Agent Memory Toward Experienced Colleagues)",
+  "community_list_entries": [
+   {
+    "source": "cognee",
+    "section": "Future directions",
+    "name": "LongMemEval-V2",
+    "paper_url": "https://arxiv.org/abs/2605.12493",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "episodic",
+    "procedural_workflow"
+   ],
+   "extra_tags": [
+    "web_agent_environment_experience"
+   ],
+   "kind_reason": "451 curated questions over web-agent history trajectories (up to 115M tokens). It covers static state recall, dynamic state tracking, workflow knowledge, environment gotchas and premise awareness, scored as QA over memory-provided context."
+  },
+  "phase1_verified_types": {
+   "procedural_workflow": "Sec.3.1: \"Workflow Knowledge. An experienced colleague knows the steps needed to perform common tasks in the customized environment.\" This is one of five scored question abilities."
+  },
+  "paper_hint": "https://arxiv.org/abs/2605.12493",
+  "code_hint": "https://github.com/xiaowu0162/LongMemEval-V2"
+ }
+}

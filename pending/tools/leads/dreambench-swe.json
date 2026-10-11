@@ -1,0 +1,33 @@
+{
+ "name": "DreamBench-SWE",
+ "slug": "dreambench-swe",
+ "leads": {
+  "registry_key": "arxiv:2608.20664",
+  "tier": "P0",
+  "arxiv": "2608.20664 (arXiv API: v1 2026-08-21; title: DreamBench-SWE: A Multi-Session Memory-Hygiene Benchmark for Software Agents)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "DreamBench-SWE: A Multi-Session Memory-Hygiene Benchmark for Software Agents",
+    "paper_url": "https://arxiv.org/pdf/2608.20664",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "coding_cross_session",
+    "semantic_knowledge_update"
+   ],
+   "extra_tags": [],
+   "kind_reason": "Multi-session software-agent memory benchmark: 3-session sequences (S1/S2 inject evidence, S3 trap), 60 traps in v2, scored by executable hidden oracles (S3 pass@1). Sequence types include convention-learning, generated-files, stale-architecture, reviewer-preference and flaky-test."
+  },
+  "phase1_verified_types": {
+   "procedural_workflow": "Table 21 construct taxonomy: \"C8 Procedural / source-of-truth memory: Remember how this repository expects a change to be made, such as editing a generator rather than a generated artifact.\" Generated-files family: \"S2 exposes source-of-truth plus regeneration",
+   "coding_cross_session": "Abstract: \"multi-session benchmark for software-agent memory hygiene in which later software tasks depend on non-inferable evidence from earlier sessions\". Sec. 5.1: S3 info \"recoverable only from earlier-session memory\"."
+  },
+  "paper_hint": "https://arxiv.org/abs/2608.20664",
+  "code_hint": "https://github.com/iroiro147/dreambench-swe"
+ }
+}

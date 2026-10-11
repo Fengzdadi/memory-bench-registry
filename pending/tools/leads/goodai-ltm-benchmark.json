@@ -1,0 +1,30 @@
+{
+ "name": "GoodAI LTM Benchmark",
+ "slug": "goodai-ltm-benchmark",
+ "leads": {
+  "registry_key": "arxiv:2409.20222",
+  "tier": "P2",
+  "arxiv": "2409.20222 (arXiv API: v1 2024-09-30; title: Beyond Prompts: Dynamic Conversational Benchmarking of Large Language Models)",
+  "community_list_entries": [
+   {
+    "source": "tsinghua",
+    "section": "Benchmark",
+    "name": "LTM",
+    "paper_url": "https://arxiv.org/abs/2409.20222",
+    "code_url": "https://github.com/GoodAI/goodai-ltm-benchmark",
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "conversational_longterm",
+    "semantic_knowledge_update"
+   ],
+   "extra_tags": [
+    "prospective_memory",
+    "multi_task_interleaving"
+   ],
+   "kind_reason": "Dynamic conversational benchmark (NeurIPS 2024 D&B) that tests long-term memory, continual learning and information integration in one long interleaved conversation. Repo datasets include colours, name_list and shopping (repeated value or list changes, then asks for the current state), plus prospect"
+  }
+ }
+}

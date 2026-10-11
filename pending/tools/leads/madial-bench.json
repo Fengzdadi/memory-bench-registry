@@ -1,0 +1,46 @@
+{
+ "name": "MADial-Bench",
+ "slug": "madial-bench",
+ "leads": {
+  "registry_key": "arxiv:2409.15240",
+  "tier": "P1",
+  "arxiv": "2409.15240 (arXiv API: v1 2024-09-23; title: MADial-Bench: Towards Real-world Evaluation of Memory-Augmented Dialogue Generation)",
+  "community_list_entries": [
+   {
+    "source": "tsinghua",
+    "section": "Benchmark",
+    "name": "MADail-Bench",
+    "paper_url": "https://arxiv.org/abs/2409.15240",
+    "code_url": "https://github.com/hejunqing/MADial-Bench",
+    "data_url": null
+   },
+   {
+    "source": "iaar",
+    "section": "Resources / Benchmarks and Tasks / Long-Term Memory Evaluation",
+    "name": "MADial-Bench",
+    "paper_url": "https://arxiv.org/abs/2409.15240",
+    "code_url": null,
+    "data_url": null
+   },
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "MADial-Bench Towards real-world evaluation of memory-augmented diglogue generation",
+    "paper_url": "https://arxiv.org/abs/2409.15240",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "conversational_longterm",
+    "episodic"
+   ],
+   "extra_tags": [
+    "proactive_memory_recall",
+    "emotional_support"
+   ],
+   "kind_reason": "Benchmark for memory-augmented dialogue generation (NAACL per repo): 160 dialogues and 171 dated event memories with time, emotion and scene. Tasks are memory retrieval and memory recognition/response, with passive and proactive (emotion- or scene-triggered) recall."
+  }
+ }
+}

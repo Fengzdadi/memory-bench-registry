@@ -1,0 +1,45 @@
+name: Evo-Memory
+slug: evo-memory
+release_date: 2025-11
+venue: arXiv preprint
+memory_types:
+- procedural_workflow
+- embodied
+links:
+  paper: https://arxiv.org/abs/2511.20857
+  code: null
+  data: null
+scale:
+  conversations: null
+  questions: 3716
+  avg_context_length: null
+  notes: 'questions = 3,716 is the sum of the per-dataset counts in v2 Appendix F; the paper states no total. Single-turn: 3,320 (MMLU-Pro Eng 969 / Econ 844 / Philo 499, GPQA-Diamond 198, AIME-24/25 30 each, ToolBench 750). Multi-turn: 396 tasks (AlfWorld 134, BabyAI 112, ScienceWorld 90, PDDL 60). No conversations: each dataset is one ordered task stream.'
+metrics:
+- Exact match (single-turn answer accuracy)
+- API / accuracy (ToolBench)
+- Success rate (multi-turn)
+- Progress rate (multi-turn)
+- Step efficiency (steps to goal)
+- Sequence robustness (easy-to-hard vs hard-to-easy task order)
+- Cumulative accuracy / success over the task stream
+judge_model: null
+repro_level: paper_only
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: arXiv only (v1 2025-11-25, v2 2026-05-18). No venue was found. Evo-Memory re-sequences existing public datasets into task streams. As of 2026-10-10 no Evo-Memory code, stream orderings or data had been released. The paper promises a release upon acceptance, and the first author's homepage lists Code as "TBD". v1 also listed Jericho (via AgentBoard), which v2 drops. The abstract says 10 datasets, but v2 names 9. Do not confuse with SakanaAI/evo-memory (NAMM) or EvoMemBench.
+sources:
+  name: 'arXiv 2511.20857 title/abstract: ''Evo-Memory: Benchmarking LLM Agent Test-time Learning with Self-Evolving Memory'''
+  release_date: 'arXiv API: 2511.20857v1 published 2025-11-25T21:08:07Z (v2 updated 2026-05-18)'
+  venue: arXiv API and abs page show no journal_ref/comments. First author's homepage (weitianxin.github.io index.html, checked 2026-10-10) lists venue 'arXiv 2025'. No OpenReview or ACL Anthology listing found by web search.
+  memory_types: 'Paper v2 §3.1 ''Dataset Preparation'': static datasets restructured into streaming task sequences where ''earlier tasks provide essential information or strategies for later ones'', with experience memory evolved after each task. §4.1.2 and App. A.4 evaluate procedural-memory methods (Dynamic Cheatsheet, AWM). Table 1(b) and Table 4 report success/progress on AlfWorld, BabyAI, ScienceWorld and PDDL, which the paper calls ''multi-turn embodied reasoning''.'
+  links.paper: arXiv abs page https://arxiv.org/abs/2511.20857
+  links.code: 'null: paper v2 App. E.2 says code will be released ''upon acceptance''. First author''s homepage Code link is ''TBD''. GitHub search found only unofficial or unrelated repos (devopsdymyr/Evo-Memory, SakanaAI/evo-memory). The HF paper page has no linked repo. Checked 2026-10-10.'
+  links.data: 'null: HF dataset search for ''evo-memory'' returned nothing. The HF paper page 2511.20857 links only two unrelated survey datasets. Checked 2026-10-10.'
+  scale.questions: Sum of per-dataset counts in paper v2 Appendix F (F.1 single-turn, F.2 multi-turn). Appendix F was added in v2 and is absent from v1.
+  scale.conversations: 'null: the benchmark uses task streams, not conversations (paper §3.1).'
+  scale.avg_context_length: 'null: the paper does not report context length.'
+  metrics: Paper v2 Table 1 (Exact Match; API/Acc. for ToolBench; S/P success and progress rates), App. A.3 (answer accuracy, success rate, step efficiency, sequence robustness), Fig. 4 (step efficiency), Table 2 (Easy→Hard direction), App. B.3 and G.2 (cumulative accuracy)
+  judge_model: 'null: paper v2 §4.1.1, App. A.3 and G.2 use exact match and success/progress rates, with the correctness signal as feedback. No LLM judge is used.'
+  repro_level: 'paper_only: paper checked. No official repo or dataset release found on GitHub, Hugging Face or the author homepage (checked 2026-10-10).'
+  notes: arXiv API (v1/v2 dates), paper v1 vs v2 HTML (§4.1.1 dataset lists, App. E.2), author homepage index.html
+  scale.notes: Paper v2 Appendix F

@@ -1,0 +1,29 @@
+{
+ "name": "MemTrack",
+ "slug": "memtrack",
+ "leads": {
+  "registry_key": "arxiv:2510.01353",
+  "tier": "P2",
+  "arxiv": "2510.01353 (arXiv API: v1 2025-10-01; title: MEMTRACK: Evaluating Long-Term Memory and State Tracking in Multi-Platform Dynamic Agent Environments)",
+  "community_list_entries": [
+   {
+    "source": "cognee",
+    "section": "Future directions",
+    "name": "MemTrack",
+    "paper_url": "https://arxiv.org/abs/2510.01353",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "semantic_knowledge_update",
+    "episodic"
+   ],
+   "extra_tags": [
+    "enterprise_multi_platform_state_tracking"
+   ],
+   "kind_reason": "Benchmark (47 curated instances) evaluating long-term memory and state tracking over platform-interleaved timelines (Slack, Linear, Git/Gitea) in software-development orgs; agents answer sequential questions via tools; metrics Correctness/Efficiency/Redundancy. Not coding_cross_session: tasks are QA"
+  }
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "name": "S3Gym",
+ "slug": "s3gym",
+ "leads": {
+  "registry_key": "arxiv:2608.31100",
+  "tier": "P0",
+  "arxiv": "2608.31100 (arXiv API: v1 ?; title: None)",
+  "phase1_verified_types": {
+   "procedural_workflow": "Sec. 4.4: \"Exploration provides diverse experience for judgment and consolidation, whereas evaluation verifies whether the resulting improvement transfers to stricter conditions\". The phases use disjoint seeds."
+  },
+  "paper_hint": "https://arxiv.org/abs/2608.31100"
+ }
+}

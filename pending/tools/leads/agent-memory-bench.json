@@ -1,0 +1,30 @@
+{
+ "name": "agent-memory-bench",
+ "slug": "agent-memory-bench",
+ "leads": {
+  "registry_key": "name:agentmemorybench",
+  "tier": "P0",
+  "community_list_entries": [
+   {
+    "source": "teleai",
+    "section": "📏 Benchmarks / 🎮 Dynamic Benchmarks & Simulation Environments / 🗓️ 2026",
+    "name": "agent-memory-bench",
+    "paper_url": null,
+    "code_url": "https://github.com/GiulioDER/agent-memory-bench",
+    "data_url": "https://huggingface.co/datasets/Gde05/agent-memory-bench-corpus"
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "coding_cross_session",
+    "semantic_knowledge_update"
+   ],
+   "extra_tags": [],
+   "kind_reason": "Preregistered, execution-graded benchmark of pluggable memory layers for Claude Code: 34 executable repo tasks, an HF corpus, and present/absent/superseded/contradictory/adjacent conditions. The README says the official run is retrieval over a bulk-ingested corpus and does not measure extraction or "
+  },
+  "phase1_verified_types": {
+   "coding_cross_session": "README: \"evaluates Claude Code on real repository tasks whose solutions depend on information from earlier sessions\"; tasks \"retrieve a governing fact from prior sessions\" (README, Task suite)."
+  },
+  "code_hint": "https://github.com/GiulioDER/agent-memory-bench"
+ }
+}

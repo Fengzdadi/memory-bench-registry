@@ -1,0 +1,46 @@
+name: MemAudit
+slug: memaudit
+release_date: 2026-05
+venue: arXiv preprint
+memory_types:
+- semantic_knowledge_update
+- conversational_longterm
+links:
+  paper: https://arxiv.org/abs/2605.02199
+  code: https://github.com/nishant7309/memaudit-artifact-neurips26
+  data: https://huggingface.co/datasets/edgeclustr/memaudit-data
+scale:
+  conversations: null
+  questions: 87
+  avg_context_length: null
+  notes: 'questions = the 87 queries in Natural-87, the main natural scoring set. It is support-sliced from LongMemEval-S. Counted in the HF release on 2026-10-10: 185 experiences, 713 evidence units and 749 candidates. Other sets: Natural-200 (200 queries), a 500-seed synthetic exact-small sweep (B=1-16), a 500-seed validity stress suite, a 30-example spot-check and a 100-example human-edited seed set.'
+metrics:
+- Package ratio rho_P(X) = F_P(X)/OPT_P(B) against the certified exact optimum
+- Union-denominator ratio for exported external stores (Mem0, Letta, A-Mem)
+- Upper-pruned bound (analysis-only)
+- Mean invalidation coverage
+- No-tombstone OPT relative to full OPT
+- 'Coverage-label audit: Cohen''s kappa, raw agreement, ratio mean absolute deviation'
+- Bootstrap 95% intervals
+- 'LongMemEval-S transfer diagnostics: retrieval compactness, token-F1, exact match'
+judge_model: Gemini Flash / Flash-Lite for coverage and salience adjudication (the repo command uses google/gemini-2.5-flash); Claude Sonnet 4.5 appears only as a cross-model audit
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: MemAudit scores the written memory store against a certified exact package optimum, not by QA accuracy. Natural packages are LongMemEval-S support slices labelled by an LLM (Gemini); the human audit covers Natural-87 only. The code repo and the HF data belong to the first author, but the arXiv paper links neither (both are an anonymous NeurIPS 2026 E&D submission artifact). Code is MIT; data is CC BY 4.0. Not the same as other papers named MemAudit (arXiv 2606.24595, 2605.23723).
+sources:
+  name: arXiv 2605.02199v1 title and body; the paper and repo README use 'MemAudit'
+  release_date: 'arXiv API: 2605.02199v1 published 2026-05-04'
+  venue: arXiv API has no journal_ref or comment. The repo dataset/README.md and croissant_metadata.json call it a 'NeurIPS 2026 E&D submission'; no acceptance found (web search, 2026-10-10)
+  memory_types: 'Paper §5: validity-state stress packages (supersession, deletion, update_chain, temporal_interval) give semantic_knowledge_update. §6 and App. B.3: natural packages built from LongMemEval-S multi-session chat support slices give conversational_longterm'
+  links.paper: arXiv abs page 2605.02199
+  links.code: GitHub nishant7309/memaudit-artifact-neurips26 (created 2026-05-04). Owner profile name Nishant Bhargava, email bharga57@purdue.edu, matching the paper's first author. The arXiv paper itself gives no repo URL
+  links.data: 'HF API datasets/edgeclustr/memaudit-data: public, not gated, cc-by-4.0. HF user edgeclustr fullname is ''Nishant Bhargava''. The README matches the repo dataset card'
+  scale.questions: 'Paper Table 2 and §6: 87-example adjudicated subset (Natural-87) is the ''main natural scoring set''. HF coverage_package/queries.jsonl has 87 rows (counted 2026-10-10)'
+  scale.conversations: 'null: examples are LongMemEval-S support slices, not separate conversations. HF experiences.jsonl has 185 rows for Natural-87 (counted 2026-10-10)'
+  scale.avg_context_length: 'null: the paper reports no average context length. The repo only sets a --max-session-words 1800 cap (REPRODUCIBILITY.md)'
+  scale.notes: Paper §4 (500-seed exact sweep, B=1,2,4,8,16), §5 (stress suite at B=6), Table 2 (Natural-200/100/30/seed-100). HF coverage_package jsonl line counts (2026-10-10)
+  metrics: Paper Def. 2-3, §4, §6 Tables 3-4, Fig. 2 (bootstrap CIs), App. D (token-F1, exact match, retrieval compactness)
+  judge_model: 'Paper §6 and App. E: coverage/salience adjudication by Gemini Flash/Flash-Lite; Claude Sonnet 4.5 cross-model audit (App. B.3, Table 3). REPRODUCIBILITY.md adjudication command uses --model google/gemini-2.5-flash. Synthetic exact packages use no LLM judge'
+  repro_level: 'Repo tree has run_oraclemem_mvp.py (exact package benchmark runner), llm_memory_validation/evaluate_coverage_package_writers.py, llm_memory_validation/adjudicate_natural_package.py and llm_memory_validation/score_mem0_written_stores.py. Data: dataset/memaudit_dataset_artifacts.tar.gz (15.7 MB) in the repo, plus HF package jsonl files (checked 2026-10-10)'
+  notes: 'Paper §6 and §8; repo README, EVALUATION_CARD.md, LICENSE (MIT), dataset/LICENSE (CC-BY-4.0); arXiv API for 2606.24595 (different authors: Enze Ma et al.)'

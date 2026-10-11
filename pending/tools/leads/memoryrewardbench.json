@@ -1,0 +1,29 @@
+{
+ "name": "MemoryRewardBench",
+ "slug": "memoryrewardbench",
+ "leads": {
+  "registry_key": "arxiv:2601.11969",
+  "tier": "P2",
+  "arxiv": "2601.11969 (arXiv API: v1 2026-01-17; title: MemoryRewardBench: Benchmarking Reward Models for Long-Term Memory Management in Large Language Models)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "MemoryRewardBench: Benchmarking Reward Models for Long-Term Memory Management in Large Language Models",
+    "paper_url": "https://arxiv.org/pdf/2601.11969",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "conversational_longterm"
+   ],
+   "extra_tags": [
+    "reward_model_meta_evaluation",
+    "long_context_single_input"
+   ],
+   "kind_reason": "A benchmark of 2,400 chosen/rejected memory-management trajectory pairs, 8K-128K tokens, for evaluating reward models' ability to judge LLM memory management. There are 10 settings across long-context reasoning (BABILong/LongMiT, MemAgent-style), multi-turn dialogue (LoCoMo/MemoryAgentBench with Mem"
+  }
+ }
+}

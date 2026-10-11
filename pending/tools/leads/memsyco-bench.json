@@ -1,0 +1,29 @@
+{
+ "name": "MemSyco-Bench",
+ "slug": "memsyco-bench",
+ "leads": {
+  "registry_key": "arxiv:2607.01071",
+  "tier": "P2",
+  "arxiv": "2607.01071 (arXiv API: v1 2026-07-01; title: MemSyco-Bench: Benchmarking Sycophancy in Agent Memory)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "MemSyco-Bench: Benchmarking Sycophancy in Agent Memory",
+    "paper_url": "https://arxiv.org/pdf/2607.01071v2",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "personalization",
+    "semantic_knowledge_update"
+   ],
+   "extra_tags": [
+    "memory_sycophancy"
+   ],
+   "kind_reason": "A benchmark for memory-induced sycophancy with five tasks: rejecting memory as factual evidence, scope control, memory-evidence conflicts, tracking memory updates, and valid personalized memory use."
+  }
+ }
+}

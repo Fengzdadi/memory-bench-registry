@@ -1,0 +1,44 @@
+name: EvaLearn
+slug: evalearn
+release_date: 2025-06
+venue: NeurIPS 2025
+memory_types:
+- procedural_workflow
+links:
+  paper: https://arxiv.org/abs/2506.02672
+  code: https://github.com/ByteDance-Seed/EvaLearn
+  data: null
+scale:
+  conversations: 182
+  questions: 648
+  avg_context_length: null
+  notes: 182 = problem sequences (7 problems each, one task type per sequence); 648 = problems across six task types (Logical Reasoning 360, Summarization 60, Extraction 60, Sequential Reasoning 60, Mathematical Reasoning 60, Classification 48). Counted on 2026-10-10 in Dataset/*.json. Paper reports 315.45 words per question on average; no token-level context length.
+metrics:
+- Overall sequence accuracy (Acc)
+- Position-wise accuracy (Acc_m)
+- Slope of fitted accuracy curve (k)
+- Average position of first correct solution (P_first)
+- Average offset of first learned correct solution (P_offset, added in later arXiv versions)
+- Average number of consecutive correct solutions (N_consec)
+- Post-warmup accuracy (Acc_pw-K)
+judge_model: GPT-4o
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'Experience is held in the context window: earlier problems plus canonical answers (demonstration learning) or own solutions plus judge feedback (feedback learning) are prepended; no external memory store. README and run.sh call Evaluate/evaluate.py, which is absent; per-setting scripts exist instead. Paper results use the Chinese rubrics (English rubrics are LLM-translated). Code is Apache-2.0; the README badge says data is CC BY 4.0, but DATA_LICENSE is CC BY-NC 4.0 (non-commercial). arXiv v3 adds P_offset.'
+sources:
+  name: 'arXiv API title ''EvaLearn: Quantifying the Learning Capability and Efficiency of LLMs via Sequential Problem Solving''; repo README'
+  release_date: 'arXiv API: 2506.02672v1 published 2025-06-03'
+  venue: arXiv comment 'Accepted by NeurIPS 2025'; NeurIPS proceedings page (Advances in Neural Information Processing Systems 38, Main Conference Track); repo README citation
+  memory_types: 'paper §2 / arXiv HTML: models solve 7-problem sequences sequentially, reusing experience from earlier problems (demonstration/feedback learning) on later, different problems of the same task type, and learning is measured by accuracy gains over sequence positions -> procedural_workflow'
+  links.paper: arXiv abs 2506.02672 (linked from repo README)
+  links.code: github.com/ByteDance-Seed/EvaLearn, linked as 'the GitHub repository' in the abstract and maintained by the authors (README contact Shihan Dou)
+  links.data: 'null: data ships in the repo (Dataset/EvaLearn_Problem.json, Dataset/EvaLearn_Sequence.json); a Hugging Face API search for ''evalearn'' returned [] on 2026-10-10'
+  scale.conversations: abstract '182 sequences'; repo Dataset/EvaLearn_Sequence.json has 182 entries, all 7 question_ids long (counted 2026-10-10)
+  scale.questions: abstract '648 challenging problems across six task types'; repo Dataset/EvaLearn_Problem.json has 648 entries (counted 2026-10-10)
+  scale.avg_context_length: 'null: the paper (arXiv HTML §2.1) gives only an average of 315.45 words per question and no token-level context-length statistic'
+  metrics: 'paper §2.3 (arXiv v3 HTML): Acc, k, P_first, P_offset, N_consec, Acc_pw-K, with position-wise Acc_m as the basis for k; v1 HTML lists five metrics, without P_offset'
+  judge_model: 'paper (arXiv v3 HTML): ''In all experiments, we use GPT-4o as the judging model''; repo scripts default to gpt-4o-2024-11-20'
+  repro_level: repo tree has Evaluate/zero_shot.py, Evaluate/few_shot.py, Evaluate/demonstration_learning.py, Evaluate/feedback_learning.py (each with argparse __main__) plus Evaluate/evaluate_metric.py and Dataset/*.json (checked 2026-10-10)
+  notes: repo DATA_LICENSE begins 'Attribution-NonCommercial 4.0 International' while README badge reads 'Data_License-CC_BY_4.0'; LICENSE is Apache 2.0; README lines 32/54 and run.sh reference Evaluate/evaluate.py, absent from repo tree; README rubric note (Chinese rubrics used in paper); arXiv API shows v3 (updated 2025-10-21) vs v1 HTML (all checked 2026-10-10)
+  scale.notes: counts from the repo Dataset JSON files; words-per-question figure from arXiv HTML §2.1

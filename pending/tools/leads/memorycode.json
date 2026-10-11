@@ -1,0 +1,14 @@
+{
+ "name": "MemoryCode",
+ "slug": "memorycode",
+ "leads": {
+  "registry_key": "arxiv:2502.13791",
+  "tier": "P0",
+  "arxiv": "2502.13791 (arXiv API: v1 ?; title: None)",
+  "phase1_verified_types": {
+   "coding_cross_session": "Title: 'Evaluating LLMs in Multi-Session Coding Interactions'. Sec. 4: the HISTORY setting 'evaluates the ability to recall information from previous sessions'. Sec. 1: instructions can be 'updated multiple times throughout the dialogue history'."
+  },
+  "paper_hint": "https://arxiv.org/abs/2502.13791",
+  "code_hint": "https://github.com/for-ai/MemoryCode"
+ }
+}

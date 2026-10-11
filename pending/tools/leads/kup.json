@@ -1,0 +1,14 @@
+{
+ "name": "KUP (Knowledge Update Playground)",
+ "slug": "kup",
+ "leads": {
+  "registry_key": "arxiv:2504.12523",
+  "tier": "P0",
+  "arxiv": "2504.12523 (arXiv API: v1 ?; title: None)",
+  "phase1_verified_types": {
+   "parametric": "Intro: \"we focus on continued pre-training (CPT) methods that directly update model parameters to memorize updated facts\"; test set of 6260 direct/indirect probing questions (Sec.4.1 KUPEval)."
+  },
+  "paper_hint": "https://arxiv.org/abs/2504.12523",
+  "code_hint": "https://github.com/Aochong-Li/KnowledgeUpdatePlayground"
+ }
+}

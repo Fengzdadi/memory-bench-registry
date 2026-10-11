@@ -1,0 +1,48 @@
+name: Mem-Gallery
+slug: mem-gallery
+release_date: 2026-01
+venue: ACL 2026
+memory_types:
+- conversational_longterm
+- multimodal
+- episodic
+- semantic_knowledge_update
+links:
+  paper: https://arxiv.org/abs/2601.03515
+  code: https://github.com/YuanchenBei/Mem-Gallery
+  data: https://huggingface.co/datasets/Ethan-Bei/Mem-Gallery
+scale:
+  conversations: 20
+  questions: 1711
+  avg_context_length: ~198 rounds per scenario conversation (16.51 rounds and 4.18 images per session)
+  notes: '20 = multi-session conversation scenarios (9-18 sessions each, 240 sessions, 3,962 rounds, 1,003 dialogue images); memory is reset per scenario in run_bench.py. 1,711 = human-annotated QA pairs (487 with query images) over 9 tasks: FR 219, VS 306, TTL 337, TR 123, VR 174, MR 206, KR 81, CD 81, AR 184. No token-length figure reported.'
+metrics:
+- F1
+- BLEU-1
+- Exact Match (EM)
+- LLM-as-a-Judge score
+- Recall@K
+- Precision@K
+- Hit@K
+- runtime / token consumption (efficiency)
+judge_model: Qwen-2.5-72B-Instruct
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'The paper text says "240 multi-session dialogues", but its Table 7 and the HF release show 20 scenario conversations containing 240 sessions in total. The HF release has 1,490 images: 1,003 in dialogues and 487 attached to questions. The 13 memory systems run on MemEngine. A-Mem and MemoryOS are not in the repo; users adapt those projects'' own eval code. The repo and HF dataset are MIT-licensed. Dialogue images come from MMDU, CUB-200, Stanford Dogs, Oxford Flowers and DeepFashion. Running the judge needs a user-supplied model endpoint.'
+sources:
+  name: arXiv API title; repo README; HF dataset card
+  release_date: 'arXiv API: 2601.03515v1 published 2026-01-07 (only version)'
+  venue: 'ACL Anthology 2026.acl-long.1892 (Proceedings of the 64th Annual Meeting of the ACL, Vol. 1: Long Papers, July 2026); repo description says ''ACL2026 Main'''
+  memory_types: 'paper §3.3 (ACL version): multi-session multimodal conversations; Temporal Reasoning (episodic); Knowledge Resolution and Conflict Detection, which require updating or overriding stored facts (semantic_knowledge_update); images in dialogues and queries (multimodal)'
+  links.paper: arXiv abs page 2601.03515
+  links.code: paper abstract footnote 1 links github.com/YuanchenBei/Mem-Gallery
+  links.data: repo README Dataset section links huggingface.co/datasets/Ethan-Bei/Mem-Gallery; HF API shows it ungated, MIT, 20 dialog JSONs + 1,490 images
+  scale.conversations: ACL paper Appendix Table 7 (20 scenarios, 240 sessions total); HF card 'Total Scenarios 20, Avg. Sessions per Scenario 12'; the 20 dialog JSONs were streamed from HF on 2026-10-10 and their session counts sum to 240
+  scale.questions: paper Table 2 and Table 8 (1,711 QA pairs); per-file 'human-annotated QAs' counts in the HF dialog JSONs sum to 1,711 (counted on 2026-10-10)
+  scale.avg_context_length: 'HF dataset card: ''Avg. Rounds per Scenario 198.10'', ''Avg. Rounds per Session 16.51'', ''Avg. Images per Session 4.18''; paper Table 1 (16.51 rounds, 4.18 images per session)'
+  scale.notes: paper Table 2, Table 7, Table 8; run_bench.py calls memory_agent.reset() per data_name
+  metrics: paper §4.1.2 (F1, BLEU-1, EM, LLM-as-a-Judge; Recall, Precision, Hit for retrieval); §4.4 Recall@K/Precision@K; efficiency analysis reports runtime and token consumption
+  judge_model: 'paper §4.1.2: ''For LLM-as-a-Judge, we adopt Qwen-2.5-72B-Instruct ... as the judging model'' (the separate dataset-quality check in §3.4 used Qwen-2.5-VL-72B, GPT-5-mini and Gemini-2.5-Flash)'
+  repro_level: repo tree has benchmark/run/run_bench.py (runs memory systems over the dialogs/QAs) and benchmark/memengine/evaluate/evaluation.py (F1/BLEU/EM/LLM-judge/retrieval metrics, --enable_llm_judge); data public on HF, not gated (checked 2026-10-10)
+  notes: ACL paper Appendix A.2.1-A.2.2 and Table 7; HF card statistics; repo README (A-Mem/MemoryOS instructions, MemEngine acknowledgement, config placeholders)

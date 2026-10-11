@@ -1,0 +1,36 @@
+{
+ "name": "StuLife",
+ "slug": "stulife",
+ "leads": {
+  "registry_key": "arxiv:2508.19005",
+  "tier": "P0",
+  "arxiv": "2508.19005 (arXiv API: v1 2025-08-26; title: Building Self-Evolving Agents via Experience-Driven Lifelong Learning: A Framework and Benchmark)",
+  "community_list_entries": [
+   {
+    "source": "tsinghua",
+    "section": "Benchmark",
+    "name": "StuLife",
+    "paper_url": "https://arxiv.org/abs/2508.19005",
+    "code_url": "https://github.com/ECNU-ICALK/ELL-StuLife",
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "procedural_workflow",
+    "episodic",
+    "semantic_knowledge_update"
+   ],
+   "extra_tags": [
+    "lifelong_agent_environment",
+    "proactive_planning"
+   ],
+   "kind_reason": "Paper introduces ELL framework and the StuLife benchmark (1,284 interdependent tasks across a simulated college year) evaluating long-term memory, skill learning and proactive behavior; metrics include StuGPA, Long-Term Retention Rate and Proactive Initiative Score."
+  },
+  "phase1_verified_types": {
+   "procedural_workflow": "Sec.4.3: \"agents must abstract experiences into reusable skills and transfer them across evolving challenges\"; Sec.5.2: AWM gives \"a robust improvement, lifting StuGPA to 17.81 and Total Success to 10.12%\"."
+  },
+  "paper_hint": "https://arxiv.org/abs/2508.19005",
+  "code_hint": "https://github.com/ECNU-ICALK/ELL-StuLife"
+ }
+}

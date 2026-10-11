@@ -1,0 +1,39 @@
+name: MemoryRewardBench
+slug: memoryrewardbench
+release_date: 2026-01
+venue: arXiv preprint
+memory_types:
+- conversational_longterm
+links:
+  paper: https://arxiv.org/abs/2601.11969
+  code: https://github.com/LCM-Lab/MemoryRewardBench
+  data: https://huggingface.co/datasets/LCM-Lab/MemoryRewardBench
+scale:
+  conversations: null
+  questions: 2400
+  avg_context_length: null
+  notes: '2,400 chosen/rejected memory-trajectory pairs across 10 settings in 3 tasks (800 each): long-context reasoning, multi-turn dialogue understanding (Mem0/A-Mem on LoCoMo and MemoryAgentBench Conflict_Resolution), and long-form generation. Context ranges from 8K to 128K tokens, bucketed 419/503/566/563/349. No average length is reported, and the number of source dialogues is not given.'
+metrics:
+- Judgment accuracy (pairwise, % of pairs where the RM prefers the chosen trajectory; unparseable outputs count as wrong)
+- Consistency under chosen/rejected position swap
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'Meta-benchmark: the systems under test are 13 generative reward models that judge memory-management trajectories. It does not test memory systems directly. Full data (2,400 rows, Apache-2.0, not gated) is on Hugging Face. The GitHub datas/ folder holds only a 54-sample subset (counted on 2026-10-10). The paper links LCM-Lab/MemRewardBench, which now redirects to MemoryRewardBench. The paper body also uses the names "MemRewardBench" and "LongRewardBench".'
+sources:
+  name: arXiv title 2601.11969 and repo README title
+  release_date: 'arXiv API: 2601.11969v1 published 2026-01-17T09:04:53Z (v2 2026-01-24)'
+  venue: arXiv abs page shows no journal_ref or comments, the README cites it as @misc arXiv, and a web search found no acceptance (checked 2026-10-10)
+  memory_types: 'paper §3.2/Appendix B.2: the multi-turn dialogue task has the RM judge Mem0/A-Mem memory chains over LoCoMo and MemoryAgentBench Conflict_Resolution dialogues. The other tasks are long-context chunked reasoning and long-form generation trajectories.'
+  links.paper: arXiv abs 2601.11969
+  links.code: 'paper HTML header ''Code: Github link'' -> github.com/LCM-Lab/MemRewardBench, which redirects to LCM-Lab/MemoryRewardBench (gh api full_name)'
+  links.data: 'paper HTML header ''Benchmark: HF link'' -> huggingface.co/datasets/LCM-Lab/MemRewardBench, which 307-redirects to LCM-Lab/MemoryRewardBench (HF API: not gated, apache-2.0)'
+  scale.questions: paper Table 2 total 2400. The HF datasets-server reports num_rows 2400 (800 per config).
+  scale.conversations: 'not reported: the dialogue setting''s count of source conversations is not given'
+  scale.avg_context_length: 'not reported: the paper gives only an 8K-128K range and per-bucket counts (Table 2)'
+  scale.notes: paper Table 2 and Appendix B.2, README Benchmark Statistics, HF datasets-server /size
+  metrics: paper §4.1 ('We calculate the judgment accuracy for each RM'), §5.2 and Table 7 (consistency via position swap), evaluator.py compare_shuffled accuracy
+  judge_model: The evaluated models are themselves the generative judges, scored against ground-truth chosen/rejected labels, so no separate LLM judge does the scoring. Data construction used Qwen3-235A22B as an LLM-as-judge for memory updates (Appendix B.1).
+  repro_level: repo tree has eval.py and evaluating/memreward_bench/evaluator.py (accuracy scoring), and the README points to LOOM-Eval config benchmarks/Reward/MemoryRewardBench. The full data is downloadable from HF (3 jsonl files, ~416MB). Checked 2026-10-10.
+  notes: GitHub datas/*.jsonl line counts 20/14/20 vs HF 800/800/800 rows, gh api redirect, paper HTML text

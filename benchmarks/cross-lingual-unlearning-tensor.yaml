@@ -1,0 +1,45 @@
+name: Cross-lingual Unlearning Tensor
+slug: cross-lingual-unlearning-tensor
+release_date: 2026-09
+venue: arXiv preprint
+memory_types:
+- parametric
+- memory_security
+links:
+  paper: https://arxiv.org/abs/2609.40286
+  code: https://github.com/tskow99/crosslingual-unlearning-tensor
+  data: null
+scale:
+  conversations: null
+  questions: 4000
+  avg_context_length: null
+  notes: questions = 4,000 TOFU forget10+retain90 English source questions (App. A.3), each queried across 174 language-script pairs. There are 52,916 English paraphrases over 25 types, and translated paraphrases in 40 languages (1,690 rows per language). Held-out forget sets A/B have 400 QA pairs each. The LORELEI set has 100 news documents in 8 languages. LUME is also used. No single total query count is reported.
+metrics:
+- Oracle-normalized residual access R = (p_U - p_O)/(p_FT - p_O) (removal = 1 - R)
+- Length-normalized teacher-forced gold-answer probability
+- Extraction strength (ES)
+- 'LLM-judged generation outcomes: full leakage, partial leakage / any disclosure, retained recovery, code-switching, gibberish'
+- chrF++
+- Extra retain damage (retained-probability points)
+- Spearman rank correlation of subset rankings (COVER analysis)
+judge_model: Qwen3.5-27B
+repro_level: paper_only
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: The full benchmark data (translated QA pairs and paraphrases) is not public. The paper and the repo README say it will be released after peer review. As checked on 2026-10-10, the official repo had a single commit dated 2026-09-29. It holds only an interactive dashboard (index.html) and aggregated per-cell score tables (parquet/CSV) in data/, with no evaluation code. The benchmark builds on TOFU (10% forget split) and LUME. The paper also proposes the COVER source-selection method.
+sources:
+  name: Paper §3 / Table 1 caption ('The Cross-lingual Unlearning Tensor at a glance'), repo README title and dashboard <title>. The abstract capitalizes it as 'Cross-Lingual'.
+  release_date: 'arXiv API: 2609.40286v1 published 2026-09-30'
+  venue: arXiv API entry has no journal_ref or comment. Repo README says 'Under peer review.' No venue found.
+  memory_types: 'parametric: models are fine-tuned on TOFU facts and then unlearned with SimNPO/RMU/GradDiff, and residual access to knowledge in the weights is measured (paper §2-3, Table 1). memory_security: the paper evaluates whether a ''deletion request'' (§4.2) actually removes facts, measuring leakage reopened through other query/answer languages (abstract, §2).'
+  links.paper: arXiv abs page 2609.40286
+  links.code: 'Paper Reproducibility statement: ''Code is available at https://github.com/tskow99/crosslingual-unlearning-tensor'''
+  links.data: 'null: no Hugging Face or separate dataset page. The data subset is in the repo''s data/ folder and served by the GitHub Pages dashboard of the same repo. The full dataset is unreleased (paper footnote 1).'
+  scale.questions: 'Paper App. A.3: ''Over the 4,000 forget10 + retain90 questions this yields 52,916 applied question paraphrases'''
+  scale.notes: Paper Table 1 (174 pairs, 25 types, 40 languages, 1,690 rows per language), §4.2 (forget sets A/B have 400 QA pairs each), §3 (LORELEI has 100 documents in 8 languages)
+  scale.conversations: 'null: single-turn QA probes, not conversations'
+  scale.avg_context_length: 'null: not reported; probes are short QA pairs'
+  metrics: Paper §2 Evaluation protocol (R, removal, probability, ES, LLM-judge categories, chrF++), App. A.6 / Table 5 (ES, full leakage, any disclosure, retained recovery, gibberish, code-switching), Table 3 (Spearman), Table 4 (extra retain damage)
+  judge_model: 'Paper App. A.6: ''We use Qwen3.5-27B as the judge with temperature zero''. GPT-5.4 was used only as a secondary judge in the calibration study.'
+  repro_level: 'Repo tree checked 2026-10-10: README.md, index.html and data/*.parquet|csv. The parquet schemas hold only aggregated scores (e.g. query_language, answer_language, split, n_probes, k_mean, nll_mean), with no question text and no eval script. README: ''The full dataset will be available upon publication.'''
+  notes: Repo README and commit log (gh api, single commit 85f6bcd dated 2026-09-29), paper footnote 1, paper §3 and App. A.1

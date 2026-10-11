@@ -1,0 +1,29 @@
+{
+ "name": "StratMem-Bench",
+ "slug": "stratmem-bench",
+ "leads": {
+  "registry_key": "arxiv:2604.26243",
+  "tier": "P2",
+  "arxiv": "2604.26243 (arXiv API: v1 2026-04-29; title: StratMem-Bench: Evaluating Strategic Memory Use in Virtual Character Conversation Beyond Factual Recall)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "StratMem-Bench: Evaluating Strategic Memory Use in Virtual Character Conversation Beyond Factual Recall",
+    "paper_url": "https://arxiv.org/abs/2604.26243",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "conversational_longterm"
+   ],
+   "extra_tags": [
+    "strategic_memory_use",
+    "role_play"
+   ],
+   "kind_reason": "Benchmark (ACL 2026) of 657 single-turn character-dialogue instances derived from LoCoMo. Memory pools come from earlier sessions and mix required, supportive and irrelevant items, to score strategic memory use rather than recall."
+  }
+ }
+}

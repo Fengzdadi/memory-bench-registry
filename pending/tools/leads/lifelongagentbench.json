@@ -1,0 +1,49 @@
+{
+ "name": "LifelongAgentBench",
+ "slug": "lifelongagentbench",
+ "leads": {
+  "registry_key": "arxiv:2505.11942",
+  "tier": "P0",
+  "arxiv": "2505.11942 (arXiv API: v1 2025-05-17; title: LifelongAgentBench: Evaluating LLM Agents as Lifelong Learners)",
+  "community_list_entries": [
+   {
+    "source": "tsinghua",
+    "section": "Benchmark",
+    "name": "LifelongAgentBench",
+    "paper_url": "https://arxiv.org/abs/2505.11942",
+    "code_url": "https://github.com/caixd-220529/LifelongAgentBench",
+    "data_url": null
+   },
+   {
+    "source": "teleai",
+    "section": "📏 Benchmarks / 💬 Plain-Text Benchmarks / 🗓️ 2025",
+    "name": "LifelongAgentBench: Evaluating LLM Agents as Lifelong Learners",
+    "paper_url": "https://arxiv.org/abs/2505.11942",
+    "code_url": "https://github.com/caixd-220529/LifelongAgentBench",
+    "data_url": "https://huggingface.co/datasets/csyq/LifelongAgentBench"
+   },
+   {
+    "source": "iaar",
+    "section": "Resources / Benchmarks and Tasks / Comprehensive Evaluation",
+    "name": "LifelongAgentBench",
+    "paper_url": "https://arxiv.org/pdf/2505.11942",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "procedural_workflow"
+   ],
+   "extra_tags": [
+    "lifelong_learning"
+   ],
+   "kind_reason": "A lifelong-learning benchmark with skill-grounded, interdependent tasks run strictly in sequence across DB (MySQL), OS (bash) and KG environments. Experience replay of 0-64 prior successful trajectories is scored by task success. It is framed as lifelong learning toward 'memory-capable LLM agents'. "
+  },
+  "phase1_verified_types": {
+   "procedural_workflow": "Sec.3: \"evaluates agents on their ability to leverage past experience to improve current task performance\"; Sec.5.3: \"enforces strict sequential execution to preserve the integrity of experience accumulation\"; Tables 2-5 vary Exp=0..64."
+  },
+  "paper_hint": "https://arxiv.org/abs/2505.11942",
+  "code_hint": "https://github.com/caixd-220529/LifelongAgentBench"
+ }
+}

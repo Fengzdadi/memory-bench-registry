@@ -1,0 +1,14 @@
+{
+ "name": "Benchmarking and Rethinking Knowledge Editing (event-based & general-purpose datasets)",
+ "slug": "benchmarking-and-rethinking-knowledge-editing",
+ "leads": {
+  "registry_key": "arxiv:2505.18690",
+  "tier": "P0",
+  "arxiv": "2505.18690 (arXiv API: v1 ?; title: None)",
+  "phase1_verified_types": {
+   "parametric": "Paper (arXiv HTML, related-work note): \"This work extends [63] by providing a comprehensive benchmark\"; abstract: \"we introduce more complex event-based datasets and general-purpose datasets drawn from other tasks\". Repo name: Knowledge-Editing-Benchmark."
+  },
+  "paper_hint": "https://arxiv.org/abs/2505.18690",
+  "code_hint": "https://github.com/ECNU-Text-Computing/Knowledge-Editing-Benchmark"
+ }
+}

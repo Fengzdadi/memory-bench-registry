@@ -1,0 +1,41 @@
+name: PrefEval
+slug: prefeval
+release_date: 2025-02
+venue: ICLR 2025
+memory_types:
+- personalization
+- conversational_longterm
+links:
+  paper: https://arxiv.org/abs/2502.09597
+  code: https://github.com/amazon-science/PrefEval
+  data: https://huggingface.co/datasets/siyanzhao/prefeval_explicit
+scale:
+  conversations: null
+  questions: 3000
+  avg_context_length: up to 100k tokens (configurable; 10 turns ~3k, 300 turns ~103k tokens)
+  notes: '3,000 = 1,000 unique preference-query pairs x 3 preference forms (explicit, implicit choice-based, implicit persona-driven) over 20 topics. Each pair is used in both a generation task and a 4-option classification task. There is no fixed conversation count: distractor multi-session turns are sampled from LMSYS-Chat-1M and inserted at a configurable number of inter-turns.'
+metrics:
+- Preference-following accuracy (generation task; absence of all error types)
+- 'Error-type rates: preference-unaware violation, preference hallucination violation, inconsistency violation, unhelpful response'
+- Classification (MCQ) accuracy
+judge_model: Claude 3 Sonnet
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'Repo licence is CC BY-NC 4.0. The official scripts call models through the AWS Bedrock API, so AWS credentials are required. Data is in the repo under benchmark_dataset/ and also on Hugging Face as three ungated datasets: prefeval_explicit, prefeval_implicit_choice and prefeval_implicit_persona, with 1,000 rows each (counted on 2026-10-10). The paper''s judge reported a 5% error rate on 200 manually checked evaluations. The repo also includes SFT training code.'
+sources:
+  name: arXiv abstract and repo README title ('PrefEval Benchmark')
+  release_date: 'arXiv API: 2502.09597v1 published 2025-02-13'
+  venue: arXiv comment 'Accepted at ICLR 2025 as oral presentation'; OpenReview API note QWunLKbBGF venue 'ICLR 2025 Oral'
+  memory_types: paper abstract (ability to 'infer, memorize and adhere to user preferences' in a long-context setting) and §2.4 (preferences must be recalled across up to 100k tokens of LMSYS-Chat-1M multi-session turns)
+  links.paper: arXiv API id 2502.09597
+  links.code: arXiv comment links prefeval.github.io; repo README links the arXiv paper and HF data; repo owned by amazon-science
+  links.data: 'repo README ''Data'' link; HF API: siyanzhao/prefeval_explicit is public and ungated, with data/train parquet (1,000 rows)'
+  scale.questions: paper Abstract (3,000 preference-query pairs) and §2.2 (1,000 unique pairs x 3 forms); repo explicit_preference/*.json sums to 1,000 across 20 topics (counted 2026-10-10)
+  scale.avg_context_length: paper Abstract and §2.4 (up to 100k tokens); Table 2 column headers (10 Turns/~3k tokens, 300 Turns/~103k tokens)
+  scale.conversations: 'null: the paper reports no fixed conversation count; distractor turns are sampled from LMSYS-Chat-1M (§2.4)'
+  scale.notes: paper §2.2–2.4; repo benchmark_dataset/ layout
+  metrics: paper §2.5 and Table 1 (error types, preference-following accuracy) and §2.2 (classification task)
+  judge_model: 'paper §2.5: ''LLM-as-a-judge'' framework using Claude 3 Sonnet'
+  repro_level: repo tree (checked 2026-10-10) has example_scripts/run_and_eval_explicit.sh, run_and_eval_implicit.sh and run_mcq_task.sh, which call generation_task/benchmark_generation.py, generation_task/llm_based_evaluation_errortypes.py, generation_task/get_preference_following_accuracy_generation_task.py and classification_task/benchmark_classification.py; data in benchmark_dataset/
+  notes: repo LICENSE (CC BY-NC 4.0); README (AWS Bedrock setup, SFT/ dir); HF API for the three siyanzhao/prefeval_* datasets; paper §2.5 (200 manually checked evaluations, 5% error rate)

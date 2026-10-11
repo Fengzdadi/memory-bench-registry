@@ -1,0 +1,41 @@
+name: StratMem-Bench
+slug: stratmem-bench
+release_date: 2026-04
+venue: ACL 2026
+memory_types:
+- conversational_longterm
+links:
+  paper: https://arxiv.org/abs/2604.26243
+  code: https://github.com/seucoin/StratMem-Bench
+  data: null
+scale:
+  conversations: null
+  questions: 657
+  avg_context_length: ~8.79 memory items per pool (~9.81 words per item)
+  notes: '657 single-turn instances built from LoCoMo multi-session dialogues. The memory pool comes from 1-3 prior sessions and the history from the next session. Split: 50 must-only, 132 nice-only, 475 must+nice. The number of source conversations is not reported. Averages are from paper Table 1. Dialogue-history length is not reported.'
+metrics:
+- Strict Memory Compliance (SMC, %)
+- Memory Integration Quality (MIQ, 1-5 Likert; reported as MIQ on SMC-pass)
+- Proactive Enrichment Score (PES, %)
+- Conditional Irrelevance Rate (CIR, %)
+judge_model: DeepSeek-V3.2 (deepseek-chat)
+repro_level: data_public
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: The repo has two files with 657 instances each (counted on 2026-10-10). data/StratMemBench.json holds the full memory pools (avg 8.79 items, matching Table 1). data/StratMemBench_testset.json caps nice memories at two per instance (avg 7.5 items), matching the downsampled setting in paper §5.2. No evaluation code is released (me.py is empty). The README licence section reads "To be added", while GitHub lists Apache-2.0. The judge model, DeepSeek-V3.2, is also one of the evaluated models.
+sources:
+  name: arXiv 2604.26243 title and abstract; repo README
+  release_date: 'arXiv API: 2604.26243v1 published 2026-04-29'
+  venue: arXiv comment 'accepted by ACL 2026 (main)'; ACL Anthology 2026.acl-long.1491 (Proc. 64th ACL Vol. 1 Long Papers, July 2026, pp. 32309-32328)
+  memory_types: 'paper §3 (arXiv HTML): memory pool built from prior LoCoMo sessions with must/nice/irr memories, and the next session used as dialogue history; scored on strategic use of those memories in the response'
+  links.paper: arXiv abs page 2604.26243
+  links.code: 'paper §3.3: ''The dataset is publicly available at https://github.com/seucoin/StratMem-Bench.git'''
+  links.data: data is in the GitHub repo under data/; Hugging Face search for 'StratMem' returned no dataset (checked 2026-10-10)
+  scale.conversations: 'null: paper does not report how many LoCoMo conversations or sessions were used'
+  scale.questions: paper Table 1 (Overall 657) and abstract; data/StratMemBench.json has 657 entries (counted 2026-10-10)
+  scale.avg_context_length: 'paper Table 1 Overall row: Avg. Mems 8.79, Avg. Words 9.81'
+  scale.notes: paper Table 1 scenario counts and §3 sliding window w in {1,2,3}; per-scenario counts re-checked in the repo JSON
+  metrics: paper §4 (SMC, MIQ, PES, CIR), Table 2 (SMC, MIQ on SMC-pass), Appendix C Table 5 (PES, CIR)
+  judge_model: 'paper §5.3: memory-use detection by ''DeepSeek-V3.2 (deepseek-chat)'' with 3 runs at T=1.0 and majority vote; MIQ scored by the same model at T=0.1'
+  repro_level: repo tree (gh api, 2026-10-10) has README.md, LICENSE, data/StratMemBench.json, data/StratMemBench_testset.json and a 0-byte me.py; no evaluation script
+  notes: both repo JSON files downloaded and compared 2026-10-10; paper §5.2 downsampling text; README License section

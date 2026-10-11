@@ -1,0 +1,31 @@
+{
+ "name": "LifeBench",
+ "slug": "lifebench",
+ "leads": {
+  "registry_key": "arxiv:2603.03781",
+  "tier": "P2",
+  "arxiv": "2603.03781 (arXiv API: v1 2026-03-04; title: LifeBench: A Benchmark for Long-Horizon Multi-Source Memory)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "LifeBench: A Benchmark for Long-Horizon Multi-Source Memory",
+    "paper_url": "https://arxiv.org/pdf/2603.03781",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "personalization",
+    "episodic",
+    "semantic_knowledge_update"
+   ],
+   "extra_tags": [
+    "multi_source",
+    "habit_inference"
+   ],
+   "kind_reason": "Benchmark of simulated year-long multi-source life events (10 users, 2,003 questions) with IE, multi-hop, temporal/knowledge-updating, non-declarative and unanswerable categories. Its 'procedural' memory means inferring a simulated user's habits, not agent skill reuse, so procedural_workflow does no"
+  }
+ }
+}

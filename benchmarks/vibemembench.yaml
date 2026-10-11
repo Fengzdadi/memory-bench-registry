@@ -1,0 +1,43 @@
+name: VibeMemBench
+slug: vibemembench
+release_date: 2026-09
+venue: arXiv preprint
+memory_types:
+- coding_cross_session
+- procedural_workflow
+links:
+  paper: https://arxiv.org/abs/2609.23570
+  code: https://github.com/AlibabaResearch/DAMO-ConvAI/tree/main/VibeMemBench
+  data: null
+scale:
+  conversations: 3634
+  questions: 111
+  avg_context_length: null
+  notes: questions = 111 SWE-style coding targets (bug fixes, feature requests, interface changes, configuration work) from 90 SWE-rebench V2 repositories. conversations = 3,634 completed history trajectories from earlier tasks in the same repositories, which memory systems ingest. Each condition runs 4 seeds (444 target-seed runs). No train/test split. The paper gives no length statistics for the history trajectories.
+metrics:
+- Resolved (share of target-seed runs whose declared executable test predicate passes), with 95% bootstrap CI over targets
+- 4/4 (targets resolved in all four seeds)
+- Paired memory effect (memory-on minus memory-off Resolved)
+- Input tokens per run (solver side)
+- Output tokens per run (solver side)
+- Agent steps per run
+judge_model: null
+repro_level: paper_only
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'The official repo directory was checked on 2026-10-10. It held only a placeholder README ("Coming"), with no task histories, test predicates or evaluation code, although paper §6 says these will be released. Targets were kept only when injected experience improved results for a reference setting (deepseek-v4-flash + MiniSWEAgent). Results are then reported on five held-out solvers. The paper evaluates four memory systems: Mem0, SimpleMem, MemoryOS and A-MEM. The paper is licensed CC BY 4.0.'
+sources:
+  name: 'arXiv API title: ''VibeMemBench: Evaluating Memory Systems for Coding Agents on Real Repository Coding Tasks''; repo README heading has the same title'
+  release_date: 'arXiv API: 2609.23570v1 published 2026-09-20T11:44:03Z (only version)'
+  venue: arXiv API entry has no journal_ref or comment; the arXiv HTML v1 names no conference; repo README is a placeholder with no venue
+  memory_types: 'coding_cross_session: §3.2 says the screen ''admits only earlier instances from the same repository and excludes every target identifier''; §3.5 says memory systems ''ingest the full eligible prior-work history available to a target'' before the target run; resolution is scored by executable tests on separate later tasks. procedural_workflow: §3.2 says ''Each experience records a bug class, root cause, fix pattern, and reusable lesson'', and Tables 1-2 score how this reused experience changes Resolved against memory-off on held-out solvers.'
+  links.paper: https://arxiv.org/abs/2609.23570 (arXiv API entry and HTML v1 opened 2026-10-10)
+  links.code: URL given in the paper (arXiv HTML v1); gh api shows AlibabaResearch/DAMO-ConvAI/VibeMemBench/README.md exists (commit c79ad8a2, 2026-09-15)
+  links.data: 'null: the paper gives no separate dataset URL; HF API searches for ''VibeMem'' and ''vibemembench'' returned []; the repo directory holds only README.md'
+  scale.conversations: 'abstract and §3.1: ''3,634 completed history trajectories'' from the target repositories'
+  scale.questions: 'abstract and §3.1: ''111 coding targets from 90 SWE-rebench V2 repositories''; Table 1 caption ''the 111 outcome-selected targets'''
+  scale.notes: §3.1 (90 repos after deduplication by history directory); §4.1 (four seeds; intervals resample the 111 targets); Table 9 / Fig. 3 (task types and languages)
+  metrics: '§4.1: ''We report Resolved, the share of target-seed runs whose declared test predicate passes''; paired memory effect defined in §4.1; Table 1 columns: Condition, Resolved, 95% CI, 4/4, Input / run, Output / run, Steps / run; Table 2 columns: Solver, System, Resolved, 95% CI, Input / run, Output / run, Steps / run'
+  judge_model: 'null: task resolution is decided by executable tests (abstract, §4.1). LLMs are used only (a) in the offline patch-pattern screen during construction, where the model is unnamed and deferred to a release manifest (§3.2, App. B.1), and (b) in an App. H.1 validity audit, where qwen3.7-max and MiniMax-M2.5 re-label failure attributions. Neither scores benchmark outcomes.'
+  repro_level: 'paper_only: on 2026-10-10 the gh api recursive tree of AlibabaResearch/DAMO-ConvAI (main) showed only VibeMemBench/README.md, whose content is the title plus ''Coming''. No data, scripts or evaluation entry point; HF dataset search was empty.'
+  notes: repo README content and commit history (gh api); arXiv HTML v1 §3.2, §3.5, §6, App. B.1; arXiv HTML header licence CC BY 4.0

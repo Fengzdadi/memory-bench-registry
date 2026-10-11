@@ -1,0 +1,42 @@
+name: RHELM
+slug: rhelm
+release_date: 2026-05
+venue: Findings of EMNLP 2026
+memory_types:
+- conversational_longterm
+- episodic
+- semantic_knowledge_update
+- personalization
+links:
+  paper: https://arxiv.org/abs/2605.31086
+  code: https://github.com/microsoft/RHELM
+  data: https://huggingface.co/datasets/microsoft/RHELM
+scale:
+  conversations: 10
+  questions: 1305
+  avg_context_length: 500k-1M tokens per persona
+  notes: 'conversations = 10 persona trajectories, each a simulated one-year history (629 day-sessions, 11,764 turns in total, plus 2,180 external files: emails, journals, reports). questions = 1,305 QA pairs: fact 207, temporal 185, hallucination 197, aggregation 192, misleading 65, attachment/email 249, mixed 210 (counted on 2026-10-10 from HF QA_final). Evaluated with and without external sources.'
+metrics:
+- Accuracy (%) via binary LLM-as-judge, per question type (Fact, Temporal, Aggregation, Hallucination, Misleading, External Source, Mixed) and average
+- Evidence recall rate of retrievers (by embedding model and top-k)
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: arXiv v1 linked github.com/Hanzhang-lang/RHELM_Benchmark (now 404). v2 and the README point to microsoft/RHELM, but the HF card still links the old repo. Data is CC BY 4.0, code is MIT, and the personas are fully synthetic. The release has 1,053 attachment files versus 998 in paper Table 7. The official harness covers only RAG and full-context runs. The MemGPT/Mem0/MemU runners and the data-generation pipeline are unreleased. The README leaderboard adds models that are absent from the arXiv paper.
+sources:
+  name: 'arXiv 2605.31086 abstract and repo README title (''RHELM: Beyond Static Dialogues'')'
+  release_date: 'arXiv API: 2605.31086v1 published 2026-05-29 (v2 updated 2026-06-01)'
+  venue: 'repo README News (2026-08-30: ''accepted to EMNLP 2026 Findings'') and project page microsoft.github.io/RHELM; no arXiv journal_ref/comment; ACL Anthology EMNLP 2026 event page not yet online (404, checked 2026-10-10)'
+  memory_types: 'paper §3.2 Table 3/Table 10 + docs/CHALLENGE_TAXONOMY.md: year-long multi-session dialogue QA (conversational_longterm); Temporal types Sequence Comprehension / Implicit Temporal Lookup (episodic); State-Dependent Attribute, evolving profiles, Post-Modification Analysis (semantic_knowledge_update); Preference Conflict and memory-conditioned Misleading queries on user''s evolved state/preferences (personalization, §5)'
+  links.paper: arXiv abs page 2605.31086
+  links.code: 'arXiv v2 abstract: ''The data is released at https://github.com/microsoft/RHELM'' (v1 pointed to Hanzhang-lang/RHELM_Benchmark, which returns 404)'
+  links.data: 'repo README HuggingFace badge -> huggingface.co/datasets/microsoft/RHELM (HF API: public, not gated, cc-by-4.0, 2,319 files)'
+  scale.conversations: 'paper §1: ''10 distinct persona trajectories''; Appendix A.3 Table 6 (10 personas); repo/HF data has 10 character folders'
+  scale.questions: 'paper §1 and Table 2: ''Total QA Pairs 1,305''; HF QA_final/*.jsonl line count = 1,305 (counted 2026-10-10)'
+  scale.avg_context_length: 'paper §1: ''context lengths ranging from 500k to 1M tokens in total per persona''; Table 1 ''500k-1M'''
+  scale.notes: paper Table 2 / Table 5 / Table 7; per-type counts from HF QA_final files and HF dataset card
+  metrics: paper §6.1 Evaluation Metrics (LLM-as-judge), Figure 18 (binary accuracy_score), Table 4 (accuracy per type, with/without external sources), §6.2 Recall Analysis / Figure 3
+  judge_model: paper §6.1, Appendix B and Figure 18 use an LLM judge but never name the judge model. Repo evaluation/rag_benchmark.py llm_judge_score() calls the same client as the answering model (--model, default 'gpt-4o' in evaluation/configs/config.py), so the judge model is left null
+  repro_level: repo has evaluation/rag_benchmark.py (run as python -m evaluation.rag_benchmark --character ... --input-file data/QA_final/...jsonl) plus evaluation/conversation_rag.py, and the data in data/{conversations,emails,attachments,QA_final} and on HF (checked 2026-10-10)
+  notes: GitHub API (microsoft/RHELM tree, licence MIT), HF API/dataset card (cc-by-4.0, 1,053 attachments, old repo link), gh api repos/Hanzhang-lang/RHELM_Benchmark -> 404, README Data & Code Release section

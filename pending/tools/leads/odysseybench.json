@@ -1,0 +1,28 @@
+{
+ "name": "OdysseyBench",
+ "slug": "odysseybench",
+ "leads": {
+  "registry_key": "arxiv:2508.09124",
+  "tier": "P2",
+  "arxiv": "2508.09124 (arXiv API: v1 2025-08-12; title: OdysseyBench: Evaluating LLM Agents on Long-Horizon Complex Office Application Workflows)",
+  "community_list_entries": [
+   {
+    "source": "teleai",
+    "section": "📏 Benchmarks / 💬 Plain-Text Benchmarks / 🗓️ 2025",
+    "name": "OdysseyBench: Evaluating LLM Agents on Long-Horizon Complex Office Application Workflows",
+    "paper_url": "https://arxiv.org/abs/2508.09124",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "conversational_longterm"
+   ],
+   "extra_tags": [
+    "agentic_task_execution"
+   ],
+   "kind_reason": "Office-workflow agent tasks: OdysseyBench+ (300) and OdysseyBench-Neo (302). Each task's needed information is spread across multi-day, multi-session user-assistant dialogue histories (at least 5 days). Memory strategies compared are long-context, RAG over raw context, and RAG over summaries. The re"
+  }
+ }
+}

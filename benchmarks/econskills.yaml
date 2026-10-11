@@ -1,0 +1,39 @@
+name: EconSkills
+slug: econskills
+release_date: 2026-09
+venue: NeurIPS 2026 Workshop on Evaluation of Interactive Agents (IAEval)
+memory_types:
+- procedural_workflow
+links:
+  paper: https://arxiv.org/abs/2609.19523
+  code: null
+  data: https://huggingface.co/datasets/EconWebArena/EconSkills
+scale:
+  conversations: null
+  questions: 360
+  avg_context_length: null
+  notes: questions = 360 EconWebArena live web tasks used in the full-library study (BASE/ALL50/RETR5/RAND5/HINT30, one run each). 150 of them have a direct family match. The controlled transfer study uses 100 held-out variants (2 per skill) x 3 conditions x 3 seeds = 900 episodes. The library holds 50 skills from 50 solved seed tasks. There are no conversations.
+metrics:
+- 'Success rate (native EconWebArena reward: answer contains gold value and final URL on authoritative domain)'
+- Mean interaction steps (compared only on paired successes)
+- McNemar's exact test on paired outcomes (significance)
+judge_model: null
+repro_level: data_public
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'Built on EconWebArena (arXiv 2506.08136). The evaluation tasks are EconWebArena''s 360 live-web tasks (360-row CSV on HF, counted 2026-10-10). EconSkills itself releases only the 50-skill library (Apache-2.0, ungated). No official code implements the skill conditions; the paper says to rerun via BrowserGym/AgentLab. Neither the skill-to-variant pairing nor the paper''s correction table for four changed gold values is released. Agent: gpt-5-mini; skills extracted by gpt-5. Venue appears only in the v2 footer (v1 says Preprint).'
+sources:
+  name: 'arXiv 2609.19523 title/abstract and HF dataset card (pretty_name: EconSkills)'
+  release_date: 'arXiv API: 2609.19523v1 published 2026-09-17T00:29:46Z (v2 updated 2026-10-08)'
+  venue: 'arXiv v2 PDF footer: ''40th Conference on Neural Information Processing Systems (NeurIPS 2026). Workshop: Evaluation of Interactive Agents (IAEval).''; NeurIPS virtual page neurips.cc/virtual/2026/workshop/137581 lists the paper in its schedule; v1 PDF footer says ''Preprint''; no arXiv journal_ref/comments'
+  memory_types: 'Paper §3.3: skills distilled from earlier solved seed trajectories are supplied to the agent on held-out task variants (BASE vs TRAJ1 vs MATCH1, Table 3: 41.0% -> 49.3% SR) and on all 360 tasks from the full library (ALL50/RETR5/RAND5/HINT30, Table 4). Reusing procedural memory across tasks = procedural_workflow'
+  links.paper: arXiv abs page 2609.19523
+  links.code: 'null: the paper links no EconSkills code repo (it cites only upstream ServiceNow BrowserGym/AgentLab). The GitHub org econwebarena has only an EconWebArena website and BrowserGym/AgentLab forks last pushed June 2025, with no skill code'
+  links.data: 'Paper footnote 2 and Appendix A: https://huggingface.co/datasets/EconWebArena/EconSkills; HF API shows it public, not gated, apache-2.0'
+  scale.questions: 'Paper §3.3/§4.1 and Table 4: full-library deployment on all 360 EconWebArena tasks (150 direct match + 210 no direct match); controlled study on 100 held-out variants (Table 3, 300 runs per condition)'
+  scale.conversations: 'null: not a dialogue benchmark'
+  scale.avg_context_length: 'null: no average context length reported; the paper gives only a 30-step agent budget (§4.1)'
+  metrics: 'Paper §3.3 ''Metrics'': SR_c from the native EconWebArena reward plus interaction steps; McNemar''s exact test for paired outcomes; sign test for steps'
+  judge_model: 'null: the reward is rule-based (gold value contained in the answer plus authoritative final domain); gpt-5 is used only for skill extraction (§3.2) and gpt-5-mini is the agent (§4.1)'
+  repro_level: Checked 2026-10-10. HF EconWebArena/EconSkills has skills.jsonl (50 rows) and skills/*.json (50 files). HF EconWebArena/EconWebArena has econ_web_arena_test.csv (360 tasks). No official script runs the EconSkills conditions
+  notes: 'HF dataset README, arXiv v1/v2 PDFs, EconWebArena CSV (seed column: 120 TRUE / 240 FALSE)'

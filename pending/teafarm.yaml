@@ -1,0 +1,37 @@
+name: TeaFarm
+slug: teafarm
+release_date: 2024-06
+venue: NAACL 2025
+memory_types:
+- conversational_longterm
+links:
+  paper: https://arxiv.org/abs/2406.10996
+  code: https://github.com/kimnamssya/Theanine
+  data: https://huggingface.co/datasets/LangAGI-Lab/teafarm
+scale:
+  conversations: 100
+  questions: 200
+  avg_context_length: null
+  notes: 100 = TeaBag episodes (sessions 1-5; 50 from MSC, 50 from Conversation Chronicles). 200 = counterfactual QA pairs (2 per episode), each with its own synthesized session 6. The paper reports no context length. In the HF release (counted 2026-10-10), an episode averages about 59 turns (about 1.2K words) across sessions 1-5.
+metrics:
+- 'Success rate (SR): share of counterfactual questions where the agent correctly recalls the past and is not fooled'
+judge_model: GPT-4
+repro_level: data_public
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: TeaFarm is the counterfactual evaluation pipeline and TeaBag is its GPT-4-generated dataset. Both come from the THEANINE method paper. The HF dataset (released Aug 2025, ungated, no licence stated) has one 'train' split of 200 rows, one per question, so each episode's sessions 1-5 appear twice. The official repo contains only THEANINE inference code and has no TeaFarm scoring script; the judge prompt appears only in paper Fig. 29. The paper's other metrics (BLEU-4, ROUGE-L, MAUVE, BERTScore, G-Eval, human eval) are for a separate MSC/CC evaluation.
+sources:
+  name: paper Sec. 5 and Appendix D (arXiv v3 HTML); HF dataset id LangAGI-Lab/teafarm
+  release_date: 'arXiv API: 2406.10996v1 published 2024-06-16'
+  venue: arXiv comment 'Accepted to NAACL 2025'; ACL Anthology 2025.naacl-long.435 (NAACL, April 2025, pp. 8631-8661); repo README 'Accepted at NAACL 25'
+  memory_types: 'paper Sec. 5.1: counterfactual questions test whether the agent correctly references past sessions 1-5 of multi-session dialogues (MSC/CC)'
+  links.paper: arXiv API entry 2406.10996
+  links.code: HF Space ResearcherScholar/Theanine (linked in the arXiv abstract) index.html links github.com/kimnamssya/Theanine; repo README cites the paper (2nd author Namyoung Kim)
+  links.data: 'HF Space index.html and repo README both link huggingface.co/datasets/LangAGI-Lab/teafarm; HF API: public, not gated, data/train-00000-of-00001.parquet'
+  scale.conversations: 'paper Appendix D: 100 episodes (50 MSC + 50 CC); verified 100 unique episode ids in HF rows via datasets-server on 2026-10-10'
+  scale.questions: paper Appendix D (200 counterfactual QA pairs) and Table 4 caption 'tested with 200 questions'; HF card num_examples 200
+  scale.avg_context_length: not reported in the paper or on the dataset card; the turn count in scale.notes was computed from HF rows on 2026-10-10
+  metrics: 'paper Table 4: Success rates (SRs), reported per MSC, CC and average'
+  judge_model: paper Figure 11 step 6 'Measuring Answer Correctness' shows GPT-4 producing a Correct/Incorrect verdict; the judge prompt is in Figure 29; the question generator is gpt-4 at temperature 0.75 (Sec. 5.1 footnote 9)
+  repro_level: on 2026-10-10 the repo tree had only src/summarize.py, src/memory_constructor.py, src/theanine.py and scripts/theanine.sh (THEANINE inference on resources/data/sample_dialogue.json) and no TeaFarm evaluation script; the HF parquet download returned 302 to the CDN and datasets-server served all 200 rows
+  notes: HF dataset API (createdAt 2025-08-18, no license tag); repo API (license null); paper Sec. 3-4 and Appendix E for Scheme 1 metrics

@@ -1,0 +1,44 @@
+name: PersonaBench
+slug: personabench
+release_date: 2025-02
+venue: Findings of ACL 2025
+memory_types:
+- personalization
+- conversational_longterm
+- semantic_knowledge_update
+links:
+  paper: https://arxiv.org/abs/2502.20616
+  code: https://github.com/SalesforceAIResearch/personabench
+  data: null
+scale:
+  conversations: 15
+  questions: 582
+  avg_context_length: null
+  notes: '15 = test users (3 from each of 5 synthetic communities), each with private documents: user-user conversations, user-AI chats and purchase history. 582 questions: 269 basic, 186 preference, 127 social (Table 2). Documents come at noise 0.0/0.3/0.5/0.7. At 0.5 there are 2,131 conversation sessions with 24,756 utterances in total. No per-user average length is reported.'
+metrics:
+- Retrieval Recall
+- Retrieval NDCG
+- End-to-end Recall (word-level answer match)
+- End-to-end F1 (word-level answer match)
+- 'Ablation dimensions: preference precision/completeness, noise robustness (F1 drop 0%->70% noise), information updating (1 - share of outdated info)'
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'Only part of the test set is public. Repo data v1 holds 2 of 5 communities: 6 of 15 users and 263 QA items, counted on 2026-10-10. Of these, 33 are "Subjective" questions that eval.py skips, so 230 are scored against 582 in the paper. The ground-truth profiles are deliberately withheld. Licence: CC BY-NC-SA 4.0. The data was generated with GPT-4o, and the README says it must not be used to develop models that compete with OpenAI. The README''s Data link is empty.'
+sources:
+  name: paper title/abstract (arXiv 2502.20616) and repo README
+  release_date: 'arXiv API: 2502.20616v1 published 2025-02-28'
+  venue: 'ACL Anthology 2025.findings-acl.49 (Findings of ACL 2025, July 2025, pp. 878-893); arXiv comment ''In Findings of the Association for Computational Linguistics: ACL 2025'''
+  memory_types: paper §4.1-4.2 (questions answered from timestamped multi-session user-user conversations and user-AI interactions; questions on biographical/preference/social attributes; §4.2.4 preference updates) and §5.4 'Information Updating' dimension; eval.py scores outdated_value recall (23 of the released questions carry outdated values)
+  links.paper: arXiv abs 2502.20616
+  links.code: github.com/SalesforceAIResearch/personabench (author org Salesforce AI Research; README links arXiv 2502.20616 and cites the paper)
+  links.data: 'no separate dataset page: README ''Data'' link is empty, the data is in the repo under eval_data/eval_data_v1, and HF search found no official Salesforce PersonaBench dataset'
+  scale.conversations: 'paper §5.1.1: ''the test set includes 15 characters'' (5 communities x 3 users)'
+  scale.questions: paper Table 2 (Basic 269, Preference 186, Social 127, Total 582)
+  scale.avg_context_length: not reported; paper Table 1 gives only total session/utterance counts per noise level
+  metrics: paper §5.3 (retrieval Recall/NDCG; end-to-end Recall/F1), Tables 3-4, §5.4 ablation dimensions
+  judge_model: paper §5.3 and repo scripts/evaluation/eval.py use word-set Recall/Precision/F1 matching; no LLM judge
+  repro_level: repo has scripts/evaluation/run_test.sh, scripts/evaluation/retrieval_and_generation.py, scripts/evaluation/eval.py and data in eval_data/eval_data_v1 (2 communities) (checked 2026-10-10)
+  notes: repo README (license, GPT-4o note, two communities released), repo tree, released eval_info/qa files counted 2026-10-10, paper §7 Limitation (profiles withheld)
+  scale.notes: paper Tables 1-2 and §5.1

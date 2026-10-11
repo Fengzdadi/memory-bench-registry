@@ -1,0 +1,51 @@
+name: Harness the Memory
+slug: harness-the-memory
+release_date: 2026-08
+venue: arXiv preprint
+memory_types:
+- conversational_longterm
+- semantic_knowledge_update
+- procedural_workflow
+- parametric
+- embodied
+links:
+  paper: https://arxiv.org/abs/2608.15008
+  code: null
+  data: null
+scale:
+  conversations: null
+  questions: null
+  avg_context_length: null
+  notes: There is no single main set; the paper reuses existing suites. LoCoMo has 10 dialogues and 1,986 questions. MemoryAgentBench AR uses LongMemEval-S* (300 queries, ~355K tokens each), alongside LRU, TTL and CR. CR is also swept at 6K/32K/262K tokens. ALFWorld has 134 valid-unseen tasks and BigCodeBench-Hard has 148 tasks.
+metrics:
+- Exact Match
+- Token F1
+- BLEU-1
+- LLM Judge
+- Compression Ratio
+- Recall@k
+- SubEM
+- ALFWorld Task Success
+- ALFWorld GC Success
+- Steps to Goal
+- BigCodeBench Pass@1
+- Efficiency metrics E1-E15 (memory size, inference time, write/retrieval latency, write/read/management/total tokens and calls, total wall-clock, per-query latency)
+judge_model: GPT-4o-mini
+repro_level: paper_only
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: This is an evaluation study, not a new dataset. It compares 11 memory substrates (M1-M11, including LoRA adapter tuning as the parametric substrate) on 3 backbones (Qwen3-8B, Qwen3-32B-AWQ, Gemma-4-26B-A4B-IT) using 26 metrics over existing benchmarks. The abstract says code will be released upon acceptance. As of 2026-10-10 no official repository was found, although the paper mentions a 'released code repository'. M9 is excluded on Gemma-4.
+sources:
+  name: 'arXiv API title: ''Harness the Memory: A Holistic Evaluation of Memory Substrates in Memory Agents'''
+  release_date: 'arXiv API: 2608.15008v1 published 2026-08-15'
+  venue: arXiv API entry has no journal_ref or comment; abstract says 'Code will be made available upon acceptance'; no venue found by web search (checked 2026-10-10)
+  memory_types: 'arXiv HTML §3 Benchmarks + App. C: LoCoMo and LongMemEval-S* (conversational_longterm); MAB Conflict Resolution/factconsolidation (semantic_knowledge_update); ALFWorld cross-episode offline bank with M7 distilled strategies and M8 skill bundles, plus BigCodeBench-Hard cross-task pool (procedural_workflow); ALFWorld household tasks scored by task success (embodied); M9 LoRA Adapter Tuning run under the same harness as the non-parametric substrates (parametric)'
+  links.paper: arXiv abs page 2608.15008
+  links.code: 'null: abstract says code will come upon acceptance; gh search repos and a web search on 2026-10-10 found no official repo'
+  links.data: 'null: no new dataset; the paper reuses existing public benchmarks'
+  scale.notes: arXiv HTML §3 'Benchmarks' and App. C (LoCoMo 10 dialogues / 1,986 Qs; MAB AR LongMemEval-S* 300 queries ~355K tokens; ALFWorld 134 valid-unseen tasks; BigCodeBench-Hard 148 tasks; CR sweep 6K/32K/262K)
+  scale.conversations: 'null: composite of existing suites with no single main set (see scale.notes)'
+  metrics: arXiv HTML App. D Table 6 (P1-P12 without P7, E1-E15; 26 metrics in total)
+  judge_model: 'arXiv HTML §3 and App. D.2 (P4): gpt-4o-mini at temperature 0, using the Mem0 CORRECT/WRONG rubric for LoCoMo/MAB and the LongMemEval per-type rubric'
+  repro_level: 'Paper checked 2026-10-10. No official code or data release found: abstract says ''Code will be made available upon acceptance'' and GitHub search returned no matching repo.'
+  notes: arXiv abstract, §3 backbones, App. B (M1-M11), App. D (mention of 'released code repository' without a URL)

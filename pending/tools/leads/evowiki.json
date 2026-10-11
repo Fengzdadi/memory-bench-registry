@@ -1,0 +1,14 @@
+{
+ "name": "EvoWiki",
+ "slug": "evowiki",
+ "leads": {
+  "registry_key": "arxiv:2412.13582",
+  "tier": "P0",
+  "arxiv": "2412.13582 (arXiv API: v1 ?; title: None)",
+  "phase1_verified_types": {
+   "parametric": "Sec.4.1: \"We integrate new knowledge into the model using continual pre-training (CPT) and supervised fine-tuning (SFT)\"; Sec.4.4 Continual Learning and 4.5 Combination of RAG and CL."
+  },
+  "paper_hint": "https://arxiv.org/abs/2412.13582",
+  "code_hint": "https://github.com/wtangdev/EvoWiki"
+ }
+}

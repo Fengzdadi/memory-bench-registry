@@ -1,0 +1,41 @@
+name: LOCCO
+slug: locco
+release_date: 2025-07
+venue: Findings of ACL 2025
+memory_types:
+- conversational_longterm
+- parametric
+links:
+  paper: https://aclanthology.org/2025.findings-acl.1014/
+  code: https://github.com/JamesLLMs/LoCoGen
+  data: null
+scale:
+  conversations: 100
+  questions: 2981
+  avg_context_length: 3,856.20 tokens per conversation (avg. 30.8 sessions)
+  notes: 'conversations = 100 simulated users'' long-term chatbot conversations (3,080 dialogue sessions, avg 30.8 per user); questions = 2,981 manually filtered dialogue QA pairs (Name 704, Location 560, Event 1,121, Others 596). LOCCO-L: 20 characters per Table 1 (text says 10), avg 112.8 sessions, 14,122.56 tokens per conversation. Experiments split the data into 6 or 20 time periods.'
+metrics:
+- Response accuracy M_j (fraction of QA answers judged consistent with the source dialogue by the consistency model)
+- Percentage decrease in M1 relative to T1 (forgetting rate)
+- Memory Retention Score (sum of M1 over time ranges, for replay strategies)
+judge_model: 'Consistency model: Qwen1.5-4B-Chat fine-tuned with LoRA'
+repro_level: data_public
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'Not on arXiv. Memory is added by sequential LoRA fine-tuning, not given in context. Repo HEAD has no data: LOCCO.json and LOCCO_L.json exist only in commit a81b576 and were removed on 2026-02-06. The released files hold dialogues only. The 2,981 QA pairs, the consistency-model judge and an evaluation script are not released. LOCCO.json has 105 user entries (104 valid, 3,236 dialogues; counted on 2026-10-10), while the paper reports 100 users and 3,080 dialogues. The README citation points to the wrong arXiv ID (2309.16609, the Qwen report).'
+sources:
+  name: 'paper abstract and §1: ''Long-term Chronological Conversations (LOCCO) dataset''; extended version LOCCO-L'
+  release_date: 'ACL Anthology page 2025.findings-acl.1014: published July 2025; arXiv API search by title and ''LOCCO'' found no arXiv version'
+  venue: 'ACL Anthology: Findings of the Association for Computational Linguistics: ACL 2025, pages 19759-19777; PDF header'
+  memory_types: 'paper §2.2/§4.3: dialogues are learned through supervised LoRA fine-tuning over sequential time periods (parametric), then recall of names, locations and events from long-term multi-session user-chatbot dialogues is tested with dialogue QA (conversational_longterm)'
+  links.paper: ACL Anthology https://aclanthology.org/2025.findings-acl.1014/ (no arXiv version found)
+  links.code: 'paper footnote 1: ''Data available at: https://github.com/JamesLLMs/LoCoGen''; README links the ACL Anthology paper'
+  links.data: 'null: no separate dataset page; data was committed to the GitHub repo (commit a81b576) and no official Hugging Face dataset was found (HF search ''locco'' returned only an unrelated user repo)'
+  scale.conversations: 'paper §1/§5 and Table 1: 100 users (Character Count 100), 3,080 interactions'
+  scale.questions: 'paper §3.3 ''Dialogue Question Answering'': 2,981 dialogue Q&A pairs kept after manual filtering; Table 5 category counts sum to 2,981'
+  scale.avg_context_length: 'paper Table 1: LOCCO Avg. tokens per conv. 3,856.20, Avg. sessions per conv. 30.8'
+  scale.notes: paper Table 1, §3.3, Table 5, Appendix D.2
+  metrics: paper §4.2 Eq. 1-2 (response accuracy A_jx/M_j), §4.3 Figure 4 (percentage decrease in M1), Figure 9 (Memory Retention Score)
+  judge_model: 'paper §4.2 and Appendix E: consistency model trained on Qwen1.5-4B-Chat with LoRA (500 positive and 500 GPT-4o-generated negative samples); manual verification in Table 3 (94%/97%)'
+  repro_level: Checked 2026-10-10. The repo HEAD tree has only pipeline code (src/pipeline/stage1-5, scripts/run_full_pipeline.py); src/evaluation/metrics/__init__.py is empty, with no evaluation script and no consistency model. LOCCO.json (3.6 MB) and LOCCO_L.json (2.9 MB) were downloaded from raw.githubusercontent.com at commit a81b5760945f170a64b80aff4fe00058515e430c; they contain dated dialogues but no QA pairs.
+  notes: gh api commit history (a81b576 added the data on 2025-05-18; edfaf3b removed it on 2026-02-06); .gitignore excludes *.json; open issue reports missing QA pairs; local count of the downloaded LOCCO.json and LOCCO_L.json; arXiv API id 2309.16609 = Qwen Technical Report; README badge and setup.py declare MIT, but there is no LICENSE file in the tree

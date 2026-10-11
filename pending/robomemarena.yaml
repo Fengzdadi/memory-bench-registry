@@ -1,0 +1,40 @@
+name: RoboMemArena
+slug: robomemarena
+release_date: 2026-05
+venue: arXiv preprint
+memory_types:
+- embodied
+- multimodal
+- episodic
+links:
+  paper: https://arxiv.org/abs/2605.10921
+  code: https://github.com/OpenHelix-Team/RoboMemArena
+  data: https://huggingface.co/datasets/RoboMemArenaBenchmark/RoboMemArena
+scale:
+  conversations: null
+  questions: null
+  avg_context_length: 1,076 steps per trajectory (average)
+  notes: No dialogues or QA items. The benchmark has 26 simulated LIBERO manipulation tasks (4 transferring, 11 occlusion, 7 counting, 4 sequence) with 100 demos each (2,600 trajectories; 15,100 keyframe segments; 151 subtasks, 68.9% memory-dependent). It also has 5 real-world tasks with 10 rollouts each. The official script defaults to 51 trials per task. The paper does not give the number of simulation trials.
+metrics:
+- Task Success Rate (TSR)
+- Cumulative Success Rate (CSR)
+- Average success rate (real-world tasks)
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: Access to the HF dataset is gated with automatic approval (login required; Apache-2.0). A June 20, 2026 update changed the Tasks 1-5 scenes and data and the Task 6 evaluation logic, so it differs from the paper's v1 results. That update shipped on ModelScope first, and the README said the HF mirror was "coming soon". On 2026-10-10 the HF repo held 14,800 subtask HDF5 files, against 15,100 segments in the paper. full_trajectory files are on ModelScope only. Memory is tested within a single episode, not across sessions.
+sources:
+  name: 'arXiv API title: ''RoboMemArena: A Comprehensive and Challenging Robotic Memory Benchmark''; repo README'
+  release_date: 'arXiv API: 2605.10921v1 published 2026-05-11'
+  venue: arXiv API has no journal_ref (comment gives only the project website); repo README BibTeX says 'arXiv preprint arXiv:2605.10921'; project page names no venue
+  memory_types: 'paper abstract/§3: a robot must rely on past observations and actions in partially observable long-horizon manipulation (transfer/occlusion/counting/sequence), with RGB agentview + wrist images as input; success is judged by task completion in the LIBERO simulation and on a real robot'
+  links.paper: arXiv abs page 2605.10921
+  links.code: linked from the project page robomemarena.github.io and in the arXiv comment; repo OpenHelix-Team/RoboMemArena README cites arXiv 2605.10921
+  links.data: 'repo README Hugging Face badge; HF API: RoboMemArenaBenchmark/RoboMemArena exists, gated=''auto'', license apache-2.0, 4 category folders covering 26 task dataset folders'
+  scale.avg_context_length: 'paper arXiv v1 HTML §3.3: average trajectory length of 1,076 steps per task (Table S2 per-task values range from 472 to 1835)'
+  scale.notes: paper §3.3 (26 tasks, 100 demos/task, 2,600 trajectories, 15,100 segments, 151 subtasks, 104 memory-dependent); Table 4 (5 real-world tasks, 10 rollouts); evaluation_benchmark/scripts/run_all_tasks1_26.py default --num-trials-per-task 51
+  metrics: paper Eq. 4-5 (TSR, CSR) and Table 2; real-world Table 4 reports average success rate
+  judge_model: Evaluation uses predefined state predicates and BDDL stage checkers; VLMs serve as planners/baselines, not judges
+  repro_level: repo tree has evaluation_benchmark/scripts/run_all_tasks1_26.py (CSR/TSR sweep over tasks 1-26), evaluation_benchmark/async_vlm26_reference/run_fullvlm26_async_vlm_vla_csr_tsr.sh, bddl/1-26 task definitions and a LIBERO fork; HF dataset lists 14,800 HDF5 files (checked 2026-10-10)
+  notes: repo README News (June 2026 update); HF API siblings counted 2026-10-10 (14,800 subtask HDF5 files plus 26 demo videos); paper §3.3 gives 15,100 segments

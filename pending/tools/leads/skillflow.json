@@ -1,0 +1,14 @@
+{
+ "name": "SkillFlow",
+ "slug": "skillflow",
+ "leads": {
+  "registry_key": "arxiv:2604.17308",
+  "tier": "P0",
+  "arxiv": "2604.17308 (arXiv API: v1 ?; title: None)",
+  "phase1_verified_types": {
+   "procedural_workflow": "Sec 1/2.4: agents \"begin without skills, evolve an external skill library through trajectory- and rubric-driven skill patches, and ... are evaluated under a fixed task order within each family\"."
+  },
+  "paper_hint": "https://arxiv.org/abs/2604.17308",
+  "code_hint": "https://github.com/ZhangZi-a/SkillFlow"
+ }
+}

@@ -1,0 +1,29 @@
+{
+ "name": "CUE-Mem",
+ "slug": "cue-mem",
+ "leads": {
+  "registry_key": "arxiv:2609.32574",
+  "tier": "P2",
+  "arxiv": "2609.32574 (arXiv API: v1 2026-09-26; title: CUE-Mem: Benchmarking Long-Term User Memory via Implicit Cues in Multimodal Conversations)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "CUE-Mem: Benchmarking Long-Term User Memory via Implicit Cues in Multimodal Conversations",
+    "paper_url": "https://arxiv.org/pdf/2609.32574",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "conversational_longterm",
+    "personalization"
+   ],
+   "extra_tags": [
+    "multimodal"
+   ],
+   "kind_reason": "Benchmark of 2,674 text-image-audio questions on long-term user memory from multimodal conversation histories; tasks Entity Recall, Long Pattern (persistent preferences/habits), Personalized Recommendation, Answer Refusal. Official repo and HF dataset verified to exist."
+  }
+ }
+}

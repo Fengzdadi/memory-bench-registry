@@ -1,0 +1,42 @@
+name: RefMem-Bench
+slug: refmem-bench
+release_date: 2026-05
+venue: arXiv preprint
+memory_types:
+- conversational_longterm
+- personalization
+links:
+  paper: https://arxiv.org/abs/2606.01223
+  code: null
+  data: null
+scale:
+  conversations: 35
+  questions: 20279
+  avg_context_length: 27,387.77 words (2,030.34 turns) per context
+  notes: '35 curated long-horizon contexts (1,341 sessions, 71,062 turns, 1,124 images). 20,279 is the test split used for evaluation. The full benchmark has 26,449 QA: 6,170 train plus the test split, divided at the evidence-cluster level. By format: 8,688 MC, 6,812 SC and 10,949 DA, across eight dimensions.'
+metrics:
+- Answer accuracy (Acc; exact option-set match for single-/multi-choice, LLM judge for direct-answer)
+- Memory recall (MemR; semantic evidence matching for text dimensions, evidence-index overlap for visual dimensions)
+- BLEU-1 (direct-answer only)
+- Token-level F1 (direct-answer only)
+judge_model: GPT-4o (gpt-4o-2024-08-06)
+repro_level: paper_only
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'New QA built over conversations from REALTALK, DialSim and LoCoMo. Questions require inferring latent user states and patterns rather than explicit recall. Images enter the evaluation prompts as captions ([Image #N Caption]). Raw images are not passed in. As of 2026-10-10 no code or data is public. The paper says code will go on GitHub and the dataset will be released under CC BY 4.0. The paper also proposes the REMIND method.'
+sources:
+  name: 'arXiv abstract / paper §3: ''we introduce RefMem-Bench'''
+  release_date: 'arXiv API: 2606.01223v1 published 2026-05-31'
+  venue: 'arXiv API: no journal_ref; comment ''9 pages, 6 figures''; no venue named in paper HTML (v1)'
+  memory_types: 'paper §3 and Appendix D (arXiv HTML v1): QA over long multi-session dialogue contexts (LoCoMo/DialSim/REALTALK) requiring inference of latent user states, beliefs, implicit boundaries, personalized visual baselines; eval prompts (Appendix E.6) feed images as captions, so multimodal not assigned'
+  links.paper: arXiv 2606.01223
+  links.code: 'null: paper says only ''we will release our code on GitHub'' with no URL; gh search repos/code for RefMem-Bench / REMIND on 2026-10-10 found no official repo'
+  links.data: 'null: paper says the dataset will be released under CC BY 4.0, with no URL; Hugging Face dataset search for ''RefMem'' on 2026-10-10 returned nothing'
+  scale.conversations: 'paper Appendix D.6 Table 2: 35 organized contexts'
+  scale.questions: 'paper Appendix D.6: 26,449 QA split into 6,170 train / 20,279 test'
+  scale.avg_context_length: 'paper Appendix D.6 Table 2: Avg. words/context 27,387.77; Avg. turns/context 2,030.34'
+  scale.notes: paper Appendix D.6 Table 2 (sessions, turns, images, format and dimension counts)
+  metrics: paper §3 Evaluation Protocols (Acc, MemR, B1, F1) and Appendix D.7 formulas
+  judge_model: 'paper §3: ''LLM-as-a-judge ... using gpt-4o-2024-08-06''; Appendix D.8 meta-evaluation (GPT-4o 0.99 vs Qwen3-8B-Instruct 0.93)'
+  repro_level: paper checked 2026-10-10; no official code repo or dataset page found (GitHub repo/code search, Hugging Face API search, web search)
+  notes: paper §3 / Appendix D.1 (sources REALTALK, DialSim, LoCoMo), Appendix E.6 prompts (image captions), ethics statement (CC BY 4.0 release)

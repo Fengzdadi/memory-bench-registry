@@ -1,0 +1,43 @@
+name: AgentStream
+slug: agentstream
+release_date: 2026-07
+venue: arXiv preprint
+memory_types:
+- procedural_workflow
+links:
+  paper: https://arxiv.org/abs/2608.00155
+  code: https://github.com/Jasper-Yan/AgentStream
+  data: null
+scale:
+  conversations: null
+  questions: 300
+  avg_context_length: null
+  notes: 300 = 50 tasks sampled from each of six benchmarks (AppWorld test-challenge, BFCL multi-turn base, BrowseComp-Plus, HLE, SWE-bench Verified, Tau2 telecom). The same set is run as Isolated, Sequential and Interleaved streams over 3 ordering seeds (42/44/46). No conversation count applies. Context length is not reported; vanilla runs average 9.5 (GPT-5.4) and 21.1 (Gemini 3.1 Pro) agent steps per task.
+metrics:
+- Task accuracy (%) from each benchmark's native scoring pipeline, averaged over 3 seeds
+- Evolution gain Δ = Perf(M,Q,S) − Perf(M,Q,∅) over the vanilla baseline
+- Positive/negative rate (configurations above/below vanilla)
+- Top-1 rate (share of configurations where a scenario is best)
+- Per-task cost ($) and relative cost overhead
+- Average agent steps and Δ steps (%)
+judge_model: GPT-5.4
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: AgentStream is an evaluation protocol over tasks from existing benchmarks. It has no standalone dataset. Tasks are pulled from the upstream benchmarks via `exgentic install --benchmark` and selected with fixed seed 42 in scripts/utils/task_ordering.py. HLE data (cais/hle on Hugging Face) is gated. Runs need LLM API keys, with GPT-5.4 acting as judge and user simulator. The paper's footnote links a mirror at microsoft/Sico/labs/AgentStream (MIT), and the arXiv comment links Jasper-Yan/AgentStream (Apache-2.0). arXiv has v1 (2026-07-31) and v2 (2026-09-27), with the same setup.
+sources:
+  name: 'arXiv API title / repo README: ''AgentStream: How Well Do Self-Evolving LLM Agents Perform Under Streaming Tasks?'''
+  release_date: 'arXiv API: 2608.00155v1 published 2026-07-31T17:50:08Z (abs page: Submitted on 31 Jul 2026; v2 27 Sep 2026)'
+  venue: arXiv API entry has no journal_ref; comment only says 'Code is available at ...'; repo README BibTeX cites 'arXiv preprint arXiv:2608.00155'; paper HTML states no acceptance
+  memory_types: 'paper §3 (arXiv v2 HTML): agent ''processes a stream of tasks and, after each attempt, distills the interaction trajectory into persistent experience (e.g., refined context, memory entries, reusable skills, or revised harness)''; Eq. 1 evolution gain measures how accumulated experience changes performance on later tasks'
+  links.paper: arXiv API id 2608.00155
+  links.code: 'arXiv comment field: ''Code is available at https://github.com/Jasper-Yan/AgentStream''; repo description ''Official Repository for The Paper''; paper footnote also links mirror github.com/microsoft/Sico/labs/AgentStream (verified exists via gh api, checked 2026-10-10)'
+  links.data: 'No dataset page: paper HTML and README name no dataset or Hugging Face link; HF search for ''AgentStream'' returned no datasets (checked 2026-10-10); tasks come from upstream benchmarks'
+  scale.questions: 'paper §4 Experimental Settings (Implementation Details, arXiv v1 and v2 HTML): ''We sample N=50 tasks from each benchmark'' over six benchmarks; §4/Appendix B mentions ''over 300 tasks''; repo run_experiment.sh NUM_TASKS=50'
+  scale.conversations: 'not applicable: agentic task stream, not a dialogue corpus'
+  scale.avg_context_length: 'not reported in paper; only agent steps (Tables 7–8: 9.5 steps GPT-5.4, 21.1 steps Gemini 3.1 Pro vanilla)'
+  scale.notes: paper §3.2 (scenarios), §4 (subsets, seeds), Tables 7–8, Tables 11–13 (seeds 42/44/46)
+  metrics: paper §3.1 Eq. 1 (evolution gain), §4 ('native scoring pipeline of each benchmark'), Table 1 (accuracy), Table 2 (positive rate, gain, Top-1 rate), Tables 7–8 (cost, steps)
+  judge_model: 'paper §4 Implementation Details: ''All judge models and user simulator models required by the benchmarks are unified to GPT-5.4''; repo scripts/ace/run_experiment.py sets hle judge_model and browsecompplus eval_model_id to openai/gpt-5.4'
+  repro_level: 'repo Jasper-Yan/AgentStream has exgentic/scripts/{ace,a_mem,reasoning_bank,autoskill,harness}/run_experiment.{sh,py}, exgentic/scripts/litellm/run_baseline.sh (vanilla), exgentic/scripts/utils/task_ordering.py; benchmarks under exgentic/src/exgentic/benchmarks/ installed via ''exgentic install --benchmark''; cais/hle HF dataset exists (gated: auto) (checked 2026-10-10)'
+  notes: repo README, run_experiment.py BENCHMARK_REGISTRY, task_ordering.py (_SELECTION_SEED=42), hle_benchmark.py load_dataset('cais/hle'), HF API cais/hle gated='auto', gh api licenses (Apache-2.0 / MIT), arXiv abs submission history

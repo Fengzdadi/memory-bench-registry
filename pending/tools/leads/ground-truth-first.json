@@ -1,0 +1,32 @@
+{
+ "name": "Ground Truth First (Veracium)",
+ "slug": "ground-truth-first",
+ "leads": {
+  "registry_key": "arxiv:2607.21962",
+  "tier": "P2",
+  "arxiv": "2607.21962 (arXiv API: v1 2026-07-24; title: Ground Truth First: A Longitudinal Evaluation Instrument for Agent Memory, and the Tenure Crossover in Memory-Architecture Rankings)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "Ground Truth First: A Longitudinal Evaluation Instrument for Agent Memory, and the Tenure Crossover in Memory-Architecture Rankings",
+    "paper_url": "https://arxiv.org/pdf/2607.21962",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "conversational_longterm",
+    "personalization",
+    "semantic_knowledge_update",
+    "episodic"
+   ],
+   "extra_tags": [
+    "memory_security",
+    "longitudinal_tenure"
+   ],
+   "kind_reason": "A longitudinal evaluation instrument with a synthetic life-script corpus: 383 questions of 15 types over chat and email histories (14 short-horizon users and 6 users with 9-week tenure histories). Question types include knowledge updates, expired state, preferences, episodic, temporal, multi-session"
+  }
+ }
+}

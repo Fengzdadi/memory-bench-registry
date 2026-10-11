@@ -1,0 +1,44 @@
+name: EngramBench
+slug: engrambench
+release_date: 2026-09
+venue: arXiv preprint
+memory_types:
+- procedural_workflow
+- coding_cross_session
+links:
+  paper: https://arxiv.org/abs/2609.39284
+  code: https://github.com/Virgil-Tan/EngramBench
+  data: null
+scale:
+  conversations: 30
+  questions: 13
+  avg_context_length: 25 to 30 interactive development turns per transfer task
+  notes: conversations = 30 learning-task development trajectories (memory source; 583 interactive turns archived, not released). questions = 13 transfer tasks (evaluation set), each scored on hidden test cases (e.g. 49 for CapacityLease per its release.json). Paper experiments use only 4 transfer tasks x 4 skill configs x 3 trials = 48 trajectories.
+metrics:
+- Micro-average Confirmed-Case Pass Fraction (CCPF)
+- Total tokens (input + output)
+- Non-cached input tokens
+- Pure development / coding time
+- Completed development turns
+- Behavioral audit counts (tool invocations, patch invocations, added patch lines, reasoning tokens, context compactions)
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: Technical report from MemoraX AI. Paper experiments cover only 4 of 13 transfer tasks (CapacityLease, EscrowGuard, MeterSettle, FlagFoundry) with GPT-5.5 Medium as coding agent and DeepSeek V4 Pro as simulated user. The MIT-licensed V2 repo ships all 43 task packages and evaluators but no learning trajectories or skill banks; evaluator records are uncertified (41 pending_live_validation, 2 pending_alignment), so author-validation runs return null formal scores. Requires Docker and Codex.
+sources:
+  name: 'arXiv API title ''EngramBench: A Capability-Grounded Benchmark for Skill-Evolution Harnesses''; repo README'
+  release_date: 'arXiv API: 2609.39284v1 published 2026-09-30'
+  venue: arXiv API entry has no journal_ref/comment; PDF header 'MemoraX AI Research, V 1.0, Sep 2026' technical report; repo README links only arXiv
+  memory_types: 'paper Sec 4.3: Phase 1 distills learning trajectories into a frozen Skill Bank; Phase 2 runs the 13 transfer coding projects with only README, clean scaffold and frozen bank, no access to learning workspaces/histories; keywords ''procedural memory, cross-project transfer'''
+  links.paper: arXiv API id 2609.39284
+  links.code: 'paper p.1 ''Code: https://github.com/Virgil-Tan/EngramBench''; repo README links the arXiv paper'
+  links.data: no separate dataset page; HF dataset search for 'engrambench' returns []; task packages live in repo task-packages/v2/
+  scale.conversations: 'paper Sec 3.1: ''the learning phase yields 30 complete, feedback-rich development trajectories''; ''583 interactive execution turns'''
+  scale.questions: 'paper abstract/Sec 3.1: 13 transfer tasks; repo transfer-tasks.json lists 13 tasks'
+  scale.avg_context_length: 'paper Sec 3.3: ''A single transfer task typically demands 25 to 30 interactive development turns''; Table 3 completed dev turns 27.00 / 26.50'
+  scale.notes: paper Sec 5 (4 tasks x 4 configs x 3 trials = 48); repo evaluators/transfer/capacitylease/release.json ('all 49 hidden ... cases')
+  metrics: paper Sec 4.1 (CCPF), Sec 5.2, Tables 2-5
+  judge_model: 'no LLM judge: correctness is scored by hidden executable test cases (CCPF, Sec 4.1); DeepSeek V4 Pro serves as the simulated user (Sec 5) and skill compressor (Sec 5.1), not as judge'
+  repro_level: repo tree (checked 2026-10-10) has scripts/run-v2.mjs (npm run run), work/superhard-v2-alignment-20260908/evaluate.mjs (documented in docs/EVALUATION.md), scripts/evaluate-frozen-batch.mjs, plus task-packages/v2/ (43 packages) and evaluators/{learning,transfer}/
+  notes: repo README 'Release status', docs/OPEN_SOURCE_RELEASE.md, docs/EVALUATION.md, paper Sec 5

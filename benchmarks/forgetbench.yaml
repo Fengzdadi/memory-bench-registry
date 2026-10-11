@@ -1,0 +1,45 @@
+name: ForgetBench
+slug: forgetbench
+release_date: 2026-07
+venue: arXiv preprint
+memory_types:
+- parametric
+links:
+  paper: https://arxiv.org/abs/2607.26455
+  code: null
+  data: null
+scale:
+  conversations: null
+  questions: 6431
+  avg_context_length: null
+  notes: '6,431 = total question instances over both settings: concept-based QA (profiles from a 2,500-name pool) and scenario-based multiple-choice QA (from 2,500 subgraphs of a 56,095-node agent-interaction graph). The paper does not give the per-setting split, which it defers to supplementary material that is not in arXiv v1. Edit sequences run up to T=500, evaluated every k=10 edits.'
+metrics:
+- ES (Edit Success)
+- Ret (Retention)
+- Δ1/2 (memory half-life)
+- AUF (Area Under the Forgetting Curve)
+- Speed (Forgetting Speed)
+- TC (Temporal Consistency)
+- 'Gen (Generalization: paraphrased minus original query accuracy)'
+- 'Flu (Fluency: ratio of valid lexical tokens)'
+judge_model: null
+repro_level: paper_only
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'The paper evaluates sequential knowledge editing (MEMIT, WISE, AlphaEdit, UltraEdit; settings from EasyEdit2) on Llama-3 8B, Llama-3.1 8B, Qwen-2.5 7B and DeepSeek-R1 7B. The data is synthetic: scenario QA comes from simulated Qwen2.5-32B agents plus an LLM that writes the questions. The abstract states "Code will be released upon acceptance." As of 2026-10-10 no official code or data was found. The GitHub repos named ForgetBench (kamaalg, Joel-Arpith, llaa33219) are unrelated projects.'
+sources:
+  name: 'arXiv API title: ''ForgetBench: Benchmarking Forgetting Dynamics of Long-Term Parametric Memory in Language Models'''
+  release_date: 'arXiv API: 2607.26455v1 published 2026-07-29 (only version)'
+  venue: arXiv API shows no journal_ref; the only comment is '9 pages, 4 figures'; the paper HTML lists no venue (checked 2026-10-10)
+  memory_types: 'paper Sec 1/3.1/4: forgetting of knowledge injected into model parameters under sequential knowledge editing (MEMIT, WISE, AlphaEdit, UltraEdit), so parametric. The multi-agent simulation is only used to generate data and is not evaluated'
+  links.paper: arXiv abs page 2607.26455
+  links.code: 'null: the abstract says ''Code will be released upon acceptance''; no repo link in the paper; GitHub search hits for ForgetBench are unrelated (kamaalg/forgetbench, Joel-Arpith/ForgetBench, llaa33219/ForgetBench); the author account guruxi has only PsyPFN (checked 2026-10-10)'
+  links.data: 'null: no dataset link in the paper; Hugging Face dataset search for ''forgetbench'' returns nothing (checked 2026-10-10)'
+  scale.questions: 'paper Sec 5.1 Benchmark Details (arXiv v1 HTML): ''a benchmark consisting of 6,431 question instances in total'''
+  scale.conversations: 'null: the benchmark is QA instances for sequential editing, not conversations'
+  scale.avg_context_length: 'null: no context length reported; the evaluation unit is the edit-sequence length, with T=500 max and k=10 interval (Sec 5.1)'
+  scale.notes: paper Sec 3.2, Algorithm 1 and Sec 5.1 (arXiv v1 HTML)
+  metrics: 'paper Sec 4.1-4.4 and Tables 1-2 columns: ES, Ret, Δ1/2, AUF, Speed, TC, Gen, Flu'
+  judge_model: 'null: correctness Z[t,i] is binary (Sec 4), Gen is an accuracy difference and Flu a valid-token ratio; no LLM judge is used. LLMs appear only in data generation (Qwen2.5-32B agents and a QA-generation LLM)'
+  repro_level: 'paper_only: no official repo or dataset found via the paper, GitHub search, author GitHub account or Hugging Face search; the abstract says code will be released upon acceptance (checked 2026-10-10)'
+  notes: arXiv v1 abstract plus Sec 5.1 Baselines and Evaluation Protocols; GitHub repo checks on 2026-10-10

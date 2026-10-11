@@ -1,0 +1,15 @@
+{
+ "name": "SWE-Bench-CL",
+ "slug": "swe-bench-cl",
+ "leads": {
+  "registry_key": "arxiv:2507.00014",
+  "tier": "P0",
+  "arxiv": "2507.00014 (arXiv API: v1 ?; title: None)",
+  "phase1_verified_types": {
+   "procedural_workflow": "Paper: memory stores 'summaries of problem, solution, rationale; tool usage; success status'. Metrics include forward/backward transfer and forgetting, comparing memory-enabled vs memory-disabled. Full agentic results are 'ongoing'.",
+   "coding_cross_session": "Sec. 3.2: '8 sequences from distinct repositories, totaling 273 tasks'. Sec. 6.3: per-task summaries are stored in FAISS and retrieved for later tasks, prioritizing 'experiences from the same task sequence'."
+  },
+  "paper_hint": "https://arxiv.org/abs/2507.00014",
+  "code_hint": "https://github.com/thomasjoshi/agents-never-forget"
+ }
+}

@@ -1,0 +1,53 @@
+name: DreamBench-SWE
+slug: dreambench-swe
+release_date: 2026-08
+venue: arXiv preprint
+memory_types:
+- coding_cross_session
+- semantic_knowledge_update
+- procedural_workflow
+links:
+  paper: https://arxiv.org/abs/2608.20664
+  code: https://github.com/iroiro147/dreambench-swe
+  data: null
+scale:
+  conversations: 60
+  questions: 60
+  avg_context_length: 3 sessions per sequence
+  notes: '60 = admitted three-session trap sequences in the v2 confirmatory fold (S1/S2 inject evidence, S3 trap); questions = their 60 S3 trap tasks, each run with 3 seeds (180 S3 cells per condition). Historical v1 fold: 22 sequences (66 cells). The 60 include 22 v1 and 8 synth-pilot traps, labelled C1-C10 constructs. Public file has 60 lines (counted 2026-10-10).'
+metrics:
+- S3 Pass@1 (executable hidden oracle)
+- final_passed
+- RepeatedErrorRate
+- HarmfulMemoryRate
+- RegressionAfterUpdate
+- ContradictionRepairAccuracy
+- HumanFeedbackUseAccuracy
+- UsefulMemoryPrecision
+- ScopeAccuracy
+- TransferScore
+- IrrelevantImportRate
+- OverscopeRate
+- StaleUseRate
+- Cost per successful task
+judge_model: null
+repro_level: data_public
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: The repo has seven GitHub releases (v2.0.0-v2.0.5, v2.1.0); the README release map names v2.0.5 (frozen original v2 fold) and v2.1.0 (preregistered external-systems audit on the same 60 traps, with the updated paper PDF). Hidden S3 oracles and reference solutions are withheld (reviewer-only), so public assets support table regeneration and stub-mode runs but not real-oracle scoring of new runs. Wake agent and sleep pipeline use hosted gpt-5.5 via Codex CLI; live reruns are new experiments. Code is Apache-2.0.
+sources:
+  name: 'arXiv API title ''DreamBench-SWE: A Multi-Session Memory-Hygiene Benchmark for Software Agents''; repo README'
+  release_date: 'arXiv API: 2608.20664v1 published 2026-08-21 (only version)'
+  venue: 'arXiv abs page/API: no journal_ref; comment only ''67 pages. Public benchmark and evidence release''; CITATION.cff says paper identifier to be added after publication; web search found no venue listing'
+  memory_types: 'paper §1/§5.1: later S3 tasks depend on non-inferable evidence from earlier separate sessions on the same repo (coding_cross_session); stale-architecture family and constructs C3 Staleness/supersession (7 traps), C4 Update propagation, C6 Contradiction/provenance test current-vs-superseded facts, with StaleUseRate (semantic_knowledge_update); construct C8 ''Procedural / source-of-truth memory'' (4 traps, generated-source workflow) and convention-learning family, reported in Table 8 (procedural_workflow)'
+  links.paper: arXiv abs page 2608.20664
+  links.code: arXiv comment links github.com/iroiro147/dreambench-swe/releases/tag/v2.1.0; repo by the paper author (CITATION.cff author Sarthak Singh)
+  links.data: 'No separate dataset page: data ships in the repo (experiments/env/sequences_confirmatory_v2.jsonl); HF dataset search for ''dreambench-swe'' returned nothing'
+  scale.conversations: 'paper §5.1 and Table 4: v2 confirmatory fold uses 60 admitted three-session traps; repo experiments/env/sequences_confirmatory_v2.jsonl has 60 records, each with 3 sessions (counted 2026-10-10)'
+  scale.questions: 'paper Table 4: 60 S3 traps; 180 seed-trap S3 cells per complete condition (3 seeds)'
+  scale.avg_context_length: 'paper §5.1: ''three-session traps'' (S1, S2 setup/reinforcement + S3 trap); no token length reported'
+  scale.notes: paper Table 4 (v1 22 traps / 66 cells); docs/DATASHEET.md '22 v1 traps + 8 synth-pilot traps + approximately 30 new traps = 60 traps'
+  metrics: paper §5.4 (Pass@1, final_passed, 8 hygiene metrics), Table 1 (IrrelevantImportRate, OverscopeRate, RepeatedErrorRate, StaleUseRate oracle metrics; cost per successful task)
+  judge_model: 'null: the primary outcome is judge-free executable S3 pass@1 (§2, §5.4), and hygiene values are deterministic offline re-scores (§5.4, §8). scripts/hygiene_oracle.py is labelled ''Judge-free''. The ''--judge-model codex-gpt-5.5'' (gpt-5.5) is the reference-probe sleep-pipeline judge (src/dream_memory/llm_judge.py: consolidation/contradiction/replay judges), not an evaluator.'
+  repro_level: Repo tree checked 2026-10-10. Public task data exists (experiments/env/sequences_confirmatory_v2.jsonl, 60 sequences), and run scripts exist (ops/launch_confirmatory.sh -> scripts/run_grid.py -> src/experiments/run_bench.py). However, real-oracle mode needs hidden oracles/refsols withheld from public packages (README; artifact/README.md; docs/DATASHEET.md 'Are hidden assets distributed?'). Public sequence sessions carry no oracle_cmd, and the v2.1.0 MANIFEST lists no oracle files. So data_public, not official_script.
+  notes: 'gh api repos/iroiro147/dreambench-swe/releases (checked 2026-10-10): 7 releases v2.0.0 (2026-07-08), v2.0.1-v2.0.4 (2026-07-09), v2.0.5 (2026-07-10), v2.1.0 (2026-08-13); paper PDF already attached from v2.0.3 onward. README ''Release Map'' (v2.0.5 frozen original-v2 package; v2.1.0 adds external-systems successor audit and updated paper PDF) and README ''hidden oracle answers and reference solutions are not included''; v2.1.0 release notes; paper §6.6 / design paragraph (''reused the same 60 traps and three repeated seeds''); artifact/README.md ''What does not ship''; paper §5.5 and Table 6; README License section (Apache-2.0)'

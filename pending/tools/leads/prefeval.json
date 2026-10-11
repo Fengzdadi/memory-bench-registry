@@ -1,0 +1,35 @@
+{
+ "name": "PrefEval",
+ "slug": "prefeval",
+ "leads": {
+  "registry_key": "arxiv:2502.09597",
+  "tier": "P2",
+  "arxiv": "2502.09597 (arXiv API: v1 2025-02-13; title: Do LLMs Recognize Your Preferences? Evaluating Personalized Preference Following in LLMs)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Resources / Benchmarks and Tasks / Long-Dialogue Reasoning",
+    "name": "PREFEVAL",
+    "paper_url": "https://arxiv.org/pdf/2502.09597",
+    "code_url": null,
+    "data_url": null
+   },
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "DO LLMS RECOGNIZE YOUR PREFERENCES? EVAL-UATING PERSONALIZED PREFERENCE FOLLOWING IN LLMS",
+    "paper_url": "https://arxiv.org/pdf/2502.09597",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "personalization",
+    "conversational_longterm"
+   ],
+   "extra_tags": [],
+   "kind_reason": "Evaluates whether LLMs 'infer, memorize and adhere to user preferences' in multi-session conversations up to 100k tokens, using 3,000 preference-query pairs. The project page links amazon-science/PrefEval and an HF dataset (siyanzhao/prefeval_explicit)."
+  }
+ }
+}

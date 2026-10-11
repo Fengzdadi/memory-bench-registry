@@ -1,0 +1,28 @@
+{
+ "name": "ForgetEval",
+ "slug": "forgeteval",
+ "leads": {
+  "registry_key": "arxiv:2606.15903",
+  "tier": "P2",
+  "arxiv": "2606.15903 (arXiv API: v1 2026-06-14; title: Control-Plane Placement Shapes Forgetting: An Architectural Study of Agent Memory Across Thirteen System Configurations)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "Control-Plane Placement Shapes Forgetting: An Architectural Study of Agent Memory Across Thirteen System Configurations",
+    "paper_url": "https://arxiv.org/pdf/2606.15903",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "semantic_knowledge_update"
+   ],
+   "extra_tags": [
+    "active_forgetting"
+   ],
+   "kind_reason": "An architectural study that releases the ForgetEval suite: 1,000 templated cases plus 385 adversarial cases, with an adapter protocol. It tests control-plane forgetting (supersede, release, purge) in external memory stores, not model weights. Released under MIT in the 'lethe' repo."
+  }
+ }
+}

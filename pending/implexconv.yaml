@@ -1,0 +1,41 @@
+name: ImplexConv
+slug: implexconv
+release_date: 2025-03
+venue: EMNLP 2025
+memory_types:
+- conversational_longterm
+- personalization
+links:
+  paper: https://arxiv.org/abs/2503.07018
+  code: https://github.com/Kaylee0501/ImplexConv
+  data: https://huggingface.co/datasets/Kaylee0501/ImplexConv
+scale:
+  conversations: 2500
+  questions: null
+  avg_context_length: ~60K tokens (~100 sessions per example)
+  notes: '2,500 examples of about 100 sessions each, per the paper. Table 1 lists 255K sessions, 2K average turns and 60K average tokens. Supportive (yes/no) and opposed (open-ended) subsets are scored separately. The paper gives no question count. Counted on 2026-10-10 from the HF dataset-server: 814 supportive × 6 QA = 4,884, and 1,550 opposed examples with about 3,633 QA (mean 2.34).'
+metrics:
+- Retrieval Accuracy (F1 between retrieved and ground-truth context)
+- Answer Correctness / Response Accuracy (LLM-judged semantic equivalence to ground truth, plus human evaluation on 100 samples per dataset)
+- Token Efficiency (average retrieved tokens / token-to-accuracy trade-off)
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: The paper reports 2,500 examples, but the HF release has 2,364 (814 supportive + 1,550 opposed). The README's HF link redirects to Kaylee0501/ImplexConv-opposed, which holds both JSON files; there is also a separate Kaylee0501/ImplexConv-supportive repo. The HF licence is MIT, and the GitHub repo has none. The paper uses an LLM judge (Code 9 prompt) without naming the judge model. The repo produces responses and retrievals but has no scorer for the LLM-judge accuracy or retrieval F1. Some baseline numbers differ between arXiv v1 and the EMNLP version.
+sources:
+  name: Paper title/abstract (EMNLP 2025 PDF and arXiv v1) names the dataset IMPLEXCONV; repo README and HF card call it ImplexConv
+  release_date: 'arXiv API: 2503.07018v1 published 2025-03-10 (only version; comment ''Preprint'', no journal_ref)'
+  venue: 'ACL Anthology 2025.emnlp-main.580: Proceedings of EMNLP 2025 (main), November 2025, pp. 11493-11506'
+  memory_types: 'Paper §3 and §5: QA over ~100-session user-assistant chat histories; questions require implicit persona-trait reasoning (supportive/opposed scenarios built from Persona Hub traits)'
+  links.paper: arXiv abs 2503.07018; also https://aclanthology.org/2025.emnlp-main.580/
+  links.code: 'Paper footnote 1 (§1): https://github.com/Kaylee0501/ImplexConv; repo owner is first author (README citation)'
+  links.data: Repo README 'Dataset' section links huggingface.co/datasets/Kaylee0501/ImplexConv; HF API redirects to Kaylee0501/ImplexConv-opposed (not gated; files ImplexConv_opposed.json, ImplexConv_supportive.json, data/*.parquet; checked 2026-10-10)
+  scale.conversations: 'Paper abstract, §3 and Table 1: ''2,500 examples'' / ''2500 / 255K'' (# conv / # sessions)'
+  scale.questions: 'null: paper reports no total QA count; HF dataset-server statistics (2026-10-10) give qa list length 6 for all 814 supportive rows and mean 2.34387 over 1,550 opposed rows'
+  scale.avg_context_length: 'Paper Table 1 (EMNLP version): Avg. Tokens 60K, Avg. Turns per Conv. 2K; §3: ~100 sessions per example'
+  scale.notes: Paper Table 1, §3.2-3.3, §5.3; HF dataset card (814 supportive / 1,550 opposed) and datasets-server /size and /statistics endpoints, 2026-10-10
+  metrics: Paper §5.2 (Retrieval Accuracy F1 Eq. 4, Answer Correctness via LLM judge + human eval, Token Efficiency); Tables 2, 5, 6; Appendix E
+  judge_model: 'null: §5.2/Appendix E say an LLM judges semantic equivalence (Code 9 prompt) but the judge model is not named; §5.3 only says GPT-4o-mini implements the framework and baselines'
+  repro_level: 'Repo tree (2026-10-10): framework/fact_sum_batch.py + framework/fact_topic_reasoning.py run TaciTree and RAG/long-context baselines on ImplexConv_opposed.json / ImplexConv_supportive.json (loaded by framework/data_process.py); evaluate/get_baseline_scores.py and framework/utils.py contain BLEU/ROUGE/LLM-judge helpers only; data downloadable from HF'
+  notes: HF dataset card and API (2026-10-10); GitHub API (license null); comparison of arXiv v1 PDF vs EMNLP PDF tables 2/5

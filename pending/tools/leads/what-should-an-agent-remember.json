@@ -1,0 +1,26 @@
+{
+ "name": "What Should an Agent Remember? (bounded-memory streaming-recall benchmark)",
+ "slug": "what-should-an-agent-remember",
+ "leads": {
+  "registry_key": "arxiv:2610.00366",
+  "tier": "P2",
+  "arxiv": "2610.00366 (arXiv API: v1 2026-09-30; title: What Should an Agent Remember? Disentangling Retention from Retrieval in Bounded-Memory Evaluation)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "What Should an Agent Remember? Disentangling Retention from Retrieval in Bounded-Memory Evaluation",
+    "paper_url": "https://arxiv.org/pdf/2610.00366",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [],
+   "extra_tags": [
+    "bounded_memory_streaming_recall"
+   ],
+   "kind_reason": "The paper builds a synthetic streaming-recall benchmark: 300 seeded episodes of 10 'slot is value' facts plus queries, with a SQuAD variant. It crosses retention and selection rules under bounded memory. This is borderline because the main thrust is evaluation methodology."
+  }
+ }
+}

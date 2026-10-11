@@ -1,0 +1,29 @@
+{
+ "name": "SCALE-QA",
+ "slug": "scale-qa",
+ "leads": {
+  "registry_key": "arxiv:2608.25655",
+  "tier": "P2",
+  "arxiv": "2608.25655 (arXiv API: v1 2026-08-26; title: Reconstructing the Right Episode: Evaluating Interleaved Conversational Memory Beyond Long Context)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "Reconstructing the Right Episode: Evaluating Interleaved Conversational Memory Beyond Long Context",
+    "paper_url": "https://arxiv.org/pdf/2608.25655",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "conversational_longterm",
+    "semantic_knowledge_update"
+   ],
+   "extra_tags": [
+    "long_context_single_input"
+   ],
+   "kind_reason": "Introduces SCALE-QA: 3,000 audited 4-way MCQ questions across 10 domains, embedded in flat unsegmented mixed-topic chat threads up to 128k (and 1M diagnostic). Answers depend on earlier latent episodes, with stress cues including state overwrite. The TSIM method is a secondary contribution."
+  }
+ }
+}

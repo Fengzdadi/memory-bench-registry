@@ -1,0 +1,45 @@
+name: VoxMem
+slug: voxmem
+release_date: 2026-09
+venue: arXiv preprint
+memory_types:
+- conversational_longterm
+- multimodal
+- semantic_knowledge_update
+- episodic
+links:
+  paper: https://arxiv.org/abs/2609.32607
+  code: https://github.com/swagshaw/voxmem
+  data: https://huggingface.co/datasets/AudioMemory/voxmembench
+scale:
+  conversations: 3196
+  questions: 3196
+  avg_context_length: 8K–64K audio tokens (4 budgets; 9→66 sessions, 2.5→20.0 min audio per instance)
+  notes: 'conversations = 3,196 per-instance multi-session spoken histories (799 per budget, nested 8K⊆16K⊆32K⊆64K), built from a pool of 34,743 unique spoken sessions (177 h, ~9 turns/session). questions = 3,196 instances = 799 questions × 4 budgets. Headline leaderboard uses the 32K budget (799 items). Strata: 2,676 answerable + 520 answer-refusal instances.'
+metrics:
+- Accuracy (LLM-judged; overall, per evidence type × memory operation, per context length)
+- Answerable accuracy
+- Answer-refusal (abstention) accuracy
+- Context-scaling drop 8K→64K (pp, 95% bootstrap CI) and retention (64K/8K)
+- Error-attribution shares (recognition, binding, operation, unsupported, not attributable)
+judge_model: Gemini-3.7-Flash
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: Data is CC BY-NC 4.0 (non-commercial), not gated; per-budget configs range from 4.03 GB (8K) to 32.83 GB (64K). The paper scores with Gemini-3.7-Flash, but the repo scorer (score_voxmembench.py) supports only OpenAI-compatible judges or exact-match, and its README examples use gpt-4o-mini. The paper does not print repo/data URLs; the repo and HF card link back to arXiv 2609.32607. Four latest_state questions do not nest strictly across budgets. The arXiv comment reads "working in process".
+sources:
+  name: 'arXiv API title ''VoxMem: Benchmarking Multimodal Memory in Large Audio Language Models''; repo README'
+  release_date: 'arXiv API: 2609.32607v1 published 2026-09-26'
+  venue: arXiv API shows no journal_ref; comment 'working in process'; paper and repo README name no venue (README citation is arXiv preprint)
+  memory_types: 'arXiv v1 HTML + HF card: multi-session spoken histories (conversational_longterm); user turns given as audio only, with speaker/paralinguistic/environmental evidence (multimodal); TET Latest State ''most recent valid state after one or more historical updates'' (semantic_knowledge_update); Appendix Table 3 TET Historical State ''state at an explicitly specified timestamp, session, or historical stage'', Table 7 Evolution/Transition (ordered sequence, first/last appearance of sound events), Table 5 IE ''semantic or timestamp anchor to locate one historical session'' (episodic, time-anchored event recall; same basis as the LongMemEval entry). Subtypes historical_state, evolution_transition, context_to_cue present in HF 32k data (datasets-server statistics, checked 2026-10-10)'
+  links.paper: arXiv abs page 2609.32607
+  links.code: github.com/swagshaw/voxmem (owner Austin Xiao, Univ. of Melbourne); README lists the paper authors and links arXiv 2609.32607 and the HF dataset
+  links.data: 'HF API AudioMemory/voxmembench: public, not gated, 102 files incl. data/{8k,16k,32k,64k}/<evidence>/*.parquet; linked from repo README'
+  scale.conversations: paper §3.2 'Each multi-session conversation is composed of three types of sessions' and Fig. 1 stats (Instances 3196; Sessions/instance 9→66); HF card 'One row per (question_id, context_length), self-contained', each row carrying its own sessions history, so 3,196 histories (799 per budget). Abstract's 34,743 counts unique spoken sessions (reused across histories), not conversations; registry convention as in LongMemEval (500 histories, not ~50k sessions)
+  scale.questions: 'paper abstract: 3,196 evaluation instances; Fig. 1 stats: 799 questions; HF card: 799 × 4 = 3,196'
+  scale.avg_context_length: 'paper Fig. 1 statistics table: sessions/instance 9→66, audio/instance 2.5→20.0 min (8K→64K); abstract: budgets 8K to 64K tokens'
+  scale.notes: 'paper abstract and Fig. 1 stats (34,743 sessions, 177 h, ~9 turns/session); paper §3.2 and Appendix B.6 (nested histories); HF card and repo README: 2,676 answerable / 520 answer_refusal; 32K reference budget in README leaderboard'
+  metrics: paper §4.1 (accuracy, answerable vs AR), context-scaling drop/retention with bootstrap CIs, §4.4/Fig. 7 error attribution (arXiv v1 HTML)
+  judge_model: 'paper §4.1 and Appendix C.5: responses scored by Gemini-3.7-Flash; cross-checked with GPT-5.6-Luna (κ=0.953)'
+  repro_level: repo tree has run_voxmembench.py + score_voxmembench.py (+ voxmembench/judge.py, metrics.py, scripts/run_matrix.sh); data downloadable from HF without gating (checked 2026-10-10)
+  notes: HF dataset card (licence, config sizes, nesting caveat); repo voxmembench/judge.py build() accepts only 'exact-match' or 'openai:<model>'; arXiv API comment

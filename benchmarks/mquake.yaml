@@ -1,0 +1,42 @@
+name: MQuAKE
+slug: mquake
+release_date: 2023-05
+venue: EMNLP 2023
+memory_types:
+- parametric
+- semantic_knowledge_update
+links:
+  paper: https://arxiv.org/abs/2305.14795
+  code: https://github.com/princeton-nlp/MQuAKE
+  data: null
+scale:
+  conversations: null
+  questions: 3000
+  avg_context_length: null
+  notes: 3,000 = instances in MQuAKE-CF-3k-v2, the main evaluation subset. Each instance has 3 GPT-generated multi-hop questions (9,000 strings), 1-4 edits and 2-4 hops. The full MQuAKE-CF set has 9,218 instances. MQuAKE-T (real temporal updates) has 1,868. The data is not conversational, so there is no context length.
+metrics:
+- Edit-wise success rate
+- Instance-wise accuracy
+- Multi-hop accuracy
+- Multi-hop accuracy (CoT)
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'MQuAKE-CF-3k was fixed in 2024-09 to remove cross-instance knowledge conflicts (MQuAKE-CF-3k-v2.json). arXiv v3 results use v2. The EMNLP 2023 version used the original subset, which is still shipped as MQuAKE-CF-3k.json. The README says MQuAKE-T has 1,825 instances, but the file holds 1,868, matching paper Table 2 (counted 2026-10-10). The official notebook evaluates only MeLLo, loads the v1 subset and calls the deprecated text-davinci-003. Licence: MIT.'
+sources:
+  name: 'arXiv title and repo README: ''MQuAKE (Multi-hop Question Answering for Knowledge Editing)'''
+  release_date: 'arXiv API: 2305.14795 published 2023-05-24T06:48:41Z (v1); v2 2023-10-29, v3 2024-09-09'
+  venue: arXiv comment 'EMNLP 2023'; ACL Anthology 2023.emnlp-main.971 (Proceedings of EMNLP 2023, December 2023, pp. 15686-15702)
+  memory_types: 'parametric: Sec. 4 evaluates weight-editing methods (FT, MEND, ROME, MEMIT) on GPT-J and Vicuna-7B. semantic_knowledge_update: Sec. 5 and Table 5 evaluate MeLLo under the same protocol. MeLLo keeps edits in an external retrieval memory and must override outdated model knowledge. MQuAKE-T uses real Wikidata 2021-04 to 2023-04 fact updates (Sec. 3.2).'
+  links.paper: arXiv abs page 2305.14795
+  links.code: arXiv comment and paper link to github.com/princeton-nlp/MQuAKE; the repo homepage field points to arXiv 2305.14795
+  links.data: 'null: the data ships in the repo under datasets/. The Hugging Face search for ''mquake'' (2026-10-10) found only third-party copies or derivatives (e.g. henryzhongsc/MQuAKE-Remastered, nbalepur/mquake) and no princeton-nlp dataset'
+  scale.questions: 'Paper Sec. 3.3 and Appendix B/Table 9 (arXiv v3): experiments use a 3,000-instance subset of MQuAKE-CF. Confirmed by counting datasets/MQuAKE-CF-3k-v2.json: 3,000 instances, 9,000 questions, hop split 1,135/1,136/729 matching Table 9. Full CF has 9,218 instances (Table 2, file count matches). MQuAKE-T has 1,868 (Table 2, file count matches).'
+  scale.conversations: 'null: the benchmark is multi-hop QA over edited facts and has no conversations'
+  scale.avg_context_length: 'null: instances are single multi-hop questions with 1-4 edits, and the paper reports no context length'
+  metrics: 'Paper Sec. 3.4, Sec. 4.1 and Appendix C: edit-wise success rate, instance-wise accuracy, multi-hop accuracy, multi-hop (CoT); Table 3 columns'
+  judge_model: 'null: Appendix C defines correctness as exact match of f*(q) to a* (repo README and notebook also accept answer aliases). No LLM judge is used. GPT-3.5 is used only to generate questions and as a MeLLo base model.'
+  repro_level: Repo tree has datasets/*.json (all 4 files downloaded and parsed) and run_mello.ipynb. The notebook loads datasets/MQuAKE-CF-3k.json, runs MeLLo with a Contriever edit memory and prints 'Multi-hop acc'. There are no scripts for the weight-editing baselines (checked 2026-10-10).
+  notes: Repo README '[2024/9 Update]' and paper footnote 3 describe the CF-3k-v2 fix. The README lists MQuAKE-T as 1,825 instances, while the parsed datasets/MQuAKE-T.json has 1,868. run_mello.ipynb source was inspected. GitHub API reports the MIT licence.
+  scale.notes: Counts from paper Table 2/Table 9 and from parsing the repo dataset files on 2026-10-10

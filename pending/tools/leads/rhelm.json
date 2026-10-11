@@ -1,0 +1,47 @@
+{
+ "name": "RHELM",
+ "slug": "rhelm",
+ "leads": {
+  "registry_key": "arxiv:2605.31086",
+  "tier": "P1",
+  "arxiv": "2605.31086 (arXiv API: v1 2026-05-29; title: Beyond Static Dialogues: Benchmarking Realistic, Heterogeneous, and Evolving Long-Term Memory)",
+  "community_list_entries": [
+   {
+    "source": "teleai",
+    "section": "📏 Benchmarks / 🎮 Dynamic Benchmarks & Simulation Environments / 🗓️ 2026",
+    "name": "Beyond Static Dialogues: Benchmarking Realistic, Heterogeneous, and Evolving Long-Term Memory",
+    "paper_url": "https://arxiv.org/abs/2605.31086",
+    "code_url": "https://github.com/microsoft/RHELM",
+    "data_url": "https://huggingface.co/datasets/microsoft/RHELM"
+   },
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "Beyond Static Dialogues: Benchmarking Realistic, Heterogeneous, and Evolving Long-Term Memory",
+    "paper_url": "https://arxiv.org/abs/2605.31086",
+    "code_url": null,
+    "data_url": null
+   },
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "Beyond Static Dialogues: Benchmarking Realistic, Heterogeneous, and Evolving Long-Term Memory",
+    "paper_url": "https://arxiv.org/abs/2605.31086",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "conversational_longterm",
+    "personalization",
+    "semantic_knowledge_update",
+    "episodic"
+   ],
+   "extra_tags": [
+    "heterogeneous_multi_source"
+   ],
+   "kind_reason": "Introduces the RHELM benchmark: year-long simulated persona dialogues mixed with emails, documents and other external sources, with 7 inquiry types covering evolving facts and preferences. Evaluates full-context, RAG and memory frameworks."
+  }
+ }
+}

@@ -1,0 +1,41 @@
+name: LifeBench
+slug: lifebench
+release_date: 2026-03
+venue: arXiv preprint
+memory_types:
+- episodic
+- personalization
+- semantic_knowledge_update
+links:
+  paper: https://arxiv.org/abs/2603.03781
+  code: https://github.com/1754955896/LifeBench
+  data: https://huggingface.co/datasets/C1754955896/Lifebenchv2.0
+scale:
+  conversations: 10
+  questions: 2003
+  avg_context_length: ~3.66M tokens per user
+  notes: 'conversations = 10 synthetic users, each with a one-year (2025) multi-source life history: events plus 9 phone-data types such as SMS, calls, agent chats and photos (stored as text metadata). questions = 2,003 QA in paper v1 (IE 718, MR 597, TKU 229, ND 429, UA 30). Release v2.0: 10 users, 3,380 QA, 9 categories (counted on 2026-10-10).'
+metrics:
+- Accuracy (LLM-as-judge with the LoCoMo evaluation prompt)
+- Per-category accuracy (IE, MR, TKU, ND, UA)
+judge_model: GPT-5.1-Mini
+repro_level: official_script
+repro_checked_at: '2026-10-10'
+run_records: []
+notes: 'The paper (arXiv v1) evaluates v1 data: 2,003 QA in 5 categories, kept on the repo''s main branch under life_bench_data/version1. The default branch (lifebench2.0) and Hugging Face host v2.0: 3,380 QA in 9 categories, in Chinese and English, Apache-2.0, not gated. Evaluation code lives in a separate repo, 1754955896/LifeBench_eval, which has no licence file. It targets v2.0 and uses a rubric-based judge prompt instead of the paper''s LoCoMo prompt. Photos are text metadata, not images.'
+sources:
+  name: 'arXiv API title: ''LifeBench: A Benchmark for Long-Horizon Multi-Source Memory'''
+  release_date: 'arXiv API: 2603.03781v1 published 2026-03-04 (only version)'
+  venue: arXiv API has no journal_ref; comment gives only page counts; repo README cites arXiv only; web search found no acceptance notice
+  memory_types: 'paper Sec. 3.2.5 and Table 2: IE (e.g., when a specific gym session happened) -> episodic; ND (user habits, skills, emotion, preferences) -> personalization; TKU (evolving info, e.g., an updated swimming count) -> semantic_knowledge_update'
+  links.paper: arXiv abs page 2603.03781
+  links.code: arXiv abstract links github.com/1754955896/LifeBench; repo README also links the official eval repo github.com/1754955896/LifeBench_eval
+  links.data: 'LifeBench README section 2 links HF dataset C1754955896/Lifebenchv2.0; HF API: public, gated=false, apache-2.0, 285 files'
+  scale.conversations: 'paper Sec. 3.4.1 and Table 5: synthetic one-year activity for 10 users'
+  scale.questions: 'paper Table 2 (arXiv v1 HTML Sec. 3.4.1): Total 2003; matches the count of the main-branch life_bench_data/version1/*/QA/QA_clean.json files (2,003, same per-category counts)'
+  scale.avg_context_length: 'paper Table 5 (Appendix) and Table 1: ''Context depth (tokens) per user 3.66M'''
+  scale.notes: v2.0 count of 3,380 from 10 HF data/*/QA_all/QA.json files, counted on 2026-10-10; matches the README and LifeBench_eval config/datasets/lifebench.yaml
+  metrics: 'paper Sec. 4.2 Evaluation Protocol: accuracy = proportion of correctly answered questions; Sec. 4.3 / Fig. 7: overall and per-category accuracy'
+  judge_model: 'paper Sec. 4.2: ''employing GPT-5.1-Mini as the judge LLM'' with the standard LoCoMo evaluation prompt'
+  repro_level: LifeBench_eval repo (same author account, linked from the official README) has cli.py, src/evaluators/llm_judge.py and config/datasets/lifebench.yaml, which points to the v2.0 3380QA LoCoMo-format data. Data is public on HF and GitHub (checked 2026-10-10)
+  notes: repo branches (main = v1 data, lifebench2.0 = default/v2); LifeBench_eval GitHub API license null; HF photo.json records are caption/OCR/tag metadata

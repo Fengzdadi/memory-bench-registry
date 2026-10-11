@@ -1,0 +1,29 @@
+{
+ "name": "H2HMem",
+ "slug": "h2hmem",
+ "leads": {
+  "registry_key": "arxiv:2606.09461",
+  "tier": "P2",
+  "arxiv": "2606.09461 (arXiv API: v1 2026-06-08; title: H2HMem: A Multimodal Memory Benchmark for Agents in Human-Human Interactions)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "H2HMem: A Multimodal Memory Benchmark for Agents in Human-Human Interactions",
+    "paper_url": "https://arxiv.org/pdf/2606.09461",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "multi_agent_group",
+    "conversational_longterm"
+   ],
+   "extra_tags": [
+    "multimodal"
+   ],
+   "kind_reason": "Multimodal memory benchmark over dyadic and multi-party human-human conversations across sessions, evaluating recall, reasoning and application."
+  }
+ }
+}

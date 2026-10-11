@@ -1,0 +1,30 @@
+{
+ "name": "Persona-MME",
+ "slug": "persona-mme",
+ "leads": {
+  "registry_key": "arxiv:2604.13074",
+  "tier": "P2",
+  "arxiv": "2604.13074 (arXiv API: v1 2026-03-20; title: PersonaVLM: Long-Term Personalized Multimodal LLMs)",
+  "community_list_entries": [
+   {
+    "source": "teleai",
+    "section": "📏 Benchmarks / 🎬 Multimodal Benchmarks / 🗓️ 2026",
+    "name": "Persona-MME: A Benchmark for Long-Term Personalized Multimodal LLMs",
+    "paper_url": "https://arxiv.org/abs/2604.13074",
+    "code_url": "https://github.com/MiG-NJU/PersonaVLM",
+    "data_url": "https://huggingface.co/datasets/ClareNie/Persona-MME"
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "personalization",
+    "conversational_longterm",
+    "semantic_knowledge_update"
+   ],
+   "extra_tags": [
+    "multimodal"
+   ],
+   "kind_reason": "Benchmark from the PersonaVLM paper (CVPR 2026) with 2,034 cases over long multimodal user histories (up to 128k). It spans 7 aspects including memory recall, latest-preference recognition and interest evolution."
+  }
+ }
+}

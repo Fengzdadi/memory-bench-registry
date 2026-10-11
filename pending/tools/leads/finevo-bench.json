@@ -1,0 +1,13 @@
+{
+ "name": "FinEvo-Bench",
+ "slug": "finevo-bench",
+ "leads": {
+  "registry_key": "arxiv:2608.06144",
+  "tier": "P0",
+  "arxiv": "2608.06144 (arXiv API: v1 ?; title: None)",
+  "phase1_verified_types": {
+   "procedural_workflow": "Sec 3.1: \"Each scene contains six substantively distinct cases governed by the same professional procedure. The shared procedure creates a basis for transferring experience\"; paired state-reset controls (abstract)."
+  },
+  "paper_hint": "https://arxiv.org/abs/2608.06144"
+ }
+}

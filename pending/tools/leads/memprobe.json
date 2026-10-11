@@ -1,0 +1,37 @@
+{
+ "name": "MEMPROBE (MemAudit)",
+ "slug": "memprobe",
+ "leads": {
+  "registry_key": "arxiv:2606.24595",
+  "tier": "P2",
+  "arxiv": "2606.24595 (arXiv API: v1 2026-06-23; title: MemAudit: Auditing Long-Term Agent Memory via Hidden User-State Recovery)",
+  "community_list_entries": [
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "MEMPROBE: Probing Long-Term Agent Memory via Hidden User-State Recovery",
+    "paper_url": "https://arxiv.org/pdf/2606.24595v1",
+    "code_url": null,
+    "data_url": null
+   },
+   {
+    "source": "iaar",
+    "section": "Paper List / Datasets & Benchmark",
+    "name": "MEMPROBE: Probing Long-Term Agent Memory via Hidden User-State Recovery",
+    "paper_url": "https://arxiv.org/pdf/2606.24595v1",
+    "code_url": null,
+    "data_url": null
+   }
+  ],
+  "phase1_classification": {
+   "memory_types": [
+    "personalization",
+    "conversational_longterm"
+   ],
+   "extra_tags": [
+    "memory_audit_recovery"
+   ],
+   "kind_reason": "A benchmark that rebuilds a simulated user's hidden state from the memory an agent leaves behind. It has 50 users with 31 dimensions each (1,550 targets), spread over 31 tasks per user with memory persisting across them. Dimension categories include assistance preferences and self-model. The current"
+  }
+ }
+}
