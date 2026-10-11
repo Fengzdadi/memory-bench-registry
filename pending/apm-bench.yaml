@@ -1,0 +1,43 @@
+name: APM-Bench
+slug: apm-bench
+release_date: 2026-09
+venue: arXiv preprint
+memory_types:
+- episodic
+- semantic_knowledge_update
+- multimodal
+links:
+  paper: https://arxiv.org/abs/2609.37559
+  code: https://github.com/Jianguo-Huang11/APM-Bench
+  data: https://huggingface.co/datasets/Jianguo-Huang11/APM-Bench
+scale:
+  conversations: 104
+  questions: 2719
+  avg_context_length: 69 minutes of video per trajectory
+  notes: The 104 trajectories contain 549 video sessions; candidates span cross-session, real-time and adaptive-response tasks.
+metrics:
+- Multiple-choice accuracy
+- Gated LLM-Judge score
+judge_model: null
+repro_level: paper_only
+repro_checked_at: '2026-10-11'
+run_records: []
+notes: The public HF page contains source videos, but the scored candidate annotations and evaluation code are listed as planned
+  releases.
+sources:
+  name: arXiv abstract/title https://arxiv.org/abs/2609.37559; paper https://arxiv.org/html/2609.37559
+  release_date: 'arXiv submission history https://arxiv.org/abs/2609.37559: v1 submitted 2026-09-29'
+  venue: 'arXiv abstract page https://arxiv.org/abs/2609.37559: no verified journal reference or conference publication'
+  memory_types: 'arXiv HTML §3: cross-session egocentric video recall, entity-state tracking, and adaptive response'
+  links.paper: arXiv abstract page https://arxiv.org/abs/2609.37559
+  repro_level: official GitHub tree contains README and image only; README says annotations and evaluation code pending, while
+    HF lists source videos without scored annotations, checked 2026-10-11
+  links.code: arXiv HTML official repository link; GitHub README identifies APM-Bench
+  links.data: official repo README links its HF dataset; HF API lists 549 video files but no annotation/question files, checked
+    2026-10-11
+  scale.conversations: 'arXiv HTML §3 Figure 5 caption: 104 trajectories'
+  scale.questions: 'arXiv HTML §3 Figure 4/5: 2,719 candidates across 12 tasks'
+  scale.avg_context_length: 'arXiv HTML §3.3: mean 69 minutes per trajectory'
+  scale.notes: arXiv HTML §3 and Figure 5
+  metrics: arXiv HTML §3.3 Table 2
+  notes: official GitHub README Release plan and HF API file listing, checked 2026-10-11

@@ -1,0 +1,43 @@
+name: Correlated Promotion Benchmark (CPB)
+slug: cpb
+release_date: 2026-09
+venue: arXiv preprint
+memory_types:
+- multi_agent_group
+- memory_security
+links:
+  paper: https://arxiv.org/abs/2609.30813
+  code: https://github.com/lxy1134/iclr_2027
+  data: https://github.com/lxy1134/iclr_2027/tree/main/data
+scale:
+  conversations: 100
+  questions: null
+  avg_context_length: null
+  notes: CPB has Static and Live tracks. A Live episode runs six agents for six rounds; four model families each use 100 configurations.
+metrics:
+- Static false-promotion rate
+- Live false adoption
+- Live correctness
+- Damage share
+judge_model: Qwen3.5-9B; Gemma-3-12B; Llama-3.1-8B; Claude Opus 5
+repro_level: official_script
+repro_checked_at: '2026-10-11'
+run_records: []
+notes: The same backbone usually acts as admission judge and agent; an additional frontier judge is tested on Qwen agents.
+sources:
+  name: arXiv abstract/title https://arxiv.org/abs/2609.30813; paper https://arxiv.org/html/2609.30813
+  release_date: 'arXiv submission history https://arxiv.org/abs/2609.30813: v1 submitted 2026-09-25'
+  venue: 'arXiv abstract page https://arxiv.org/abs/2609.30813: no verified journal reference or conference publication'
+  memory_types: 'arXiv HTML §3–4: admission of true and false claims into a shared agent store and downstream false-belief
+    adoption'
+  links.paper: arXiv abstract page https://arxiv.org/abs/2609.30813
+  repro_level: official GitHub tree includes data/cpb_live/gold, configs/datasets and evaluation/policy source files, checked
+    2026-10-11
+  links.code: arXiv HTML reproduction appendix links author repository lxy1134/iclr_2027
+  links.data: official repo tree contains data/cpb_live/gold and benchmark data, checked 2026-10-11
+  scale.conversations: 'arXiv HTML §4.2: 100 Live configurations/episodes per backbone'
+  scale.notes: arXiv HTML §4.2 and Table 2
+  metrics: arXiv HTML §§3.3 and 4.4
+  judge_model: 'arXiv HTML §4.3: each backbone serves as agents, consumer and admission judge; additional closed-model judge
+    over Qwen'
+  notes: arXiv HTML §4.3

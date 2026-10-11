@@ -1,0 +1,37 @@
+name: Controlled In-Context Memory
+slug: cicm
+release_date: 2026-09
+venue: arXiv preprint
+memory_types:
+- semantic_knowledge_update
+links:
+  paper: https://arxiv.org/abs/2609.38866
+  code: null
+  data: null
+scale:
+  conversations: 1200
+  questions: 1200
+  avg_context_length: null
+  notes: The suite also includes 180 ledgers, 24 decision scenarios and 40 operational histories; these are separate tasks
+    rather than additive questions.
+metrics:
+- Current-value accuracy
+- Old-value error rate
+judge_model: null
+repro_level: paper_only
+repro_checked_at: '2026-10-11'
+run_records: []
+notes: Core counts refer to preference-dialogue CICM; the paper reports several additional controlled update settings.
+sources:
+  name: arXiv abstract/title https://arxiv.org/abs/2609.38866; paper https://arxiv.org/html/2609.38866
+  release_date: 'arXiv submission history https://arxiv.org/abs/2609.38866: v1 submitted 2026-09-30'
+  venue: 'arXiv abstract page https://arxiv.org/abs/2609.38866: no verified journal reference or conference publication'
+  memory_types: 'arXiv HTML §3–5: overwrite tests ask for the current value after older values in dialogue and operational
+    logs'
+  links.paper: arXiv abstract page https://arxiv.org/abs/2609.38866
+  repro_level: arXiv paper checked 2026-10-11; no official benchmark repository or data page linked
+  scale.conversations: 'arXiv HTML CICM construction: 1,200 preference dialogues in the core task'
+  scale.questions: 'arXiv HTML CICM construction: one current-value query for each of 1,200 preference dialogues'
+  scale.notes: arXiv HTML experiment and appendix task descriptions
+  metrics: arXiv HTML Results and Table 5; current/old/other outcome categories
+  notes: arXiv HTML benchmark construction and appendix

@@ -1,0 +1,42 @@
+name: CUE-Mem
+slug: cue-mem
+release_date: 2026-09
+venue: arXiv preprint
+memory_types:
+- conversational_longterm
+- personalization
+- multimodal
+links:
+  paper: https://arxiv.org/abs/2609.32574
+  code: https://github.com/yulinlp/CUE-MEM
+  data: https://huggingface.co/datasets/Kkryptonite/CUE-Mem
+scale:
+  conversations: 648
+  questions: 2674
+  avg_context_length: null
+  notes: Twenty users contribute 5,798 turns, 496 images and 2,228 audio clips; four multiple-choice task families.
+metrics:
+- Accuracy
+- Memory Avg.
+- Explicit–Implicit Gap (EI-Gap)
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-11'
+run_records: []
+notes: The benchmark scores explicit and implicit evidence variants; Answer Refusal tests when the history lacks support.
+sources:
+  name: arXiv abstract/title https://arxiv.org/abs/2609.32574; paper https://arxiv.org/html/2609.32574
+  release_date: 'arXiv submission history https://arxiv.org/abs/2609.32574: v1 submitted 2026-09-26'
+  venue: 'arXiv abstract page https://arxiv.org/abs/2609.32574: no verified journal reference or conference publication'
+  memory_types: 'arXiv HTML §4.1–4.3: user-specific text, image and audio memories across sessions, with personalized recommendation
+    and refusal tasks'
+  links.paper: arXiv abstract page https://arxiv.org/abs/2609.32574
+  repro_level: official GitHub tree has scripts/RQ1_RQ2/benchmark and RQ3 pipelines; README gives dataset preparation and
+    evaluation commands; public HF files verified 2026-10-11
+  links.code: arXiv HTML abstract links official repository; README describes RQ1–RQ3 evaluation pipelines
+  links.data: official repository README links dataset; HF API lists dialogue, QA and media files, checked 2026-10-11
+  scale.conversations: 'arXiv HTML §4.3 Figure 4: 648 sessions for 20 users'
+  scale.questions: 'arXiv HTML §4.3 Figure 4: 2,674 QA pairs'
+  scale.notes: arXiv HTML §4.3 Figure 4
+  metrics: 'arXiv HTML §5 and Table 2: MCQ accuracy, task average and evidence gap'
+  notes: arXiv HTML §4.1 and §5

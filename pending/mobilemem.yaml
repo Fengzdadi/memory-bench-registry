@@ -1,0 +1,47 @@
+name: MobileMem
+slug: mobilemem
+release_date: 2026-08
+venue: arXiv preprint
+memory_types:
+- conversational_longterm
+- personalization
+- episodic
+- semantic_knowledge_update
+- multimodal
+links:
+  paper: https://arxiv.org/abs/2608.13606
+  code: https://github.com/zjunlp/MobileMem
+  data: https://huggingface.co/datasets/zjunlp/MobileMem
+scale:
+  conversations: 16
+  questions: 7415
+  avg_context_length: 1.72M tokens/user
+  notes: The scale fields describe the MobileMem-Omni track; Table 3 also reports 202.6 sessions per user and 19,060 images.
+metrics:
+- LLM-judge accuracy
+- Word-overlap F1
+judge_model: Qwen3-14B (Omni); Qwen3.5-397B-A17B (text)
+repro_level: official_script
+repro_checked_at: '2026-10-11'
+run_records: []
+notes: Paper includes text and multimodal tracks. Counts and metrics here describe MobileMem-Omni; judge_model names both
+  original-paper track judges.
+sources:
+  name: arXiv abstract/title https://arxiv.org/abs/2608.13606; paper https://arxiv.org/html/2608.13606
+  release_date: 'arXiv submission history https://arxiv.org/abs/2608.13606: v1 submitted 2026-08-11'
+  venue: 'arXiv abstract page https://arxiv.org/abs/2608.13606: no verified journal reference or conference publication'
+  memory_types: 'arXiv HTML §2.3 and §5.1: year-long multi-session mobile histories, preference and state-update QA, visual
+    questions over screenshots/photos'
+  links.paper: arXiv abstract page https://arxiv.org/abs/2608.13606
+  repro_level: official GitHub tree has omni/eval/eval/evaluator.py and track evaluation guides; HF dataset API lists public
+    QA and media files, checked 2026-10-11
+  links.code: paper title block links official zjunlp/MobileMem repository; README describes text and omni evaluation tracks
+  links.data: official repo README links Hugging Face dataset; HF API lists omni/data.jsonl and omni/questions.jsonl, checked
+    2026-10-11
+  scale.conversations: 'arXiv HTML §5.1 Table 3: 16 user trajectories in MobileMem-Omni'
+  scale.questions: 'arXiv HTML §5.1 Table 3: 7,415 MobileMem-Omni QA pairs'
+  scale.avg_context_length: 'arXiv HTML §5.1 Table 3: average context length 1.72M tokens per user'
+  scale.notes: arXiv HTML §5.1 Table 3
+  metrics: arXiv HTML §5.2.1 and Table 4 (MobileMem-Omni)
+  judge_model: arXiv HTML §5.2.1 names Qwen3-14B for Omni; §4.2.1 names Qwen3.5-397B-A17B for text
+  notes: arXiv HTML §4–5

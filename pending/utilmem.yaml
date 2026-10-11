@@ -1,0 +1,42 @@
+name: UTILMEM
+slug: utilmem
+release_date: 2026-08
+venue: arXiv preprint
+memory_types:
+- conversational_longterm
+- personalization
+links:
+  paper: https://arxiv.org/abs/2608.30508
+  code: https://github.com/peijunallin/UtilMem
+  data: https://huggingface.co/datasets/KrisQ/utilmem
+scale:
+  conversations: 1717
+  questions: 1717
+  avg_context_length: 120K tokens per instance
+  notes: One instance pairs a multi-session history with a question; the paper reports 80K–220K token lengths.
+metrics:
+- Robustness Score
+- Normalized Robustness
+- Degradation Rate
+judge_model: GPT-5.2-1211-global; GPT-5.4-0305-global
+repro_level: data_public
+repro_checked_at: '2026-10-11'
+run_records: []
+notes: The public GitHub repository currently contains only a README; evaluation code is marked as forthcoming.
+sources:
+  name: arXiv abstract/title https://arxiv.org/abs/2608.30508; paper https://arxiv.org/html/2608.30508
+  release_date: 'arXiv submission history https://arxiv.org/abs/2608.30508: v1 submitted 2026-08-31'
+  venue: 'arXiv abstract page https://arxiv.org/abs/2608.30508: no verified journal reference or conference publication'
+  memory_types: 'arXiv HTML §3: multi-session user histories and personalized evidence-sensitive questions'
+  links.paper: arXiv abstract page https://arxiv.org/abs/2608.30508
+  repro_level: HF dataset API shows public evaluation JSON; official GitHub README says evaluation and construction code coming
+    soon, checked 2026-10-11
+  links.code: arXiv HTML abstract links official repository; README identifies benchmark
+  links.data: official repo README links KrisQ/utilmem; HF API lists multi_domain_eval_strong.json, checked 2026-10-11
+  scale.conversations: 'arXiv HTML Table 1: 1,717 evaluation instances, each with a user history'
+  scale.questions: 'arXiv HTML Table 1 and §3: 1,717 evaluation instances with an evaluation query'
+  scale.avg_context_length: 'arXiv HTML Appendix A, Figure 7: mean per-sample budget 120K tokens'
+  scale.notes: arXiv HTML Table 1 and §3
+  metrics: arXiv HTML §4 Evaluation protocol
+  judge_model: 'arXiv HTML §4 Implementation: scores averaged across two judges'
+  notes: official GitHub README Release Status, checked 2026-10-11

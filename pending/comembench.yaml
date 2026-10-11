@@ -1,0 +1,37 @@
+name: CoMemBench
+slug: comembench
+release_date: 2026-09
+venue: arXiv preprint
+memory_types:
+- multi_agent_group
+links:
+  paper: https://arxiv.org/abs/2609.32192
+  code: null
+  data: null
+scale:
+  conversations: null
+  questions: 800
+  avg_context_length: null
+  notes: The certified release pairs 800 clean workflows with 800 matched isolation challenges across four domains.
+metrics:
+- Success Rate (SR)
+- Verified Node Completion Rate (VNCR)
+- Verified Handoff Success (VHS)
+- Isolation Challenge Success (ICS)
+judge_model: null
+repro_level: paper_only
+repro_checked_at: '2026-10-11'
+run_records: []
+notes: Workflow memory is reset at the start of each case; the benchmark tests sharing and isolation within a multi-agent
+  workflow.
+sources:
+  name: arXiv abstract/title https://arxiv.org/abs/2609.32192; paper https://arxiv.org/html/2609.32192
+  release_date: 'arXiv submission history https://arxiv.org/abs/2609.32192: v1 submitted 2026-09-26'
+  venue: 'arXiv abstract page https://arxiv.org/abs/2609.32192: no verified journal reference or conference publication'
+  memory_types: 'arXiv HTML §3–4: shared and isolated memory boundaries in multi-agent workflow graphs'
+  links.paper: arXiv abstract page https://arxiv.org/abs/2609.32192
+  repro_level: arXiv paper checked 2026-10-11; no official public CoMemBench data or evaluator repository link identified
+  scale.questions: 'arXiv HTML §3.5: 800 clean workflows'
+  scale.notes: arXiv HTML §3.5 Corpus profile
+  metrics: arXiv HTML §4 and Appendix F
+  notes: arXiv HTML §3–4

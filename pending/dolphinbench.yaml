@@ -1,0 +1,44 @@
+name: DolphinBench
+slug: dolphinbench
+release_date: 2026-09
+venue: arXiv preprint
+memory_types:
+- conversational_longterm
+- personalization
+- episodic
+links:
+  paper: https://arxiv.org/abs/2609.24971
+  code: https://github.com/mem0ai/dolphinbench
+  data: https://github.com/mem0ai/dolphinbench
+scale:
+  conversations: 3
+  questions: 600
+  avg_context_length: approximately 500k tokens of user messages per persona
+  notes: Each history has 3,400–5,128 user messages. Scored tasks require simulated app actions.
+metrics:
+- Task pass rate (accuracy)
+- Total cost
+- Median task latency
+judge_model: GPT-5.6-Sol
+repro_level: official_script
+repro_checked_at: '2026-10-11'
+run_records: []
+notes: Each task was checked by agent runs with and without relevant history. Tool actions are scored by deterministic checks
+  and an LLM judge where meaning must be interpreted.
+sources:
+  name: arXiv abstract/title https://arxiv.org/abs/2609.24971; paper https://arxiv.org/html/2609.24971
+  release_date: 'arXiv submission history https://arxiv.org/abs/2609.24971: v1 submitted 2026-09-21'
+  venue: 'arXiv abstract page https://arxiv.org/abs/2609.24971: no verified journal reference or conference publication'
+  memory_types: 'arXiv HTML §3: years of persona-specific user messages are ingested before action tasks that depend on past
+    facts, decisions and preferences'
+  links.paper: arXiv abstract page https://arxiv.org/abs/2609.24971
+  repro_level: official GitHub tree includes 600 task YAMLs, persona states, runner and grading modules; checked 2026-10-11
+  links.code: official dolphinbench.ai landing page links mem0ai/dolphinbench; repo README describes runner
+  links.data: official repo tree contains tests/alex, tests/morgan and tests/riley plus persona histories, checked 2026-10-11
+  scale.conversations: 'arXiv HTML §3: three multi-year persona histories'
+  scale.questions: 'arXiv HTML §3: 200 tests per persona, 600 total'
+  scale.avg_context_length: arXiv HTML abstract and §3; user-message content measured with o200k_base
+  scale.notes: arXiv HTML §3
+  metrics: arXiv HTML §3.2 Grading & Metrics
+  judge_model: 'arXiv HTML §3.2: semantic action requirements use GPT-5.6-Sol judge'
+  notes: arXiv HTML §3 Test Construction and §3.2

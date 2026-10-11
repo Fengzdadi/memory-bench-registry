@@ -1,0 +1,38 @@
+name: StateMemBench
+slug: statemembench
+release_date: 2026-08
+venue: arXiv preprint
+memory_types:
+- conversational_longterm
+- semantic_knowledge_update
+links:
+  paper: https://arxiv.org/abs/2608.19652
+  code: null
+  data: null
+scale:
+  conversations: 234
+  questions: 322
+  avg_context_length: null
+  notes: Short scenarios are about 165 turns; long fused scenarios about 600 turns. No single overall average is stated.
+metrics:
+- State-agreement accuracy (gold rate)
+- Drift rate
+- In-pool engagement
+judge_model: deepseek-v4-pro
+repro_level: paper_only
+repro_checked_at: '2026-10-11'
+run_records: []
+notes: The paper also evaluates existing benchmarks; the scale here refers only to StateMemBench.
+sources:
+  name: arXiv abstract/title https://arxiv.org/abs/2608.19652; paper https://arxiv.org/html/2608.19652
+  release_date: 'arXiv submission history https://arxiv.org/abs/2608.19652: v1 submitted 2026-08-20'
+  venue: 'arXiv abstract page https://arxiv.org/abs/2608.19652: no verified journal reference or conference publication'
+  memory_types: 'arXiv HTML §4: multi-session dialogue scenarios with superseded state values and current-state probes'
+  links.paper: arXiv abstract page https://arxiv.org/abs/2608.19652
+  repro_level: arXiv paper checked 2026-10-11; no official benchmark repository or data link in paper abstract/body
+  scale.conversations: 'arXiv HTML abstract and §4: 234 scenarios (190 short, 44 long)'
+  scale.questions: 'arXiv HTML §6 Table 3: 190 short probes plus 132 probes in 44 long scenarios'
+  scale.notes: arXiv HTML §6 Table 3
+  metrics: arXiv HTML §6 Tables 3 and 5
+  judge_model: 'arXiv HTML §6 Table 3 caption: fixed deepseek-v4-pro judge'
+  notes: arXiv HTML §6
