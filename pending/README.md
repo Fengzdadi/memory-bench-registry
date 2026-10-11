@@ -12,6 +12,9 @@
   - 71 个已由 agent 填写（打开过论文和仓库，每个字段写了 `sources`），但**尚未独立复核**，即本目录下的 `*.yaml`，均能通过 `validate.py`。
   - 2 个填写时被标记为可能不应单独入库，放在 `flagged/`：agent-memory-integrity-benchmark（已并入 RAMR 仓库，没有论文）、
     locomo-refined（LoCoMo 的修订再发布，技术报告尚未发布）。
+- 复核中新增的 flagged（2026-10-11）：
+  - bad-memory：论文描述的是安全评测框架，作者没有称其为 benchmark，也没有题目条目。
+  - eccbench：核心任务是判断一个片段是否出现在单次输入的长流中，属于 docs/fields.md 排除的单次长输入测试（阶段 1 也标为 long_context_single_input）。
   - 31 个还没有填写：mobilemem statemembench utilmem apm-bench capmem cicm comembench cpb cue-mem dolphinbench icm-bench
     impact-is-not-invalidation lapse locomo-conv lsrep memcalib memoreason memprobe-2 memriskbench memtransfer pairpref pragma
     simlife-bp twist video2skill what-should-an-agent-remember cmsc-e dyadmem ember-bench knowing-the-store realcompanion
