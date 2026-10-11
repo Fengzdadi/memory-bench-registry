@@ -20,7 +20,7 @@ python3 -m venv .venv && .venv/bin/pip install -r requirements.txt   # 已有 .v
 .venv/bin/python scripts/build_readme.py --check     # CI 用：检查 README 是否同步
 ```
 
-不要手改 README.md；改 YAML 后重新生成。
+不要手改 README.md / README.zh-CN.md；改 YAML 后重新生成。
 
 ## 当前状态（2026-10-11）
 

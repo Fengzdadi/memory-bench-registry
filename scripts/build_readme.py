@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Generate README.md from benchmarks/*.yaml and templates/README.md.j2.
+"""Generate README.md (English) and README.zh-CN.md from benchmarks/*.yaml and templates/.
 
 Usage:
-  python scripts/build_readme.py           # write README.md
-  python scripts/build_readme.py --check   # exit 1 if README.md is out of date
+  python scripts/build_readme.py           # write the READMEs
+  python scripts/build_readme.py --check   # exit 1 if any README is out of date
 """
 from __future__ import annotations
 
@@ -20,7 +20,8 @@ from jinja2 import Environment, FileSystemLoader, StrictUndefined
 ROOT = Path(__file__).resolve().parent.parent
 BENCH_DIR = ROOT / "benchmarks"
 TEMPLATE_DIR = ROOT / "templates"
-README = ROOT / "README.md"
+# (template, output) pairs, one per language
+OUTPUTS = [("README.md.j2", ROOT / "README.md"), ("README.zh-CN.md.j2", ROOT / "README.zh-CN.md")]
 SCHEMA = ROOT / "schema" / "benchmark.schema.json"
 
 
@@ -82,7 +83,7 @@ def build_context(entries: list[dict]) -> dict:
     }
 
 
-def render() -> str:
+def render(template: str, context: dict) -> str:
     env = Environment(
         loader=FileSystemLoader(TEMPLATE_DIR),
         undefined=StrictUndefined,
@@ -91,27 +92,34 @@ def render() -> str:
         keep_trailing_newline=True,
     )
     env.filters.update(name=fmt_name, links=fmt_links, scale=fmt_scale, types=fmt_types, cell=md_cell)
-    return env.get_template("README.md.j2").render(**build_context(load_entries()))
+    return env.get_template(template).render(**context)
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("--check", action="store_true", help="fail if README.md differs from the generated output")
+    parser.add_argument("--check", action="store_true", help="fail if any README differs from the generated output")
     args = parser.parse_args()
 
-    output = render()
-    if args.check:
-        current = README.read_text() if README.exists() else ""
+    context = build_context(load_entries())
+    stale = False
+    for template, path in OUTPUTS:
+        output = render(template, context)
+        name = path.relative_to(ROOT)
+        if not args.check:
+            path.write_text(output)
+            print(f"wrote {name}")
+            continue
+        current = path.read_text() if path.exists() else ""
         if current == output:
-            print("README.md is up to date")
-            return 0
+            print(f"{name} is up to date")
+            continue
+        stale = True
         sys.stdout.writelines(
-            difflib.unified_diff(current.splitlines(True), output.splitlines(True), "README.md (committed)", "README.md (generated)")
+            difflib.unified_diff(current.splitlines(True), output.splitlines(True), f"{name} (committed)", f"{name} (generated)")
         )
-        print("\nREADME.md is out of date: run python scripts/build_readme.py", file=sys.stderr)
+        print(f"\n{name} is out of date: run python scripts/build_readme.py", file=sys.stderr)
+    if stale:
         return 1
-    README.write_text(output)
-    print(f"wrote {README.relative_to(ROOT)}")
     return 0
 
 

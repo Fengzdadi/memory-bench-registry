@@ -1,0 +1,66 @@
+<!-- 本文件由 scripts/build_readme.py 根据 benchmarks/*.yaml 生成，请勿手改。手写内容放在 templates/ 或 docs/。 -->
+# memory-bench-registry
+
+[English](README.md) | **中文**
+
+结构化的 agent memory benchmark 登记库：每个 benchmark 一个 YAML（`benchmarks/<slug>.yaml`），本 README 由脚本生成。
+所有字段都必须能在论文或官方仓库里找到出处（记录在各条目的 `sources` 中），找不到即为 `null`。
+
+- 字段与可复现等级定义：[docs/fields.md](docs/fields.md)
+- 现有汇总列表的覆盖缺口核对：[docs/coverage-gaps.md](docs/coverage-gaps.md)
+- 现有汇总列表及其核实状态：[docs/related-lists.md](docs/related-lists.md)
+- 评估过但未收录的候选及理由：[docs/excluded.md](docs/excluded.md)
+
+当前共 **{{ entries | length }}** 条。可复现等级分布：{% for row in level_counts %}`{{ row.level }}` {{ row.count }}{% if not loop.last %} · {% endif %}{% endfor %}
+
+
+## 按记忆类型
+
+一个 benchmark 可属于多个类型。点开查看该类型下的条目，按发布时间从新到旧排列。
+
+{% for group in by_type %}
+<details>
+<summary><code>{{ group.type }}</code>（{{ group.entries | length }}）</summary>
+
+{% if group.entries %}
+{% for e in group.entries %}{{ e | name }}{% if not loop.last %} · {% endif %}{% endfor %}
+
+{% else %}
+_暂无条目。_
+{% endif %}
+</details>
+{% endfor %}
+
+## 全部条目
+
+按发布时间从新到旧排列。点名称查看完整字段与出处。
+
+| 名称 | 日期 | 类型 | 链接 | 规模 | 可复现等级 |
+| --- | --- | --- | --- | --- | --- |
+{% for e in entries %}
+| {{ e | name }} | {{ e.release_date or "—" }} | {{ e | types }} | {{ e | links }} | {{ e | scale }} | `{{ e.repro_level }}` |
+{% endfor %}
+
+### 可复现等级
+
+| 等级 | 含义 |
+| --- | --- |
+| `unverified` | 还没有人打开论文和仓库核对 |
+| `paper_only` | 核对过论文；找不到公开数据或代码 |
+| `data_public` | 数据可公开获取，但官方仓库没有评测脚本 |
+| `official_script` | 官方仓库有可直接跑评测的脚本，且数据可获取 |
+| `smoke_tested` | 我们用官方脚本在小样本上跑通过 |
+| `full_run` | 我们跑过完整评测 |
+
+## 贡献
+
+1. 新增 `benchmarks/<slug>.yaml`，按 [docs/fields.md](docs/fields.md) 填写，每个非空字段在 `sources` 中注明出处。
+2. 运行 `python scripts/validate.py` 与 `python scripts/build_readme.py`。
+3. 不要手改 README（中英文两份）；CI 会检查它们与数据是否同步。
+
+## 许可证
+
+- 数据（`benchmarks/`、`docs/`、`schema/` 及 README）：[CC BY 4.0](LICENSE-DATA)
+- 代码（`scripts/`、`templates/`、`pending/tools/`）：[MIT](LICENSE)
+
+条目中链接的论文、代码和数据集各有其许可证，不受本仓库许可证约束；使用前请查看原始来源。
