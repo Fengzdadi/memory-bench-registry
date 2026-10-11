@@ -1,7 +1,7 @@
 name: MemProbe
 slug: memprobe-2
 release_date: 2026-09
-venue: arXiv preprint
+venue: EMNLP 2026
 memory_types:
 - conversational_longterm
 - personalization
@@ -29,7 +29,7 @@ notes: This MemProbe is a separate 2026-09 paper from the earlier MEMPROBE, whic
 sources:
   name: arXiv abstract/title https://arxiv.org/abs/2609.30558; paper https://arxiv.org/html/2609.30558
   release_date: 'arXiv submission history https://arxiv.org/abs/2609.30558: v1 submitted 2026-09-24'
-  venue: 'arXiv abstract page https://arxiv.org/abs/2609.30558: no verified journal reference or conference publication'
+  venue: 'arXiv abstract page https://arxiv.org/abs/2609.30558 Comments: Accepted by EMNLP 2026 Main'
   memory_types: 'arXiv HTML §3: multi-session user facts and preferences undergo valid updates, misinformation and source
     conflicts'
   links.paper: arXiv abstract page https://arxiv.org/abs/2609.30558

@@ -7,7 +7,7 @@ memory_types:
 - semantic_knowledge_update
 links:
   paper: https://arxiv.org/abs/2609.16730
-  code: null
+  code: https://github.com/Deepnar/ice
   data: null
 scale:
   conversations: 4
@@ -32,7 +32,8 @@ sources:
   memory_types: 'arXiv HTML §3 and §6: longitudinal conversation state replay with evolving reference answers; candidate classification
     only because LSREP is a protocol'
   links.paper: arXiv abstract page https://arxiv.org/abs/2609.16730
-  repro_level: arXiv paper read 2026-10-11; evaluated private replay corpus and probes are not released
+  repro_level: arXiv paper and author-linked GitHub tree checked 2026-10-11; code and evaluation scripts exist but private replay corpus and probes are not released
+  links.code: 'arXiv abstract Comments links https://github.com/Deepnar/ice; GitHub tree includes experiments/mature/evaluate_probes.py, checked 2026-10-11'
   scale.conversations: 'arXiv HTML §6.1 Table 3: four private conversation datasets A–D'
   scale.questions: 'arXiv HTML §6.1 Table 3: 219 distinct probes, repeated at checkpoints'
   scale.notes: arXiv HTML §6.1 Table 3

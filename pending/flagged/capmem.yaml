@@ -1,7 +1,7 @@
 name: CapMem
 slug: capmem
 release_date: 2026-09
-venue: arXiv preprint
+venue: EMNLP 2026
 memory_types:
 - episodic
 links:
@@ -26,7 +26,7 @@ notes: 'Flagged: each question is answered from captions generated for one video
 sources:
   name: arXiv abstract/title https://arxiv.org/abs/2609.17688; paper https://arxiv.org/html/2609.17688
   release_date: 'arXiv submission history https://arxiv.org/abs/2609.17688: v1 submitted 2026-09-15'
-  venue: 'arXiv abstract page https://arxiv.org/abs/2609.17688: no verified journal reference or conference publication'
+  venue: 'arXiv abstract page https://arxiv.org/abs/2609.17688 Comments: EMNLP 2026'
   memory_types: 'arXiv HTML §3.1–3.2: episodic recall through generated captions of egocentric videos; evaluated QA input
     is captions'
   links.paper: arXiv abstract page https://arxiv.org/abs/2609.17688

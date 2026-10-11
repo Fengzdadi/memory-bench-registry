@@ -1,7 +1,7 @@
 name: LoCoMo-Conv
 slug: locomo-conv
 release_date: 2026-09
-venue: arXiv preprint
+venue: Findings of EMNLP 2026
 memory_types:
 - conversational_longterm
 links:
@@ -28,7 +28,7 @@ notes: A distinct query and response evaluation derived from LoCoMo, with new co
 sources:
   name: arXiv abstract/title https://arxiv.org/abs/2609.03467; paper https://arxiv.org/html/2609.03467
   release_date: 'arXiv submission history https://arxiv.org/abs/2609.03467: v1 submitted 2026-09-03'
-  venue: 'arXiv abstract page https://arxiv.org/abs/2609.03467: no verified journal reference or conference publication'
+  venue: 'arXiv abstract page https://arxiv.org/abs/2609.03467 Comments: Accepted by EMNLP 2026 Findings'
   memory_types: 'arXiv HTML §3: conversational rewrites of LoCoMo histories test retrieval and grounded replies under implicit,
     counterfactual and composed queries'
   links.paper: arXiv abstract page https://arxiv.org/abs/2609.03467

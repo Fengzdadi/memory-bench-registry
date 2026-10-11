@@ -1,0 +1,50 @@
+name: RealCompanion
+slug: realcompanion
+release_date: 2026-10
+venue: arXiv preprint
+memory_types:
+- conversational_longterm
+- personalization
+- episodic
+links:
+  paper: https://arxiv.org/abs/2610.01780
+  code: https://anonymous.4open.science/r/realcompanion-54CC/
+  data: https://huggingface.co/datasets/Quislab/RealCompanion
+scale:
+  conversations: 10
+  questions: 3235
+  avg_context_length: null
+  notes: The corpus has 27,218 messages over up to 120 days; separate chat track contains 1,533 scoreable probes and 434 cold-open
+    controls.
+metrics:
+- Retrieval hit rate
+- Mean reciprocal rank
+- Response content match
+- Restraint
+- Evidence coverage
+- Memory-need AUROC
+- Persona F1
+judge_model: null
+repro_level: paper_only
+repro_checked_at: '2026-10-11'
+run_records: []
+notes: The official HF dataset requires manual access approval. Counts for scale.questions describe the QA track; the separate
+  chat track is described in scale.notes.
+sources:
+  name: arXiv abstract/title https://arxiv.org/abs/2610.01780; paper https://arxiv.org/html/2610.01780
+  release_date: 'arXiv submission history https://arxiv.org/abs/2610.01780: v1 submitted 2026-10-01'
+  venue: 'arXiv abstract page https://arxiv.org/abs/2610.01780: no verified journal reference or conference publication'
+  memory_types: 'arXiv HTML abstract and §3–5: months of real user–companion messages, persona/profile inference and recall
+    of distant exchanges'
+  links.paper: arXiv abstract page https://arxiv.org/abs/2610.01780
+  repro_level: official HF API shows 52 files but gated=manual; anonymous code page responded without inspectable file tree,
+    so open download/evaluator were not confirmed on 2026-10-11
+  links.code: arXiv HTML §1 footnote names official code and reproduction map; code browser returned a page but file tree
+    was not accessible during 2026-10-11 check
+  links.data: arXiv HTML §1 footnote links official dataset; HF API lists per-user source/chat/persona/profile/QA JSON, gated=manual,
+    checked 2026-10-11
+  scale.conversations: 'arXiv HTML abstract: ten real user–AI companion relationships'
+  scale.questions: 'arXiv HTML dataset table: 3,235 scoreable QA items'
+  scale.notes: arXiv HTML abstract, dataset table and Appendix C
+  metrics: arXiv HTML §5 Metrics and Appendix A.2
+  notes: official HF API gated flag and arXiv HTML dataset statistics, checked 2026-10-11

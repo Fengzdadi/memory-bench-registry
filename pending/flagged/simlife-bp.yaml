@@ -1,7 +1,7 @@
 name: SimLife-BP
 slug: simlife-bp
 release_date: 2026-09
-venue: arXiv preprint
+venue: COLM 2026 Learning from Situated and Embodied Interaction Workshop
 memory_types:
 - personalization
 - semantic_knowledge_update
@@ -27,7 +27,7 @@ notes: 'Flagged: evaluated models answer from one supplied ultra-long episode at
 sources:
   name: arXiv abstract/title https://arxiv.org/abs/2609.19610; paper https://arxiv.org/html/2609.19610
   release_date: 'arXiv submission history https://arxiv.org/abs/2609.19610: v1 submitted 2026-09-17'
-  venue: 'arXiv abstract page https://arxiv.org/abs/2609.19610: no verified journal reference or conference publication'
+  venue: 'arXiv abstract page https://arxiv.org/abs/2609.19610 Comments names COLM 2026 Learning from Situated and Embodied Interaction Workshop'
   memory_types: 'arXiv HTML §3–4: behavioral-rule inference and pattern changes from simulated video/audio household histories;
     candidate tags only'
   links.paper: arXiv abstract page https://arxiv.org/abs/2609.19610

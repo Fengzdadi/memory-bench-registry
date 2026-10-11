@@ -1,7 +1,7 @@
 name: PRAGMA
 slug: pragma
 release_date: 2026-09
-venue: arXiv preprint
+venue: EMNLP 2026
 memory_types:
 - conversational_longterm
 - personalization
@@ -28,7 +28,7 @@ notes: The public repo primarily contains a construction pipeline; response rubr
 sources:
   name: arXiv abstract/title https://arxiv.org/abs/2609.09664; paper https://arxiv.org/html/2609.09664
   release_date: 'arXiv submission history https://arxiv.org/abs/2609.09664: v1 submitted 2026-09-09'
-  venue: 'arXiv abstract page https://arxiv.org/abs/2609.09664: no verified journal reference or conference publication'
+  venue: 'arXiv abstract page https://arxiv.org/abs/2609.09664 Comments: Accepted to EMNLP 2026'
   memory_types: 'arXiv HTML §3: long user histories support personalized guidance, evolving preferences and corrective queries'
   links.paper: arXiv abstract page https://arxiv.org/abs/2609.09664
   repro_level: HF API confirms public conversations, queries and rubrics; official GitHub pipeline/run_pipeline.py reconstructs
