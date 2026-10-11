@@ -49,7 +49,10 @@ python3 -m venv .venv && .venv/bin/pip install -r requirements.txt   # 已有 .v
    - `judge_model` 是**原论文**用的 judge
    - `repro_level` 与仓库实际文件树相符（`gh api "repos/<o>/<r>/git/trees/HEAD?recursive=1" --jq '.tree[].path'`）
    - `memory_types` 符合 docs/fields.md 的判定标准
-4. 有错就直接改 YAML，并同步更新对应的 `sources`；`repro_checked_at` 更新为实际核对日期。
+4. **只改错的字段，不要动正确的内容。** 有错就改那个字段，并在对应 `sources` 末尾追加核对依据。
+   字段正确就保持原样：不要精简或重写 `notes`、`scale.notes`、`sources`。草稿里亲自数过的数字、
+   许可证、数据门槛、论文与发布版本不一致等细节都很重要，删掉会造成信息损失。
+   `memory_types` 只在明显不符合 docs/fields.md 定义时才改；拿不准就保持原值，并在汇报里提出。
 5. 如果发现它不应单独入库（不是 benchmark、和已有条目是同一个数据集、与记忆无关、找不到论文），
    **不要删除**，移到 `pending/flagged/` 并在汇报里说明理由。
 6. 通过后 `git mv pending/<slug>.yaml benchmarks/`。
