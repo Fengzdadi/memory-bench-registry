@@ -41,17 +41,18 @@ def fmt_name(entry: dict) -> str:
 
 def fmt_links(entry: dict) -> str:
     parts = [f"[{label}]({url})" for label, url in entry["links"].items() if url]
-    return " · ".join(parts) if parts else "—"
+    # non-breaking spaces keep "paper · code · data" on one line in narrow table columns
+    return "&nbsp;·&nbsp;".join(parts) if parts else "—"
 
 
 def fmt_scale(entry: dict) -> str:
     scale = entry["scale"]
     parts = []
     if scale["conversations"] is not None:
-        parts.append(f"{scale['conversations']:,} conv.")
+        parts.append(f"{scale['conversations']:,}&nbsp;conv.")
     if scale["questions"] is not None:
-        parts.append(f"{scale['questions']:,} Q")
-    return md_cell(" · ".join(parts)) if parts else "—"
+        parts.append(f"{scale['questions']:,}&nbsp;Q")
+    return "<br>".join(parts) if parts else "—"
 
 
 def fmt_types(entry: dict) -> str:
@@ -65,6 +66,16 @@ def newest_first(entries) -> list[dict]:
     return dated + [e for e in by_name if not e["release_date"]]
 
 
+def fmt_date(entry: dict) -> str:
+    # U+2011 (non-breaking hyphen) stops "2026-10" from wrapping in narrow columns
+    return entry["release_date"].replace("-", "\u2011") if entry["release_date"] else "—"
+
+
+def fmt_month(entry: dict) -> str:
+    # within a year section only the month is shown
+    return entry["release_date"][5:7] if entry["release_date"] else "—"
+
+
 def build_context(entries: list[dict]) -> dict:
     schema = json.loads(SCHEMA.read_text())
     type_order = schema["$defs"]["memory_type"]["enum"]
@@ -75,10 +86,16 @@ def build_context(entries: list[dict]) -> dict:
         members = newest_first(e for e in entries if mtype in e["memory_types"])
         by_type.append({"type": mtype, "entries": members})
 
+    by_year: dict[str, list[dict]] = {}
+    for entry in newest_first(entries):
+        year = entry["release_date"][:4] if entry["release_date"] else "undated"
+        by_year.setdefault(year, []).append(entry)
+
     levels = Counter(e["repro_level"] for e in entries)
     return {
         "entries": newest_first(entries),
         "by_type": by_type,
+        "by_year": [{"year": y, "entries": es} for y, es in by_year.items()],
         "level_counts": [{"level": lv, "count": levels.get(lv, 0)} for lv in level_order],
     }
 
@@ -91,7 +108,7 @@ def render(template: str, context: dict) -> str:
         lstrip_blocks=True,
         keep_trailing_newline=True,
     )
-    env.filters.update(name=fmt_name, links=fmt_links, scale=fmt_scale, types=fmt_types, cell=md_cell)
+    env.filters.update(name=fmt_name, date=fmt_date, month=fmt_month, links=fmt_links, scale=fmt_scale, types=fmt_types, cell=md_cell)
     return env.get_template(template).render(**context)
 
 

@@ -23,7 +23,11 @@
 <summary><code>{{ group.type }}</code>（{{ group.entries | length }}）</summary>
 
 {% if group.entries %}
-{% for e in group.entries %}{{ e | name }}{% if not loop.last %} · {% endif %}{% endfor %}
+| 名称 | 日期 | 链接 | 规模 | 可复现等级 |
+| --- | --- | --- | --- | --- |
+{% for e in group.entries %}
+| {{ e | name }} | {{ e | date }} | {{ e | links }} | {{ e | scale }} | `{{ e.repro_level }}` |
+{% endfor %}
 
 {% else %}
 _暂无条目。_
@@ -33,14 +37,18 @@ _暂无条目。_
 
 ## 全部条目
 
-按发布时间从新到旧排列。点名称查看完整字段与出处。
+按年份分组，从新到旧排列。点名称查看完整字段与出处。
 
-| 名称 | 日期 | 类型 | 链接 | 规模 | 可复现等级 |
+{% for y in by_year %}
+### {{ y.year }}（{{ y.entries | length }}）
+
+| 名称 | 月份 | 类型 | 链接 | 规模 | 可复现等级 |
 | --- | --- | --- | --- | --- | --- |
-{% for e in entries %}
-| {{ e | name }} | {{ e.release_date or "—" }} | {{ e | types }} | {{ e | links }} | {{ e | scale }} | `{{ e.repro_level }}` |
+{% for e in y.entries %}
+| {{ e | name }} | {{ e | month }} | {{ e | types }} | {{ e | links }} | {{ e | scale }} | `{{ e.repro_level }}` |
 {% endfor %}
 
+{% endfor %}
 ### 可复现等级
 
 | 等级 | 含义 |

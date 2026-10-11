@@ -40,7 +40,11 @@ Single-input long-context tests (e.g. RULER, NIAH, LongBench) are not memory ben
 <summary><code>{{ group.type }}</code> ({{ group.entries | length }})</summary>
 
 {% if group.entries %}
-{% for e in group.entries %}{{ e | name }}{% if not loop.last %} · {% endif %}{% endfor %}
+| Name | Date | Links | Scale | Repro level |
+| --- | --- | --- | --- | --- |
+{% for e in group.entries %}
+| {{ e | name }} | {{ e | date }} | {{ e | links }} | {{ e | scale }} | `{{ e.repro_level }}` |
+{% endfor %}
 
 {% else %}
 _No entries yet._
@@ -50,14 +54,18 @@ _No entries yet._
 
 ## All entries
 
-Newest first. Click a name to see all fields and their sources.
+Grouped by year, newest first. Click a name to see all fields and their sources.
 
-| Name | Date | Types | Links | Scale | Repro level |
+{% for y in by_year %}
+### {{ y.year }} ({{ y.entries | length }})
+
+| Name | Month | Types | Links | Scale | Repro level |
 | --- | --- | --- | --- | --- | --- |
-{% for e in entries %}
-| {{ e | name }} | {{ e.release_date or "—" }} | {{ e | types }} | {{ e | links }} | {{ e | scale }} | `{{ e.repro_level }}` |
+{% for e in y.entries %}
+| {{ e | name }} | {{ e | month }} | {{ e | types }} | {{ e | links }} | {{ e | scale }} | `{{ e.repro_level }}` |
 {% endfor %}
 
+{% endfor %}
 ### Reproducibility levels
 
 | Level | Meaning |
