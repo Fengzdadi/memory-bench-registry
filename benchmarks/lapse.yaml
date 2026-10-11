@@ -20,7 +20,7 @@ metrics:
 - Paired directional difference
 - Proceed-versus-hedge rate
 - Validity judgment
-judge_model: null
+judge_model: Seed-OSS-36B-Instruct
 repro_level: paper_only
 repro_checked_at: '2026-10-11'
 run_records: []
@@ -38,4 +38,5 @@ sources:
   scale.questions: 'arXiv HTML §4 factorial design: 128 matched user-statement pairs per configuration'
   scale.notes: arXiv HTML §4.1–4.2
   metrics: arXiv HTML §4.3 and §7
+  judge_model: 'arXiv HTML Appendix B.2 https://arxiv.org/html/2609.36457: Seed-OSS-36B-Instruct scores behavior outputs alongside the rule cascade'
   notes: arXiv HTML §1 and §4
