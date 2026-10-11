@@ -8,7 +8,7 @@
 - 现有汇总列表的覆盖缺口核对：[docs/coverage-gaps.md](docs/coverage-gaps.md)
 - 现有汇总列表及其核实状态：[docs/related-lists.md](docs/related-lists.md)
 
-当前共 **200** 条。可复现等级分布：`unverified` 0 · `paper_only` 33 · `data_public` 29 · `official_script` 138 · `smoke_tested` 0 · `full_run` 0
+当前共 **208** 条。可复现等级分布：`unverified` 0 · `paper_only` 37 · `data_public` 31 · `official_script` 140 · `smoke_tested` 0 · `full_run` 0
 
 ## 按记忆类型
 
@@ -86,14 +86,19 @@
 | RUMBA | 2026-07 | `conversational_longterm`, `episodic`, `semantic_knowledge_update`, `memory_security` | [paper](https://arxiv.org/abs/2607.21447) · [code](https://github.com/ai-forever/RUMBA) · [data](https://huggingface.co/datasets/ai-forever/RUMBA) | 85 conv. · 1,543 Q · avg ≈340,000 characters | `official_script` |
 | MemUse | 2026-08 | `conversational_longterm`, `personalization` | [paper](https://arxiv.org/abs/2608.24189) · [code](https://github.com/ryuichi-sumida/memuse) · [data](https://huggingface.co/datasets/RuiSumida/memuse) | 72 conv. · 316 Q · avg ~306 turns | `official_script` |
 | MobileMem | 2026-08 | `conversational_longterm`, `personalization`, `episodic`, `semantic_knowledge_update`, `multimodal` | [paper](https://arxiv.org/abs/2608.13606) · [code](https://github.com/zjunlp/MobileMem) · [data](https://huggingface.co/datasets/zjunlp/MobileMem) | 16 conv. · 7,415 Q · avg 1.72M tokens/user | `official_script` |
+| StateMemBench | 2026-08 | `conversational_longterm`, `semantic_knowledge_update` | [paper](https://arxiv.org/abs/2608.19652) | 234 conv. · 322 Q | `paper_only` |
 | TANGLE | 2026-08 | `personalization`, `conversational_longterm`, `semantic_knowledge_update` | [paper](https://arxiv.org/abs/2608.13921) | 40 conv. · 541 Q · avg ~48K tokens per persona (mean 744 tokens per session) | `paper_only` |
+| UTILMEM | 2026-08 | `conversational_longterm`, `personalization` | [paper](https://arxiv.org/abs/2608.30508) · [code](https://github.com/peijunallin/UtilMem) · [data](https://huggingface.co/datasets/KrisQ/utilmem) | 1,717 conv. · 1,717 Q · avg 120K tokens per instance | `data_public` |
 | CUE-Mem | 2026-09 | `conversational_longterm`, `personalization`, `multimodal` | [paper](https://arxiv.org/abs/2609.32574) · [code](https://github.com/yulinlp/CUE-MEM) · [data](https://huggingface.co/datasets/Kkryptonite/CUE-Mem) | 648 conv. · 2,674 Q | `official_script` |
 | DolphinBench | 2026-09 | `conversational_longterm`, `personalization`, `episodic` | [paper](https://arxiv.org/abs/2609.24971) · [code](https://github.com/mem0ai/dolphinbench) · [data](https://github.com/mem0ai/dolphinbench) | 3 conv. · 600 Q · avg approximately 500k tokens of user messages per persona | `official_script` |
 | LoCoMo-Conv | 2026-09 | `conversational_longterm` | [paper](https://arxiv.org/abs/2609.03467) · [code](https://github.com/MiuLab/LoCoMo-Conv) · [data](https://github.com/MiuLab/LoCoMo-Conv/tree/main/data) | 10 conv. · 6,581 Q | `official_script` |
+| LSREP | 2026-09 | `conversational_longterm`, `semantic_knowledge_update` | [paper](https://arxiv.org/abs/2609.16730) · [code](https://github.com/Deepnar/ice) | 4 conv. · 219 Q | `paper_only` |
 | MemProbe | 2026-09 | `conversational_longterm`, `personalization`, `semantic_knowledge_update` | [paper](https://arxiv.org/abs/2609.30558) · [code](https://github.com/jq-ding/MemProbe) · [data](https://github.com/jq-ding/MemProbe/tree/main/data/suite56) | 56 conv. · 224 Q | `official_script` |
 | PRAGMA | 2026-09 | `conversational_longterm`, `personalization`, `semantic_knowledge_update` | [paper](https://arxiv.org/abs/2609.09664) · [code](https://github.com/yuhyojeong/PRAGMA) · [data](https://huggingface.co/datasets/stellahj/PRAGMA) | 100 conv. · 400 Q · avg approximately 160K conversational tokens per user | `data_public` |
+| TWIST | 2026-09 | `conversational_longterm`, `memory_security` | [paper](https://arxiv.org/abs/2609.28575) · [code](https://github.com/subratpanda/twist-benchmark) · [data](https://github.com/subratpanda/twist-benchmark/tree/main/data) | 161 Q | `official_script` |
 | VoxMem | 2026-09 | `conversational_longterm`, `multimodal`, `semantic_knowledge_update`, `episodic` | [paper](https://arxiv.org/abs/2609.32607) · [code](https://github.com/swagshaw/voxmem) · [data](https://huggingface.co/datasets/AudioMemory/voxmembench) | 3,196 conv. · 3,196 Q · avg 8K–64K audio tokens (4 budgets; 9→66 sessions, 2.5→20.0 min audio per instance) | `official_script` |
 | DyadMem | 2026-10 | `conversational_longterm`, `personalization`, `episodic`, `semantic_knowledge_update` | [paper](https://arxiv.org/abs/2610.03020) | 3,065 conv. · 61,210 Q | `paper_only` |
+| RealCompanion | 2026-10 | `conversational_longterm`, `personalization`, `episodic` | [paper](https://arxiv.org/abs/2610.01780) · [code](https://anonymous.4open.science/r/realcompanion-54CC/) · [data](https://huggingface.co/datasets/Quislab/RealCompanion) | 10 conv. · 3,235 Q | `paper_only` |
 
 ### `personalization`
 
@@ -155,6 +160,7 @@
 | MobileMem | 2026-08 | `conversational_longterm`, `personalization`, `episodic`, `semantic_knowledge_update`, `multimodal` | [paper](https://arxiv.org/abs/2608.13606) · [code](https://github.com/zjunlp/MobileMem) · [data](https://huggingface.co/datasets/zjunlp/MobileMem) | 16 conv. · 7,415 Q · avg 1.72M tokens/user | `official_script` |
 | PAST-Bench | 2026-08 | `procedural_workflow`, `semantic_knowledge_update`, `personalization`, `episodic` | [paper](https://arxiv.org/abs/2608.04003) · [code](https://github.com/Gen-Verse/PAST-Bench) | 26 conv. · 204 Q | `official_script` |
 | TANGLE | 2026-08 | `personalization`, `conversational_longterm`, `semantic_knowledge_update` | [paper](https://arxiv.org/abs/2608.13921) | 40 conv. · 541 Q · avg ~48K tokens per persona (mean 744 tokens per session) | `paper_only` |
+| UTILMEM | 2026-08 | `conversational_longterm`, `personalization` | [paper](https://arxiv.org/abs/2608.30508) · [code](https://github.com/peijunallin/UtilMem) · [data](https://huggingface.co/datasets/KrisQ/utilmem) | 1,717 conv. · 1,717 Q · avg 120K tokens per instance | `data_public` |
 | CUE-Mem | 2026-09 | `conversational_longterm`, `personalization`, `multimodal` | [paper](https://arxiv.org/abs/2609.32574) · [code](https://github.com/yulinlp/CUE-MEM) · [data](https://huggingface.co/datasets/Kkryptonite/CUE-Mem) | 648 conv. · 2,674 Q | `official_script` |
 | DolphinBench | 2026-09 | `conversational_longterm`, `personalization`, `episodic` | [paper](https://arxiv.org/abs/2609.24971) · [code](https://github.com/mem0ai/dolphinbench) · [data](https://github.com/mem0ai/dolphinbench) | 3 conv. · 600 Q · avg approximately 500k tokens of user messages per persona | `official_script` |
 | Lapse | 2026-09 | `personalization`, `semantic_knowledge_update` | [paper](https://arxiv.org/abs/2609.36457) | 128 Q | `paper_only` |
@@ -164,6 +170,7 @@
 | PRAGMA | 2026-09 | `conversational_longterm`, `personalization`, `semantic_knowledge_update` | [paper](https://arxiv.org/abs/2609.09664) · [code](https://github.com/yuhyojeong/PRAGMA) · [data](https://huggingface.co/datasets/stellahj/PRAGMA) | 100 conv. · 400 Q · avg approximately 160K conversational tokens per user | `data_public` |
 | CMSC-E | 2026-10 | `personalization` | [paper](https://arxiv.org/abs/2610.05124) · [code](https://github.com/aishwaryalonarkar/cross-model-memory-canonicalization) · [data](https://github.com/aishwaryalonarkar/cross-model-memory-canonicalization/tree/main/data) | — | `official_script` |
 | DyadMem | 2026-10 | `conversational_longterm`, `personalization`, `episodic`, `semantic_knowledge_update` | [paper](https://arxiv.org/abs/2610.03020) | 3,065 conv. · 61,210 Q | `paper_only` |
+| RealCompanion | 2026-10 | `conversational_longterm`, `personalization`, `episodic` | [paper](https://arxiv.org/abs/2610.01780) · [code](https://anonymous.4open.science/r/realcompanion-54CC/) · [data](https://huggingface.co/datasets/Quislab/RealCompanion) | 10 conv. · 3,235 Q | `paper_only` |
 | ServeLearnBench | 2026-10 | `procedural_workflow`, `semantic_knowledge_update`, `personalization` | [paper](https://arxiv.org/abs/2610.07792) · [code](https://github.com/Infini-AI-Lab/ServeLearnBench) | 3,210 Q | `official_script` |
 
 ### `episodic`
@@ -225,6 +232,7 @@
 | MemTransfer | 2026-09 | `episodic`, `embodied` | [paper](https://arxiv.org/abs/2609.32313) | 100 conv. · 100 Q | `paper_only` |
 | VoxMem | 2026-09 | `conversational_longterm`, `multimodal`, `semantic_knowledge_update`, `episodic` | [paper](https://arxiv.org/abs/2609.32607) · [code](https://github.com/swagshaw/voxmem) · [data](https://huggingface.co/datasets/AudioMemory/voxmembench) | 3,196 conv. · 3,196 Q · avg 8K–64K audio tokens (4 budgets; 9→66 sessions, 2.5→20.0 min audio per instance) | `official_script` |
 | DyadMem | 2026-10 | `conversational_longterm`, `personalization`, `episodic`, `semantic_knowledge_update` | [paper](https://arxiv.org/abs/2610.03020) | 3,065 conv. · 61,210 Q | `paper_only` |
+| RealCompanion | 2026-10 | `conversational_longterm`, `personalization`, `episodic` | [paper](https://arxiv.org/abs/2610.01780) · [code](https://anonymous.4open.science/r/realcompanion-54CC/) · [data](https://huggingface.co/datasets/Quislab/RealCompanion) | 10 conv. · 3,235 Q | `paper_only` |
 
 ### `semantic_knowledge_update`
 
@@ -288,16 +296,20 @@
 | DreamBench-SWE | 2026-08 | `coding_cross_session`, `semantic_knowledge_update`, `procedural_workflow` | [paper](https://arxiv.org/abs/2608.20664) · [code](https://github.com/iroiro147/dreambench-swe) | 60 conv. · 60 Q · avg 3 sessions per sequence | `data_public` |
 | MobileMem | 2026-08 | `conversational_longterm`, `personalization`, `episodic`, `semantic_knowledge_update`, `multimodal` | [paper](https://arxiv.org/abs/2608.13606) · [code](https://github.com/zjunlp/MobileMem) · [data](https://huggingface.co/datasets/zjunlp/MobileMem) | 16 conv. · 7,415 Q · avg 1.72M tokens/user | `official_script` |
 | PAST-Bench | 2026-08 | `procedural_workflow`, `semantic_knowledge_update`, `personalization`, `episodic` | [paper](https://arxiv.org/abs/2608.04003) · [code](https://github.com/Gen-Verse/PAST-Bench) | 26 conv. · 204 Q | `official_script` |
+| StateMemBench | 2026-08 | `conversational_longterm`, `semantic_knowledge_update` | [paper](https://arxiv.org/abs/2608.19652) | 234 conv. · 322 Q | `paper_only` |
 | TANGLE | 2026-08 | `personalization`, `conversational_longterm`, `semantic_knowledge_update` | [paper](https://arxiv.org/abs/2608.13921) | 40 conv. · 541 Q · avg ~48K tokens per persona (mean 744 tokens per session) | `paper_only` |
 | APM-Bench | 2026-09 | `episodic`, `semantic_knowledge_update`, `multimodal` | [paper](https://arxiv.org/abs/2609.37559) · [code](https://github.com/Jianguo-Huang11/APM-Bench) · [data](https://huggingface.co/datasets/Jianguo-Huang11/APM-Bench) | 104 conv. · 2,719 Q · avg 69 minutes of video per trajectory | `paper_only` |
 | Controlled In-Context Memory | 2026-09 | `semantic_knowledge_update` | [paper](https://arxiv.org/abs/2609.38866) | 1,200 conv. · 1,200 Q | `paper_only` |
 | EmbodiedMemory-Bench (EMem-Bench) | 2026-09 | `embodied`, `episodic`, `semantic_knowledge_update`, `multimodal` | [paper](https://arxiv.org/abs/2609.28236) · [code](https://github.com/ZJU-OmniAI/Embodied-Omni/tree/main/embodied_memory) · [data](https://huggingface.co/datasets/lzLiang/EmbodiedMemoryBench) | 2,554 conv. · 2,554 Q · avg ~72-113 history steps per episode (family means) | `official_script` |
 | EvoPathBench | 2026-09 | `procedural_workflow`, `semantic_knowledge_update` | [paper](https://arxiv.org/abs/2609.24663) · [code](https://github.com/HQ-Lin/EvoPathBench) | 1,800 conv. · 3,600 Q · avg 5 episodes per stream; 24 market steps / 3 decisions per episode | `official_script` |
+| Impact Is Not Invalidation | 2026-09 | `semantic_knowledge_update` | [paper](https://arxiv.org/abs/2609.25130) | 10,369 Q | `paper_only` |
 | Lapse | 2026-09 | `personalization`, `semantic_knowledge_update` | [paper](https://arxiv.org/abs/2609.36457) | 128 Q | `paper_only` |
+| LSREP | 2026-09 | `conversational_longterm`, `semantic_knowledge_update` | [paper](https://arxiv.org/abs/2609.16730) · [code](https://github.com/Deepnar/ice) | 4 conv. · 219 Q | `paper_only` |
 | MemProbe | 2026-09 | `conversational_longterm`, `personalization`, `semantic_knowledge_update` | [paper](https://arxiv.org/abs/2609.30558) · [code](https://github.com/jq-ding/MemProbe) · [data](https://github.com/jq-ding/MemProbe/tree/main/data/suite56) | 56 conv. · 224 Q | `official_script` |
 | MemRiskBench | 2026-09 | `semantic_knowledge_update`, `memory_security` | [paper](https://arxiv.org/abs/2609.14976) · [code](https://github.com/fuxue-mingzhu/MemRiskBench) · [data](https://github.com/fuxue-mingzhu/MemRiskBench) | 120 conv. · 120 Q | `official_script` |
 | PRAGMA | 2026-09 | `conversational_longterm`, `personalization`, `semantic_knowledge_update` | [paper](https://arxiv.org/abs/2609.09664) · [code](https://github.com/yuhyojeong/PRAGMA) · [data](https://huggingface.co/datasets/stellahj/PRAGMA) | 100 conv. · 400 Q · avg approximately 160K conversational tokens per user | `data_public` |
 | VoxMem | 2026-09 | `conversational_longterm`, `multimodal`, `semantic_knowledge_update`, `episodic` | [paper](https://arxiv.org/abs/2609.32607) · [code](https://github.com/swagshaw/voxmem) · [data](https://huggingface.co/datasets/AudioMemory/voxmembench) | 3,196 conv. · 3,196 Q · avg 8K–64K audio tokens (4 budgets; 9→66 sessions, 2.5→20.0 min audio per instance) | `official_script` |
+| What Should an Agent Remember? | 2026-09 | `semantic_knowledge_update` | [paper](https://arxiv.org/abs/2610.00366) · [code](https://github.com/TheClassicTechno/MemoryLLMAgentProject) | 300 conv. · 600 Q | `official_script` |
 | DyadMem | 2026-10 | `conversational_longterm`, `personalization`, `episodic`, `semantic_knowledge_update` | [paper](https://arxiv.org/abs/2610.03020) | 3,065 conv. · 61,210 Q | `paper_only` |
 | Knowing the Store | 2026-10 | `semantic_knowledge_update` | [paper](https://arxiv.org/abs/2610.04794) · [code](https://github.com/ansh348/knowing-the-store) · [data](https://github.com/ansh348/knowing-the-store/tree/main/artifact/supplementary/data) | 444 Q | `official_script` |
 | ServeLearnBench | 2026-10 | `procedural_workflow`, `semantic_knowledge_update`, `personalization` | [paper](https://arxiv.org/abs/2610.07792) · [code](https://github.com/Infini-AI-Lab/ServeLearnBench) | 3,210 Q | `official_script` |
@@ -457,6 +469,7 @@
 | EmbodiedMemory-Bench (EMem-Bench) | 2026-09 | `embodied`, `episodic`, `semantic_knowledge_update`, `multimodal` | [paper](https://arxiv.org/abs/2609.28236) · [code](https://github.com/ZJU-OmniAI/Embodied-Omni/tree/main/embodied_memory) · [data](https://huggingface.co/datasets/lzLiang/EmbodiedMemoryBench) | 2,554 conv. · 2,554 Q · avg ~72-113 history steps per episode (family means) | `official_script` |
 | ICM-Bench | 2026-09 | `episodic`, `multimodal` | [paper](https://arxiv.org/abs/2609.04438) · [code](https://github.com/Shidu-Ren/ICM-Bench) · [data](https://huggingface.co/datasets/ryanren0330/ICM-Bench) | 839 conv. · 1,217 Q | `official_script` |
 | IDUnlearn-Bench | 2026-09 | `parametric`, `memory_security`, `multimodal` | [paper](https://arxiv.org/abs/2609.33481) · [code](https://github.com/CyberChangAn/IDUnlearn-Bench) · [data](https://huggingface.co/datasets/CyberChangAn/IDUnlearn-Bench) | 4,860 Q | `data_public` |
+| Video2Skill | 2026-09 | `multimodal` | [paper](https://arxiv.org/abs/2609.36691) · [data](https://huggingface.co/datasets/Sterzhang/video2skill-bench) | 172 conv. · 1,671 Q | `data_public` |
 | VoxMem | 2026-09 | `conversational_longterm`, `multimodal`, `semantic_knowledge_update`, `episodic` | [paper](https://arxiv.org/abs/2609.32607) · [code](https://github.com/swagshaw/voxmem) · [data](https://huggingface.co/datasets/AudioMemory/voxmembench) | 3,196 conv. · 3,196 Q · avg 8K–64K audio tokens (4 budgets; 9→66 sessions, 2.5→20.0 min audio per instance) | `official_script` |
 
 ### `embodied`
@@ -497,6 +510,7 @@
 | Cross-lingual Unlearning Tensor | 2026-09 | `parametric`, `memory_security` | [paper](https://arxiv.org/abs/2609.40286) · [code](https://github.com/tskow99/crosslingual-unlearning-tensor) | 4,000 Q | `paper_only` |
 | IDUnlearn-Bench | 2026-09 | `parametric`, `memory_security`, `multimodal` | [paper](https://arxiv.org/abs/2609.33481) · [code](https://github.com/CyberChangAn/IDUnlearn-Bench) · [data](https://huggingface.co/datasets/CyberChangAn/IDUnlearn-Bench) | 4,860 Q | `data_public` |
 | MemRiskBench | 2026-09 | `semantic_knowledge_update`, `memory_security` | [paper](https://arxiv.org/abs/2609.14976) · [code](https://github.com/fuxue-mingzhu/MemRiskBench) · [data](https://github.com/fuxue-mingzhu/MemRiskBench) | 120 conv. · 120 Q | `official_script` |
+| TWIST | 2026-09 | `conversational_longterm`, `memory_security` | [paper](https://arxiv.org/abs/2609.28575) · [code](https://github.com/subratpanda/twist-benchmark) · [data](https://github.com/subratpanda/twist-benchmark/tree/main/data) | 161 Q | `official_script` |
 
 ## 时间线
 
@@ -692,7 +706,9 @@
 | PAST-Bench | 2026-08 | `procedural_workflow`, `semantic_knowledge_update`, `personalization`, `episodic` | [paper](https://arxiv.org/abs/2608.04003) · [code](https://github.com/Gen-Verse/PAST-Bench) | 26 conv. · 204 Q | `official_script` |
 | PATH-Bench | 2026-08 | `procedural_workflow` | [paper](https://arxiv.org/abs/2608.01149) | 120 Q · avg 100 intervening tasks per sequence (plus 5-task warm-up and repeated probes) | `paper_only` |
 | S3Gym | 2026-08 | `procedural_workflow`, `parametric` | [paper](https://arxiv.org/abs/2608.31100) | — | `paper_only` |
+| StateMemBench | 2026-08 | `conversational_longterm`, `semantic_knowledge_update` | [paper](https://arxiv.org/abs/2608.19652) | 234 conv. · 322 Q | `paper_only` |
 | TANGLE | 2026-08 | `personalization`, `conversational_longterm`, `semantic_knowledge_update` | [paper](https://arxiv.org/abs/2608.13921) | 40 conv. · 541 Q · avg ~48K tokens per persona (mean 744 tokens per session) | `paper_only` |
+| UTILMEM | 2026-08 | `conversational_longterm`, `personalization` | [paper](https://arxiv.org/abs/2608.30508) · [code](https://github.com/peijunallin/UtilMem) · [data](https://huggingface.co/datasets/KrisQ/utilmem) | 1,717 conv. · 1,717 Q · avg 120K tokens per instance | `data_public` |
 | APM-Bench | 2026-09 | `episodic`, `semantic_knowledge_update`, `multimodal` | [paper](https://arxiv.org/abs/2609.37559) · [code](https://github.com/Jianguo-Huang11/APM-Bench) · [data](https://huggingface.co/datasets/Jianguo-Huang11/APM-Bench) | 104 conv. · 2,719 Q · avg 69 minutes of video per trajectory | `paper_only` |
 | CoMemBench | 2026-09 | `multi_agent_group` | [paper](https://arxiv.org/abs/2609.32192) | 800 Q | `paper_only` |
 | ConsolidationBench | 2026-09 | `procedural_workflow`, `memory_security` | [paper](https://arxiv.org/abs/2609.33013) | — | `paper_only` |
@@ -708,8 +724,10 @@
 | EvoPathBench | 2026-09 | `procedural_workflow`, `semantic_knowledge_update` | [paper](https://arxiv.org/abs/2609.24663) · [code](https://github.com/HQ-Lin/EvoPathBench) | 1,800 conv. · 3,600 Q · avg 5 episodes per stream; 24 market steps / 3 decisions per episode | `official_script` |
 | ICM-Bench | 2026-09 | `episodic`, `multimodal` | [paper](https://arxiv.org/abs/2609.04438) · [code](https://github.com/Shidu-Ren/ICM-Bench) · [data](https://huggingface.co/datasets/ryanren0330/ICM-Bench) | 839 conv. · 1,217 Q | `official_script` |
 | IDUnlearn-Bench | 2026-09 | `parametric`, `memory_security`, `multimodal` | [paper](https://arxiv.org/abs/2609.33481) · [code](https://github.com/CyberChangAn/IDUnlearn-Bench) · [data](https://huggingface.co/datasets/CyberChangAn/IDUnlearn-Bench) | 4,860 Q | `data_public` |
+| Impact Is Not Invalidation | 2026-09 | `semantic_knowledge_update` | [paper](https://arxiv.org/abs/2609.25130) | 10,369 Q | `paper_only` |
 | Lapse | 2026-09 | `personalization`, `semantic_knowledge_update` | [paper](https://arxiv.org/abs/2609.36457) | 128 Q | `paper_only` |
 | LoCoMo-Conv | 2026-09 | `conversational_longterm` | [paper](https://arxiv.org/abs/2609.03467) · [code](https://github.com/MiuLab/LoCoMo-Conv) · [data](https://github.com/MiuLab/LoCoMo-Conv/tree/main/data) | 10 conv. · 6,581 Q | `official_script` |
+| LSREP | 2026-09 | `conversational_longterm`, `semantic_knowledge_update` | [paper](https://arxiv.org/abs/2609.16730) · [code](https://github.com/Deepnar/ice) | 4 conv. · 219 Q | `paper_only` |
 | MemCalib | 2026-09 | `personalization` | [paper](https://arxiv.org/abs/2609.24259) · [code](https://github.com/Quark-Medical/memcalib) · [data](https://huggingface.co/datasets/ZiLaotou/MemCalib) | 1,500 Q | `data_public` |
 | MemoReason | 2026-09 | `parametric` | [paper](https://arxiv.org/abs/2609.35312) · [code](https://github.com/Zineddine-Tighidet/MemoReason) · [data](https://huggingface.co/datasets/zineddine/MemoReason) | 1,200 Q · avg 2,974 characters per factual document | `official_script` |
 | MemProbe | 2026-09 | `conversational_longterm`, `personalization`, `semantic_knowledge_update` | [paper](https://arxiv.org/abs/2609.30558) · [code](https://github.com/jq-ding/MemProbe) · [data](https://github.com/jq-ding/MemProbe/tree/main/data/suite56) | 56 conv. · 224 Q | `official_script` |
@@ -717,14 +735,18 @@
 | MemTransfer | 2026-09 | `episodic`, `embodied` | [paper](https://arxiv.org/abs/2609.32313) | 100 conv. · 100 Q | `paper_only` |
 | PairPref | 2026-09 | `personalization` | [paper](https://arxiv.org/abs/2609.34526) | 1,227 Q | `paper_only` |
 | PRAGMA | 2026-09 | `conversational_longterm`, `personalization`, `semantic_knowledge_update` | [paper](https://arxiv.org/abs/2609.09664) · [code](https://github.com/yuhyojeong/PRAGMA) · [data](https://huggingface.co/datasets/stellahj/PRAGMA) | 100 conv. · 400 Q · avg approximately 160K conversational tokens per user | `data_public` |
+| TWIST | 2026-09 | `conversational_longterm`, `memory_security` | [paper](https://arxiv.org/abs/2609.28575) · [code](https://github.com/subratpanda/twist-benchmark) · [data](https://github.com/subratpanda/twist-benchmark/tree/main/data) | 161 Q | `official_script` |
 | VibeMemBench | 2026-09 | `coding_cross_session`, `procedural_workflow` | [paper](https://arxiv.org/abs/2609.23570) · [code](https://github.com/AlibabaResearch/DAMO-ConvAI/tree/main/VibeMemBench) | 3,634 conv. · 111 Q | `paper_only` |
+| Video2Skill | 2026-09 | `multimodal` | [paper](https://arxiv.org/abs/2609.36691) · [data](https://huggingface.co/datasets/Sterzhang/video2skill-bench) | 172 conv. · 1,671 Q | `data_public` |
 | VoxMem | 2026-09 | `conversational_longterm`, `multimodal`, `semantic_knowledge_update`, `episodic` | [paper](https://arxiv.org/abs/2609.32607) · [code](https://github.com/swagshaw/voxmem) · [data](https://huggingface.co/datasets/AudioMemory/voxmembench) | 3,196 conv. · 3,196 Q · avg 8K–64K audio tokens (4 budgets; 9→66 sessions, 2.5→20.0 min audio per instance) | `official_script` |
+| What Should an Agent Remember? | 2026-09 | `semantic_knowledge_update` | [paper](https://arxiv.org/abs/2610.00366) · [code](https://github.com/TheClassicTechno/MemoryLLMAgentProject) | 300 conv. · 600 Q | `official_script` |
 | CMSC-E | 2026-10 | `personalization` | [paper](https://arxiv.org/abs/2610.05124) · [code](https://github.com/aishwaryalonarkar/cross-model-memory-canonicalization) · [data](https://github.com/aishwaryalonarkar/cross-model-memory-canonicalization/tree/main/data) | — | `official_script` |
 | DyadMem | 2026-10 | `conversational_longterm`, `personalization`, `episodic`, `semantic_knowledge_update` | [paper](https://arxiv.org/abs/2610.03020) | 3,065 conv. · 61,210 Q | `paper_only` |
 | Knowing the Store | 2026-10 | `semantic_knowledge_update` | [paper](https://arxiv.org/abs/2610.04794) · [code](https://github.com/ansh348/knowing-the-store) · [data](https://github.com/ansh348/knowing-the-store/tree/main/artifact/supplementary/data) | 444 Q | `official_script` |
 | Learn2Play Bench | 2026-10 | `procedural_workflow` | [paper](https://arxiv.org/abs/2610.08215) · [code](https://github.com/liushiliushi/Learn2Play-Bench) | 20 Q | `data_public` |
 | MetaKernelBench | 2026-10 | `procedural_workflow`, `coding_cross_session` | [paper](https://arxiv.org/abs/2610.05014) · [code](https://github.com/YIGE24/MetaKernelBench) | 74 Q | `official_script` |
 | MLE-InsightBench | 2026-10 | `procedural_workflow` | [paper](https://arxiv.org/abs/2610.04927) | 12 Q | `paper_only` |
+| RealCompanion | 2026-10 | `conversational_longterm`, `personalization`, `episodic` | [paper](https://arxiv.org/abs/2610.01780) · [code](https://anonymous.4open.science/r/realcompanion-54CC/) · [data](https://huggingface.co/datasets/Quislab/RealCompanion) | 10 conv. · 3,235 Q | `paper_only` |
 | ServeLearnBench | 2026-10 | `procedural_workflow`, `semantic_knowledge_update`, `personalization` | [paper](https://arxiv.org/abs/2610.07792) · [code](https://github.com/Infini-AI-Lab/ServeLearnBench) | 3,210 Q | `official_script` |
 
 ## 贡献

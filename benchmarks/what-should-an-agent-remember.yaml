@@ -22,7 +22,7 @@ judge_model: null
 repro_level: official_script
 repro_checked_at: '2026-10-11'
 run_records: []
-notes: 'Flagged: each case tests retention and retrieval from ten short slot-value statements in one episode. It has no dialogue
+notes: 'Each case tests retention and retrieval from ten short slot-value statements in one episode. It has no dialogue
   history, specific event, fact update, or cross-task skill reuse under the repository taxonomy.'
 sources:
   name: arXiv abstract/title https://arxiv.org/abs/2610.00366; paper https://arxiv.org/html/2610.00366
@@ -37,4 +37,5 @@ sources:
   scale.questions: 'arXiv HTML §3: two queries per episode'
   scale.notes: arXiv HTML §3
   metrics: arXiv HTML §3–4
-  notes: arXiv HTML §3 environment and metrics; docs/fields.md memory_types and single-input boundary
+  notes: arXiv HTML §3 environment and metrics; docs/fields.md memory_types and single-input boundary. Review 2026-10-11
+    confirmed an online streaming-retention benchmark with 300 episodes; the short stream is not a single long-input test.

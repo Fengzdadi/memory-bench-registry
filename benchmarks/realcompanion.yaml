@@ -24,7 +24,12 @@ metrics:
 - Evidence coverage
 - Memory-need AUROC
 - Persona F1
-judge_model: null
+- Profile F1
+- Answer accuracy
+- Misfire rate
+- Attribution rate
+- Locus accuracy
+judge_model: gemini-3.6-flash
 repro_level: paper_only
 repro_checked_at: '2026-10-11'
 run_records: []
@@ -46,5 +51,7 @@ sources:
   scale.conversations: 'arXiv HTML abstract: ten real user–AI companion relationships'
   scale.questions: 'arXiv HTML dataset table: 3,235 scoreable QA items'
   scale.notes: arXiv HTML abstract, dataset table and Appendix C
-  metrics: arXiv HTML §5 Metrics and Appendix A.2
+  metrics: arXiv HTML §5 Metrics and Appendix A.2; review 2026-10-11 checked §5 Table 3, Appendix A.2 Table 7,
+    and Appendix F.7 Table 41 for profile F1, question answer accuracy, misfire, attribution and locus scores
+  judge_model: 'arXiv HTML Appendix E.6 Table 31 https://arxiv.org/html/2610.01780: response judge is gemini-3.6-flash'
   notes: official HF API gated flag and arXiv HTML dataset statistics, checked 2026-10-11

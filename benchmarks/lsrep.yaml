@@ -19,12 +19,12 @@ metrics:
 - Rubric score (1–5)
 - Paired score difference
 - Token cost
-judge_model: null
+judge_model: gemma-4-12B-AWQ (LSREP); muse-spark-1.3-contributor (LongMemEval diagnostic)
 repro_level: paper_only
 repro_checked_at: '2026-10-11'
 run_records: []
-notes: 'Flagged: LSREP is introduced as a system-independent evaluation protocol, instantiated only on one user’s private
-  histories. No standalone public benchmark examples or answer key are supplied.'
+notes: 'LSREP is introduced as a system-independent evaluation protocol, instantiated on one user’s private histories.
+  The 219 probes and answer key are not public.'
 sources:
   name: arXiv abstract/title https://arxiv.org/abs/2609.16730; paper https://arxiv.org/html/2609.16730
   release_date: 'arXiv submission history https://arxiv.org/abs/2609.16730: v1 submitted 2026-09-15'
@@ -38,4 +38,6 @@ sources:
   scale.questions: 'arXiv HTML §6.1 Table 3: 219 distinct probes, repeated at checkpoints'
   scale.notes: arXiv HTML §6.1 Table 3
   metrics: arXiv HTML §6.3 and Table 4
-  notes: arXiv HTML abstract, §1 contributions and §6.1 private-data description
+  judge_model: 'arXiv HTML §6.2 and §6.4 https://arxiv.org/html/2609.16730: LSREP private replay uses gemma-4-12B-AWQ; separate matched LongMemEval diagnostic uses muse-spark-1.3-contributor'
+  notes: arXiv HTML abstract, §1 contributions and §6.1 private-data description. Review 2026-10-11 confirmed four
+    instantiated histories and 219 probes in §6.1; private data limits reproducibility but does not negate a benchmark.

@@ -3,7 +3,7 @@ slug: impact-is-not-invalidation
 release_date: 2026-09
 venue: arXiv preprint
 memory_types:
-- coding_cross_session
+- semantic_knowledge_update
 links:
   paper: https://arxiv.org/abs/2609.25130
   code: null
@@ -21,17 +21,19 @@ judge_model: null
 repro_level: paper_only
 repro_checked_at: '2026-10-11'
 run_records: []
-notes: 'Flagged: the evaluation supplies a repository claim and commit diff in one input. It does not exercise retained coding
-  information across independent agent sessions, as required by docs/fields.md.'
+notes: 'The evaluation supplies a repository claim and commit diff in one input. It tests whether a stored claim should be
+  invalidated after a repository fact changes; no independent agent sessions are exercised.'
 sources:
   name: arXiv abstract/title https://arxiv.org/abs/2609.25130; paper https://arxiv.org/html/2609.25130
   release_date: 'arXiv submission history https://arxiv.org/abs/2609.25130: v1 submitted 2026-09-20'
   venue: 'arXiv abstract page https://arxiv.org/abs/2609.25130: no verified journal reference or conference publication'
   memory_types: 'arXiv HTML §III: repository claims before/after a commit; candidate tag only, as no independent agent session
-    or persistent memory is evaluated'
+    or persistent memory is evaluated. Review 2026-10-11: §II–III https://arxiv.org/html/2609.25130 frames claim-relative invalidation
+    as deciding when an external coding-memory claim becomes stale; classified as semantic_knowledge_update rather than coding_cross_session.'
   links.paper: arXiv abstract page https://arxiv.org/abs/2609.25130
   repro_level: arXiv paper read 2026-10-11; no official downloadable artifact URL identified in the paper
   scale.questions: 'arXiv HTML §III: 10,369 mined claims from 23 Python libraries'
   scale.notes: arXiv HTML §III and §VII
   metrics: arXiv HTML evaluation and discussion of coverage
-  notes: arXiv HTML §III method and §VII artifact; docs/fields.md coding_cross_session criterion
+  notes: arXiv HTML §III method and §VII artifact; docs/fields.md coding_cross_session criterion. Review 2026-10-11
+    cites §II–III claim-relative memory invalidation.
