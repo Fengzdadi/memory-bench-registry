@@ -15,6 +15,8 @@
 - 复核中新增的 flagged（2026-10-11）：
   - bad-memory：论文描述的是安全评测框架，作者没有称其为 benchmark，也没有题目条目。
   - eccbench：核心任务是判断一个片段是否出现在单次输入的长流中，属于 docs/fields.md 排除的单次长输入测试（阶段 1 也标为 long_context_single_input）。
+  - recon：论文 §3.1 规定系统只看到一次提供的 50K–100K token 案例文件并据此答题，属于 docs/fields.md 排除的单次长输入测试。
+  - scale-qa：官方 benchmark_protocol.md 明确称为 Single-session Cross-domain Agentic Long-context Evaluation，运行时把条目和噪声打包成单个长线程，属于 docs/fields.md 排除的单次长输入测试。
   - 31 个还没有填写：mobilemem statemembench utilmem apm-bench capmem cicm comembench cpb cue-mem dolphinbench icm-bench
     impact-is-not-invalidation lapse locomo-conv lsrep memcalib memoreason memprobe-2 memriskbench memtransfer pairpref pragma
     simlife-bp twist video2skill what-should-an-agent-remember cmsc-e dyadmem ember-bench knowing-the-store realcompanion
