@@ -3,7 +3,6 @@ slug: memtrapbench
 release_date: 2026-08
 venue: arXiv preprint
 memory_types:
-- conversational_longterm
 - procedural_workflow
 - memory_security
 links:
@@ -30,7 +29,7 @@ sources:
   name: 'arXiv API title ''MemTrapBench: Benchmarking Cognitive Traps in LLM Memory Use'' (2608.20202)'
   release_date: 'arXiv API: 2608.20202v1 published 2026-08-20'
   venue: 'arXiv API: no journal_ref, comment ''Work in progress''; repo README BibTeX cites ''arXiv preprint arXiv:2608.20202'''
-  memory_types: 'paper §2.2 (arXiv v1 HTML): 18–40-turn dialogues plant prior strategies/feedback/rules that are reused on a new final task (Cognitive Bias, Task Boundary, Trauma = reasoning fixation from earlier task strategies); evaluated with conversational memory frameworks LightMem/MemOS/SimpleMem/EverMemOS (§3.1); Safety subset plants false premises (repo file memtrapbench/safety/poison_200.json with poisoned_fact/poison_type fields)'
+  memory_types: 'paper §2.2 (arXiv v1 HTML): 18–40-turn dialogues plant prior strategies/feedback/rules that are reused on a new final task (Cognitive Bias, Task Boundary, Trauma = reasoning fixation from earlier task strategies); evaluated with conversational memory frameworks LightMem/MemOS/SimpleMem/EverMemOS (§3.1); Safety subset plants false premises (repo file memtrapbench/safety/poison_200.json with poisoned_fact/poison_type fields). Recheck 2026-10-11: §2.2 says each instance is one 18–40-turn generated dialogue ending in a query, not a long multi-session chat history under docs/fields.md; conversational_longterm was removed.'
   links.paper: arXiv abs page 2608.20202
   links.code: 'paper footnote 1: ''Data and code will be available at https://github.com/zjunlp/MemTrapBench''; repo by zjunlp (authors'' lab)'
   links.data: data shipped in repo under memtrapbench/; HF API dataset search for 'MemTrap' returned no results (checked 2026-10-10)

@@ -3,7 +3,6 @@ slug: mist
 release_date: 2026-06
 venue: arXiv preprint
 memory_types:
-- conversational_longterm
 - personalization
 links:
   paper: https://arxiv.org/abs/2606.10949
@@ -28,7 +27,7 @@ sources:
   name: 'arXiv v2 HTML Section 1: ''Memory Influence on Sycophancy Tests (MIST)'''
   release_date: 'arXiv API: 2606.10949v1 published 2026-06-09 (v2 updated 2026-08-24)'
   venue: arXiv API comment 'Under submission; preprint'; no journal_ref; no venue in paper
-  memory_types: 'Paper Sections 2-3 (arXiv v2): synthetic chat histories with user misconceptions are ingested into memory systems (Mem0, MemOS, Zep). The evaluation then tests in a later session whether stored user-specific beliefs sway answers. This is a multi-session setting with personalization to user beliefs.'
+  memory_types: 'Paper Sections 2-3 (arXiv v2): synthetic chat histories with user misconceptions are ingested into memory systems (Mem0, MemOS, Zep). The evaluation then tests in a later session whether stored user-specific beliefs sway answers. This is a multi-session setting with personalization to user beliefs. Recheck 2026-10-11: §3.1 limits each synthetic history to four turns per speaker; docs/fields.md requires a long multi-session chat history for conversational_longterm, so that type was removed.'
   links.paper: arXiv abs page 2606.10949
   links.code: 'null: paper (v2 App. C) promises the codebase on publication. Nothing found on 2026-10-10 in GitHub search, the writer GitHub org, or author account axelmagn.'
   links.data: 'null: no dataset release found on 2026-10-10 on Hugging Face (Writer org, searches for MIST and sycophancy); paper links only third-party LoCoMo-MC10'
