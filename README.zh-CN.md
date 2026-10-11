@@ -3,6 +3,8 @@
 
 [English](README.md) | **中文**
 
+**[在线浏览 →](https://fengzdadi.github.io/memory-bench-registry/)** 可按记忆类型、可复现等级、年份筛选和搜索。
+
 结构化的 agent memory benchmark 登记库：每个 benchmark 一个 YAML（`benchmarks/<slug>.yaml`），本 README 由脚本生成。
 所有字段都必须能在论文或官方仓库里找到出处（记录在各条目的 `sources` 中），找不到即为 `null`。
 
@@ -793,6 +795,6 @@
 ## 许可证
 
 - 数据（`benchmarks/`、`docs/`、`schema/` 及 README）：[CC BY 4.0](LICENSE-DATA)
-- 代码（`scripts/`、`templates/`、`pending/tools/`）：[MIT](LICENSE)
+- 代码（`scripts/`、`templates/`、`site/`、`pending/tools/`）：[MIT](LICENSE)
 
 条目中链接的论文、代码和数据集各有其许可证，不受本仓库许可证约束；使用前请查看原始来源。

@@ -18,3 +18,5 @@ jobs:
         run: python scripts/validate.py
       - name: Check README.md is in sync with the data
         run: python scripts/build_readme.py --check
+      - name: Build the website
+        run: python scripts/build_site.py

@@ -1,0 +1,602 @@
+<!doctype html>
+<!-- Source of the website. scripts/build_site.py injects the registry data into the JSON block near the end and writes the result to _site/. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>memory-bench-registry</title>
+<meta name="description" content="A registry of agent memory benchmarks: one YAML file per benchmark, every value sourced to the paper or the official repository.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="memory-bench-registry">
+<meta property="og:description" content="A registry of agent memory benchmarks: one YAML file per benchmark, every value sourced to the paper or the official repository.">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%231b1b1b'/%3E%3Ctext x='16' y='23' font-family='monospace' font-size='20' font-weight='700' text-anchor='middle' fill='white'%3Em%3C/text%3E%3C/svg%3E">
+<script>
+  // Apply a saved theme before first paint so there is no flash.
+  try { const t = localStorage.getItem('theme'); if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t; } catch (e) {}
+</script>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg:    light-dark(#ffffff, #121212);
+    --ink:   light-dark(#1b1b1b, #e8e8e8);
+    --ink-2: light-dark(#4d4d4d, #b8b8b8);
+    --ink-3: light-dark(#6e6e6e, #8f8f8f);
+    --line:  light-dark(#e2e2e2, #2a2a2a);
+    --line-2:light-dark(#b9b9b9, #4a4a4a);
+    --link:  light-dark(#0b4fb3, #7ab0f5);
+    --wash:  light-dark(#f5f5f3, #1b1b1b);
+    --sans: system-ui, -apple-system, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+    --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  :root[data-theme="light"] { color-scheme: light; }
+  :root[data-theme="dark"]  { color-scheme: dark; }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 14.5px/1.55 var(--sans); }
+  body.lock { overflow: hidden; }
+  a { color: var(--link); }
+  button { font: inherit; color: inherit; cursor: pointer; }
+  :focus-visible { outline: 2px solid var(--link); outline-offset: 2px; }
+  [hidden] { display: none !important; }
+  code, .mono { font-family: var(--mono); font-size: .9em; }
+  .wrap { max-width: 1280px; margin: 0 auto; padding-inline: 24px; }
+  .muted { color: var(--ink-3); }
+  .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+  /* ---------- header ---------- */
+  .top .wrap { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 4px 20px; padding-top: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--line-2); }
+  .wordmark { font: 600 16px var(--mono); color: var(--ink); text-decoration: none; }
+  .top nav { display: flex; flex-wrap: wrap; gap: 2px 16px; font-size: 14px; }
+  .top nav button { padding: 0; border: 0; background: none; color: var(--link); text-decoration: underline; }
+  .top nav button[aria-pressed="true"] { color: var(--ink); text-decoration: none; font-weight: 600; }
+
+  .intro { max-width: 78ch; margin: 22px 0 18px; color: var(--ink-2); }
+  .intro b { color: var(--ink); font-weight: 600; }
+
+  /* ---------- filters: a form-like table of controls ---------- */
+  .facet { display: grid; grid-template-columns: 8.5rem minmax(0, 1fr); gap: 0 16px; padding: 8px 0; border-top: 1px solid var(--line); }
+  #filters .facet:last-child { border-bottom: 1px solid var(--line); }
+  .facet-name { padding-top: 3px; color: var(--ink-2); font-size: 13.5px; line-height: 1.3; }
+  .facet-name small { display: block; margin-top: 2px; color: var(--ink-3); font-size: 12px; }
+  .facet-items { display: grid; grid-template-columns: repeat(auto-fill, var(--col, 12rem)); gap: 1px 12px; align-content: start; }
+  .facet-items[data-group="types"], .facet-items[data-group="levels"] { --col: 15.5rem; }
+  .facet-items[data-group="years"] { --col: 6.5rem; }
+  .facet-items[data-group="flags"] { --col: 13rem; }
+  .tog { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; width: 100%; padding: 3px 8px; border: 0; border-radius: 2px; background: none; text-align: left; font: 12.5px/1.6 var(--mono); }
+  .tog.plain { font-family: var(--sans); font-size: 13.5px; }
+  .tog:hover { background: var(--wash); }
+  .tog:focus-visible { outline-offset: -2px; }
+  .tog .n { color: var(--ink-3); font-variant-numeric: tabular-nums; }
+  .tog.zero { opacity: .45; }
+  .tog[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+  .tog[aria-pressed="true"] .n { color: inherit; opacity: .7; }
+  .filters-summary { display: none; padding: 6px 0; color: var(--link); text-decoration: underline; cursor: pointer; }
+  .def-toggle { margin-top: 4px; padding: 0; border: 0; background: none; color: var(--link); font-size: 12px; text-decoration: underline; cursor: pointer; }
+  .facet-defs { grid-column: 2; margin-top: 8px; padding-top: 6px; border-top: 1px dashed var(--line-2); }
+  .facet-defs dl { margin: 0; columns: 2 22rem; column-gap: 40px; }
+  #defs-levels dl { columns: 1; }
+  .facet-defs dl > div { break-inside: avoid; padding: 4px 0; }
+  .facet-defs dt { font: 12.5px var(--mono); }
+  .facet-defs dd { margin: 0; color: var(--ink-2); font-size: 13px; }
+  .facet-defs p { margin: 8px 0 2px; color: var(--ink-3); font-size: 12.5px; }
+  .search-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 16px; }
+  .search-row input { flex: 1 1 280px; max-width: 520px; height: 34px; padding: 0 10px; border: 1px solid var(--line-2); border-radius: 2px; background: var(--bg); color: var(--ink); font: inherit; }
+  .search-row input::placeholder { color: var(--ink-3); }
+  .search-row input:focus-visible { outline: none; border-color: var(--link); box-shadow: 0 0 0 1px var(--link); }
+  .count { color: var(--ink-3); font-size: 13px; font-variant-numeric: tabular-nums; }
+  .linkish { padding: 0; border: 0; background: none; color: var(--link); text-decoration: underline; font-size: 13px; }
+  .table-gap { height: 22px; }
+
+  /* ---------- table ---------- */
+  table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+  th, td { padding: 9px 12px 9px 0; text-align: left; vertical-align: top; }
+  th:first-child, td:first-child { padding-left: 10px; }
+  th:last-child, td:last-child { padding-right: 10px; }
+  th { padding-top: 6px; padding-bottom: 6px; color: var(--ink-3); font-size: 13px; font-weight: 400; white-space: nowrap; }
+  #browse thead th { position: sticky; top: 0; z-index: 1; background: var(--bg); box-shadow: inset 0 -1px 0 var(--line-2); }
+  td { border-bottom: 1px solid var(--line); }
+  .num { text-align: right; font-variant-numeric: tabular-nums; }
+  th.num, td.num { padding-right: 18px; }
+  .sort-btn { padding: 0; border: 0; background: none; color: inherit; font: inherit; }
+  .sort-btn:hover { color: var(--ink); text-decoration: underline; }
+  th[aria-sort="ascending"] .sort-btn::after { content: " ↑"; }
+  th[aria-sort="descending"] .sort-btn::after { content: " ↓"; }
+  th[aria-sort] .sort-btn { color: var(--ink); }
+  col.c-name { width: 24%; } col.c-date { width: 5.4rem; } col.c-conv { width: 5rem; } col.c-q { width: 5.2rem; } col.c-repro { width: 9.4rem; } col.c-links { width: 8.2rem; }
+  tbody tr { cursor: pointer; }
+  tbody tr:hover { background: var(--wash); }
+  td.name { font-weight: 600; overflow-wrap: anywhere; }
+  a.entry { color: var(--ink); text-decoration: none; }
+  tbody tr:hover a.entry { text-decoration: underline; }
+  .venue { display: block; color: var(--ink-3); font-size: 12.5px; font-weight: 400; }
+  .ty { font: 12.5px/1.5 var(--mono); color: var(--ink-2); white-space: nowrap; }
+  .ty + .ty::before { content: ", "; white-space: pre-wrap; color: var(--ink-3); }
+  .repro { font: 12.5px/1.6 var(--mono); }
+  .links a { margin-right: 10px; white-space: nowrap; }
+  .empty { padding: 40px 10px; color: var(--ink-2); }
+
+  /* ---------- footer ---------- */
+  footer { margin-top: 28px; padding: 14px 0 40px; border-top: 1px solid var(--line-2); color: var(--ink-3); font-size: 13px; }
+  footer p { margin: 0; }
+
+  /* ---------- detail panel ---------- */
+  dialog.drawer { position: fixed; inset: 0 0 0 auto; margin: 0; padding: 0; border: 0; border-left: 1px solid var(--line-2); width: min(640px, 100vw); max-width: none; height: 100dvh; max-height: none; background: var(--bg); color: var(--ink); overflow: hidden; }
+  dialog.drawer::backdrop { background: rgba(0, 0, 0, .35); }
+  .sheet { display: flex; flex-direction: column; height: 100%; }
+  .sheet-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; padding: 18px 24px 12px; border-bottom: 1px solid var(--line-2); }
+  .sheet-head p { margin: 0; color: var(--ink-3); font-size: 13px; }
+  .sheet-head h2 { margin: 0; font-size: 20px; line-height: 1.25; overflow-wrap: anywhere; }
+  .sheet-actions { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: flex-end; gap: 4px 18px; font-size: 13.5px; }
+  .sheet-nav { display: inline-flex; align-items: baseline; gap: 10px; font-variant-numeric: tabular-nums; }
+  .sheet-head button:disabled { color: var(--ink-3); text-decoration: none; cursor: default; }
+  .sheet-head button { flex: none; padding: 0; border: 0; background: none; color: var(--link); text-decoration: underline; }
+  .sheet-body { flex: 1; overflow: auto; padding: 14px 24px 48px; overscroll-behavior: contain; }
+  .sheet h3 { margin: 22px 0 6px; font-size: 13px; font-weight: 600; }
+  .sheet p { margin: 0; color: var(--ink-2); overflow-wrap: anywhere; }
+  .sheet ul { margin: 0; padding-left: 18px; color: var(--ink-2); }
+  .sheet li { margin: 3px 0; overflow-wrap: anywhere; }
+  .sheet .type-defs { padding: 0; list-style: none; }
+  .sheet .type-defs code { color: var(--ink); }
+  .sheet .sheet-links { display: flex; flex-wrap: wrap; gap: 4px 18px; margin: 0 0 4px; color: inherit; }
+  .facts { width: 100%; margin: 12px 0 0; border-collapse: collapse; table-layout: auto; }
+  .facts th, .facts td { padding: 7px 0; border: 0; border-top: 1px solid var(--line); vertical-align: top; }
+  .facts tr:last-child th, .facts tr:last-child td { border-bottom: 1px solid var(--line); }
+  .facts th { width: 9.5rem; padding-right: 12px; font-size: 13.5px; white-space: normal; }
+  .facts td { overflow-wrap: anywhere; }
+  .sheet details { margin-top: 24px; }
+  .sheet summary { cursor: pointer; font-size: 13px; font-weight: 600; }
+  .sources { margin: 8px 0 0; }
+  .sources dt { margin-top: 12px; font: 12.5px var(--mono); }
+  .sources dd { margin: 2px 0 0; color: var(--ink-2); font-size: 13.5px; overflow-wrap: anywhere; }
+  .runs { table-layout: auto; font-size: 13.5px; }
+  .runs th, .runs td { padding: 5px 8px 5px 0; border: 0; border-top: 1px solid var(--line); }
+
+  /* ---------- narrow screens ---------- */
+  @media (max-width: 860px) {
+    .facet { grid-template-columns: minmax(0, 1fr); }
+    .facet-defs { grid-column: 1; }
+  }
+  @media (max-width: 760px) {
+    .wrap { padding-inline: 16px; }
+    .filters-summary { display: list-item; }
+    #browse, #browse tbody, #browse tr, #browse td { display: block; }
+    #browse colgroup { display: none; }
+    #browse thead tr { display: flex; flex-wrap: wrap; gap: 2px 16px; padding: 6px 0; border-bottom: 1px solid var(--line-2); }
+    #browse thead th { position: static; padding: 0; box-shadow: none; }
+    #browse thead th.nosort { display: none; }
+    #browse tbody tr { display: grid; grid-template-columns: auto auto minmax(0, 1fr) auto; grid-template-areas: "name name name date" "types types types types" "conv q . repro" "links links links links"; gap: 5px 14px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+    #browse td, #browse td:first-child, #browse td:last-child { padding: 0; border: 0; text-align: left; }
+    td.name { grid-area: name; }
+    td.date { grid-area: date; text-align: right; }
+    td.types { grid-area: types; }
+    td.conv { grid-area: conv; }
+    td.q { grid-area: q; }
+    td.repro { grid-area: repro; text-align: right; }
+    td.links { grid-area: links; }
+    #browse td.num::after { content: " " attr(data-unit); color: var(--ink-3); }
+    #browse td.na { display: none; }
+    #browse td.conv.na + td.q { grid-area: 3 / 1; }
+    .facts th { width: 7.5rem; }
+    .sheet-head, .sheet-body { padding-left: 16px; padding-right: 16px; }
+  }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="wordmark" href="./">memory-bench-registry</a>
+    <nav aria-label="Site">
+      <a id="gh" href="#" target="_blank" rel="noopener">GitHub</a>
+      <button type="button" data-lang="en" aria-pressed="true">EN</button>
+      <button type="button" data-lang="zh" aria-pressed="false">中文</button>
+      <button type="button" id="theme"></button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="intro" id="intro"></p>
+
+  <div class="facet">
+    <label class="facet-name" for="q"><span data-i18n="fSearch">search</span><small data-i18n="fSearchHint">press /</small></label>
+    <div class="search-row">
+      <input type="search" id="q" autocomplete="off" spellcheck="false" data-i18n-attr="placeholder:searchPh" placeholder="Name, metric, notes">
+      <span class="count" id="count" aria-live="polite"></span>
+      <button type="button" class="linkish" id="clear" hidden data-i18n="clear">Clear filters</button>
+    </div>
+  </div>
+  <details id="filters-box" open>
+    <summary class="filters-summary"><span data-i18n="filtersBtn">Filters</span> <span id="filters-count"></span></summary>
+    <div id="filters"></div>
+  </details>
+  <div class="table-gap"></div>
+
+  <table id="browse">
+    <colgroup><col class="c-name"><col class="c-date"><col><col class="c-conv"><col class="c-q"><col class="c-repro"><col class="c-links"></colgroup>
+    <thead><tr id="thead"></tr></thead>
+    <tbody id="list"></tbody>
+  </table>
+
+</main>
+
+<footer>
+  <div class="wrap"><p id="foot"></p></div>
+</footer>
+
+<dialog class="drawer" id="detail" aria-labelledby="detail-title"></dialog>
+
+<noscript><p class="wrap">This page needs JavaScript. The same data is in <a href="benchmarks.json">benchmarks.json</a>.</p></noscript>
+
+<script id="registry-data" type="application/json">__REGISTRY_DATA__</script>
+<script>
+"use strict";
+const DATA = JSON.parse(document.getElementById("registry-data").textContent);
+const ENTRIES = DATA.entries;
+const BY_SLUG = new Map(ENTRIES.map(e => [e.slug, e]));
+
+/* ---------------- text ---------------- */
+// Types and levels are shown under their registry names (the slugs); only the explanations are translated.
+const TYPE_DESC = {
+  conversational_longterm: ["Recall or reasoning over long, multi-session dialogue or chat histories (e.g. LoCoMo, LongMemEval, MSC)", "在长的多会话对话 / 聊天历史上做回忆或推理（如 LoCoMo、LongMemEval、MSC）"],
+  personalization: ["Using user-specific preferences, personas or profiles to tailor answers (e.g. PersonaMem, PrefEval)", "利用用户特定的偏好 / 人设 / 画像信息来定制回答（如 PersonaMem、PrefEval）"],
+  episodic: ["Recalling specific events and experiences with time, place or order (“what happened when”)", "回忆带有时间、地点或顺序的具体事件与经历（“什么时候发生了什么”）"],
+  semantic_knowledge_update: ["Factual knowledge stored outside the weights (context or external store), updated correctly when facts change", "存放在权重之外（上下文 / 外部存储）的事实知识，并在事实变化时正确更新、覆盖"],
+  procedural_workflow: ["Distilling skills, workflows or tool use from earlier tasks and reusing them on different later tasks", "从早先任务中提炼技能、流程、工具用法或经验，并在之后不同的任务中复用"],
+  coding_cross_session: ["Coding agents that must retain information across independent sessions or tasks", "面向编码 agent，信息必须跨独立的会话或任务保留（仓库约定、先前修复、编码偏好等）"],
+  parametric: ["Memory in the model weights: knowledge editing, injection by fine-tuning, test-time training, memorization or unlearning", "记忆存放在模型权重中：知识编辑、微调注入、test-time training、记忆化或遗忘"],
+  multi_agent_group: ["Memory shared among several agents, or multi-party / group conversations", "多个 agent 共享记忆，或多方 / 群组对话"],
+  multimodal: ["Remembered content includes non-text input (images, video, audio) that the system must process directly", "需要记住和回忆的内容包含非文本输入（图像、视频、音频），被测系统必须直接处理"],
+  embodied: ["Agents act in a simulated or real environment; memory is scored through actions or task success", "agent 在模拟或真实环境中行动，记忆通过环境中的动作或任务成败来评测"],
+  memory_security: ["Attacks on or protection of memory: poisoning, injection, privacy leakage, whether deletion requests take effect", "针对记忆的攻击或保护：投毒 / 注入、隐私泄露、删除或遗忘请求是否生效"],
+};
+const LEVEL_DESC = {
+  unverified: ["No one has opened the paper and repository to check yet", "还没有人打开论文和仓库核对"],
+  paper_only: ["Paper checked; no public data or code found", "核对过论文；找不到公开数据或代码"],
+  data_public: ["Data is publicly available, but the official repository has no evaluation script", "数据可公开获取，但官方仓库没有评测脚本"],
+  official_script: ["The official repository has a script that runs the evaluation, and the data is available", "官方仓库有可直接跑评测的脚本，且数据可获取"],
+  smoke_tested: ["We ran the official script on a small sample", "我们用官方脚本在小样本上跑通过"],
+  full_run: ["We ran the full evaluation", "我们跑过完整评测"],
+};
+const UI = {
+  en: {
+    themeDark: "dark", themeLight: "light", filtersBtn: "Filters", fSearch: "search", fSearchHint: "press /", hintAny: "match any", hintAll: "match all", defsToggle: "definitions", tipConv: "Conversations, interaction histories or episodes, as counted in the original paper", tipQ: "Questions, probes or tasks, as counted in the original paper", prev: "prev", next: "next",
+    noteTypes: "A benchmark can have several types; each one lists what it actually tests. Single-input long-context tests (RULER, NIAH, LongBench) are not memory benchmarks and are not included.",
+    noteLevels: "Levels record what was opened and checked, not what was run: the benchmarks themselves are not run here.",
+    intro: (n, checked, fields, excluded) => `A registry of agent memory benchmarks. There is one YAML file per benchmark; every value is sourced to the paper or the official repository, and anything that could not be found is left as <code>null</code>. <b>${n}</b> entries, latest source check ${checked}. Field definitions are in <a href="${fields}" target="_blank" rel="noopener">fields.md</a>; candidates that were reviewed and left out are in <a href="${excluded}" target="_blank" rel="noopener">excluded.md</a> (both in Chinese).`,
+    fType: "memory type", fLevel: "repro level", fYear: "year", fMore: "require",
+    flagCode: "official code", flagData: "official data", flagJudge: "LLM judge", flagPeer: "peer-reviewed venue",
+    searchLabel: "Search benchmarks", searchPh: "Name, metric, notes",
+    showing: (n, total) => `${n} of ${total}`, clear: "Clear filters", emptyTitle: "No benchmark matches these filters.",
+    hName: "Name", hDate: "Date", hTypes: "Memory types", hConv: "Conv.", hQ: "Q", hRepro: "Repro level", hLinks: "Links",
+    conv: "conv.", q: "Q", paper: "paper", code: "code", data: "data", yaml: "YAML", none: "none", close: "close",
+    dConv: "Conversations", dQ: "Questions", dCtx: "Average context", dJudge: "Judge model", dRepro: "Repro level",
+    checked: d => `checked ${d}`, dTypes: "Memory types", dScale: "About the scale numbers", dMetrics: "Metrics", dNotes: "Notes",
+    dSources: n => `Sources (${n} fields)`, dRuns: "Our run records",
+    runDate: "Date", runModel: "Model", runSample: "Sample", runTokens: "Tokens", runCost: "Cost", runNotes: "Notes",
+    foot: repo => `Data: CC BY 4.0, also as <a href="benchmarks.json">benchmarks.json</a>. Code: MIT. Linked papers, code and datasets keep their own licenses. Missing a benchmark? <a href="${repo}#contributing" target="_blank" rel="noopener">Add an entry</a>.`,
+  },
+  zh: {
+    themeDark: "深色", themeLight: "浅色", filtersBtn: "筛选", fSearch: "搜索", fSearchHint: "按 /", hintAny: "满足任一", hintAll: "全部满足", defsToggle: "说明", tipConv: "对话 / 交互历史 / episode 数量，按原文", tipQ: "评测题目 / probe / 任务数量，按原文", prev: "上一个", next: "下一个",
+    noteTypes: "一个 benchmark 可以有多个类型，每个类型都是它实际考察的内容。只考察单次长输入的长上下文测试（RULER、NIAH、LongBench）不算记忆 benchmark，不收录。",
+    noteLevels: "等级只记录“打开并核对过什么”，不代表运行过：这里不运行 benchmark。",
+    intro: (n, checked, fields, excluded) => `agent memory benchmark 登记表。每个 benchmark 一个 YAML，每个值都标明论文或官方仓库中的出处，查不到的写 <code>null</code>。共 <b>${n}</b> 条，最近一次来源核对在 ${checked}。字段定义见 <a href="${fields}" target="_blank" rel="noopener">fields.md</a>，评估过但未收录的候选见 <a href="${excluded}" target="_blank" rel="noopener">excluded.md</a>。`,
+    fType: "记忆类型", fLevel: "可复现等级", fYear: "年份", fMore: "要求",
+    flagCode: "官方代码", flagData: "官方数据", flagJudge: "LLM judge", flagPeer: "会议 / 期刊发表",
+    searchLabel: "搜索 benchmark", searchPh: "名称、指标、备注",
+    showing: (n, total) => `${n} / ${total}`, clear: "清除筛选", emptyTitle: "没有符合条件的 benchmark。",
+    hName: "名称", hDate: "日期", hTypes: "记忆类型", hConv: "对话", hQ: "题", hRepro: "可复现等级", hLinks: "链接",
+    conv: "对话", q: "题", paper: "论文", code: "代码", data: "数据", yaml: "YAML", none: "无", close: "关闭",
+    dConv: "对话数", dQ: "题目数", dCtx: "平均上下文长度", dJudge: "Judge 模型", dRepro: "可复现等级",
+    checked: d => `核对于 ${d}`, dTypes: "记忆类型", dScale: "规模数字的说明", dMetrics: "评测指标", dNotes: "备注",
+    dSources: n => `出处（${n} 个字段）`, dRuns: "我们的运行记录",
+    runDate: "日期", runModel: "模型", runSample: "样本", runTokens: "Tokens", runCost: "费用", runNotes: "备注",
+    foot: repo => `数据：CC BY 4.0，也可直接下载 <a href="benchmarks.json">benchmarks.json</a>。代码：MIT。所链接的论文、代码和数据集沿用各自的许可证。缺了某个 benchmark？<a href="${repo}#contributing" target="_blank" rel="noopener">提交一条</a>。`,
+  },
+};
+
+let lang = "en";
+try { const s = localStorage.getItem("lang"); lang = s === "zh" || s === "en" ? s : (navigator.language || "").toLowerCase().startsWith("zh") ? "zh" : "en"; } catch (e) {}
+const t = (k, ...a) => { const v = UI[lang][k]; return typeof v === "function" ? v(...a) : v; };
+const typeDesc  = k => TYPE_DESC[k]?.[lang === "zh" ? 1 : 0] ?? "";
+const levelDesc = k => LEVEL_DESC[k]?.[lang === "zh" ? 1 : 0] ?? "";
+
+/* ---------------- helpers ---------------- */
+const esc = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+const safeUrl = u => (typeof u === "string" && /^https?:\/\//i.test(u)) ? u : null;
+const fmtNum = n => Number(n).toLocaleString("en-US");
+const linkify = s => esc(s).replace(/https?:\/\/[^\s<>"')\]]*[^\s<>"').,;:\]]/g, u => `<a href="${u}" target="_blank" rel="noopener">${u}</a>`);
+const $ = id => document.getElementById(id);
+const tokens = q => q.toLowerCase().split(/\s+/).filter(Boolean);
+
+for (const e of ENTRIES) {
+  e._year = e.release_date ? e.release_date.slice(0, 4) : "undated";
+  e._name = e.name.toLowerCase();
+  e._hay = [e.name, e.slug, e.venue, e.memory_types.join(" "), e.metrics.join(" "), e.judge_model, e.notes, e.scale.notes, e.scale.avg_context_length]
+    .filter(Boolean).join("\n").toLowerCase();
+}
+const FLAGS = {
+  code:  { label: "flagCode",  test: e => !!e.links.code },
+  data:  { label: "flagData",  test: e => !!e.links.data },
+  judge: { label: "flagJudge", test: e => !!e.judge_model },
+  peer:  { label: "flagPeer",  test: e => !!e.venue && e.venue !== "arXiv preprint" },
+};
+const YEARS = [...new Set(ENTRIES.map(e => e._year))].sort().reverse();
+const LEVELS = DATA.levels.filter(l => ENTRIES.some(e => e.repro_level === l));
+const FACETS = [
+  { key: "types",  name: "fType",  values: () => DATA.types, desc: typeDesc,  has: (e, v) => e.memory_types.includes(v) },
+  { key: "levels", name: "fLevel", values: () => LEVELS,     desc: levelDesc, has: (e, v) => e.repro_level === v },
+  { key: "years",  name: "fYear",  values: () => YEARS,      desc: () => "",  has: (e, v) => e._year === v },
+];
+
+/* ---------------- state (mirrored in the query string) ---------------- */
+const SORT_KEYS = {
+  date: { get: e => e.release_date, first: "desc" },
+  name: { get: e => e.name, first: "asc" },
+  conv: { get: e => e.scale.conversations, first: "desc" },
+  q:    { get: e => e.scale.questions, first: "desc" },
+};
+const DEFAULT_SORT = "date:desc";
+let visibleSlugs = []; // slugs in the order currently shown in the table, for prev / next in the detail panel
+const state = { q: "", types: new Set(), levels: new Set(), years: new Set(), flags: new Set(), sort: DEFAULT_SORT };
+
+function readURL() {
+  const p = new URLSearchParams(location.search);
+  const list = (k, ok) => (p.get(k) || "").split(",").filter(v => ok.includes(v));
+  state.q = p.get("q") || "";
+  state.types = new Set(list("type", DATA.types));
+  state.levels = new Set(list("level", DATA.levels));
+  state.years = new Set(list("year", YEARS));
+  state.flags = new Set(list("has", Object.keys(FLAGS)));
+  const [key, dir] = (p.get("sort") || "").split(":");
+  state.sort = Object.hasOwn(SORT_KEYS, key) && (dir === "asc" || dir === "desc") ? `${key}:${dir}` : DEFAULT_SORT;
+}
+function writeURL() {
+  const p = new URLSearchParams();
+  if (state.q) p.set("q", state.q);
+  if (state.types.size) p.set("type", [...state.types].join(","));
+  if (state.levels.size) p.set("level", [...state.levels].join(","));
+  if (state.years.size) p.set("year", [...state.years].join(","));
+  if (state.flags.size) p.set("has", [...state.flags].join(","));
+  if (state.sort !== DEFAULT_SORT) p.set("sort", state.sort);
+  const qs = p.toString();
+  history.replaceState(null, "", location.pathname + (qs ? "?" + qs : "") + location.hash);
+}
+
+/* ---------------- filtering and sorting ---------------- */
+// `skip` leaves one facet out so its own counts show what selecting an option would give.
+function matches(e, skip) {
+  if (state.q) for (const tok of tokens(state.q)) if (!e._hay.includes(tok)) return false;
+  if (skip !== "types"  && state.types.size  && !e.memory_types.some(v => state.types.has(v))) return false;
+  if (skip !== "levels" && state.levels.size && !state.levels.has(e.repro_level)) return false;
+  if (skip !== "years"  && state.years.size  && !state.years.has(e._year)) return false;
+  for (const f of state.flags) if (!FLAGS[f].test(e)) return false;
+  return true;
+}
+function sorted(rows) {
+  const [key, dir] = state.sort.split(":"), get = SORT_KEYS[key].get, sign = dir === "asc" ? 1 : -1;
+  return rows.sort((a, b) => {
+    const x = get(a), y = get(b);
+    if (x == null || y == null) return x == null && y == null ? a.name.localeCompare(b.name) : x == null ? 1 : -1; // missing values stay last
+    const c = typeof x === "string" ? x.localeCompare(y, undefined, { sensitivity: "base" }) : x - y;
+    return c ? c * sign : a.name.localeCompare(b.name);
+  });
+}
+function visibleEntries() {
+  const rows = sorted(ENTRIES.filter(e => matches(e)));
+  if (!state.q || state.sort !== DEFAULT_SORT) return rows;
+  // With a search term and the default order, benchmarks whose name matches come before ones that only mention it in their notes.
+  const toks = tokens(state.q), hit = e => toks.every(tok => e._name.includes(tok));
+  return [...rows.filter(hit), ...rows.filter(e => !hit(e))];
+}
+
+/* ---------------- rendering: static pieces ---------------- */
+function renderTheme() {
+  const root = document.documentElement;
+  const dark = root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  $("theme").textContent = t(dark ? "themeLight" : "themeDark");
+}
+function renderStatic() {
+  document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
+  document.querySelectorAll("[data-i18n]").forEach(el => { el.textContent = t(el.dataset.i18n); });
+  document.querySelectorAll("[data-i18n-attr]").forEach(el => {
+    const [attr, key] = el.dataset.i18nAttr.split(":"); el.setAttribute(attr, t(key));
+  });
+  document.querySelectorAll("[data-lang]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.lang === lang)));
+  $("gh").href = DATA.repo;
+  const checked = ENTRIES.map(e => e.repro_checked_at).filter(Boolean).sort().at(-1) || "—";
+  $("intro").innerHTML = t("intro", ENTRIES.length, checked, `${DATA.repo}/blob/main/docs/fields.md`, `${DATA.repo}/blob/main/docs/excluded.md`);
+  renderTheme();
+
+  const heads = [["name", "hName", ""], ["date", "hDate", ""], [null, "hTypes", ""], ["conv", "hConv", "num", "tipConv"], ["q", "hQ", "num", "tipQ"], [null, "hRepro", ""], [null, "hLinks", ""]];
+  $("thead").innerHTML = heads.map(([key, label, cls, tip]) => key
+    ? `<th scope="col" class="${cls}" data-key="${key}"${tip ? ` title="${esc(t(tip))}"` : ""}><button type="button" class="sort-btn" data-sort="${key}">${esc(t(label))}</button></th>`
+    : `<th scope="col" class="nosort">${esc(t(label))}</th>`).join("");
+
+  $("foot").innerHTML = t("foot", DATA.repo);
+  buildFilters();
+}
+
+/* ---------------- rendering: filters ---------------- */
+function buildFilters() {
+  const tog = (facet, v, label, title, plain) =>
+    `<button type="button" class="tog${plain ? " plain" : ""}" aria-pressed="false" data-facet="${facet}" data-value="${esc(v)}"${title ? ` title="${esc(title)}"` : ""}><span>${esc(label)}</span><span class="n"></span></button>`;
+  const defsPanel = (group, values, desc, note) => `<div class="facet-defs" id="defs-${group}" hidden><dl>${values.map(v => `<div><dt>${esc(v)}</dt><dd>${esc(desc(v))}</dd></div>`).join("")}</dl><p>${esc(t(note))}</p></div>`;
+  const line = (group, name, hint, items, defs) => `<div class="facet"><div class="facet-name">${esc(t(name))}<small>${esc(t(hint))}</small>${defs ? `<button type="button" class="def-toggle" aria-expanded="false" aria-controls="defs-${group}">${esc(t("defsToggle"))}</button>` : ""}</div><div class="facet-items" data-group="${group}">${items}</div>${defs || ""}</div>`;
+  $("filters").innerHTML =
+    FACETS.map(f => line(f.key, f.name, "hintAny", f.values().map(v => tog(f.key, v, v === "undated" ? "—" : v, f.desc(v), false)).join(""),
+      f.key === "types" ? defsPanel("types", DATA.types, typeDesc, "noteTypes") : f.key === "levels" ? defsPanel("levels", LEVELS, levelDesc, "noteLevels") : "")).join("") +
+    line("flags", "fMore", "hintAll", Object.entries(FLAGS).map(([k, f]) => tog("flags", k, t(f.label), "", true)).join(""));
+}
+function updateFilters() {
+  const root = $("filters");
+  const paint = (facet, v, n, on) => {
+    const b = root.querySelector(`[data-facet="${facet}"][data-value="${CSS.escape(v)}"]`);
+    b.setAttribute("aria-pressed", String(on));
+    b.classList.toggle("zero", n === 0 && !on);
+    b.querySelector(".n").textContent = n;
+  };
+  for (const f of FACETS) for (const v of f.values())
+    paint(f.key, v, ENTRIES.filter(e => matches(e, f.key) && f.has(e, v)).length, state[f.key].has(v));
+  for (const k of Object.keys(FLAGS))
+    paint("flags", k, ENTRIES.filter(e => matches(e) && FLAGS[k].test(e)).length, state.flags.has(k));
+}
+
+/* ---------------- rendering: table ---------------- */
+function rowHTML(e) {
+  const num = (cls, v, unit) => v == null ? `<td class="num ${cls} na muted">—</td>` : `<td class="num ${cls}" data-unit="${esc(unit)}">${fmtNum(v)}</td>`;
+  const links = ["paper", "code", "data"].map(k => { const u = safeUrl(e.links[k]); return u ? `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(t(k))}</a>` : ""; }).join("");
+  return `<tr data-slug="${esc(e.slug)}">
+    <td class="name"><a class="entry" href="#${encodeURIComponent(e.slug)}">${esc(e.name)}</a>${e.venue ? `<span class="venue">${esc(e.venue)}</span>` : ""}</td>
+    <td class="date">${esc(e.release_date || "—")}</td>
+    <td class="types">${e.memory_types.map(v => `<span class="ty" title="${esc(typeDesc(v))}">${esc(v)}</span>`).join("")}</td>
+    ${num("conv", e.scale.conversations, t("conv"))}
+    ${num("q", e.scale.questions, t("q"))}
+    <td class="repro" title="${esc(levelDesc(e.repro_level))}">${esc(e.repro_level)}</td>
+    <td class="links">${links || '<span class="muted">—</span>'}</td>
+  </tr>`;
+}
+const activeFilters = () => state.types.size + state.levels.size + state.years.size + state.flags.size;
+function update() {
+  const rows = visibleEntries();
+  visibleSlugs = rows.map(e => e.slug);
+  $("list").innerHTML = rows.length ? rows.map(rowHTML).join("") : `<tr><td colspan="7" class="empty">${esc(t("emptyTitle"))} <button type="button" class="linkish" data-action="clear">${esc(t("clear"))}</button></td></tr>`;
+  $("count").textContent = t("showing", rows.length, ENTRIES.length);
+  $("clear").hidden = !(state.q || activeFilters());
+  $("filters-count").textContent = activeFilters() ? `(${activeFilters()})` : "";
+  const [key, dir] = state.sort.split(":");
+  document.querySelectorAll("#thead th[data-key]").forEach(th => {
+    if (th.dataset.key === key) th.setAttribute("aria-sort", dir === "asc" ? "ascending" : "descending"); else th.removeAttribute("aria-sort");
+  });
+  updateFilters();
+  writeURL();
+}
+
+/* ---------------- detail panel ---------------- */
+const dlg = $("detail");
+function detailHTML(e) {
+  const link = k => { const u = safeUrl(e.links[k]);
+    return u ? `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(t(k))} ↗</a>` : `<span class="muted">${esc(t(k))}: ${esc(t("none"))}</span>`; };
+  const dash = '<span class="muted">—</span>';
+  const row = (label, value) => `<tr><th scope="row">${esc(label)}</th><td>${value}</td></tr>`;
+  const sources = Object.entries(e.sources || {});
+  const runs = e.run_records || [];
+  const i = visibleSlugs.indexOf(e.slug), last = visibleSlugs.length - 1;
+  const nav = i < 0 ? "" : `<span class="sheet-nav"><button type="button" data-nav="-1"${i === 0 ? " disabled" : ""}>← ${esc(t("prev"))}</button><span class="muted">${i + 1} / ${last + 1}</span><button type="button" data-nav="1"${i === last ? " disabled" : ""}>${esc(t("next"))} →</button></span>`;
+  return `<div class="sheet">
+    <header class="sheet-head">
+      <div><p>${esc([e.venue, e.release_date].filter(Boolean).join(" · "))}</p><h2 id="detail-title">${esc(e.name)}</h2></div>
+      <div class="sheet-actions">${nav}<button type="button" data-action="close">${esc(t("close"))}</button></div>
+    </header>
+    <div class="sheet-body">
+      <p class="sheet-links">${link("paper")}${link("code")}${link("data")}<a href="${esc(DATA.repo)}/blob/main/benchmarks/${esc(e.slug)}.yaml" target="_blank" rel="noopener">${esc(t("yaml"))} ↗</a></p>
+      <table class="facts"><tbody>
+        ${row(t("dConv"), e.scale.conversations != null ? fmtNum(e.scale.conversations) : dash)}
+        ${row(t("dQ"), e.scale.questions != null ? fmtNum(e.scale.questions) : dash)}
+        ${row(t("dCtx"), e.scale.avg_context_length ? esc(e.scale.avg_context_length) : dash)}
+        ${row(t("dJudge"), e.judge_model ? esc(e.judge_model) : dash)}
+        ${row(t("dRepro"), `<span class="mono">${esc(e.repro_level)}</span>` + (e.repro_checked_at ? ` <span class="muted">(${esc(t("checked", e.repro_checked_at))})</span>` : ""))}
+      </tbody></table>
+      <h3>${esc(t("dTypes"))}</h3>
+      <ul class="type-defs">${e.memory_types.map(v => `<li><code>${esc(v)}</code>: ${esc(typeDesc(v))}</li>`).join("")}</ul>
+      ${e.scale.notes ? `<h3>${esc(t("dScale"))}</h3><p>${linkify(e.scale.notes)}</p>` : ""}
+      ${e.metrics.length ? `<h3>${esc(t("dMetrics"))}</h3><ul>${e.metrics.map(m => `<li>${linkify(m)}</li>`).join("")}</ul>` : ""}
+      ${e.notes ? `<h3>${esc(t("dNotes"))}</h3><p>${linkify(e.notes)}</p>` : ""}
+      ${runs.length ? `<h3>${esc(t("dRuns"))}</h3><table class="runs"><thead><tr>${["runDate", "runModel", "runSample", "runTokens", "runCost", "runNotes"].map(k => `<th>${esc(t(k))}</th>`).join("")}</tr></thead><tbody>${
+        runs.map(r => `<tr>${["date", "model", "sample_size", "tokens", "cost", "notes"].map(k => `<td>${esc(r[k] ?? "—")}</td>`).join("")}</tr>`).join("")}</tbody></table>` : ""}
+      ${sources.length ? `<details><summary>${esc(t("dSources", sources.length))}</summary><dl class="sources">${sources.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${linkify(v)}</dd>`).join("")}</dl></details>` : ""}
+    </div>
+  </div>`;
+}
+function openDetail(e) {
+  document.title = `${e.name} · memory-bench-registry`;
+  dlg.innerHTML = detailHTML(e);
+  if (!dlg.open) dlg.showModal();
+  document.body.classList.add("lock");
+  dlg.querySelector(".sheet-body").scrollTop = 0;
+}
+const hashSlug = () => { try { return decodeURIComponent(location.hash.slice(1)); } catch (e) { return ""; } };
+function syncHash() {
+  const e = BY_SLUG.get(hashSlug());
+  if (e) openDetail(e); else if (dlg.open) dlg.close();
+}
+function go(delta) {
+  const i = visibleSlugs.indexOf(hashSlug()), next = i < 0 ? null : BY_SLUG.get(visibleSlugs[i + delta]);
+  if (!next) return;
+  history.replaceState(null, "", location.pathname + location.search + "#" + encodeURIComponent(next.slug));
+  openDetail(next);
+  dlg.querySelector(`[data-nav="${delta}"]:not([disabled])`)?.focus({ preventScroll: true });
+}
+dlg.addEventListener("close", () => {
+  document.title = "memory-bench-registry";
+  document.body.classList.remove("lock");
+  if (BY_SLUG.has(hashSlug())) history.replaceState(null, "", location.pathname + location.search);
+});
+dlg.addEventListener("click", ev => {
+  const nb = ev.target.closest("[data-nav]");
+  if (nb) { if (!nb.disabled) go(Number(nb.dataset.nav)); return; }
+  if (ev.target === dlg || ev.target.closest('[data-action="close"]')) dlg.close();
+});
+window.addEventListener("hashchange", syncHash);
+
+/* ---------------- events ---------------- */
+$("filters").addEventListener("click", ev => {
+  const d = ev.target.closest(".def-toggle");
+  if (d) { const panel = $(d.getAttribute("aria-controls")); panel.hidden = !panel.hidden; d.setAttribute("aria-expanded", String(!panel.hidden)); return; }
+  const b = ev.target.closest("button[data-facet]"); if (!b) return;
+  const set = state[b.dataset.facet], v = b.dataset.value;
+  set.has(v) ? set.delete(v) : set.add(v);
+  update();
+});
+$("thead").addEventListener("click", ev => {
+  const b = ev.target.closest("button[data-sort]"); if (!b) return;
+  const key = b.dataset.sort, [cur, dir] = state.sort.split(":");
+  state.sort = `${key}:${cur === key ? (dir === "asc" ? "desc" : "asc") : SORT_KEYS[key].first}`;
+  update();
+});
+$("q").addEventListener("input", ev => { state.q = ev.target.value.trim(); update(); });
+function clearAll() {
+  state.q = ""; $("q").value = "";
+  for (const k of ["types", "levels", "years", "flags"]) state[k].clear();
+  update();
+}
+$("clear").addEventListener("click", clearAll);
+$("list").addEventListener("click", ev => {
+  if (ev.target.closest('[data-action="clear"]')) return clearAll();
+  if (ev.target.closest("a")) return; // links do their own thing; a click anywhere else on the row opens the detail
+  const tr = ev.target.closest("tr[data-slug]");
+  if (tr) location.hash = encodeURIComponent(tr.dataset.slug);
+});
+document.addEventListener("keydown", ev => {
+  if (dlg.open && (ev.key === "ArrowLeft" || ev.key === "ArrowRight") && !ev.metaKey && !ev.ctrlKey && !ev.altKey && !ev.shiftKey) { go(ev.key === "ArrowLeft" ? -1 : 1); return; }
+  if (ev.key === "/" && !dlg.open && !/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName)) { ev.preventDefault(); $("q").focus(); }
+});
+document.querySelectorAll("[data-lang]").forEach(b => b.addEventListener("click", () => {
+  lang = b.dataset.lang;
+  try { localStorage.setItem("lang", lang); } catch (e) {}
+  renderStatic(); update();
+  if (dlg.open) syncHash();
+}));
+$("theme").addEventListener("click", () => {
+  const root = document.documentElement;
+  const dark = root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  root.dataset.theme = dark ? "light" : "dark";
+  try { localStorage.setItem("theme", root.dataset.theme); } catch (e) {}
+  renderTheme();
+});
+
+// The filter block is folded on narrow screens, open on wide ones.
+const narrow = matchMedia("(max-width: 760px)");
+narrow.addEventListener("change", () => { $("filters-box").open = !narrow.matches; });
+
+/* ---------------- start ---------------- */
+readURL();
+$("filters-box").open = !narrow.matches || activeFilters() > 0;
+$("q").value = state.q;
+renderStatic();
+update();
+syncHash();
+</script>
+</body>
+</html>

@@ -18,9 +18,10 @@ python3 -m venv .venv && .venv/bin/pip install -r requirements.txt   # 已有 .v
 .venv/bin/python scripts/validate.py pending/*.yaml  # 也可以校验指定文件
 .venv/bin/python scripts/build_readme.py             # 重新生成 README.md
 .venv/bin/python scripts/build_readme.py --check     # CI 用：检查 README 是否同步
+.venv/bin/python scripts/build_site.py               # 生成网站到 _site/（源码在 site/index.html；本地预览：python3 -m http.server -d _site）
 ```
 
-不要手改 README.md / README.zh-CN.md；改 YAML 后重新生成。
+不要手改 README.md / README.zh-CN.md；改 YAML 后重新生成。网站（GitHub Pages）由 CI 在 push 到 main 时从 YAML 自动构建，`_site/` 不入库。
 
 ## 当前状态（2026-10-11）
 
