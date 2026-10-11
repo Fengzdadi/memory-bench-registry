@@ -25,7 +25,7 @@
 - `benchmarks/lsrep.yaml`：取消 flag。四段私人历史与 219 个 probe 构成已实例化的记忆评测；数据未公开影响 `repro_level`，不影响收录。
 - `flagged/capmem.yaml`：每题只从一段预生成的长视频字幕作答，属于 `docs/fields.md` 排除的单次长输入测试。复核同意。
 - `flagged/simlife-bp.yaml`：已报告的任务把一整段超长模拟生活 episode 作为输入做离线规则问答，没有跨独立交互保存记忆。复核同意。
-- `benchmarks/what-should-an-agent-remember.yaml`：取消 flag。300 个 episode 测在线流式保留与查询时选择，属于记忆 benchmark，也不是单次长输入测试；`memory_types` 的精确归类仍有歧义。
+- `flagged/what-should-an-agent-remember.yaml`：复核认为它是记忆 benchmark（300 个 episode 的在线流式保留，不是单次长输入），但现有 11 个 `memory_types` 都不合适：条目填的是 `semantic_knowledge_update`，自己的 notes 却写明没有事实更新。是否新增类型（如“保留/取舍”）或归入现有类型，由仓库所有者决定，暂不入库。
 - `flagged/ember-bench.yaml`：模型从单段预录家庭任务视频做离线多选问答，没有环境中的动作评测，也没有跨独立交互的记忆保留。复核同意。
 
 ## 下一步
