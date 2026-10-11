@@ -14,38 +14,40 @@
 
 ## 按记忆类型
 
-一个 benchmark 可属于多个类型，会在每个所属类型下各出现一次；组内按发布时间排序。
+一个 benchmark 可属于多个类型。点开查看该类型下的条目，按发布时间从新到旧排列。
 
 {% for group in by_type %}
-### `{{ group.type }}`
+<details>
+<summary><code>{{ group.type }}</code>（{{ group.entries | length }}）</summary>
 
 {% if group.entries %}
-| 名称 | 日期 | 类型 | 链接 | 规模 | 可复现等级 |
-| --- | --- | --- | --- | --- | --- |
-{% for e in group.entries %}
-| {{ e.name | cell }} | {{ e.release_date or "—" }} | {{ e | types }} | {{ e | links }} | {{ e | scale }} | `{{ e.repro_level }}` |
-{% endfor %}
+{% for e in group.entries %}{{ e | name }}{% if not loop.last %} · {% endif %}{% endfor %}
+
 {% else %}
 _暂无条目。_
 {% endif %}
-
+</details>
 {% endfor %}
-## 时间线
 
-按 `release_date`（论文首次公开的年月）从早到晚排列。
+## 全部条目
 
-{% for year in timeline %}
-### {{ year.year }}
+按发布时间从新到旧排列。点名称查看完整字段与出处。
 
 | 名称 | 日期 | 类型 | 链接 | 规模 | 可复现等级 |
 | --- | --- | --- | --- | --- | --- |
-{% for e in year.entries %}
-| {{ e.name | cell }} | {{ e.release_date or "—" }} | {{ e | types }} | {{ e | links }} | {{ e | scale }} | `{{ e.repro_level }}` |
+{% for e in entries %}
+| {{ e | name }} | {{ e.release_date or "—" }} | {{ e | types }} | {{ e | links }} | {{ e | scale }} | `{{ e.repro_level }}` |
 {% endfor %}
 
-{% endfor %}
 ## 贡献
 
 1. 新增 `benchmarks/<slug>.yaml`，按 [docs/fields.md](docs/fields.md) 填写，每个非空字段在 `sources` 中注明出处。
 2. 运行 `python scripts/validate.py` 与 `python scripts/build_readme.py`。
 3. 不要手改本 README；CI 会检查它与数据是否同步。
+
+## 许可证
+
+- 数据（`benchmarks/`、`docs/`、`schema/` 及本 README）：[CC BY 4.0](LICENSE-DATA)
+- 代码（`scripts/`、`templates/`、`pending/tools/`）：[MIT](LICENSE)
+
+条目中链接的论文、代码和数据集各有其许可证，不受本仓库许可证约束；使用前请查看原始来源。

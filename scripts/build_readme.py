@@ -33,6 +33,11 @@ def md_cell(text) -> str:
     return str(text).replace("|", "\\|").replace("\n", " ")
 
 
+def fmt_name(entry: dict) -> str:
+    # name links to the YAML file, which holds the full details and sources
+    return f"[{md_cell(entry['name'])}](benchmarks/{entry['slug']}.yaml)"
+
+
 def fmt_links(entry: dict) -> str:
     parts = [f"[{label}]({url})" for label, url in entry["links"].items() if url]
     return " · ".join(parts) if parts else "—"
@@ -45,8 +50,6 @@ def fmt_scale(entry: dict) -> str:
         parts.append(f"{scale['conversations']:,} conv.")
     if scale["questions"] is not None:
         parts.append(f"{scale['questions']:,} Q")
-    if scale["avg_context_length"]:
-        parts.append(f"avg {scale['avg_context_length']}")
     return md_cell(" · ".join(parts)) if parts else "—"
 
 
@@ -54,9 +57,11 @@ def fmt_types(entry: dict) -> str:
     return ", ".join(f"`{t}`" for t in entry["memory_types"])
 
 
-def date_key(entry: dict):
-    # undated entries sort last in the timeline
-    return (entry["release_date"] or "9999-99", entry["name"].casefold())
+def newest_first(entries) -> list[dict]:
+    # newest release first; ties by name; undated entries last
+    by_name = sorted(entries, key=lambda e: e["name"].casefold())
+    dated = sorted((e for e in by_name if e["release_date"]), key=lambda e: e["release_date"], reverse=True)
+    return dated + [e for e in by_name if not e["release_date"]]
 
 
 def build_context(entries: list[dict]) -> dict:
@@ -66,19 +71,13 @@ def build_context(entries: list[dict]) -> dict:
 
     by_type = []
     for mtype in type_order:
-        members = sorted((e for e in entries if mtype in e["memory_types"]), key=date_key)
+        members = newest_first(e for e in entries if mtype in e["memory_types"])
         by_type.append({"type": mtype, "entries": members})
-
-    timeline: dict[str, list[dict]] = {}
-    for entry in sorted(entries, key=date_key):
-        year = entry["release_date"][:4] if entry["release_date"] else "undated"
-        timeline.setdefault(year, []).append(entry)
 
     levels = Counter(e["repro_level"] for e in entries)
     return {
-        "entries": entries,
+        "entries": newest_first(entries),
         "by_type": by_type,
-        "timeline": [{"year": y, "entries": es} for y, es in timeline.items()],
         "level_counts": [{"level": lv, "count": levels.get(lv, 0)} for lv in level_order],
     }
 
@@ -91,7 +90,7 @@ def render() -> str:
         lstrip_blocks=True,
         keep_trailing_newline=True,
     )
-    env.filters.update(links=fmt_links, scale=fmt_scale, types=fmt_types, cell=md_cell)
+    env.filters.update(name=fmt_name, links=fmt_links, scale=fmt_scale, types=fmt_types, cell=md_cell)
     return env.get_template("README.md.j2").render(**build_context(load_entries()))
 
 
