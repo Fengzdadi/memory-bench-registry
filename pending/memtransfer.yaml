@@ -1,0 +1,41 @@
+name: MemTransfer
+slug: memtransfer
+release_date: 2026-09
+venue: arXiv preprint
+memory_types:
+- episodic
+- embodied
+links:
+  paper: https://arxiv.org/abs/2609.32313
+  code: null
+  data: null
+scale:
+  conversations: 100
+  questions: 100
+  avg_context_length: null
+  notes: Four successful demonstrations are collected per case; memory representations are compared in test episodes under
+    changed poses and routes.
+metrics:
+- Success Rate
+- SPL
+- Blocked-route follow rate
+- Recovery rate
+judge_model: null
+repro_level: paper_only
+repro_checked_at: '2026-10-11'
+run_records: []
+notes: Demonstrations and test episodes are paired by task case. This is embodied experience reuse, not the cross-task procedural
+  transfer required for procedural_workflow.
+sources:
+  name: arXiv abstract/title https://arxiv.org/abs/2609.32313; paper https://arxiv.org/html/2609.32313
+  release_date: 'arXiv submission history https://arxiv.org/abs/2609.32313: v1 submitted 2026-09-26'
+  venue: 'arXiv abstract page https://arxiv.org/abs/2609.32313: no verified journal reference or conference publication'
+  memory_types: 'arXiv HTML §III–IV: stored demonstrations guide warehouse navigation actions under new starts and blocked
+    routes'
+  links.paper: arXiv abstract page https://arxiv.org/abs/2609.32313
+  repro_level: arXiv paper read 2026-10-11; no official benchmark code or data URL linked
+  scale.conversations: 'arXiv HTML §III: 100 task cases (10 types × 10)'
+  scale.questions: 'arXiv HTML §IV: each condition evaluates the same 100 task cases'
+  scale.notes: arXiv HTML §III and §IV
+  metrics: arXiv HTML §IV-B
+  notes: arXiv HTML §III–IV; docs/fields.md procedural_workflow definition

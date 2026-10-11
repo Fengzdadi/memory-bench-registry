@@ -1,0 +1,42 @@
+name: ICM-Bench
+slug: icm-bench
+release_date: 2026-09
+venue: arXiv preprint
+memory_types:
+- episodic
+- multimodal
+links:
+  paper: https://arxiv.org/abs/2609.04438
+  code: https://github.com/Shidu-Ren/ICM-Bench
+  data: https://huggingface.co/datasets/ryanren0330/ICM-Bench
+scale:
+  conversations: 839
+  questions: 1217
+  avg_context_length: null
+  notes: The 839 clips form a 141-minute synthetic life-album stream; probes have temporal cutoffs.
+metrics:
+- Open-ended answer accuracy
+- Recall accuracy
+- Retrieval accuracy
+- Profile accuracy
+judge_model: Gemini 3 Flash
+repro_level: official_script
+repro_checked_at: '2026-10-11'
+run_records: []
+notes: The questions target person identity across temporally ordered clips; underlying inputs include video and audio.
+sources:
+  name: arXiv abstract/title https://arxiv.org/abs/2609.04438; paper https://arxiv.org/html/2609.04438
+  release_date: 'arXiv submission history https://arxiv.org/abs/2609.04438: v1 submitted 2026-09-03'
+  venue: 'arXiv abstract page https://arxiv.org/abs/2609.04438: no verified journal reference or conference publication'
+  memory_types: 'arXiv HTML §3–4: identity recall across earlier audio-visual life-album clips and cross-episode profiles'
+  links.paper: arXiv abstract page https://arxiv.org/abs/2609.04438
+  repro_level: GitHub tree includes evaluation/judging and model-specific evaluation scripts; HF dataset API lists public
+    annotations/media, checked 2026-10-11
+  links.code: arXiv HTML links author repository; README calls it official evaluation code
+  links.data: official GitHub README links HF release; HF API lists annotations and media, checked 2026-10-11
+  scale.conversations: 'arXiv HTML §4 Dataset: 839 chronological clips'
+  scale.questions: 'arXiv HTML §4 Dataset: 400 recall, 500 cross-episode retrieval, 317 profile questions'
+  scale.notes: arXiv HTML dataset description and statistics
+  metrics: arXiv HTML §4 Table 4
+  judge_model: 'arXiv HTML §4: shared Gemini 3 Flash judge for free-form responses'
+  notes: arXiv HTML §3–4

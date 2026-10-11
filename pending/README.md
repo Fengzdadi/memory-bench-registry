@@ -21,6 +21,11 @@
     impact-is-not-invalidation lapse locomo-conv lsrep memcalib memoreason memprobe-2 memriskbench memtransfer pairpref pragma
     simlife-bp twist video2skill what-should-an-agent-remember cmsc-e dyadmem ember-bench knowing-the-store realcompanion
 
+本次填写新增的待裁决条目（不要直接入库）：
+
+- `flagged/impact-is-not-invalidation.yaml`：输入是仓库断言与提交差异，判断断言是否失效；论文没有让编码 agent 在独立会话或任务间保留信息，不符合 `coding_cross_session` 的收录标准。
+- `flagged/lsrep.yaml`：论文明确把 LSREP 定义为评测协议；实例化所用的四段私人对话及 219 个 probe 未公开，不构成可单独登记的公开 benchmark 数据集。
+
 ## 下一步
 
 1. 对本目录的 71 个条目做独立复核；有分歧的字段再交给第三个 agent 裁决。

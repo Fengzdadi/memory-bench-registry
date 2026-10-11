@@ -1,0 +1,45 @@
+name: MemCalib
+slug: memcalib
+release_date: 2026-09
+venue: arXiv preprint
+memory_types:
+- personalization
+links:
+  paper: https://arxiv.org/abs/2609.24259
+  code: https://github.com/Quark-Medical/memcalib
+  data: https://huggingface.co/datasets/ZiLaotou/MemCalib
+scale:
+  conversations: null
+  questions: 1500
+  avg_context_length: null
+  notes: 'The full release has 15,000 examples: 13,500 training and 1,500 held-out evaluation. Each query comes with composite
+    memory blocks.'
+metrics:
+- Sample Memory Overuse Severity
+- Sample Memory Underuse Severity
+- Any-Overuse Rate
+- Any-Underuse Rate
+- Sample Calibration Score
+- Exact Calibration
+judge_model: DeepSeek-V4-Pro
+repro_level: data_public
+repro_checked_at: '2026-10-11'
+run_records: []
+notes: The benchmark grades whether each memory atom should be ignored, bounded or controlling, across health, general assistance
+  and coding.
+sources:
+  name: arXiv abstract/title https://arxiv.org/abs/2609.24259; paper https://arxiv.org/html/2609.24259
+  release_date: 'arXiv submission history https://arxiv.org/abs/2609.24259: v1 submitted 2026-09-21'
+  venue: 'arXiv abstract page https://arxiv.org/abs/2609.24259: no verified journal reference or conference publication'
+  memory_types: 'arXiv HTML §2: user-specific memory facts, preferences and constraints carry target influence levels in generated
+    responses'
+  links.paper: arXiv abstract page https://arxiv.org/abs/2609.24259
+  repro_level: HF API lists public train/test JSONL; GitHub README describes training/data preparation but no benchmark scoring
+    entry point, checked 2026-10-11
+  links.code: arXiv HTML title footnote and official project link; repo README names MemCalib-RL implementation
+  links.data: official repo README links HF dataset; HF API lists test.jsonl and train.jsonl, checked 2026-10-11
+  scale.questions: 'arXiv HTML §2.2: disjoint 1,500-example test set'
+  scale.notes: arXiv HTML §2.2
+  metrics: arXiv HTML §2.3 equations and metric list
+  judge_model: 'arXiv HTML §2.4: DeepSeek-V4-Pro classifies atom-level memory use on test set'
+  notes: arXiv HTML §2

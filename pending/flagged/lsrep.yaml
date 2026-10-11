@@ -1,0 +1,40 @@
+name: LSREP
+slug: lsrep
+release_date: 2026-09
+venue: arXiv preprint
+memory_types:
+- conversational_longterm
+- semantic_knowledge_update
+links:
+  paper: https://arxiv.org/abs/2609.16730
+  code: null
+  data: null
+scale:
+  conversations: 4
+  questions: 219
+  avg_context_length: null
+  notes: The four private histories total 1,985 turns and 1,211 repeated observations; the manuscript includes no verbatim
+    private turns or probes.
+metrics:
+- Rubric score (1–5)
+- Paired score difference
+- Token cost
+judge_model: null
+repro_level: paper_only
+repro_checked_at: '2026-10-11'
+run_records: []
+notes: 'Flagged: LSREP is introduced as a system-independent evaluation protocol, instantiated only on one user’s private
+  histories. No standalone public benchmark examples or answer key are supplied.'
+sources:
+  name: arXiv abstract/title https://arxiv.org/abs/2609.16730; paper https://arxiv.org/html/2609.16730
+  release_date: 'arXiv submission history https://arxiv.org/abs/2609.16730: v1 submitted 2026-09-15'
+  venue: 'arXiv abstract page https://arxiv.org/abs/2609.16730: no verified journal reference or conference publication'
+  memory_types: 'arXiv HTML §3 and §6: longitudinal conversation state replay with evolving reference answers; candidate classification
+    only because LSREP is a protocol'
+  links.paper: arXiv abstract page https://arxiv.org/abs/2609.16730
+  repro_level: arXiv paper read 2026-10-11; evaluated private replay corpus and probes are not released
+  scale.conversations: 'arXiv HTML §6.1 Table 3: four private conversation datasets A–D'
+  scale.questions: 'arXiv HTML §6.1 Table 3: 219 distinct probes, repeated at checkpoints'
+  scale.notes: arXiv HTML §6.1 Table 3
+  metrics: arXiv HTML §6.3 and Table 4
+  notes: arXiv HTML abstract, §1 contributions and §6.1 private-data description

@@ -1,0 +1,43 @@
+name: MemRiskBench
+slug: memriskbench
+release_date: 2026-09
+venue: arXiv preprint
+memory_types:
+- semantic_knowledge_update
+- memory_security
+links:
+  paper: https://arxiv.org/abs/2609.14976
+  code: https://github.com/fuxue-mingzhu/MemRiskBench
+  data: https://github.com/fuxue-mingzhu/MemRiskBench
+scale:
+  conversations: 120
+  questions: 120
+  avg_context_length: null
+  notes: Episodes have 5–25 turns by difficulty; R6 summary contamination is documented but outside the main scored five-risk
+    set.
+metrics:
+- Deterministic episode pass rate
+- Per-risk pass rate
+- Violation count
+- Safety-aware refusal score
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-11'
+run_records: []
+notes: The primary scorer is deterministic. LLM judging appears only in qualitative error analysis, so judge_model is null.
+sources:
+  name: arXiv abstract/title https://arxiv.org/abs/2609.14976; paper https://arxiv.org/html/2609.14976
+  release_date: 'arXiv submission history https://arxiv.org/abs/2609.14976: v1 submitted 2026-09-14'
+  venue: 'arXiv abstract page https://arxiv.org/abs/2609.14976: no verified journal reference or conference publication'
+  memory_types: 'arXiv HTML §3–4: stale, conflicting, leaked and revoked memories plus constraint decay are checked in agent
+    traces'
+  links.paper: arXiv abstract page https://arxiv.org/abs/2609.14976
+  repro_level: official GitHub tree contains episode definitions, scripts/run_eval_resumable.py and scoring code; checked
+    2026-10-11
+  links.code: arXiv HTML release section links official repository
+  links.data: official repo tree contains benchmark episode definitions and raw traces, checked 2026-10-11
+  scale.conversations: 'arXiv HTML §4: 120 scripted episodes, 24 per scored risk'
+  scale.questions: 'arXiv HTML §4: one scored case per episode, 120 total'
+  scale.notes: arXiv HTML §4 and Table 4
+  metrics: arXiv HTML §4.2 and §4.4
+  notes: arXiv HTML §4.2

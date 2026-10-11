@@ -1,0 +1,41 @@
+name: Lapse
+slug: lapse
+release_date: 2026-09
+venue: arXiv preprint
+memory_types:
+- personalization
+- semantic_knowledge_update
+links:
+  paper: https://arxiv.org/abs/2609.36457
+  code: null
+  data: null
+scale:
+  conversations: null
+  questions: 128
+  avg_context_length: null
+  notes: Count is matched pairs in the main controlled stimulus set; a complete configuration issues 6,008 requests across
+    writer and reader conditions.
+metrics:
+- Destructive rewrite rate
+- Paired directional difference
+- Proceed-versus-hedge rate
+- Validity judgment
+judge_model: null
+repro_level: paper_only
+repro_checked_at: '2026-10-11'
+run_records: []
+notes: The controlled test isolates temporal aspect in matched user statements. The paper reports 11 model configurations
+  and installed memory writers.
+sources:
+  name: arXiv abstract/title https://arxiv.org/abs/2609.36457; paper https://arxiv.org/html/2609.36457
+  release_date: 'arXiv submission history https://arxiv.org/abs/2609.36457: v1 submitted 2026-09-29'
+  venue: 'arXiv abstract page https://arxiv.org/abs/2609.36457: no verified journal reference or conference publication'
+  memory_types: 'arXiv HTML §4 and §7: user facts are rewritten into memory notes, then tested for temporal validity and appropriate
+    use after time passes'
+  links.paper: arXiv abstract page https://arxiv.org/abs/2609.36457
+  repro_level: arXiv paper read 2026-10-11; release of stimuli/outputs/analysis is described but no official download address
+    was found
+  scale.questions: 'arXiv HTML §4 factorial design: 128 matched user-statement pairs per configuration'
+  scale.notes: arXiv HTML §4.1–4.2
+  metrics: arXiv HTML §4.3 and §7
+  notes: arXiv HTML §1 and §4

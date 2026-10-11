@@ -1,0 +1,46 @@
+name: LoCoMo-Conv
+slug: locomo-conv
+release_date: 2026-09
+venue: arXiv preprint
+memory_types:
+- conversational_longterm
+links:
+  paper: https://arxiv.org/abs/2609.03467
+  code: https://github.com/MiuLab/LoCoMo-Conv
+  data: https://github.com/MiuLab/LoCoMo-Conv/tree/main/data
+scale:
+  conversations: 10
+  questions: 6581
+  avg_context_length: null
+  notes: Queries reuse LoCoMo10 histories and gold evidence but change conversational framing; composed queries combine source
+    QAs.
+metrics:
+- Retrieval recall
+- Response fact-used score
+- Counterfactual correction score
+- Composed atomic-fact coverage
+judge_model: GPT-5.4-mini
+repro_level: official_script
+repro_checked_at: '2026-10-11'
+run_records: []
+notes: A distinct query and response evaluation derived from LoCoMo, with new conversational rewrites and supportive-memory
+  annotations.
+sources:
+  name: arXiv abstract/title https://arxiv.org/abs/2609.03467; paper https://arxiv.org/html/2609.03467
+  release_date: 'arXiv submission history https://arxiv.org/abs/2609.03467: v1 submitted 2026-09-03'
+  venue: 'arXiv abstract page https://arxiv.org/abs/2609.03467: no verified journal reference or conference publication'
+  memory_types: 'arXiv HTML §3: conversational rewrites of LoCoMo histories test retrieval and grounded replies under implicit,
+    counterfactual and composed queries'
+  links.paper: arXiv abstract page https://arxiv.org/abs/2609.03467
+  repro_level: official GitHub tree has data files and response_eval/run_response_eval.py plus style-specific scoring scripts,
+    checked 2026-10-11
+  links.code: arXiv HTML footnote 1 links author repository
+  links.data: official GitHub tree includes data/locomo10.json, response_eval_full_ext.json and supportive_memory.json, checked
+    2026-10-11
+  scale.conversations: 'arXiv HTML §3 and Appendix B: LoCoMo10 conversation histories'
+  scale.questions: 'arXiv HTML Appendix B Table 9: 1,986 dialog + 1,986 implicit + 1,540 counterfactual + 1,069 composed =
+    6,581'
+  scale.notes: arXiv HTML §3 and Appendix B Table 9
+  metrics: arXiv HTML §4.1–4.2
+  judge_model: 'arXiv HTML §5 Experimental Setup: primary response judge GPT-5.4-mini'
+  notes: arXiv HTML §1 and §3; official repo data tree

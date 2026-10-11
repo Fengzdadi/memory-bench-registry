@@ -1,0 +1,41 @@
+name: MemoReason
+slug: memoreason
+release_date: 2026-09
+venue: arXiv preprint
+memory_types:
+- parametric
+links:
+  paper: https://arxiv.org/abs/2609.35312
+  code: https://github.com/Zineddine-Tighidet/MemoReason
+  data: https://huggingface.co/datasets/zineddine/MemoReason
+scale:
+  conversations: null
+  questions: 1200
+  avg_context_length: 2,974 characters per factual document
+  notes: Each factual template has 10 fictitious variants, yielding 12,000 additional fictitious QA pairs.
+metrics:
+- Exact Match
+- Judge Match
+- Factual–fictitious accuracy gap
+- Shortcut Rate
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-11'
+run_records: []
+notes: Counts distinguish the factual core from 10 counterfactual variants per template.
+sources:
+  name: arXiv abstract/title https://arxiv.org/abs/2609.35312; paper https://arxiv.org/html/2609.35312
+  release_date: 'arXiv submission history https://arxiv.org/abs/2609.35312: v1 submitted 2026-09-28'
+  venue: 'arXiv abstract page https://arxiv.org/abs/2609.35312: no verified journal reference or conference publication'
+  memory_types: 'arXiv HTML §2–3: matched factual and fictitious contexts isolate influence of facts held in model weights
+    on contextual reasoning'
+  links.paper: arXiv abstract page https://arxiv.org/abs/2609.35312
+  repro_level: official GitHub tree contains scripts/model_evaluation/generate_parse_and_score_model_answers.py; HF API confirms
+    public factual/fictional data, checked 2026-10-11
+  links.code: arXiv HTML project/repository links author GitHub
+  links.data: arXiv HTML data link; HF API lists factual.jsonl.gz and fictional.jsonl.gz, checked 2026-10-11
+  scale.questions: 'arXiv HTML Table 1: 1,200 factual QA pairs (12 per document)'
+  scale.avg_context_length: 'arXiv HTML Table 1: average factual document length 2,974 characters'
+  scale.notes: arXiv HTML §2.3 and Table 1
+  metrics: arXiv HTML §3 and Tables 4–5
+  notes: arXiv HTML §2.1–2.3

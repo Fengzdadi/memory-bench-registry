@@ -1,0 +1,43 @@
+name: MemProbe
+slug: memprobe-2
+release_date: 2026-09
+venue: arXiv preprint
+memory_types:
+- conversational_longterm
+- personalization
+- semantic_knowledge_update
+links:
+  paper: https://arxiv.org/abs/2609.30558
+  code: https://github.com/jq-ding/MemProbe
+  data: https://github.com/jq-ding/MemProbe/tree/main/data/suite56
+scale:
+  conversations: 56
+  questions: 224
+  avg_context_length: null
+  notes: The 56 episodes contain 1,246 ordered sessions; this is a reference suite for the broader MemProbe protocol.
+metrics:
+- Overall probe accuracy
+- Plasticity
+- Stability
+- Stability–Plasticity Balance
+- Historical/source/temporal fidelity
+judge_model: null
+repro_level: official_script
+repro_checked_at: '2026-10-11'
+run_records: []
+notes: This MemProbe is a separate 2026-09 paper from the earlier MEMPROBE, which was renamed MemAudit and is already in benchmarks/memprobe.yaml.
+sources:
+  name: arXiv abstract/title https://arxiv.org/abs/2609.30558; paper https://arxiv.org/html/2609.30558
+  release_date: 'arXiv submission history https://arxiv.org/abs/2609.30558: v1 submitted 2026-09-24'
+  venue: 'arXiv abstract page https://arxiv.org/abs/2609.30558: no verified journal reference or conference publication'
+  memory_types: 'arXiv HTML §3: multi-session user facts and preferences undergo valid updates, misinformation and source
+    conflicts'
+  links.paper: arXiv abstract page https://arxiv.org/abs/2609.30558
+  repro_level: official GitHub tree has data/suite56 and src/eval/run_eval.py, checked 2026-10-11
+  links.code: arXiv HTML Appendix A.1 names official GitHub package
+  links.data: official repo tree includes data/suite56/episodes.jsonl and latent_specs.json, checked 2026-10-11
+  scale.conversations: 'arXiv HTML Appendix B: 56 diagnostic episodes'
+  scale.questions: 'arXiv HTML Appendix B: 224 probe questions'
+  scale.notes: arXiv HTML Appendix B suite statistics
+  metrics: arXiv HTML §4.2
+  notes: arXiv HTML title/§3; existing registry entry benchmarks/memprobe.yaml
