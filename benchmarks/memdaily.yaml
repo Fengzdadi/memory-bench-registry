@@ -1,10 +1,9 @@
-name: MemDaily (MemSim)
+name: MemDaily
 slug: memdaily
 release_date: 2024-09
 venue: NeurIPS 2025
 memory_types:
 - personalization
-- conversational_longterm
 links:
   paper: https://arxiv.org/abs/2409.20163
   code: https://github.com/nuster1128/MemSim
@@ -25,10 +24,10 @@ repro_checked_at: '2026-10-10'
 run_records: []
 notes: MemDaily is the dataset that the MemSim simulator generates. The released data is in Chinese; the paper shows English translations only as examples. The repo has no licence file. Noise-infused benchmark files (memdaily_0/9/49/99/199.json) come from a Google Drive folder or can be regenerated with benchmark/rawdata/infuse_noise.py. The main experiments use GLM-4-9B, and the NeurIPS version adds Qwen2.5-7B (Appendix F). arXiv has only v1 (2024-09-30).
 sources:
-  name: 'arXiv abstract and repo README: ''MemSim'' simulator generates the ''MemDaily'' dataset/benchmark'
+  name: 'arXiv abstract and repo README: ''MemSim'' simulator generates the ''MemDaily'' dataset/benchmark. Rechecked 2026-10-11: paper §3.4 and repo README ''MemDaily Benchmark'' use MemDaily as the benchmark name.'
   release_date: 'arXiv API: 2409.20163v1 published 2024-09-30 (only version)'
   venue: NeurIPS 2025 proceedings page papers.neurips.cc/.../826aea2253363fe04e8c4991b2a8869e-Abstract-Conference.html (Main Conference Track); arXiv journal_ref empty
-  memory_types: 'paper §3/§5: personal-assistant agent must remember user-specific facts (roles, events, items, places) from timestamped daily-life user messages, histories lengthened to 100x/200x with noise posts'
+  memory_types: 'paper §3/§5: personal-assistant agent must remember user-specific facts (roles, events, items, places) from timestamped daily-life user messages, histories lengthened to 100x/200x with noise posts. Rechecked 2026-10-11: paper §3.4/Table 2 describes 2,954 user-message trajectories averaging 26,003/2,954 ≈ 8.8 messages; no multi-session dialogue is described, so conversational_longterm does not meet docs/fields.md.'
   links.paper: arXiv API entry 2409.20163
   links.code: 'arXiv abstract and paper link https://github.com/nuster1128/MemSim (repo description: official repository)'
   links.data: data is in the repo (data_generation/final_dataset/memdaily.json); no Hugging Face dataset found (HF API search 'memdaily'/'MemSim' empty, 2026-10-10)

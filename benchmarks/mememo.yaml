@@ -1,4 +1,4 @@
-name: MemEmo (HLME)
+name: HLME
 slug: mememo
 release_date: 2026-02
 venue: arXiv preprint
@@ -31,7 +31,7 @@ repro_checked_at: '2026-10-10'
 run_records: []
 notes: 'As of 2026-10-10, no official code or dataset was found. Places checked: paper PDF links, the arXiv page, the HF paper page (no linked datasets), MemTensor/IAAR-Shanghai GitHub repos, and GitHub/HF searches for MemEmo/HLME. The dialogues are synthetic and LLM-generated, seeded from PersonaHub personas. Systems are tested on memory frameworks (Mem0, Letta, MemOS, Mirix, MemoBase), not raw LLMs. The paper says six systems were evaluated but lists five. It also calls the large split both ''Large'' and ''Long''.'
 sources:
-  name: 'arXiv 2602.23944 title ''MemEmo: Evaluating Emotion in Memory Systems of Agents''; abstract/§1 name the Human-Like Memory Emotion (HLME) dataset/benchmark'
+  name: 'arXiv 2602.23944 title ''MemEmo: Evaluating Emotion in Memory Systems of Agents''; abstract/§1 name the Human-Like Memory Emotion (HLME) dataset/benchmark. Rechecked 2026-10-11: paper §1 contribution 1 explicitly calls HLME the benchmark; MemEmo is the paper title.'
   release_date: 'arXiv API: 2602.23944v1 published 2026-02-27T11:46:08Z (only version)'
   venue: arXiv API entry has no journal_ref/comments; abs page shows only v1; no venue found via web search or HF papers page
   memory_types: 'paper §3 and §5: multi-turn long human-computer dialogues (sessions, long-range anchor facts at turn t-100); EMU task tests update decision and memory stability against overwriting; EQA asks about historical emotional states and trends'
