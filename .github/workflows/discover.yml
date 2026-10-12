@@ -1,0 +1,46 @@
+name: discover
+
+# Weekly scan of new arXiv papers for memory-benchmark candidates. It only opens an Issue;
+# it never edits benchmarks/ (see scripts/discover.py and AGENTS.md).
+on:
+  schedule:
+    - cron: "17 3 * * 1" # Mondays, 03:17 UTC
+  workflow_dispatch:
+    inputs:
+      days:
+        description: "Days to look back, including today"
+        default: "14"
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: discover
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      GH_TOKEN: ${{ github.token }}
+      DAYS: ${{ inputs.days || '14' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Collect the arXiv IDs already reported in earlier digests
+        run: gh issue list --label candidates --state all --limit 1000 --json body --jq '.[].body' > seen.txt
+      - name: Scan arXiv
+        run: python scripts/discover.py --days "$DAYS" --seen seen.txt --out digest.md
+      - name: Open the digest issue
+        run: |
+          if [ -s digest.md ]; then
+            gh label create candidates --description "Weekly arXiv candidate digest" --color 0e8a16 --force
+            gh issue create --title "Candidates $(date -u +%G-W%V)" --label candidates --body-file digest.md
+          else
+            echo "No new candidates."
+          fi
