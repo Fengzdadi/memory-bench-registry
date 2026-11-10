@@ -1,0 +1,46 @@
+name: memory-bench
+slug: memory-bench
+release_date: 2026-11
+venue: null
+memory_types:
+- conversational_longterm
+- episodic
+- semantic_knowledge_update
+- personalization
+- memory_security
+links:
+  paper: null
+  code: https://github.com/LF-Labs-Inc/memory-bench
+  data: https://github.com/LF-Labs-Inc/memory-bench
+scale:
+  conversations: 599
+  questions: 2080
+  avg_context_length: null
+  notes: One fictional user over six months (March to August 2026); 599 sessions across typed chat, voice, a remote phone channel, inbound texts and emails, meetings and web pages. 2,080 probes in 15 areas; 1,040 dev probes are public, and the 1,040 test probes are private and scored by the maintainers (counted from README on 2026-11-10).
+metrics:
+- overall score (mean pass rate over areas)
+- safety score (1 minus the worst leak rate across forget, scope and poisoning)
+- leak rate per area (forget, scope, poisoning)
+- silence junk rate
+- remote over-block rate
+- mean context tokens
+judge_model: claude-opus-5-5
+repro_level: official_script
+repro_checked_at: '2026-11-10'
+run_records: []
+notes: 'No paper. Black-box: any memory system plugs in through a Python adapter; claude-sonnet-5-5 answers from what the system injected and claude-opus-5-5 judges. 15 areas include forgetting on request, channel scope, poisoning, silence, attribution and abstention next to recall. The maintainers also make Dawnmere, which is one of the scored systems. Licence: Apache-2.0 code, CC BY 4.0 data.'
+sources:
+  name: README.md title, https://github.com/LF-Labs-Inc/memory-bench
+  release_date: 'No paper. GitHub API repos/LF-Labs-Inc/memory-bench created_at 2026-11-08T03:15:13Z'
+  venue: No paper or venue; the README links none
+  memory_types: 'docs/spec.md section 5 areas: retrieval and multi_hop over 599 sessions (conversational_longterm), temporal (episodic), update (semantic_knowledge_update), application of learned preferences (personalization), forget, scope and poisoning (memory_security)'
+  links.code: official repository, GitHub API repos/LF-Labs-Inc/memory-bench (Apache-2.0)
+  links.data: 'README.md "Status and license": world/, sessions/ and cases/ are in the repository under CC BY 4.0 (LICENSE-DATA); the public tree carries the dev split'
+  scale.conversations: README.md "What it is", "599 sessions"; repo tree has sessions/s0001.json onward (599 session files plus sessions/README.md)
+  scale.questions: README.md "What it is", "2,080 probes in 15 areas"; docs/taxonomy.md Totals table, All 2080
+  scale.avg_context_length: not reported as an average in the README or docs/spec.md
+  scale.notes: README.md "What it is" and "Status and license" (test half private, scored by the maintainers)
+  metrics: README.md Results table columns; docs/spec.md section 6 (headline, safety score, leak metrics)
+  judge_model: README.md "What it is", "claude-opus-5-5 judges"
+  repro_level: 'repo tree checked 2026-11-10: harness/run.py (runner), harness/score.py, harness/adapters/ (none, oracle, naive_rag, full_history, mem0, zep_graphiti, claude_mem, dawnmere), cases/*.jsonl and sessions/*.json; README gives `uv run python -m harness.run --adapter oracle --dry-run`'
+  notes: README.md first paragraphs, "What it measures" table, Results section (maintainers' disclosure) and "Status and license"

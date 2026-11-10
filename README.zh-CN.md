@@ -13,17 +13,18 @@
 - 现有汇总列表及其核实状态：[docs/related-lists.md](docs/related-lists.md)
 - 评估过但未收录的候选及理由：[docs/excluded.md](docs/excluded.md)
 
-当前共 **207** 条。可复现等级分布：`unverified` 0 · `paper_only` 37 · `data_public` 31 · `official_script` 139 · `smoke_tested` 0 · `full_run` 0
+当前共 **208** 条。可复现等级分布：`unverified` 0 · `paper_only` 37 · `data_public` 31 · `official_script` 140 · `smoke_tested` 0 · `full_run` 0
 
 ## 按记忆类型
 
 一个 benchmark 可属于多个类型。点开查看该类型下的条目，按发布时间从新到旧排列。
 
 <details>
-<summary><code>conversational_longterm</code>（81）</summary>
+<summary><code>conversational_longterm</code>（82）</summary>
 
 | 名称 | 日期 | 链接 | 规模 | 可复现等级 |
 | --- | --- | --- | --- | --- |
+| [memory-bench](benchmarks/memory-bench.yaml) | 2026‑11 | [code](https://github.com/LF-Labs-Inc/memory-bench)&nbsp;·&nbsp;[data](https://github.com/LF-Labs-Inc/memory-bench) | 599&nbsp;conv.<br>2,080&nbsp;Q | `official_script` |
 | [DyadMem](benchmarks/dyadmem.yaml) | 2026‑10 | [paper](https://arxiv.org/abs/2610.03020) | 3,065&nbsp;conv.<br>61,210&nbsp;Q | `paper_only` |
 | [RealCompanion](benchmarks/realcompanion.yaml) | 2026‑10 | [paper](https://arxiv.org/abs/2610.01780)&nbsp;·&nbsp;[code](https://anonymous.4open.science/r/realcompanion-54CC/)&nbsp;·&nbsp;[data](https://huggingface.co/datasets/Quislab/RealCompanion) | 10&nbsp;conv.<br>3,235&nbsp;Q | `paper_only` |
 | [CUE-Mem](benchmarks/cue-mem.yaml) | 2026‑09 | [paper](https://arxiv.org/abs/2609.32574)&nbsp;·&nbsp;[code](https://github.com/yulinlp/CUE-MEM)&nbsp;·&nbsp;[data](https://huggingface.co/datasets/Kkryptonite/CUE-Mem) | 648&nbsp;conv.<br>2,674&nbsp;Q | `official_script` |
@@ -108,10 +109,11 @@
 
 </details>
 <details>
-<summary><code>personalization</code>（68）</summary>
+<summary><code>personalization</code>（69）</summary>
 
 | 名称 | 日期 | 链接 | 规模 | 可复现等级 |
 | --- | --- | --- | --- | --- |
+| [memory-bench](benchmarks/memory-bench.yaml) | 2026‑11 | [code](https://github.com/LF-Labs-Inc/memory-bench)&nbsp;·&nbsp;[data](https://github.com/LF-Labs-Inc/memory-bench) | 599&nbsp;conv.<br>2,080&nbsp;Q | `official_script` |
 | [CMSC-E](benchmarks/cmsc-e.yaml) | 2026‑10 | [paper](https://arxiv.org/abs/2610.05124)&nbsp;·&nbsp;[code](https://github.com/aishwaryalonarkar/cross-model-memory-canonicalization)&nbsp;·&nbsp;[data](https://github.com/aishwaryalonarkar/cross-model-memory-canonicalization/tree/main/data) | — | `official_script` |
 | [DyadMem](benchmarks/dyadmem.yaml) | 2026‑10 | [paper](https://arxiv.org/abs/2610.03020) | 3,065&nbsp;conv.<br>61,210&nbsp;Q | `paper_only` |
 | [RealCompanion](benchmarks/realcompanion.yaml) | 2026‑10 | [paper](https://arxiv.org/abs/2610.01780)&nbsp;·&nbsp;[code](https://anonymous.4open.science/r/realcompanion-54CC/)&nbsp;·&nbsp;[data](https://huggingface.co/datasets/Quislab/RealCompanion) | 10&nbsp;conv.<br>3,235&nbsp;Q | `paper_only` |
@@ -183,10 +185,11 @@
 
 </details>
 <details>
-<summary><code>episodic</code>（56）</summary>
+<summary><code>episodic</code>（57）</summary>
 
 | 名称 | 日期 | 链接 | 规模 | 可复现等级 |
 | --- | --- | --- | --- | --- |
+| [memory-bench](benchmarks/memory-bench.yaml) | 2026‑11 | [code](https://github.com/LF-Labs-Inc/memory-bench)&nbsp;·&nbsp;[data](https://github.com/LF-Labs-Inc/memory-bench) | 599&nbsp;conv.<br>2,080&nbsp;Q | `official_script` |
 | [DyadMem](benchmarks/dyadmem.yaml) | 2026‑10 | [paper](https://arxiv.org/abs/2610.03020) | 3,065&nbsp;conv.<br>61,210&nbsp;Q | `paper_only` |
 | [RealCompanion](benchmarks/realcompanion.yaml) | 2026‑10 | [paper](https://arxiv.org/abs/2610.01780)&nbsp;·&nbsp;[code](https://anonymous.4open.science/r/realcompanion-54CC/)&nbsp;·&nbsp;[data](https://huggingface.co/datasets/Quislab/RealCompanion) | 10&nbsp;conv.<br>3,235&nbsp;Q | `paper_only` |
 | [APM-Bench](benchmarks/apm-bench.yaml) | 2026‑09 | [paper](https://arxiv.org/abs/2609.37559)&nbsp;·&nbsp;[code](https://github.com/Jianguo-Huang11/APM-Bench)&nbsp;·&nbsp;[data](https://huggingface.co/datasets/Jianguo-Huang11/APM-Bench) | 104&nbsp;conv.<br>2,719&nbsp;Q | `paper_only` |
@@ -246,10 +249,11 @@
 
 </details>
 <details>
-<summary><code>semantic_knowledge_update</code>（74）</summary>
+<summary><code>semantic_knowledge_update</code>（75）</summary>
 
 | 名称 | 日期 | 链接 | 规模 | 可复现等级 |
 | --- | --- | --- | --- | --- |
+| [memory-bench](benchmarks/memory-bench.yaml) | 2026‑11 | [code](https://github.com/LF-Labs-Inc/memory-bench)&nbsp;·&nbsp;[data](https://github.com/LF-Labs-Inc/memory-bench) | 599&nbsp;conv.<br>2,080&nbsp;Q | `official_script` |
 | [DyadMem](benchmarks/dyadmem.yaml) | 2026‑10 | [paper](https://arxiv.org/abs/2610.03020) | 3,065&nbsp;conv.<br>61,210&nbsp;Q | `paper_only` |
 | [Knowing the Store](benchmarks/knowing-the-store.yaml) | 2026‑10 | [paper](https://arxiv.org/abs/2610.04794)&nbsp;·&nbsp;[code](https://github.com/ansh348/knowing-the-store)&nbsp;·&nbsp;[data](https://github.com/ansh348/knowing-the-store/tree/main/artifact/supplementary/data) | 444&nbsp;Q | `official_script` |
 | [ServeLearnBench](benchmarks/servelearnbench.yaml) | 2026‑10 | [paper](https://arxiv.org/abs/2610.07792)&nbsp;·&nbsp;[code](https://github.com/Infini-AI-Lab/ServeLearnBench) | 3,210&nbsp;Q | `official_script` |
@@ -514,10 +518,11 @@
 
 </details>
 <details>
-<summary><code>memory_security</code>（18）</summary>
+<summary><code>memory_security</code>（19）</summary>
 
 | 名称 | 日期 | 链接 | 规模 | 可复现等级 |
 | --- | --- | --- | --- | --- |
+| [memory-bench](benchmarks/memory-bench.yaml) | 2026‑11 | [code](https://github.com/LF-Labs-Inc/memory-bench)&nbsp;·&nbsp;[data](https://github.com/LF-Labs-Inc/memory-bench) | 599&nbsp;conv.<br>2,080&nbsp;Q | `official_script` |
 | [ConsolidationBench](benchmarks/consolidationbench.yaml) | 2026‑09 | [paper](https://arxiv.org/abs/2609.33013) | — | `paper_only` |
 | [Correlated Promotion Benchmark (CPB)](benchmarks/cpb.yaml) | 2026‑09 | [paper](https://arxiv.org/abs/2609.30813)&nbsp;·&nbsp;[code](https://github.com/lxy1134/iclr_2027)&nbsp;·&nbsp;[data](https://github.com/lxy1134/iclr_2027/tree/main/data) | 100&nbsp;conv. | `official_script` |
 | [Cross-lingual Unlearning Tensor](benchmarks/cross-lingual-unlearning-tensor.yaml) | 2026‑09 | [paper](https://arxiv.org/abs/2609.40286)&nbsp;·&nbsp;[code](https://github.com/tskow99/crosslingual-unlearning-tensor) | 4,000&nbsp;Q | `paper_only` |
@@ -543,10 +548,11 @@
 
 按年份分组，从新到旧排列。点名称查看完整字段与出处。
 
-### 2026（143）
+### 2026（144）
 
 | 名称 | 月份 | 类型 | 链接 | 规模 | 可复现等级 |
 | --- | --- | --- | --- | --- | --- |
+| [memory-bench](benchmarks/memory-bench.yaml) | 11 | `conversational_longterm`, `episodic`, `semantic_knowledge_update`, `personalization`, `memory_security` | [code](https://github.com/LF-Labs-Inc/memory-bench)&nbsp;·&nbsp;[data](https://github.com/LF-Labs-Inc/memory-bench) | 599&nbsp;conv.<br>2,080&nbsp;Q | `official_script` |
 | [CMSC-E](benchmarks/cmsc-e.yaml) | 10 | `personalization` | [paper](https://arxiv.org/abs/2610.05124)&nbsp;·&nbsp;[code](https://github.com/aishwaryalonarkar/cross-model-memory-canonicalization)&nbsp;·&nbsp;[data](https://github.com/aishwaryalonarkar/cross-model-memory-canonicalization/tree/main/data) | — | `official_script` |
 | [DyadMem](benchmarks/dyadmem.yaml) | 10 | `conversational_longterm`, `personalization`, `episodic`, `semantic_knowledge_update` | [paper](https://arxiv.org/abs/2610.03020) | 3,065&nbsp;conv.<br>61,210&nbsp;Q | `paper_only` |
 | [Knowing the Store](benchmarks/knowing-the-store.yaml) | 10 | `semantic_knowledge_update` | [paper](https://arxiv.org/abs/2610.04794)&nbsp;·&nbsp;[code](https://github.com/ansh348/knowing-the-store)&nbsp;·&nbsp;[data](https://github.com/ansh348/knowing-the-store/tree/main/artifact/supplementary/data) | 444&nbsp;Q | `official_script` |
